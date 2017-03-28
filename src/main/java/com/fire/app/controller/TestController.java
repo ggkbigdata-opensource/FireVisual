@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class TestController {
 
-    @RequestMapping(value="alarmFire")
+    @RequestMapping(value="/alarmFire")
     public String TestPage(){
         
         return "alarm/alarm-fire";

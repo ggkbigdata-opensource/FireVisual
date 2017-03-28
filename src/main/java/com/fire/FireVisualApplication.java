@@ -6,6 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan("com.fire.app.controller")
+@ComponentScan("com.fire.app.service")
 public class FireVisualApplication {
 
 	public static void main(String[] args) {

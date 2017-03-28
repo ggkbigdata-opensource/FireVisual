@@ -1,6 +1,7 @@
 package com.fire.app.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  * @fileName AppFireEventRepository.java
@@ -12,4 +13,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AppFireEventRepository extends JpaRepository<AppFireEvent, Long> {
 
+    
 }
