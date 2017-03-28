@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fire.app.common.App;
 import com.fire.app.common.CommonResult;
+import com.fire.app.domain.User;
 import com.fire.app.service.UserService;
 import com.fire.app.util.AppHelper;
+import com.fire.app.util.ContextHolderUtils;
 
 @Controller
 public class LoginController {
@@ -25,12 +27,18 @@ public class LoginController {
     private UserService userService;
 
     @RequestMapping("/")
-    public String index() {
+    public String login() {
 
         return "login/login";
 
     }
-
+    
+    @RequestMapping("/index")
+    public String index() {
+       ContextHolderUtils.isLogin("index/index");
+        return null;
+    }
+  
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult loginToPhone(@RequestParam(value = "name", required = true) String name,
@@ -45,6 +53,7 @@ public class LoginController {
         if (flag) {
             return CommonResult.success("success");
         }
+        
         return CommonResult.fail("帐号或密码错误");
         
     }

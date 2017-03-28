@@ -13,7 +13,7 @@ import com.fire.app.service.UserService;
  * @description
  */
 @Service
-public class UserServcieImpl implements UserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
