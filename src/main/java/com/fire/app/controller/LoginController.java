@@ -33,7 +33,7 @@ public class LoginController {
 
     }
     
-    @RequestMapping("/app/index")
+    @RequestMapping("app/index")
     public String index() {
        if (ContextHolderUtils.isLogin()) {
            return "index/index";
@@ -53,6 +53,9 @@ public class LoginController {
         Boolean flag = this.userService.selectByUsernameAndPassword(name,phone);
 
         if (flag) {
+            
+            
+            
             return CommonResult.success("success");
         }
         

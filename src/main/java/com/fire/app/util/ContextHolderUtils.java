@@ -32,6 +32,7 @@ public class ContextHolderUtils {
 	}
 
 	
+
 	public static boolean isLogin() {
 	    User user = (User) getSession().getAttribute(App.USER_SESSION_KEY);
 	     if (user!=null) {
