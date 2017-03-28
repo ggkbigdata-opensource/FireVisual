@@ -1,5 +1,6 @@
 target/
 .mvn/
+.metadata/
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
