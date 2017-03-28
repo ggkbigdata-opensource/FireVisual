@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>执法</title>
+    <link href="../css/base.css" rel="stylesheet"/>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <link href="../css/mui.picker.min.css" rel="stylesheet"/>
+    <link href="../common/iconfont/iconfont.css" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
+</head>
+<body>
+	<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+			<!--菜单部分-->
+			<aside id="offCanvasSide" class="mui-off-canvas-right">
+				<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="menu-title">菜单</div>
+						<ul class="menu">
+							<li><a href="../regionalProfile/regionalProfile.html"><i class="iconfont icon-region"></i>区域概况</a></li>
+							<li><a href="../hiddenInvestigation/hiddenInvestigation.html"><i class="iconfont icon-hidden"></i>隐患排查项目统计</a></li>
+							<li><a href="../alarm/alarm-tianHe.html"><i class="iconfont icon-warn"></i>警情</a></li>
+							<li><a href="../lawEnforcement/lawEnforcement-tianHe.html"><i class="iconfont icon-police"></i>执法</a></li>
+							<li><a href="../statisticalData/statisticalData.html"><i class="iconfont icon-bar-chart"></i>统计数据展示</a></li>
+						</ul>
+					</div>
+				</div>
+			</aside>
+			<div class="mui-inner-wrap">
+				<header class="mui-bar mui-bar-nav">
+					<div class="logo">
+						<img src="../img/logo.png" />
+					</div>
+					<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
+					<h1 class="mui-title">执法</h1>
+				</header>
+				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="filterBox">
+							<button onclick="hide('trendPopover')" class="fl btn-filter" >
+								火灾执法基本数据
+								<i class="mui-icon mui-icon-arrowdown"></i>
+							</button>
+							<div id="trendPopover" style="display: none " class="popoverbox">
+								<ul class="mui-table-view">
+								    <li class="mui-table-view-cell"><a href="lawEnforcement-tianHe.html">天河区执法趋势</a></li>
+								    <li class="mui-table-view-cell"><a href="lawEnforcement-region.html">区域执法趋势</a></li>
+								    <li class="mui-table-view-cell"><a href="lawEnforcement-fire.html">火灾执法基本数据</a></li>
+								  </ul>
+							</div>
+							<button onclick="hide('timePopover')" class="fr btn-filter" >
+								选择时间段
+								<i class="mui-icon mui-icon-arrowdown"></i>
+							</button>
+							<div id="timePopover" style="display: none " class="popoverbox">
+								<div class="mui-scroll-wrapper time-scroll-wrapper">
+								<div class="mui-scroll">
+							 	<div class="regionCurrent">当前：<span>2016年1月-7月</span></div>
+							 	<div class="rangeBox tc mt10">
+							 		<div class="tl font-red pl15 mb10">输入范围</div>
+							 		<form class="mui-input-group">
+										<div class="mui-input-row">
+											<label>开始时间：</label>
+											<input type="text" placeholder="年月">
+										</div>
+										<div class="mui-input-row">
+											<label>结束时间：</label>
+											<input type="text" placeholder="年月">
+										</div>
+										<div class="mui-button-row range-button">
+											<button type="button" class="mui-btn">确认</button>
+										</div>
+									</form>
+							 	</div>
+							 	<div class="selectRangeBox">
+							 		<div class="tl font-red pl15 mb10">选择范围</div>
+							 		<ul class="selectRangeList">
+							 			<li>
+							 				<div class="tit tr fl">按年份：</div>
+							 				<div class="oh">
+							 					<a class="selected" href="javascirpt:;">2016年</a>
+							 					<a href="javascirpt:;">2015年</a>
+							 				</div>
+							 			</li>
+							 			<li>
+							 				<div class="tit tr fl">按半年：</div>
+							 				<div class="oh">
+							 					<a href="javascirpt:;">2016年下半年</a>
+							 					<a href="javascirpt:;">2016年上半年</a>
+							 					<a href="javascirpt:;">2015年下半年</a>
+							 					<a href="javascirpt:;">2015年上半年</a>
+							 				</div>
+							 			</li>
+							 			<li>
+							 				<div class="tit tr fl">按季度：</div>
+							 				<div class="oh">
+							 					<a href="javascirpt:;">2016年4季度</a>
+							 					<a href="javascirpt:;">2016年3季度</a>
+							 					<a href="javascirpt:;">2016年2季度</a>
+							 					<a href="javascirpt:;">2016年1季度</a>
+							 					<a href="javascirpt:;">2016年2季度</a>
+							 					<a href="javascirpt:;">2016年1季度</a>
+							 				</div>
+							 			</li>
+							 			<li>
+							 				<div class="tit tr fl">按月份：</div>
+							 				<div class="oh">
+							 					<div class="month-item">
+								 					<div class="tit">2016年</div>
+								 					<div class="oh">
+									 					<a href="javascirpt:;">1月</a>
+									 					<a href="javascirpt:;">2月</a>
+									 					<a href="javascirpt:;">3月</a>
+									 					<a href="javascirpt:;">4月</a>
+									 					<a href="javascirpt:;">5月</a>
+									 					<a href="javascirpt:;">6月</a>
+									 					<a href="javascirpt:;">7月</a>
+									 					<a href="javascirpt:;">8月</a>
+									 					<a href="javascirpt:;">9月</a>
+									 					<a href="javascirpt:;">10月</a>
+									 					<a href="javascirpt:;">11月</a>
+									 					<a href="javascirpt:;">12月</a>
+								 					</div>
+							 					</div>
+							 					<div class="month-item">
+								 					<div class="tit">2015年</div>
+								 					<div class="oh">
+									 					<a href="javascirpt:;">1月</a>
+									 					<a href="javascirpt:;">2月</a>
+									 					<a href="javascirpt:;">3月</a>
+									 					<a href="javascirpt:;">4月</a>
+									 					<a href="javascirpt:;">5月</a>
+									 					<a href="javascirpt:;">6月</a>
+									 					<a href="javascirpt:;">7月</a>
+									 					<a href="javascirpt:;">8月</a>
+									 					<a href="javascirpt:;">9月</a>
+									 					<a href="javascirpt:;">10月</a>
+									 					<a href="javascirpt:;">11月</a>
+									 					<a href="javascirpt:;">12月</a>
+								 					</div>
+							 					</div>
+							 				</div>
+							 			</li>
+							 		</ul>
+							 	</div>
+							 	</div>
+							 	</div>
+							</div>
+						</div>
+						<div class="mui-content-padded">
+							<!-- 内容区域 -->
+							<div class="timeBox tc fb font-red">2016年1月-7月</div>
+							<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-red mt15">
+								<a class="mui-control-item mui-active" href="#item1">原始火灾执法</a>
+								<a class="mui-control-item" href="#item2">确认火灾执法</a>
+								<a class="mui-control-item" href="#item3">冒烟类火灾执法</a>
+							</div>
+							<div class="tableBox mt10">
+								<div id="item1" class="mui-control-content mui-active">
+									<table class="table fireDataTable">
+										<thead>
+											<tr>
+												<th width="50" class="grayBg" rowspan="2">排序</th>
+												<th width="70" class="greenBg" rowspan="2">街道</th>
+												<th class="orangeBg" colspan="2">原始火灾执法</th>
+											</tr>
+											<tr>
+												<th class="orangeBg light">2016年</th>
+												<th class="orangeBg light">同期</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="grayBg">1</td>
+												<td class="greenBg">员村</td>
+												<td class="orangeBg">1</td>
+												<td class="orangeBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">2</td>
+												<td class="greenBg">员村</td>
+												<td class="orangeBg">1</td>
+												<td class="orangeBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">3</td>
+												<td class="greenBg">员村</td>
+												<td class="orangeBg">1</td>
+												<td class="orangeBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">4</td>
+												<td class="greenBg">员村</td>
+												<td class="orangeBg">1</td>
+												<td class="orangeBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">5</td>
+												<td class="greenBg">员村</td>
+												<td class="orangeBg">1</td>
+												<td class="orangeBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">6</td>
+												<td class="greenBg">员村</td>
+												<td class="orangeBg">1</td>
+												<td class="orangeBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">7</td>
+												<td class="greenBg">员村</td>
+												<td class="orangeBg">1</td>
+												<td class="orangeBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">8</td>
+												<td class="greenBg">员村</td>
+												<td class="orangeBg">1</td>
+												<td class="orangeBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">9</td>
+												<td class="greenBg">员村</td>
+												<td class="orangeBg">1</td>
+												<td class="orangeBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">10</td>
+												<td class="greenBg">员村</td>
+												<td class="orangeBg">1</td>
+												<td class="orangeBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">11</td>
+												<td class="greenBg">员村</td>
+												<td class="orangeBg">1</td>
+												<td class="orangeBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">12</td>
+												<td class="greenBg">员村</td>
+												<td class="orangeBg">1</td>
+												<td class="orangeBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">13</td>
+												<td class="greenBg">员村</td>
+												<td class="orangeBg">1</td>
+												<td class="orangeBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">14</td>
+												<td class="greenBg">员村</td>
+												<td class="orangeBg">1</td>
+												<td class="orangeBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">15</td>
+												<td class="greenBg">员村</td>
+												<td class="orangeBg">1</td>
+												<td class="orangeBg">1</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div id="item2" class="mui-control-content">
+									<table class="table fireDataTable">
+										<thead>
+											<tr>
+												<th width="50" class="grayBg" rowspan="2">排序</th>
+												<th width="70" class="greenBg" rowspan="2">街道</th>
+												<th class="redBg" colspan="2">确认火灾执法</th>
+											</tr>
+											<tr>
+												<th class="redBg light">2016年</th>
+												<th class="redBg light">同期</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="grayBg">1</td>
+												<td class="greenBg">员村</td>
+												<td class="redBg">1</td>
+												<td class="redBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">2</td>
+												<td class="greenBg">员村</td>
+												<td class="redBg">1</td>
+												<td class="redBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">3</td>
+												<td class="greenBg">员村</td>
+												<td class="redBg">1</td>
+												<td class="redBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">4</td>
+												<td class="greenBg">员村</td>
+												<td class="redBg">1</td>
+												<td class="redBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">5</td>
+												<td class="greenBg">员村</td>
+												<td class="redBg">1</td>
+												<td class="redBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">6</td>
+												<td class="greenBg">员村</td>
+												<td class="redBg">1</td>
+												<td class="redBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">7</td>
+												<td class="greenBg">员村</td>
+												<td class="redBg">1</td>
+												<td class="redBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">8</td>
+												<td class="greenBg">员村</td>
+												<td class="redBg">1</td>
+												<td class="redBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">9</td>
+												<td class="greenBg">员村</td>
+												<td class="redBg">1</td>
+												<td class="redBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">10</td>
+												<td class="greenBg">员村</td>
+												<td class="redBg">1</td>
+												<td class="redBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">11</td>
+												<td class="greenBg">员村</td>
+												<td class="redBg">1</td>
+												<td class="redBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">12</td>
+												<td class="greenBg">员村</td>
+												<td class="redBg">1</td>
+												<td class="redBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">13</td>
+												<td class="greenBg">员村</td>
+												<td class="redBg">1</td>
+												<td class="redBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">14</td>
+												<td class="greenBg">员村</td>
+												<td class="redBg">1</td>
+												<td class="redBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">15</td>
+												<td class="greenBg">员村</td>
+												<td class="redBg">1</td>
+												<td class="redBg">1</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div id="item3" class="mui-control-content">
+									<table class="table fireDataTable">
+										<thead>
+											<tr>
+												<th width="50" class="grayBg" rowspan="2">排序</th>
+												<th width="70" class="greenBg" rowspan="2">街道</th>
+												<th class="blueBg" colspan="2">冒烟类原始火灾执法</th>
+											</tr>
+											<tr>
+												<th class="blueBg light">2016年</th>
+												<th class="blueBg light">同期</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="grayBg">1</td>
+												<td class="greenBg">员村</td>
+												<td class="blueBg">1</td>
+												<td class="blueBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">2</td>
+												<td class="greenBg">员村</td>
+												<td class="blueBg">1</td>
+												<td class="blueBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">3</td>
+												<td class="greenBg">员村</td>
+												<td class="blueBg">1</td>
+												<td class="blueBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">4</td>
+												<td class="greenBg">员村</td>
+												<td class="blueBg">1</td>
+												<td class="blueBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">5</td>
+												<td class="greenBg">员村</td>
+												<td class="blueBg">1</td>
+												<td class="blueBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">6</td>
+												<td class="greenBg">员村</td>
+												<td class="blueBg">1</td>
+												<td class="blueBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">7</td>
+												<td class="greenBg">员村</td>
+												<td class="blueBg">1</td>
+												<td class="blueBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">8</td>
+												<td class="greenBg">员村</td>
+												<td class="blueBg">1</td>
+												<td class="blueBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">9</td>
+												<td class="greenBg">员村</td>
+												<td class="blueBg">1</td>
+												<td class="blueBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">10</td>
+												<td class="greenBg">员村</td>
+												<td class="blueBg">1</td>
+												<td class="blueBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">11</td>
+												<td class="greenBg">员村</td>
+												<td class="blueBg">1</td>
+												<td class="blueBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">12</td>
+												<td class="greenBg">员村</td>
+												<td class="blueBg">1</td>
+												<td class="blueBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">13</td>
+												<td class="greenBg">员村</td>
+												<td class="blueBg">1</td>
+												<td class="blueBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">14</td>
+												<td class="greenBg">员村</td>
+												<td class="blueBg">1</td>
+												<td class="blueBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">15</td>
+												<td class="greenBg">员村</td>
+												<td class="blueBg">1</td>
+												<td class="blueBg">1</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<!-- 内容区域 end -->
+						</div>
+					</div>
+				</div>
+				<!-- off-canvas backdrop -->
+				<div class="mui-off-canvas-backdrop"></div>
+			</div>
+		</div>
+	<script src="../js/mui.js"></script>
+	<script src="../js/normal.js"></script>
+</body>
+</html>

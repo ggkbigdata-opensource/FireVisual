@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>登录</title>
+    <link href="../css/base.css" rel="stylesheet"/>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <link href="../common/iconfont/iconfont.css" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav login-bar">
+		<div class="logo"><img src="../img/logo.png"/></div>
+	</header>
+	<div class="mui-content loginBox">
+		<div class="mui-content-padded">
+			<form id='login-form' class="mui-input-group" action="../index/index.html">
+				<div class="mui-input-row">
+					<i class="iconfont icon-user"></i>
+					<input type="text" class="mui-input-clear mui-input" placeholder="请输入姓名">
+				</div>
+				<div class="mui-input-row">
+					<i class="iconfont icon-phone"></i>
+					<input type="text" class="mui-input-clear mui-input" placeholder="请输入电话">
+				</div>
+				<div class="mui-input-row">
+					<i class="iconfont icon-code"></i>
+					<input type="text" class="mui-input-clear mui-input" placeholder="请输入验证码">
+					<!--<div class="cord">
+						<img src="../custom/upload/cord.jpg" height="25px" />
+					</div>-->
+				</div>
+				<button id='login' class="mui-btn mui-btn-block">登录</button>
+			</form>
+		</div>
+	</div>
+	<script src="../js/mui.js"></script>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+</body>
+</html>
