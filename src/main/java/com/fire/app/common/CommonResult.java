@@ -1,11 +1,17 @@
 package com.fire.app.common;
 
+import java.util.List;
+
+import org.apache.poi.ss.formula.functions.T;
+
 public class CommonResult {
 	private boolean successful = true;
 	
 	private String msg;
 	
 	private Object data;
+	
+	private List<T> list;
 	
 	private long total;
 	
@@ -29,6 +35,13 @@ public class CommonResult {
 		result.successful = true;
 		result.data = data;
 		return result;
+	}
+	
+	public static CommonResult success(List<T> list){
+	    CommonResult result = new CommonResult();
+	    result.successful = true;
+	    result.list = list;
+	    return result;
 	}
 	
 	public static CommonResult success(String msg){
@@ -85,6 +98,14 @@ public class CommonResult {
 	public void setData(Object data) {
 		this.data = data;
 	}
+
+    public List<T> getList() {
+        return list;
+    }
+
+    public void setList(List<T> list) {
+        this.list = list;
+    }
 	
 	
 }
