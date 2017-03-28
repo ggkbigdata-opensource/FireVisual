@@ -15,7 +15,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/fire?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8
     username: root
-    password: Root12345..
+    password: 
   jpa:
     hibernate:
       ddl-auto: update
