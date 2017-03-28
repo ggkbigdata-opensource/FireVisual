@@ -11,8 +11,6 @@ public class CommonResult {
 	
 	private Object data;
 	
-	private List<T> list;
-	
 	private long total;
 	
 	public long getTotal() {
@@ -35,13 +33,6 @@ public class CommonResult {
 		result.successful = true;
 		result.data = data;
 		return result;
-	}
-	
-	public static CommonResult success(List<T> list){
-	    CommonResult result = new CommonResult();
-	    result.successful = true;
-	    result.list = list;
-	    return result;
 	}
 	
 	public static CommonResult success(String msg){
@@ -99,13 +90,6 @@ public class CommonResult {
 		this.data = data;
 	}
 
-    public List<T> getList() {
-        return list;
-    }
 
-    public void setList(List<T> list) {
-        this.list = list;
-    }
-	
 	
 }
