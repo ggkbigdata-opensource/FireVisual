@@ -117,7 +117,9 @@ public class FireEventServiceImpl implements FireEventService {
                 
                 JSONObject streetResult = new JSONObject();
                 
-                Integer value = fireEventRepository.findStreetData(type,beginTime,endTime,street.getId());
+                
+                
+                Integer value = fireEventRepository.findStreetData(type,new Date(),new Date(),street.getId());
                 System.out.println(value);
                 
                 

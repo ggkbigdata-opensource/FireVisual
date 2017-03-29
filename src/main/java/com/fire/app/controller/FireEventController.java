@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
@@ -44,8 +45,8 @@ public class FireEventController {
 
     }
     
-    @RequestMapping("/toBaseDate")
-    private String toBaseDate() {
+    @RequestMapping("/toBasePage")
+    private String toBasePage() {
         
       /*  if (!ContextHolderUtils.isLogin()) {
             return "login/login";
@@ -63,7 +64,7 @@ public class FireEventController {
      * @return 
      * @description 获取每个街道详情
      */
-    @RequestMapping("/getBaseDate")
+    @RequestMapping(value = "/getBaseDate",method = RequestMethod.POST)
     private CommonResult getBaseDate(String type,String beginTime,String endTime) {
         
       /*  if (!ContextHolderUtils.isLogin()) {
