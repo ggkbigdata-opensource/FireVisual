@@ -24,19 +24,18 @@ public interface FireEventService {
      * @author wangzhiwang
      * @param type
      * @param beginTime
-     * @param endTime
      * @return 
      * @description
      */
-    List<JSONObject> getBaseDate(String type, String beginTime, String endTime);
+    List<JSONObject> getBaseDate(String type, String beginTime);
 
     /**
      * @createDate 2017年3月29日下午2:50:47 
      * @author wangzhiwang
-     * @param streetName
+     * @param id
      * @return 
      * @description 
      */
-    List<JSONObject> getAreaDate(String streetName);
+    List<JSONObject> getAreaDate(Long id);
 
 }

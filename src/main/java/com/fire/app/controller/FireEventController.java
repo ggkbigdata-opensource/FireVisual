@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
@@ -67,13 +68,13 @@ public class FireEventController {
      */
     @RequestMapping(value = "/getBaseDate",method = RequestMethod.POST)
     @ResponseBody
-    private List<JSONObject> getBaseDate(String type,String beginTime,String endTime) {
+    private List<JSONObject> getBaseDate(String beginTime,String endTime) {
         
       /*  if (!ContextHolderUtils.isLogin()) {
             return "login/login";
         }*/
         
-        List<JSONObject> result = fireEventServcie.getBaseDate(type,beginTime,endTime);
+        List<JSONObject> result = fireEventServcie.getBaseDate(beginTime,endTime);
         
         return result;
     }
@@ -100,13 +101,13 @@ public class FireEventController {
      */
     @RequestMapping(value = "/getAreaDate",method = RequestMethod.POST)
     @ResponseBody
-    private List<JSONObject> getAreaDate(String streetName) {
+    private List<JSONObject> getAreaDate(@RequestParam(required=true) Long id) {
         
         /*  if (!ContextHolderUtils.isLogin()) {
             return "login/login";
         }*/
         
-        List<JSONObject> result = fireEventServcie.getAreaDate(streetName);
+        List<JSONObject> result = fireEventServcie.getAreaDate(id);
         
         return result;
     }
