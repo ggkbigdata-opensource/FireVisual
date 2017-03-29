@@ -37,9 +37,7 @@ public interface AppFireEventRepository extends JpaRepository<AppFireEvent, Long
      * @return 
      * @description
      */
-   // @Query(value = "SELECT * FROM app_fire_event t where t.fire_type = ?1 and t.occur_time between ?2 and ?3", nativeQuery = true)
-    //@Query(value = "SELECT * FROM app_fire_event t where t.fire_type = ?1 and t.occur_time between '2014-01-04 09:22:20' and '2017-02-01 10:07:33'and t.block_id in( select b.id from block b where b.street_id = ?4)", nativeQuery = true)
-    @Query(value = "SELECT * FROM app_fire_event t where t.fire_type = ?1 and t.occur_time between ?2 and ?3 and t.block_id in( select b.id from block b where b.street_id = ?4)", nativeQuery = true)
+    @Query(value = "SELECT count(id) FROM app_fire_event t where t.fire_type = ?1 and t.occur_time between ?2 and ?3 and t.block_id in( select b.id from block b where b.street_id = ?4)", nativeQuery = true)
     Integer findStreetData(String type, Date beginTime, Date endTime, Long id);
 
 }

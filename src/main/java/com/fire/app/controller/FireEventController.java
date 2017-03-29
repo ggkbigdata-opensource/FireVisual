@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -65,6 +66,7 @@ public class FireEventController {
      * @description 获取每个街道详情
      */
     @RequestMapping(value = "/getBaseDate",method = RequestMethod.POST)
+    @ResponseBody
     private CommonResult getBaseDate(String type,String beginTime,String endTime) {
         
       /*  if (!ContextHolderUtils.isLogin()) {
@@ -72,6 +74,39 @@ public class FireEventController {
         }*/
         
         List<JSONObject> result = fireEventServcie.getBaseDate(type,beginTime,endTime);
+        
+        return CommonResult.success(result);
+    }
+    
+    
+    @RequestMapping("/toBasePage")
+    private String toAreaPage() {
+        
+        /*  if (!ContextHolderUtils.isLogin()) {
+            return "login/login";
+        }*/
+        
+        return "alarm/alarm-region";
+    }
+    
+    /**
+     * @createDate 2017年3月29日上午10:14:53 
+     * @author wangzhiwang
+     * @param type
+     * @param beginTime
+     * @param endTime
+     * @return 
+     * @description 获取街道的详情
+     */
+    @RequestMapping(value = "/getAreaDate",method = RequestMethod.POST)
+    @ResponseBody
+    private CommonResult getAreaDate(String streetName) {
+        
+        /*  if (!ContextHolderUtils.isLogin()) {
+            return "login/login";
+        }*/
+        
+        List<JSONObject> result = fireEventServcie.getAreaDate(streetName);
         
         return CommonResult.success(result);
     }
