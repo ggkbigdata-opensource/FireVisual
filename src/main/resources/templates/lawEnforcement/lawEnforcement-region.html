@@ -1,96 +1,81 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>执法</title>
-    <link href="../css/base.css" rel="stylesheet"/>
-    <link href="../css/mui.min.css" rel="stylesheet"/>
-    <link href="../common/iconfont/iconfont.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
+<head th:with="title=${'执法'}" th:include="/layouts/layout::head">
 </head>
 <body>
-	<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
-			<!--菜单部分-->
-			<aside id="offCanvasSide" class="mui-off-canvas-right">
-				<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<div class="menu-title">菜单</div>
-						<ul class="menu">
-							<li><a href="../regionalProfile/regionalProfile.html"><i class="iconfont icon-region"></i>区域概况</a></li>
-							<li><a href="../hiddenInvestigation/hiddenInvestigation.html"><i class="iconfont icon-hidden"></i>隐患排查项目统计</a></li>
-							<li><a href="../alarm/alarm-tianHe.html"><i class="iconfont icon-warn"></i>警情</a></li>
-							<li><a href="../lawEnforcement/lawEnforcement-tianHe.html"><i class="iconfont icon-police"></i>执法</a></li>
-							<li><a href="../statisticalData/statisticalData.html"><i class="iconfont icon-bar-chart"></i>统计数据展示</a></li>
-						</ul>
-					</div>
-				</div>
-			</aside>
-			<div class="mui-inner-wrap">
-				<header class="mui-bar mui-bar-nav">
-					<div class="logo">
-						<img src="../img/logo.png" />
-					</div>
-					<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
-					<h1 class="mui-title">执法</h1>
-				</header>
-				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<div class="filterBox">
-							<button onclick="hide('trendPopover')" class="fl btn-filter" >
-								区域执法趋势
-								<i class="mui-icon mui-icon-arrowdown"></i>
-							</button>
-							<div id="trendPopover" style="display: none " class="popoverbox">
-								<ul class="mui-table-view">
-								    <li class="mui-table-view-cell"><a href="lawEnforcement-tianHe.html">天河区执法趋势</a></li>
-								    <li class="mui-table-view-cell"><a href="lawEnforcement-region.html">区域执法趋势</a></li>
-								    <li class="mui-table-view-cell"><a href="lawEnforcement-fire.html">火灾执法基本数据</a></li>
-								</ul>
-							</div>
-							<button onclick="hide('regionPopover')" class="fr btn-filter" >
-								员村
-								<i class="mui-icon mui-icon-arrowdown"></i>
-							</button>
-							<div id="regionPopover" style="display: none " class="popoverbox">
-							 	<div class="regionCurrent">当前：<span>员村</span></div>
-							 	<ul class="regionList">
-							 		<li class="selected"><a href="javascript:;">员村</a></li>
-							 		<li><a href="javascript:;">员村</a></li>
-							 		<li><a href="javascript:;">员村</a></li>
-							 		<li><a href="javascript:;">员村</a></li>
-							 		<li><a href="javascript:;">员村</a></li>
-							 		<li><a href="javascript:;">员村</a></li>
-							 		<li><a href="javascript:;">员村</a></li>
-							 		<li><a href="javascript:;">员村</a></li>
-							 		<li><a href="javascript:;">员村</a></li>
-							 		<li><a href="javascript:;">员村</a></li>
-							 		<li><a href="javascript:;">员村</a></li>
-							 		<li><a href="javascript:;">员村</a></li>
-							 		<li><a href="javascript:;">员村</a></li>
-							 		<li><a href="javascript:;">员村</a></li>
-							 		<li><a href="javascript:;">员村</a></li>
-							 		<li><a href="javascript:;">员村</a></li>
-							 		<li><a href="javascript:;">员村</a></li>
-							 	</ul>
-							</div>
-						</div>
-						<div class="mui-content-padded">
-							<!-- 内容区域 -->
-							<div class="chartBox mt20 mb20">
-								<img src="../custom/upload/chart1.png" width="100%" />
-							</div>
-							<!-- 内容区域 end -->
-						</div>
-					</div>
-				</div>
-				<!-- off-canvas backdrop -->
-				<div class="mui-off-canvas-backdrop"></div>
-			</div>
-		</div>
-	<script src="../js/mui.js"></script>
-	<script src="../js/normal.js"></script>
+    <div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+        <!--菜单部分-->
+        <div th:replace="/layouts/layout::menu"></div>
+        <div class="mui-inner-wrap">
+            <!-- Header 部分 -->
+            <div th:with="headTitle=${'执法'}"></div>
+            <div th:replace="/layouts/layout::menu"></div>
+            <div id="offCanvasContentScroll"
+                class="mui-content mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    <div class="filterBox">
+                        <button onclick="hide('trendPopover')"
+                            class="fl btn-filter">
+                            区域执法趋势 <i
+                                class="mui-icon mui-icon-arrowdown"></i>
+                        </button>
+                        <div id="trendPopover" style="display: none"
+                            class="popoverbox">
+                            <ul class="mui-table-view">
+                                <li class="mui-table-view-cell"><a
+                                    href="lawEnforcement-tianHe.html">天河区执法趋势</a></li>
+                                <li class="mui-table-view-cell"><a
+                                    href="lawEnforcement-region.html">区域执法趋势</a></li>
+                                <li class="mui-table-view-cell"><a
+                                    href="lawEnforcement-fire.html">火灾执法基本数据</a></li>
+                            </ul>
+                        </div>
+                        <button onclick="hide('regionPopover')"
+                            class="fr btn-filter">
+                            员村 <i class="mui-icon mui-icon-arrowdown"></i>
+                        </button>
+                        <div id="regionPopover" style="display: none"
+                            class="popoverbox">
+                            <div class="regionCurrent">
+                                当前：<span>员村</span>
+                            </div>
+                            <ul class="regionList">
+                                <li class="selected"><a
+                                    href="javascript:;">员村</a></li>
+                                <li><a href="javascript:;">员村</a></li>
+                                <li><a href="javascript:;">员村</a></li>
+                                <li><a href="javascript:;">员村</a></li>
+                                <li><a href="javascript:;">员村</a></li>
+                                <li><a href="javascript:;">员村</a></li>
+                                <li><a href="javascript:;">员村</a></li>
+                                <li><a href="javascript:;">员村</a></li>
+                                <li><a href="javascript:;">员村</a></li>
+                                <li><a href="javascript:;">员村</a></li>
+                                <li><a href="javascript:;">员村</a></li>
+                                <li><a href="javascript:;">员村</a></li>
+                                <li><a href="javascript:;">员村</a></li>
+                                <li><a href="javascript:;">员村</a></li>
+                                <li><a href="javascript:;">员村</a></li>
+                                <li><a href="javascript:;">员村</a></li>
+                                <li><a href="javascript:;">员村</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mui-content-padded">
+                        <!-- 内容区域 -->
+                        <div class="chartBox mt20 mb20">
+                            <img src="../custom/upload/chart1.png"
+                                width="100%" />
+                        </div>
+                        <!-- 内容区域 end -->
+                    </div>
+                </div>
+            </div>
+            <!-- off-canvas backdrop -->
+            <div class="mui-off-canvas-backdrop"></div>
+        </div>
+    </div>
+    <script src="../js/mui.js"></script>
+    <script src="../js/normal.js"></script>
 </body>
 </html>
