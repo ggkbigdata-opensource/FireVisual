@@ -35,6 +35,23 @@ body,
 }
 .font-green { color: #119d35;}
 .font-red { color:  #f56060;}
+
+.mui-table-view-cell>button:not(.mui-btn) {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: -11px -15px;
+    padding: 11px 15px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: inherit;
+    border: 0;
+    background-color: transparent!important;
+    font-size: 17px;
+}
+.mui-table-view-cell>button:active {
+	color: #f66e6e;
+}
 /*login*/
 .login-bar {
 	height: 180px;
@@ -110,14 +127,18 @@ body,
 .menu > li + li {
 	margin-top: 20px;
 }
-.menu > li > a {
+.menu > li > a,
+.menu > li > button {
 	position: relative;
 	display: block;
+	width: 100%;
 	height: 50px;
+	padding: 0;
 	line-height: 48px;
 	text-align: center;
 	color: #ec4040;
 	font-size: 18px;
+	border-radius: 0;
 	border: 1px solid #ec4040;
 	-webkit-transition: all;
             transition: all;
@@ -126,7 +147,8 @@ body,
     -webkit-transition-duration: .2s;
             transition-duration: .2s;
 }
-.menu > li > a > .iconfont {
+.menu > li > a > .iconfont,
+.menu > li > button > .iconfont {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -134,7 +156,8 @@ body,
 	text-align: center;
 	font-size: 25px;
 }
-.menu > li > a:active {
+.menu > li > a:active,
+.menu > li > button:active {
 	background-color: #ec4040;
 	color: #fff;
 }
@@ -157,7 +180,8 @@ body,
 .mui-off-canvas-right .menu > li + li {
 	margin-top: 0;
 }
-.mui-off-canvas-right .menu > li > a {
+.mui-off-canvas-right .menu > li > a,
+.mui-off-canvas-right .menu > li > button {
 	height: 70px;
 	line-height: 70px;
 	color: #fff;
@@ -166,11 +190,14 @@ body,
 	font-size: 18px;
 	border-width: 0 0 1px 0;
 	border-color: #ef7d7d;
+	background-color: transparent;
 }
-.mui-off-canvas-right .menu > li > a > .iconfont {
+.mui-off-canvas-right .menu > li > a > .iconfont,
+.mui-off-canvas-right .menu > li > button > .iconfont {
 	width: 60px;
 }
-.mui-off-canvas-right .menu > li > a:active {
+.mui-off-canvas-right .menu > li > a:active,
+.mui-off-canvas-right .menu > li > button:active {
 	color: #ec4040;
 	background-color: #fff;
 }
@@ -247,8 +274,14 @@ body,
 	color: #fff;
 	font-weight: bold;
 }
+.groupList .btn-detail {
+	padding: 0;
+	border: 0;
+	background-color: transparent!important;
+}
 .groupList .btn-detail,
 .groupList .btn-detail i {
+	height: 30px;
 	font-size: 14px;
 	line-height: 30px;
 	color: #ec4040;
@@ -368,7 +401,8 @@ body,
 	margin-left: 10px;
 	height: 30px;
 }
-.regionList > li > a {
+.regionList > li > a,
+.regionList > li > button {
 	display: block;
 	padding: 0 10px;
 	height: 30px;
@@ -376,9 +410,12 @@ body,
 	color: #f66e6e;
 	border: 1px solid #f66e6e;
 	background-color: #fff;
+	font-size: 17px;
 }
 .regionList > li > a:active,
-.regionList > li.selected > a {
+.regionList > li.selected > a,
+.regionList > li > button:active,
+.regionList > li.selected > button {
 	color: #fff;
 	background-color: #f66e6e;
 }
@@ -422,7 +459,8 @@ body,
 .selectRangeList > li .oh {
 	margin-bottom: -10px;
 }
-.selectRangeList > li > .oh a {
+.selectRangeList > li > .oh a,
+.selectRangeList > li > .oh button {
 	float: left;
 	min-width: 56px;
 	padding: 0 10px;
@@ -434,8 +472,12 @@ body,
 	border: 1px solid #f66e6e;
 	background-color: #fff;
 	text-align: center;
+	font-size: 16px;
 }
-.selectRangeList > li > .oh a.selected {
+.selectRangeList > li > .oh a.selected,
+.selectRangeList > li > .oh button.selected,
+.selectRangeList > li > .oh a:active,
+.selectRangeList > li > .oh button:active {
 	background-color: #f66e6e;
 	color: #fff;
 }

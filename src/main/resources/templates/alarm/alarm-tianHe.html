@@ -6,32 +6,32 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>警情</title>
-    <link href="css/base.css" rel="stylesheet"/>
-    <link href="css/mui.min.css" rel="stylesheet"/>
-    <link href="common/iconfont/iconfont.css" rel="stylesheet"/>
-    <link href="css/style.css" rel="stylesheet"/>
+    <link th:href="@{/css/base.css}" rel="stylesheet"/>
+    <link th:href="@{/css/mui.min.css}" rel="stylesheet"/>
+    <link th:href="@{/common/iconfont/iconfont.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
 	<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
 			<!--菜单部分-->
-			<aside id="offCanvasSide" class="mui-off-canvas-right">
+			<buttonside id="offCanvasSide" class="mui-off-canvas-right">
 				<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
 					<div class="mui-scroll">
 						<div class="menu-title">菜单</div>
 						<ul class="menu">
-							<li><a href="../regionalProfile/regionalProfile.html"><i class="iconfont icon-region"></i>区域概况</a></li>
-							<li><a href="../hiddenInvestigation/hiddenInvestigation.html"><i class="iconfont icon-hidden"></i>隐患排查项目统计</a></li>
-							<li><a href="../alarm/alarm-tianHe.html"><i class="iconfont icon-warn"></i>警情</a></li>
-							<li><a href="../lawEnforcement/lawEnforcement-tianHe.html"><i class="iconfont icon-police"></i>执法</a></li>
-							<li><a href="../statisticalData/statisticalData.html"><i class="iconfont icon-bar-chart"></i>统计数据展示</a></li>
+							<li><button th:href="@{/regionalProfile/regionalProfile.html}"><i class="iconfont icon-region"></i>区域概况</button></li>
+							<li><button th:href="@{/hiddenInvestigation/hiddenInvestigation.html}"><i class="iconfont icon-hidden"></i>隐患排查项目统计</button></li>
+							<li><button th:href="@{/alarm/alarm-tianHe.html}"><i class="iconfont icon-warn"></i>警情</button></li>
+							<li><button th:href="@{/lawEnforcement/lawEnforcement-tianHe.html}"><i class="iconfont icon-police"></i>执法</button></li>
+							<li><button th:href="@{/statisticalData/statisticalData.html}"><i class="iconfont icon-bar-chart"></i>统计数据展示</button></li>
 						</ul>
 					</div>
 				</div>
-			</aside>
+			</buttonside>
 			<div class="mui-inner-wrap">
 				<header class="mui-bar mui-bar-nav">
 					<div class="logo">
-						<img src="../img/logo.png" />
+						<img th:src="@{/img/logo.png}" />
 					</div>
 					<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
 					<h1 class="mui-title">警情</h1>
@@ -45,9 +45,9 @@
 							</button>
 							<div id="trendPopover" style="display: none " class="popoverbox">
 								<ul class="mui-table-view">
-								    <li class="mui-table-view-cell"><a href="alarm-tianHe.html">天河区警情趋势</a></li>
-								    <li class="mui-table-view-cell"><a href="alarm-region.html">区域警情趋势</a></li>
-								    <li class="mui-table-view-cell"><a href="alarm-fire.html">火灾警情基本数据</a></li>
+								    <li class="mui-table-view-cell"><button href="alarm-tianHe.html">天河区警情趋势</button></li>
+								    <li class="mui-table-view-cell"><button href="alarm-region.html">区域警情趋势</button></li>
+								    <li class="mui-table-view-cell"><button href="alarm-fire.html">火灾警情基本数据</button></li>
 								  </ul>
 							</div>
 						</div>
@@ -65,7 +65,70 @@
 				<div class="mui-off-canvas-backdrop"></div>
 			</div>
 		</div>
-	<script src="js/mui.js"></script>
-	<script src="js/normal.js"></script>
+	<script th:src="@{/js/mui.js}"></script>
+	<script th:src="@{/js/normal.js}"></script>
+	<script th:src="@{/js/echarts.min.js}"></script>
+	<script th:src="@{/js/macarons.js}"></script>
+	<script>
+		mui.init();
+		mui.get('main','',function(data){
+			console.log(data);
+			if(data && data.successful){
+				require.config({
+					path:{
+						echarts: "@{/js/echarts.min.js}"
+					}
+				});
+				require(
+					['echarts','echarts/chart/line'],
+					function(e){
+						var alarmTendency = e.init(document.getElementById('alarmTendency'));
+						var option = {
+							    tooltip : {
+							        trigger: 'axis'
+							    },
+							    legend: {
+							        data:['原始警情','冒烟警情','确认警情']
+							    },
+							    calculable : false,
+							    xAxis : [
+							        {
+							            type : 'category',
+							            boundaryGap : false,
+							            data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+							        }
+							    ],
+							    yAxis : [
+							        {
+							            type : 'value'
+							        }
+							    ],
+							    series : [
+							        {
+							            name:'原始警情',
+							            type:'line',
+							      
+							            data:[420, 462, 501, 540, 590, 630, 710, 900,950,750,630,500]
+							        },
+							        {
+							            name:'冒烟警情',
+							            type:'line',
+							         
+							            data:[304, 382, 391, 434, 500, 550, 610, 650, 730,620,550,400]
+							        },
+							        {
+							            name:'确认警情',
+							            type:'line',
+							            
+							            data:[200, 232, 201, 254, 300, 330, 410,500,530,450,300,200]
+							        }
+							    ]
+							};
+						alarmTendency.setOption(option);
+					}
+				)
+			}
+		},'json');
+	</script>
 </body>
 </html>

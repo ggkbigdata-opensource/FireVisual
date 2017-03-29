@@ -6,10 +6,10 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>菜单</title>
-    <link href="css/base.css" rel="stylesheet"/>
-    <link href="css/mui.min.css" rel="stylesheet"/>
-    <link href="common/iconfont/iconfont.css" rel="stylesheet"/>
-    <link href="css/style.css" rel="stylesheet"/>
+    <link href="../css/base.css" rel="stylesheet"/>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <link href="../common/iconfont/iconfont.css" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
 </head>
 <body>
 	<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
@@ -30,7 +30,7 @@
 			<div class="mui-inner-wrap">
 				<header class="mui-bar mui-bar-nav">
 					<div class="logo">
-						<img src="img/logo.png" />
+						<img src="../img/logo.png" />
 					</div>
 					<!--<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>-->
 					<h1 class="mui-title">菜单</h1>
@@ -42,7 +42,7 @@
 							<ul class="menu">
 								<li><a href="../regionalProfile/regionalProfile.html"><i class="iconfont icon-region"></i>区域概况</a></li>
 								<li><a href="../hiddenInvestigation/hiddenInvestigation.html"><i class="iconfont icon-hidden"></i>隐患排查项目统计</a></li>
-								<li><a href="../alarm/alarm-tianHe.html"><i class="iconfont icon-warn"></i>警情</a></li>
+								<li><button onclick="goUrl('fireEvent/')"><i class="iconfont icon-warn"></i>警情</button></li>
 								<li><a href="../lawEnforcement/lawEnforcement-tianHe.html"><i class="iconfont icon-police"></i>执法</a></li>
 								<li><a href="../statisticalData/statisticalData.html"><i class="iconfont icon-bar-chart"></i>统计数据展示</a></li>
 							</ul>
@@ -54,7 +54,17 @@
 				<div class="mui-off-canvas-backdrop"></div>
 			</div>
 		</div>
-	<script src="js/mui.js"></script>
-	<script src="js/normal.js"></script>
+	<script src="../js/mui.js"></script>
+	<script src="../js/normal.js"></script>
+	<script src="../js/jquery-2.1.0.js"></script>
+	<script type="text/javascript">
+		mui.init();
+
+		var goUrl = function (url){
+			
+			mui.openWindow({url: url});
+		};
+		
+	</script>
 </body>
 </html>
