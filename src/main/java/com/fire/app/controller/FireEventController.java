@@ -18,6 +18,7 @@ import com.fire.app.common.App;
 import com.fire.app.common.CommonResult;
 import com.fire.app.service.FireEventService;
 import com.fire.app.util.AppHelper;
+import com.fire.app.util.ContextHolderUtils;
 
 /**
  * @createDate 2017年3月28日下午3:57:31
@@ -31,6 +32,16 @@ public class FireEventController {
     @Autowired
     private FireEventService fireEventServcie;
 
+    @RequestMapping("/")
+    private String toFireEvent() {
+        
+        if (!ContextHolderUtils.isLogin()) {
+            return "login/login";
+        }
+        
+        return "alarm/alarm-tianHe";
+    }
+    
     @RequestMapping(value = "/main")
     @ResponseBody
     public CommonResult main() {
