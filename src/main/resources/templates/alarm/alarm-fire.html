@@ -60,12 +60,9 @@
                         <div id="trendPopover" style="display: none"
                             class="popoverbox">
                             <ul class="mui-table-view">
-                                <li class="mui-table-view-cell"><button
-                                    onclick="goUrl('fireEvent/')">天河区警情趋势</button></li>
-                                <li class="mui-table-view-cell"><button
-                                    >区域警情趋势</button></li>
-                                <li class="mui-table-view-cell"><button
-                                    >火灾警情基本数据</button></li>
+                                <li class="mui-table-view-cell"><button onclick="goUrl('/fire-visual/app/fireEvent/')">天河区警情趋势</button></li>
+                                <li class="mui-table-view-cell"><button onclick="goUrl('/fire-visual/app/fireEvent/toAreaPage')">区域警情趋势</button></li>
+                                <li class="mui-table-view-cell"><button onclick="goUrl()">火灾警情基本数据</button></li>
                             </ul>
                         </div>
                         <button onclick="hide('timePopover')"
@@ -577,7 +574,12 @@
     <script>
     	mui.init();
 		var goUrl = function (url){
-			mui.openWindow({url: url});
+			if(url === undefined){
+				document.getElementById('trendPopover').style.display = 'none';
+			}else{
+				mui.openWindow({url: url});
+			}
+			
 		};
     </script>
 </body>

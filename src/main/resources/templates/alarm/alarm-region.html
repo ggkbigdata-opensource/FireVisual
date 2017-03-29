@@ -6,10 +6,10 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>警情</title>
-    <link href="../css/base.css" rel="stylesheet"/>
-    <link href="../css/mui.min.css" rel="stylesheet"/>
-    <link href="../common/iconfont/iconfont.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
+    <link th:href="@{/css/base.css}" rel="stylesheet"/>
+    <link th:href="@{/css/mui.min.css}" rel="stylesheet"/>
+    <link th:href="@{/common/iconfont/iconfont.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
 	<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
@@ -31,7 +31,7 @@
 			<div class="mui-inner-wrap">
 				<header class="mui-bar mui-bar-nav">
 					<div class="logo">
-						<img src="../img/logo.png" />
+						<img th:src="@{/img/logo.png}" />
 					</div>
 					<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
 					<h1 class="mui-title">警情</h1>
@@ -45,9 +45,9 @@
 							</button>
 							<div id="trendPopover" style="display: none " class="popoverbox">
 								<ul class="mui-table-view">
-								    <li class="mui-table-view-cell"><a href="alarm-tianHe.html">天河区警情趋势</a></li>
-								    <li class="mui-table-view-cell"><a href="alarm-region.html">区域警情趋势</a></li>
-								    <li class="mui-table-view-cell"><a href="alarm-fire.html">火灾警情基本数据</a></li>
+								    <li class="mui-table-view-cell"><button onclick="goUrl('/fire-visual/app/fireEvent/')">天河区警情趋势</button></li>
+								    <li class="mui-table-view-cell"><button onclick="goUrl()">区域警情趋势</button></li>
+								    <li class="mui-table-view-cell"><button onclick="goUrl('/fire-visual/app/fireEvent/toBasePage')">火灾警情基本数据</button></li>
 								  </ul>
 							</div>
 							<button onclick="hide('regionPopover')" class="fr btn-filter" >
@@ -80,7 +80,7 @@
 						<div class="mui-content-padded">
 							<!-- 内容区域 -->
 							<div class="chartBox mt20 mb20">
-								<img src="../custom/upload/chart1.png" width="100%" />
+								<div id="regionTendency" style="height:225px;"></div>
 							</div>
 							<!-- 内容区域 end -->
 						</div>
@@ -90,7 +90,20 @@
 				<div class="mui-off-canvas-backdrop"></div>
 			</div>
 		</div>
-	<script src="../js/mui.js"></script>
-	<script src="../js/normal.js"></script>
+	<script th:src="@{/js/mui.js}"></script>
+	<script th:src="@{/js/normal.js}"></script>
+	<script th:src="@{/js/echarts.min.js}"></script>
+	<script th:src="@{/js/macarons.js}"></script>
+	<script>
+		mui.init();
+		var goUrl = function (url){
+			if(url === undefined){
+				document.getElementById('trendPopover').style.display = 'none';
+			}else{
+				mui.openWindow({url: url});
+			}
+			
+		};
+	</script>
 </body>
 </html>

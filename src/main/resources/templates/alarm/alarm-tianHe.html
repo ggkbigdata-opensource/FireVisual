@@ -36,7 +36,7 @@
 					<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
 					<h1 class="mui-title">警情</h1>
 				</header>
-				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
+				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper" >
 					<div class="mui-scroll">
 						<div class="filterBox">
 							<button onclick="hide('trendPopover')" class="fl btn-filter" >
@@ -46,16 +46,16 @@
 							<div id="trendPopover" style="display: none " class="popoverbox">
 								<ul class="mui-table-view">
 								    <li class="mui-table-view-cell"><button onclick="goUrl()">天河区警情趋势</button></li>
-								    <li class="mui-table-view-cell"><button href="alarm-region.html">区域警情趋势</button></li>
-								    <li class="mui-table-view-cell"><button onclick="goUrl('app/fireEvent/toBasePage')">火灾警情基本数据</button></li>
+								    <li class="mui-table-view-cell"><button onclick="goUrl('toAreaPage')">区域警情趋势</button></li>
+								    <li class="mui-table-view-cell"><button onclick="goUrl('toBasePage')">火灾警情基本数据</button></li>
 								  </ul>
 							</div>
 						</div>
-						<div class="mui-content-padded">
+						<div class="mui-content-padded" style="height:100%">
 							<!-- 内容区域 -->
 							<div class="chartBox mt20 mb20">
 								<!-- <img src="../custom/upload/chart1.png" width="100%" /> -->
-								<div id="alarmTendency" style="height:400px;"></div>
+								<div id="alarmTendency" style="height:225px;"></div>
 							</div>
 							<!-- 内容区域 end -->
 						</div>
