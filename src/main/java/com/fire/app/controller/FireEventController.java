@@ -100,7 +100,7 @@ public class FireEventController {
      */
     @RequestMapping(value = "/getAreaDate",method = RequestMethod.POST)
     @ResponseBody
-    private CommonResult getAreaDate(String streetName) {
+    private List<JSONObject> getAreaDate(String streetName) {
         
         /*  if (!ContextHolderUtils.isLogin()) {
             return "login/login";
@@ -108,6 +108,6 @@ public class FireEventController {
         
         List<JSONObject> result = fireEventServcie.getAreaDate(streetName);
         
-        return CommonResult.success(result);
+        return result;
     }
 }
