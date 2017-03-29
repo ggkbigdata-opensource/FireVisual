@@ -79,7 +79,7 @@ public class FireEventController {
     }
     
     
-    @RequestMapping("/toBasePage")
+    @RequestMapping("/toAreaPage")
     private String toAreaPage() {
         
         /*  if (!ContextHolderUtils.isLogin()) {

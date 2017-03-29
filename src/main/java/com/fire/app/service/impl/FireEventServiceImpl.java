@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSONObject;
 import com.fire.app.domain.AppFireEvent;
 import com.fire.app.domain.AppFireEventRepository;
-import com.fire.app.domain.Block;
 import com.fire.app.domain.BlockRepository;
 import com.fire.app.domain.Street;
 import com.fire.app.domain.StreetRepository;
@@ -53,10 +52,13 @@ public class FireEventServiceImpl implements FireEventService {
                 Integer.parseInt(arr[2]));// 灵活的输入年份，月
 
         // 用于存储每个月的数值
-        HashMap<String, Integer> oneSum = new HashMap<String, Integer>();
-        HashMap<String, Integer> twoSum = new HashMap<String, Integer>();
-        HashMap<String, Integer> threeSum = new HashMap<String, Integer>();
+        HashMap<Integer, Integer> oneSum = new HashMap<Integer, Integer>();
+        HashMap<Integer, Integer> twoSum = new HashMap<Integer, Integer>();
+        HashMap<Integer, Integer> threeSum = new HashMap<Integer, Integer>();
 
+        ArrayList<JSONObject> test = new ArrayList<JSONObject>();
+        
+        
         for (int i = 1; i < 13; i++) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             calendar1.add(calendar.MONTH, -1);// 获取上个月月份
@@ -77,9 +79,9 @@ public class FireEventServiceImpl implements FireEventService {
                     threed++;
                 }
             }
-            oneSum.put(i+"月", oned);
-            twoSum.put(i+"月", twod);
-            threeSum.put(i+"月", threed);
+            oneSum.put(i, oned);
+            twoSum.put(i, twod);
+            threeSum.put(i, threed);
 
         }
 
