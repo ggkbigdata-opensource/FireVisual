@@ -21,7 +21,7 @@
                         </button>
                         <!-- 火情下拉列表 -->
                         <div th:replace="/layouts/layout::alarm-menu"></div>
-                        
+
                         <button onclick="hide('timePopover')"
                             class="fr btn-filter">
                             选择时间段 <i class="mui-icon mui-icon-arrowdown"></i>
@@ -529,17 +529,16 @@
     <script th:src="@{/js/mui.js}"></script>
     <script th:src="@{/js/normal.js}"></script>
     <script>
-                    mui.init();
-                    var goUrl = function(url) {
-                        if (url === undefined) {
-                            document.getElementById('trendPopover').style.display = 'none';
-                        } else {
-                            mui.openWindow({
-                                url : url
-                            });
-                        }
-
-                    };
-                </script>
+          mui.init();
+          var goUrl = function(url) {
+            if (url === undefined) {
+              document.getElementById('trendPopover').style.display = 'none';
+            } else {
+              mui.openWindow({
+                url : url
+              });
+            }
+          };
+        </script>
 </body>
 </html>

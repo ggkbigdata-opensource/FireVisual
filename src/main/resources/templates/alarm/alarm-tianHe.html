@@ -41,137 +41,112 @@
     <script th:src="@{/js/echarts.min.js}"></script>
     <script th:src="@{/js/macarons.js}"></script>
     <script>
-                    mui.init();
-                    var alarmTendency = echarts.init(document
-                            .getElementById('alarmTendency'), 'macarons');
-                    var option = {};
-                    mui
-                            .get(
-                                    'main',
-                                    '',
-                                    function(data) {
-                                        if (data && data.length > 0) {
-                                            var legend = [];
-                                            var item = [];
-                                            var datas = [];
-                                            var unit = [];
-                                            unit = data[0].unit;
-                                            for (var i = 0; i < data.length; i++) {
-                                                legend.unshift(data[i].type);
-                                                var da = [];
-                                                for (var k = 0; k < data[i].data.length; k++) {
-                                                    da
-                                                            .unshift(data[i].data[k].value);
-                                                }
-                                                datas.unshift(da);
-                                            }
-                                            for (var j = 0; j < data[0].data.length; j++) {
-                                                item
-                                                        .unshift(data[0].data[j].month);
-                                            }
-                                            option = {
-                                                tooltip : {
-                                                    show : false,
-                                                    trigger : 'axis'
-                                                },
-                                                legend : {
-                                                    data : legend
-                                                },
-                                                grid : {
-                                                    x : 30,
-                                                    x2 : 10
-                                                },
-                                                calculable : false,
-                                                xAxis : [ {
-                                                    type : 'category',
-                                                    boundaryGap : false,
-                                                    data : item,
-                                                    axisLabel : {
-                                                        show : true,
-                                                        interval : 0,
-                                                        formatter : function(
-                                                                params) {
-                                                            var oneLineLength = 2;
-                                                            var newParamsName = '';
-                                                            var paramsNameNumber = params.length;
-                                                            var provideNumber = oneLineLength;
-                                                            var rowNumber = Math
-                                                                    .ceil(paramsNameNumber
-                                                                            / provideNumber);
-                                                            if (paramsNameNumber > provideNumber) {
-                                                                for (var p = 0; p < rowNumber; p++) {
-                                                                    var tempStr = '';
-                                                                    var start = p
-                                                                            * provideNumber;
-                                                                    var end = start
-                                                                            + provideNumber;
-                                                                    if (p === rowNumber - 1) {
-                                                                        tempStr = params
-                                                                                .substring(
-                                                                                        start,
-                                                                                        paramsNameNumber);
-                                                                    } else {
-                                                                        tempStr = params
-                                                                                .substring(
-                                                                                        start,
-                                                                                        end)
-                                                                                + '\n';
-                                                                    }
-                                                                    newParamsName += tempStr;
-                                                                }
-                                                            } else {
-                                                                newParamsName = params;
-                                                            }
-                                                            return newParamsName;
-                                                        }
-                                                    }
-                                                } ],
-                                                yAxis : [ {
-                                                    type : 'value',
-                                                    name : '单位：' + unit,
-                                                } ],
-                                                series : (function() {
-                                                    var series = [];
-                                                    for (var l = 0; l < datas.length; l++) {
-                                                        var d = {};
-                                                        d.name = '';
-                                                        d.data = [];
-                                                        d.name = legend[l];
-                                                        d.type = 'line';
-                                                        d.smooth = false;
-                                                        d.data = datas[l];
-                                                        series.unshift(d);
-                                                    }
-
-                                                    return series;
-                                                }()),
-                                                color : [ '#C0392B', '#F39C12',
-                                                        '#8E44AD', '#2980B9',
-                                                        '#1ABC9C' ]
-                                            };
-                                            alarmTendency.setOption(option);
-                                        }
-                                    }, 'json');
-                    var goUrl = function(url) {
-                        alert(url);
-                        if (url === undefined) {
-                            document.getElementById('trendPopover').style.display = 'none';
-                        } else {
-                            mui.openWindow({
-                                url : url
-                            });
+          mui.init();
+          var alarmTendency = echarts.init(document.getElementById('alarmTendency'), 'macarons');
+          var option = {};
+          mui.get('main', '', function(data) {
+            if (data && data.length > 0) {
+              var legend = [];
+              var item = [];
+              var datas = [];
+              var unit = [];
+              unit = data[0].unit;
+              for (var i = 0; i < data.length; i++) {
+                legend.unshift(data[i].type);
+                var da = [];
+                for (var k = 0; k < data[i].data.length; k++) {
+                  da.unshift(data[i].data[k].value);
+                }
+                datas.unshift(da);
+              }
+              for (var j = 0; j < data[0].data.length; j++) {
+                item.unshift(data[0].data[j].month);
+              }
+              option = {
+                tooltip : {
+                  show : false,
+                  trigger : 'axis'
+                },
+                legend : {
+                  data : legend
+                },
+                grid : {
+                  x : 30,
+                  x2 : 10
+                },
+                calculable : false,
+                xAxis : [ {
+                  type : 'category',
+                  boundaryGap : false,
+                  data : item,
+                  axisLabel : {
+                    show : true,
+                    interval : 0,
+                    formatter : function(params) {
+                      var oneLineLength = 2;
+                      var newParamsName = '';
+                      var paramsNameNumber = params.length;
+                      var provideNumber = oneLineLength;
+                      var rowNumber = Math.ceil(paramsNameNumber / provideNumber);
+                      if (paramsNameNumber > provideNumber) {
+                        for (var p = 0; p < rowNumber; p++) {
+                          var tempStr = '';
+                          var start = p * provideNumber;
+                          var end = start + provideNumber;
+                          if (p === rowNumber - 1) {
+                            tempStr = params.substring(start, paramsNameNumber);
+                          } else {
+                            tempStr = params.substring(start, end) + '\n';
+                          }
+                          newParamsName += tempStr;
                         }
-
-                    };
-                    window.onresize = function() {
-                        var timeout;
-                        timeout = setTimeout(function() {
-                            var alarmTendency = echarts.init(document
-                                    .getElementById('alarmTendency'),
-                                    'macarons');
-                            alarmTendency.setOption(option);
-                        }, 200);
+                      } else {
+                        newParamsName = params;
+                      }
+                      return newParamsName;
                     }
-                </script>
+                  }
+                } ],
+                yAxis : [ {
+                  type : 'value',
+                  name : '单位：' + unit,
+                } ],
+                series : (function() {
+                  var series = [];
+                  for (var l = 0; l < datas.length; l++) {
+                    var d = {};
+                    d.name = '';
+                    d.data = [];
+                    d.name = legend[l];
+                    d.type = 'line';
+                    d.smooth = false;
+                    d.data = datas[l];
+                    series.unshift(d);
+                  }
+                  return series;
+                }()),
+                color : [ '#C0392B', '#F39C12', '#8E44AD', '#2980B9', '#1ABC9C' ]
+              };
+              alarmTendency.setOption(option);
+            }
+          }, 'json');
+          var goUrl = function(url) {
+            alert(url);
+            if (url === undefined) {
+              document.getElementById('trendPopover').style.display = 'none';
+            } else {
+              mui.openWindow({
+                url : url
+              });
+            }
+          };
+          window.onresize = function() {
+            var timeout;
+            timeout = setTimeout(function() {
+              var alarmTendency = echarts.init(document.getElementById('alarmTendency'), 'macarons');
+              alarmTendency.setOption(option);
+            }, 200);
+          }
+        </script>
 </body>
 </html>
