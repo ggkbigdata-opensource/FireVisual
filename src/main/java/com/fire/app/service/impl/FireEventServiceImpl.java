@@ -14,6 +14,10 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSONObject;
 import com.fire.app.domain.AppFireEvent;
 import com.fire.app.domain.AppFireEventRepository;
+import com.fire.app.domain.Block;
+import com.fire.app.domain.BlockRepository;
+import com.fire.app.domain.Street;
+import com.fire.app.domain.StreetRepository;
 import com.fire.app.service.FireEventService;
 
 /**
@@ -26,6 +30,10 @@ public class FireEventServiceImpl implements FireEventService {
 
     @Autowired
     private AppFireEventRepository fireEventRepository;
+    @Autowired
+    private StreetRepository streetRepository;
+    @Autowired
+    private BlockRepository blockRepository;
 
     @Override
     public List<JSONObject> getData() {
@@ -44,9 +52,9 @@ public class FireEventServiceImpl implements FireEventService {
                 Integer.parseInt(arr[2]));// 灵活的输入年份，月
 
         // 用于存储每个月的数值
-        HashMap<Integer, Integer> oneSum = new HashMap<Integer, Integer>();
-        HashMap<Integer, Integer> twoSum = new HashMap<Integer, Integer>();
-        HashMap<Integer, Integer> threeSum = new HashMap<Integer, Integer>();
+        HashMap<String, Integer> oneSum = new HashMap<String, Integer>();
+        HashMap<String, Integer> twoSum = new HashMap<String, Integer>();
+        HashMap<String, Integer> threeSum = new HashMap<String, Integer>();
 
         for (int i = 1; i < 13; i++) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -68,9 +76,9 @@ public class FireEventServiceImpl implements FireEventService {
                     threed++;
                 }
             }
-            oneSum.put(i, oned);
-            twoSum.put(i, twod);
-            threeSum.put(i, threed);
+            oneSum.put(i+"月", oned);
+            twoSum.put(i+"月", twod);
+            threeSum.put(i+"月", threed);
 
         }
 
@@ -80,12 +88,15 @@ public class FireEventServiceImpl implements FireEventService {
 
         one.put("type", "原始警情");
         one.put("value", oneSum);
+        one.put("unit", "起");
 
         two.put("type", "冒烟警情");
         two.put("value", twoSum);
+        one.put("unit", "起");
 
         three.put("type", "确认警情");
         three.put("value", threeSum);
+        one.put("unit", "起");
 
         List<JSONObject> result = new ArrayList<JSONObject>();
         result.add(one);
@@ -93,6 +104,30 @@ public class FireEventServiceImpl implements FireEventService {
         result.add(three);
 
         return result;
+    }
+
+    @Override
+    public List<JSONObject> getBaseDate(String type, String beginTime, String endTime) {
+        //获取所有的街道
+        List<Street> streets = streetRepository.findAll();
+        if (streets!= null && streets.size()>0) {
+            for (Street street : streets) {
+                //获取街道下对应的社区
+                List<Block> blocks = blockRepository.findByStreetId(street.getId());
+                
+                JSONObject streetResult = new JSONObject();
+                
+                Integer value = fireEventRepository.findStreetData(type,beginTime,endTime,street.getId());
+                System.out.println(value);
+                
+                
+                
+            }
+            
+        }
+        
+        
+        return null;
     }
 
 }

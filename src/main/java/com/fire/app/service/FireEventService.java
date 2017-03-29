@@ -19,4 +19,15 @@ public interface FireEventService {
      */
     List<JSONObject> getData();
 
+    /**
+     * @createDate 2017年3月29日上午10:15:36 
+     * @author wangzhiwang
+     * @param type
+     * @param beginTime
+     * @param endTime
+     * @return 
+     * @description
+     */
+    List<JSONObject> getBaseDate(String type, String beginTime, String endTime);
+
 }

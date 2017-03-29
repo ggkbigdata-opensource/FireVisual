@@ -26,4 +26,18 @@ public interface AppFireEventRepository extends JpaRepository<AppFireEvent, Long
     @Query(value = "SELECT * FROM app_fire_event t where YEAR(t.occur_time)=?1 AND MONTH(t.occur_time)=?2", nativeQuery = true)
     List<AppFireEvent> findDateToMonth(String date1, String date2);
 
+    /**
+     * @createDate 2017年3月29日上午10:37:32 
+     * @author wangzhiwang
+     * @param type
+     * @param beginTime
+     * @param endTime
+     * @param id
+     * @return 
+     * @description
+     */
+   // @Query(value = "SELECT * FROM app_fire_event t where t.fire_type = ?1 and t.occur_time between ?2 and ?3", nativeQuery = true)
+    @Query(value = "SELECT * FROM app_fire_event t where t.fire_type = ?1 and t.occur_time between '2014-01-04 09:22:20' and '2017-02-01 10:07:33'", nativeQuery = true)
+    Integer findStreetData(String type, String beginTime, String endTime, Long id);
+
 }

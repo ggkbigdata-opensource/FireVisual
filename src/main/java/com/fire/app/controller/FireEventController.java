@@ -17,7 +17,7 @@ import com.fire.app.util.ContextHolderUtils;
  * @author wangzhiwang
  * @description
  */
-@RequestMapping("/fireEvent")
+@RequestMapping("/app/fireEvent")
 @Controller
 public class FireEventController {
 
@@ -42,5 +42,36 @@ public class FireEventController {
 
         return CommonResult.success(result);
 
+    }
+    
+    @RequestMapping("/toBaseDate")
+    private String toBaseDate() {
+        
+      /*  if (!ContextHolderUtils.isLogin()) {
+            return "login/login";
+        }*/
+        
+        return "alarm/alarm-fire";
+    }
+    
+    /**
+     * @createDate 2017年3月29日上午10:14:53 
+     * @author wangzhiwang
+     * @param type
+     * @param beginTime
+     * @param endTime
+     * @return 
+     * @description 获取每个街道详情
+     */
+    @RequestMapping("/getBaseDate")
+    private CommonResult getBaseDate(String type,String beginTime,String endTime) {
+        
+      /*  if (!ContextHolderUtils.isLogin()) {
+            return "login/login";
+        }*/
+        
+        List<JSONObject> result = fireEventServcie.getBaseDate(type,beginTime,endTime);
+        
+        return CommonResult.success(result);
     }
 }
