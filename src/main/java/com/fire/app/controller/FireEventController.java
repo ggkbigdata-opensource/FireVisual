@@ -38,11 +38,11 @@ public class FireEventController {
     
     @RequestMapping(value = "/main")
     @ResponseBody
-    public CommonResult main() {
+    public List<JSONObject> main() {
 
         List<JSONObject> result = fireEventServcie.getData();
 
-        return CommonResult.success(result);
+        return result;
 
     }
     
@@ -67,7 +67,7 @@ public class FireEventController {
      */
     @RequestMapping(value = "/getBaseDate",method = RequestMethod.POST)
     @ResponseBody
-    private CommonResult getBaseDate(String type,String beginTime,String endTime) {
+    private List<JSONObject> getBaseDate(String type,String beginTime,String endTime) {
         
       /*  if (!ContextHolderUtils.isLogin()) {
             return "login/login";
@@ -75,7 +75,7 @@ public class FireEventController {
         
         List<JSONObject> result = fireEventServcie.getBaseDate(type,beginTime,endTime);
         
-        return CommonResult.success(result);
+        return result;
     }
     
     

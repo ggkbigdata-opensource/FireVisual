@@ -52,11 +52,13 @@ public class FireEventServiceImpl implements FireEventService {
                 Integer.parseInt(arr[2]));// 灵活的输入年份，月
 
         // 用于存储每个月的数值
-        HashMap<Integer, Integer> oneSum = new HashMap<Integer, Integer>();
-        HashMap<Integer, Integer> twoSum = new HashMap<Integer, Integer>();
-        HashMap<Integer, Integer> threeSum = new HashMap<Integer, Integer>();
+       // HashMap<Integer, Integer> oneSum = new HashMap<Integer, Integer>();
+       // HashMap<Integer, Integer> twoSum = new HashMap<Integer, Integer>();
+       // HashMap<Integer, Integer> threeSum = new HashMap<Integer, Integer>();
 
-        ArrayList<JSONObject> test = new ArrayList<JSONObject>();
+        List<JSONObject> oneSum = new ArrayList<JSONObject>();
+        List<JSONObject> twoSum = new ArrayList<JSONObject>();
+        List<JSONObject> threeSum = new ArrayList<JSONObject>();
         
         
         for (int i = 1; i < 13; i++) {
@@ -79,9 +81,26 @@ public class FireEventServiceImpl implements FireEventService {
                     threed++;
                 }
             }
-            oneSum.put(i, oned);
-            twoSum.put(i, twod);
-            threeSum.put(i, threed);
+            
+            JSONObject one = new JSONObject();
+            one.put("month", date1[1]+"月");
+            one.put("value", oned);
+            
+            JSONObject two = new JSONObject();
+            two.put("month", date1[1]+"月");
+            two.put("value", twod);
+            
+            JSONObject three = new JSONObject();
+            three.put("month", date1[1]+"月");
+            three.put("value", threed);
+            
+           // oneSum.put(i, oned);
+           // twoSum.put(i, twod);
+            //threeSum.put(i, threed);
+            
+            oneSum.add(one);
+            twoSum.add(two);
+            threeSum.add(three);
 
         }
 
@@ -90,16 +109,19 @@ public class FireEventServiceImpl implements FireEventService {
         JSONObject three = new JSONObject();// 确认警情
 
         one.put("type", "原始警情");
-        one.put("value", oneSum);
+        //one.put("value", oneSum);
         one.put("unit", "起");
+        one.put("data", oneSum);
 
         two.put("type", "冒烟警情");
-        two.put("value", twoSum);
-        one.put("unit", "起");
+        //two.put("value", twoSum);
+        two.put("unit", "起");
+        two.put("data", oneSum);
 
         three.put("type", "确认警情");
-        three.put("value", threeSum);
-        one.put("unit", "起");
+       // three.put("value", threeSum);
+        three.put("unit", "起");
+        three.put("data", threeSum);
 
         List<JSONObject> result = new ArrayList<JSONObject>();
         result.add(one);
