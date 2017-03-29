@@ -70,18 +70,17 @@
     <script th:src="@{/js/echarts.min.js}"></script>
     <script th:src="@{/js/macarons.js}"></script>
     <script>
-                    mui.init();
-                    var goUrl = function(url) {
-                        alert(url);
-                        if (url === undefined) {
-                            document.getElementById('trendPopover').style.display = 'none';
-                        } else {
-                            mui.openWindow({
-                                url : url
-                            });
-                        }
-
-                    };
-                </script>
+          mui.init();
+          var goUrl = function(url) {
+            alert(url);
+            if (url === undefined) {
+              document.getElementById('trendPopover').style.display = 'none';
+            } else {
+              mui.openWindow({
+                url : url
+              });
+            }
+          };
+        </script>
 </body>
 </html>

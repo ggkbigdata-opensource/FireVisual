@@ -3,9 +3,9 @@
 <head th:with="title=${'菜单'}" th:include="/layouts/layout::head">
 </head>
 <body>
-	<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
-			<!--菜单部分-->
-			<!--<aside id="offCanvasSide" class="mui-off-canvas-right">
+    <div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+        <!--菜单部分-->
+        <!--<aside id="offCanvasSide" class="mui-off-canvas-right">
 				<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
 					<div class="mui-scroll">
 						<ul class="menu">
@@ -18,42 +18,49 @@
 					</div>
 				</div>
 			</aside>-->
-			<div class="mui-inner-wrap">
-				<header class="mui-bar mui-bar-nav">
-					<div class="logo">
-						<img th:src="@{/img/logo.png}" />
-					</div>
-					<!--<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>-->
-					<h1 class="mui-title">菜单</h1>
-				</header>
-				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<div class="mui-content-padded">
-							<!-- 内容区域 -->
-							<ul class="menu">
-								<li><button onclick="goUrl()"><i class="iconfont icon-region"></i>区域概况</button></li>
-								<li><button onclick="goUrl()"><i class="iconfont icon-hidden"></i>隐患排查项目统计</button></li>
-								<li><button onclick="goUrl('fireEvent/')"><i class="iconfont icon-warn"></i>警情</button></li>
-								<li><button onclick="goUrl()"><i class="iconfont icon-police"></i>执法</button></li>
-								<li><button onclick="goUrl()"><i class="iconfont icon-bar-chart"></i>统计数据展示</button></li>
-							</ul>
-							<!-- 内容区域 end -->
-						</div>
-					</div>
-				</div>
-				<!-- off-canvas backdrop -->
-				<div class="mui-off-canvas-backdrop"></div>
-			</div>
-		</div>
-	<script th:src="@{/js/mui.js}"></script>
-	<script th:src="@{/js/normal.js}"></script>
-	<script th:src="@{/js/jquery-2.1.0.js}"></script>
-	<script type="text/javascript">
-		mui.init();
-		var goUrl = function (url){
-			mui.openWindow({url: url});
-		};
-		
-	</script>
+        <div class="mui-inner-wrap">
+            <header class="mui-bar mui-bar-nav">
+                <div class="logo">
+                    <img th:src="@{/img/logo.png}" />
+                </div>
+                <!--<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>-->
+                <h1 class="mui-title">菜单</h1>
+            </header>
+            <div id="offCanvasContentScroll"
+                class="mui-content mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    <div class="mui-content-padded">
+                        <!-- 内容区域 -->
+                        <ul class="menu">
+                            <li><a th:href="@{/}"><i
+                                    class="iconfont icon-region"></i>区域概况</a></li>
+                            <li><a th:href="@{/}"><i
+                                    class="iconfont icon-hidden"></i>隐患排查项目统计</a></li>
+                            <li><a th:href="@{/app/fireEvent/}"><i
+                                    class="iconfont icon-warn"></i>警情</a></li>
+                            <li><a th:href="@{/}"><i
+                                    class="iconfont icon-police"></i>执法</a></li>
+                            <li><a th:href="@{/}"><i
+                                    class="iconfont icon-bar-chart"></i>统计数据展示</a></li>
+                        </ul>
+                        <!-- 内容区域 end -->
+                    </div>
+                </div>
+            </div>
+            <!-- off-canvas backdrop -->
+            <div class="mui-off-canvas-backdrop"></div>
+        </div>
+    </div>
+    <script th:src="@{/js/mui.js}"></script>
+    <script th:src="@{/js/normal.js}"></script>
+    <script th:src="@{/js/jquery-2.1.0.js}"></script>
+    <script type="text/javascript">
+          mui.init();
+          var goUrl = function(url) {
+            mui.openWindow({
+              url : url
+            });
+          };
+        </script>
 </body>
 </html>

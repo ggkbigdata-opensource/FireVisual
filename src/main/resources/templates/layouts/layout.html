@@ -62,12 +62,12 @@
     <!-- 火情下拉列表 -->
     <div th:fragment="alarm-menu" id="trendPopover" style="display: none" class="popoverbox">
         <ul class="mui-table-view">
-            <li class="mui-table-view-cell"><button
-                    onclick="goUrl(@{/})">天河区警情趋势</button></li>
-            <li class="mui-table-view-cell"><button
-                    onclick="goUrl(@{toAreaPage})">区域警情趋势</button></li>
-            <li class="mui-table-view-cell"><button
-                    onclick="goUrl(@{toBasePage})">火灾警情基本数据</button></li>
+            <li class="mui-table-view-cell"><a
+                    th:href="@{/app/fireEvent/}">天河全区警情趋势</a></li>
+            <li class="mui-table-view-cell"><a
+                    th:href="@{/app/fireEvent/toAreaPage}">街道警情趋势</a></li>
+            <li class="mui-table-view-cell"><a
+                    th:href="@{/app/fireEvent/toBasePage}">分类警情数据</a></li>
         </ul>
     </div>
 
