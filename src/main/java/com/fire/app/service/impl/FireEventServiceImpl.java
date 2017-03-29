@@ -192,7 +192,8 @@ public class FireEventServiceImpl implements FireEventService {
             calendar1.add(calendar.MONTH, -1);// 获取上个月月份
             String[] date1 = sdf.format(calendar1.getTime()).split("-");
 
-            List<AppFireEvent> list = fireEventRepository.findAreaDateToMonth(date1[0], date1[1],street.getId());
+            //List<AppFireEvent> list = fireEventRepository.findAreaDateToMonth(date1[0], date1[1],street.getId());
+            List<AppFireEvent> list = fireEventRepository.findDateToMonth(date1[0], date1[1]);
             int oned = 0;
             int twod = 0;
             int threed = 0;
