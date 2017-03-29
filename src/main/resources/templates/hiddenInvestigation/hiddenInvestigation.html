@@ -1,183 +1,185 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>隐患排查项目统计</title>
-    <link href="../css/base.css" rel="stylesheet"/>
-    <link href="../css/mui.min.css" rel="stylesheet"/>
-    <link href="../common/iconfont/iconfont.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
+<head th:with="title=${'隐患排查'}" th:include="/layouts/layout::head">
 </head>
 <body>
-	<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
-			<!--菜单部分-->
-			<aside id="offCanvasSide" class="mui-off-canvas-right">
-				<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<div class="menu-title">菜单</div>
-						<ul class="menu">
-							<li><a href="../regionalProfile/regionalProfile.html"><i class="iconfont icon-region"></i>区域概况</a></li>
-							<li><a href="../hiddenInvestigation/hiddenInvestigation.html"><i class="iconfont icon-hidden"></i>隐患排查项目统计</a></li>
-							<li><a href="../alarm/alarm-tianHe.html"><i class="iconfont icon-warn"></i>警情</a></li>
-							<li><a href="../lawEnforcement/lawEnforcement-tianHe.html"><i class="iconfont icon-police"></i>执法</a></li>
-							<li><a href="../statisticalData/statisticalData.html"><i class="iconfont icon-bar-chart"></i>统计数据展示</a></li>
-						</ul>
-					</div>
-				</div>
-			</aside>
-			<div class="mui-inner-wrap">
-				<header class="mui-bar mui-bar-nav">
-					<div class="logo">
-						<img src="../img/logo.png" />
-					</div>
-					<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
-					<h1 class="mui-title">隐患排查项目统计</h1>
-				</header>
-				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<div class="mui-content-padded">
-							<!-- 内容区域 -->
-							<div class="listLevel mb10 mt10">
-								<div class="mui-content tc">
-								    <div class="mui-row">
-								        <div class="mui-col-xs-4">
-								        	<i class="iconfont icon-circle mr5 font-green"></i>合格数
-								        </div>
-								        <div class="mui-col-xs-4">
-								        	<i class="iconfont icon-circle mr5 font-red"></i>不合格数
-								        </div>
-								        <div class="mui-col-xs-4">
-								        	<i class="iconfont icon-circle mr5 font-blue"></i>合格率
-								        </div>
-								    </div>
-								</div>
-							</div>
-							<ul class="groupList hiddenList">
-								<li>
-									<h1>检查项目检查项目检查项目检查项目</h1>
-									<div class="mui-row tc">
-								        <div class="mui-col-xs-4">
-								            <i class="iconfont icon-circle mr15 font-green"></i>101
-								        </div>
-								        <div class="mui-col-xs-4">
-								            <i class="iconfont icon-circle mr15 font-red"></i>23
-								        </div>
-								        <div class="mui-col-xs-4">
-								            <i class="iconfont icon-circle mr15 font-blue"></i>83%
-								        </div>
-								    </div>
-								</li>
-								<li>
-									<h1>检查项目检查项目检查项目检查项目检查项目检查项目检查项目检查项目</h1>
-									<div class="mui-row tc">
-								        <div class="mui-col-xs-4">
-								            <i class="iconfont icon-circle mr15 font-green"></i>101
-								        </div>
-								        <div class="mui-col-xs-4">
-								            <i class="iconfont icon-circle mr15 font-red"></i>23
-								        </div>
-								        <div class="mui-col-xs-4">
-								            <i class="iconfont icon-circle mr15 font-blue"></i>83%
-								        </div>
-								    </div>
-								</li>
-								<li>
-									<h1>检查项目检查项目检查项目检查项目</h1>
-									<div class="mui-row tc">
-								        <div class="mui-col-xs-4">
-								            <i class="iconfont icon-circle mr15 font-green"></i>101
-								        </div>
-								        <div class="mui-col-xs-4">
-								            <i class="iconfont icon-circle mr15 font-red"></i>23
-								        </div>
-								        <div class="mui-col-xs-4">
-								            <i class="iconfont icon-circle mr15 font-blue"></i>83%
-								        </div>
-								    </div>
-								</li>
-								<li>
-									<h1>检查项目检查项目检查项目检查项目</h1>
-									<div class="mui-row tc">
-								        <div class="mui-col-xs-4">
-								            <i class="iconfont icon-circle mr15 font-green"></i>101
-								        </div>
-								        <div class="mui-col-xs-4">
-								            <i class="iconfont icon-circle mr15 font-red"></i>23
-								        </div>
-								        <div class="mui-col-xs-4">
-								            <i class="iconfont icon-circle mr15 font-blue"></i>83%
-								        </div>
-								    </div>
-								</li>
-								<li>
-									<h1>检查项目检查项目检查项目检查项目</h1>
-									<div class="mui-row tc">
-								        <div class="mui-col-xs-4">
-								            <i class="iconfont icon-circle mr15 font-green"></i>101
-								        </div>
-								        <div class="mui-col-xs-4">
-								            <i class="iconfont icon-circle mr15 font-red"></i>23
-								        </div>
-								        <div class="mui-col-xs-4">
-								            <i class="iconfont icon-circle mr15 font-blue"></i>83%
-								        </div>
-								    </div>
-								</li>
-								<li>
-									<h1>检查项目检查项目检查项目检查项目</h1>
-									<div class="mui-row tc">
-								        <div class="mui-col-xs-4">
-								            <i class="iconfont icon-circle mr15 font-green"></i>101
-								        </div>
-								        <div class="mui-col-xs-4">
-								            <i class="iconfont icon-circle mr15 font-red"></i>23
-								        </div>
-								        <div class="mui-col-xs-4">
-								            <i class="iconfont icon-circle mr15 font-blue"></i>83%
-								        </div>
-								    </div>
-								</li>
-								<li>
-									<h1>检查项目检查项目检查项目检查项目</h1>
-									<div class="mui-row tc">
-								        <div class="mui-col-xs-4">
-								            <i class="iconfont icon-circle mr15 font-green"></i>101
-								        </div>
-								        <div class="mui-col-xs-4">
-								            <i class="iconfont icon-circle mr15 font-red"></i>23
-								        </div>
-								        <div class="mui-col-xs-4">
-								            <i class="iconfont icon-circle mr15 font-blue"></i>83%
-								        </div>
-								    </div>
-								</li>
-								<li>
-									<h1>检查项目检查项目检查项目检查项目</h1>
-									<div class="mui-row tc">
-								        <div class="mui-col-xs-4">
-								            <i class="iconfont icon-circle mr15 font-green"></i>101
-								        </div>
-								        <div class="mui-col-xs-4">
-								            <i class="iconfont icon-circle mr15 font-red"></i>23
-								        </div>
-								        <div class="mui-col-xs-4">
-								            <i class="iconfont icon-circle mr15 font-blue"></i>83%
-								        </div>
-								    </div>
-								</li>
-							</ul>
-							<!-- 内容区域 end -->
-						</div>
-					</div>
-				</div>
-				<!-- off-canvas backdrop -->
-				<div class="mui-off-canvas-backdrop"></div>
-			</div>
-		</div>
-	<script src="../js/mui.js"></script>
-	<script src="../js/normal.js"></script>
+    <div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+        <!--菜单部分-->
+        <div th:replace="/layouts/layout::menu"></div>
+        <div class="mui-inner-wrap">
+            <!-- Header 部分 -->
+            <div th:with="headTitle=${'隐患排查项目统计'}"></div>
+            <div th:replace="/layouts/layout::menu"></div>
+            <div id="offCanvasContentScroll"
+                class="mui-content mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    <div class="mui-content-padded">
+                        <!-- 内容区域 -->
+                        <div class="listLevel mb10 mt10">
+                            <div class="mui-content tc">
+                                <div class="mui-row">
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr5 font-green"></i>合格数
+                                    </div>
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr5 font-red"></i>不合格数
+                                    </div>
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr5 font-blue"></i>合格率
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="groupList hiddenList">
+                            <li>
+                                <h1>检查项目检查项目检查项目检查项目</h1>
+                                <div class="mui-row tc">
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr15 font-green"></i>101
+                                    </div>
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr15 font-red"></i>23
+                                    </div>
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr15 font-blue"></i>83%
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <h1>检查项目检查项目检查项目检查项目检查项目检查项目检查项目检查项目</h1>
+                                <div class="mui-row tc">
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr15 font-green"></i>101
+                                    </div>
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr15 font-red"></i>23
+                                    </div>
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr15 font-blue"></i>83%
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <h1>检查项目检查项目检查项目检查项目</h1>
+                                <div class="mui-row tc">
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr15 font-green"></i>101
+                                    </div>
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr15 font-red"></i>23
+                                    </div>
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr15 font-blue"></i>83%
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <h1>检查项目检查项目检查项目检查项目</h1>
+                                <div class="mui-row tc">
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr15 font-green"></i>101
+                                    </div>
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr15 font-red"></i>23
+                                    </div>
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr15 font-blue"></i>83%
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <h1>检查项目检查项目检查项目检查项目</h1>
+                                <div class="mui-row tc">
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr15 font-green"></i>101
+                                    </div>
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr15 font-red"></i>23
+                                    </div>
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr15 font-blue"></i>83%
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <h1>检查项目检查项目检查项目检查项目</h1>
+                                <div class="mui-row tc">
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr15 font-green"></i>101
+                                    </div>
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr15 font-red"></i>23
+                                    </div>
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr15 font-blue"></i>83%
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <h1>检查项目检查项目检查项目检查项目</h1>
+                                <div class="mui-row tc">
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr15 font-green"></i>101
+                                    </div>
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr15 font-red"></i>23
+                                    </div>
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr15 font-blue"></i>83%
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <h1>检查项目检查项目检查项目检查项目</h1>
+                                <div class="mui-row tc">
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr15 font-green"></i>101
+                                    </div>
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr15 font-red"></i>23
+                                    </div>
+                                    <div class="mui-col-xs-4">
+                                        <i
+                                            class="iconfont icon-circle mr15 font-blue"></i>83%
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <!-- 内容区域 end -->
+                    </div>
+                </div>
+            </div>
+            <!-- off-canvas backdrop -->
+            <div class="mui-off-canvas-backdrop"></div>
+        </div>
+    </div>
+    <script src="../js/mui.js"></script>
+    <script src="../js/normal.js"></script>
 </body>
 </html>

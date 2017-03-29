@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+
+<!--  Fire Visualization Layout Part   -->
+<head th:fragment="head">
+<meta charset="utf-8">
+<meta name="viewport"
+    content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title th:text="${title}">标题</title>
+<link th:href="@{/css/base.css}" rel="stylesheet" />
+<link th:href="@{/css/mui.min.css}" rel="stylesheet" />
+<link th:href="@{/css/mui.picker.min.css}" rel="stylesheet" />
+<link th:href="@{/common/iconfont/iconfont.css}" rel="stylesheet" />
+<link th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+
+<body>
+    <!--菜单部分-->
+    <aside th:fragment="menu" id="offCanvasSide"
+        class="mui-off-canvas-right">
+        <div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <div class="menu-title">菜单</div>
+                <ul class="menu">
+                    <li><button
+                            th:href="@{/regionalProfile/regionalProfile}">
+                            <i class="iconfont icon-region"></i>区域概况
+                        </button></li>
+                    <li><button
+                            th:href="@{/hiddenInvestigation/hiddenInvestigation}">
+                            <i class="iconfont icon-hidden"></i>隐患排查项目统计
+                        </button></li>
+                    <li><button th:href="@{/alarm/alarm-tianHe}">
+                            <i class="iconfont icon-warn"></i>警情
+                        </button></li>
+                    <li><button
+                            th:href="@{/lawEnforcement/lawEnforcement-tianHe}">
+                            <i class="iconfont icon-police"></i>执法
+                        </button></li>
+                    <li><button
+                            th:href="@{/statisticalData/statisticalData}">
+                            <i class="iconfont icon-bar-chart"></i>统计数据展示
+                        </button></li>
+                </ul>
+            </div>
+        </div>
+    </aside>
+
+    <!--header部分-->
+    <header th:fragment="header" class="mui-bar mui-bar-nav">
+        <div class="logo">
+            <img th:src="@{/img/logo.png}" />
+        </div>
+        <a id="offCanvasBtn" href="#offCanvasSide"
+            class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
+        <h1 th:text="${headTitle}" class="mui-title">头部标题</h1>
+    </header>
+
+    <!-- 火情下拉列表 -->
+    <div th:fragment="alarm-menu" id="trendPopover" style="display: none" class="popoverbox">
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell"><button
+                    onclick="goUrl(@{/})">天河区警情趋势</button></li>
+            <li class="mui-table-view-cell"><button
+                    onclick="goUrl(@{toAreaPage})">区域警情趋势</button></li>
+            <li class="mui-table-view-cell"><button
+                    onclick="goUrl(@{toBasePage})">火灾警情基本数据</button></li>
+        </ul>
+    </div>
+
+</body>
+
+<footer></footer>
+</html>
