@@ -7,11 +7,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <title>警情</title>
-<link href="css/base.css" rel="stylesheet" />
-<link href="css/mui.min.css" rel="stylesheet" />
-<link href="css/mui.picker.min.css" rel="stylesheet" />
-<link href="common/iconfont/iconfont.css" rel="stylesheet" />
-<link href="css/style.css" rel="stylesheet" />
+<link th:href="@{/css/base.css}" rel="stylesheet" />
+<link th:href="@{/css/mui.min.css}" rel="stylesheet" />
+<link th:href="@{/css/mui.picker.min.css}" rel="stylesheet" />
+<link th:href="@{/common/iconfont/iconfont.css}" rel="stylesheet" />
+<link th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
 <body>
     <div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
@@ -21,20 +21,20 @@
                 <div class="mui-scroll">
                     <div class="menu-title">菜单</div>
                     <ul class="menu">
-                        <li><a
+                        <li><button
                             href="regionalProfile/regionalProfile"><i
-                                class="iconfont icon-region"></i>区域概况</a></li>
-                        <li><a
+                                class="iconfont icon-region"></i>区域概况</button></li>
+                        <li><button
                             href="hiddenInvestigation/hiddenInvestigation"><i
-                                class="iconfont icon-hidden"></i>隐患排查项目统计</a></li>
-                        <li><a href="alarm/alarm-tianHe"><i
-                                class="iconfont icon-warn"></i>警情</a></li>
-                        <li><a
+                                class="iconfont icon-hidden"></i>隐患排查项目统计</button></li>
+                        <li><button href="alarm/alarm-tianHe"><i
+                                class="iconfont icon-warn"></i>警情</button></li>
+                        <li><button
                             href="lawEnforcement/lawEnforcement-tianHe"><i
-                                class="iconfont icon-police"></i>执法</a></li>
-                        <li><a
+                                class="iconfont icon-police"></i>执法</button></li>
+                        <li><button
                             href="statisticalData/statisticalData"><i
-                                class="iconfont icon-bar-chart"></i>统计数据展示</a></li>
+                                class="iconfont icon-bar-chart"></i>统计数据展示</button></li>
                     </ul>
                 </div>
             </div>
@@ -60,12 +60,12 @@
                         <div id="trendPopover" style="display: none"
                             class="popoverbox">
                             <ul class="mui-table-view">
-                                <li class="mui-table-view-cell"><a
-                                    href="alarm-tianHe.html">天河区警情趋势</a></li>
-                                <li class="mui-table-view-cell"><a
-                                    href="alarm-region.html">区域警情趋势</a></li>
-                                <li class="mui-table-view-cell"><a
-                                    href="alarm-fire.html">火灾警情基本数据</a></li>
+                                <li class="mui-table-view-cell"><button
+                                    onclick="goUrl('fireEvent/')">天河区警情趋势</button></li>
+                                <li class="mui-table-view-cell"><button
+                                    >区域警情趋势</button></li>
+                                <li class="mui-table-view-cell"><button
+                                    >火灾警情基本数据</button></li>
                             </ul>
                         </div>
                         <button onclick="hide('timePopover')"
@@ -220,8 +220,8 @@
                         <div class="timeBox tc fb font-red">2016年1月-7月</div>
                         <div id="segmentedControl"
                             class="mui-segmented-control mui-segmented-control-red mt15">
-                            <a class="mui-control-item mui-active"
-                                href="#item1">原始火灾警情</a> <a
+                            <button class="mui-control-item mui-active"
+                                href="#item1">原始火灾警情</button> <a
                                 class="mui-control-item" href="#item2">确认火灾警情</a>
                             <a class="mui-control-item" href="#item3">冒烟类火灾警情</a>
                         </div>
@@ -572,7 +572,13 @@
             <div class="mui-off-canvas-backdrop"></div>
         </div>
     </div>
-    <script src="js/mui.js"></script>
-    <script src="js/normal.js"></script>
+    <script th:src="@{/js/mui.js}"></script>
+    <script th:src="@{/js/normal.js}"></script>
+    <script>
+    	mui.init();
+		var goUrl = function (url){
+			mui.openWindow({url: url});
+		};
+    </script>
 </body>
 </html>

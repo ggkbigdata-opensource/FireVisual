@@ -3,14 +3,14 @@
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>登录</title>
-    <link href="css/base.css" rel="stylesheet"/>
-    <link href="css/mui.min.css" rel="stylesheet"/>
-    <link href="common/iconfont/iconfont.css" rel="stylesheet"/>
-    <link href="css/style.css" rel="stylesheet"/>
+    <link th:href="@{/css/base.css}" rel="stylesheet"/>
+    <link th:href="@{/css/mui.min.css}" rel="stylesheet"/>
+    <link th:href="@{/common/iconfont/iconfont.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
 	<header class="mui-bar mui-bar-nav login-bar">
-		<div class="logo"><img src="img/logo.png"/></div>
+		<div class="logo"><img th:src="@{/img/logo.png}"/></div>
 	</header>
 	<div class="mui-content loginBox">
 		<div class="mui-content-padded">
@@ -34,8 +34,8 @@
 				<button id='login' class="mui-btn mui-btn-block">登录</button>
 		</div>
 	</div>
-	<script src="js/mui.js"></script>
-	<script src="js/jquery-2.1.0.js"></script>
+	<script th:src="@{/js/mui.js}"></script>
+	<script th:src="@{/js/jquery-2.1.0.js}"></script>
     <script type="text/javascript" charset="utf-8">
       	mui.init();
       	$('#login').click(function(){
@@ -52,7 +52,7 @@
 				mui.toast('验证码不能为空');
 				return false;
 			}else{
-				mui.post('login',{
+				$.post('/fire-visual/login',{
 					name: name,
 					phone: phone,
 					verifCode: verifCode
@@ -60,7 +60,7 @@
 					//服务器返回响应，根据响应结果，分析是否登录成功；
 					console.log(data);
 					if(data.successful === true){
-						mui.openWindow({url:'app/index'});
+						mui.openWindow({url:"/fire-visual/app/index"});
 					}else{
 						mui.toast('账号或密码错误');
 					}

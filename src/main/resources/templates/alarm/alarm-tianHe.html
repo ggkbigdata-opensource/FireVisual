@@ -45,9 +45,9 @@
 							</button>
 							<div id="trendPopover" style="display: none " class="popoverbox">
 								<ul class="mui-table-view">
-								    <li class="mui-table-view-cell"><button href="alarm-tianHe.html">天河区警情趋势</button></li>
+								    <li class="mui-table-view-cell"><button onclick="goUrl()">天河区警情趋势</button></li>
 								    <li class="mui-table-view-cell"><button href="alarm-region.html">区域警情趋势</button></li>
-								    <li class="mui-table-view-cell"><button href="alarm-fire.html">火灾警情基本数据</button></li>
+								    <li class="mui-table-view-cell"><button onclick="goUrl('app/fireEvent/toBasePage')">火灾警情基本数据</button></li>
 								  </ul>
 							</div>
 						</div>
@@ -55,7 +55,7 @@
 							<!-- 内容区域 -->
 							<div class="chartBox mt20 mb20">
 								<!-- <img src="../custom/upload/chart1.png" width="100%" /> -->
-								<div id="alarmTendency" width="100%"></div>
+								<div id="alarmTendency" style="height:400px;"></div>
 							</div>
 							<!-- 内容区域 end -->
 						</div>
@@ -71,64 +71,114 @@
 	<script th:src="@{/js/macarons.js}"></script>
 	<script>
 		mui.init();
+		var alarmTendency = echarts.init(document.getElementById('alarmTendency'),'macarons');
+		var option = {};
 		mui.get('main','',function(data){
-			console.log(data);
-			if(data && data.successful){
-				require.config({
-					path:{
-						echarts: "@{/js/echarts.min.js}"
+			if(data && data.length>0){
+				var legend = [];
+				var item = [];
+				var datas = [];
+				var unit = [];
+				unit = data[0].unit;
+				for(var i=0;i<data.length;i++){
+					legend.unshift(data[i].type);
+					var da = [];
+					for(var k=0;k<data[i].data.length;k++){
+						da.unshift(data[i].data[k].value);
 					}
-				});
-				require(
-					['echarts','echarts/chart/line'],
-					function(e){
-						var alarmTendency = e.init(document.getElementById('alarmTendency'));
-						var option = {
-							    tooltip : {
-							        trigger: 'axis'
-							    },
-							    legend: {
-							        data:['原始警情','冒烟警情','确认警情']
-							    },
-							    calculable : false,
-							    xAxis : [
-							        {
-							            type : 'category',
-							            boundaryGap : false,
-							            data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
-							        }
-							    ],
-							    yAxis : [
-							        {
-							            type : 'value'
-							        }
-							    ],
-							    series : [
-							        {
-							            name:'原始警情',
-							            type:'line',
-							      
-							            data:[420, 462, 501, 540, 590, 630, 710, 900,950,750,630,500]
-							        },
-							        {
-							            name:'冒烟警情',
-							            type:'line',
-							         
-							            data:[304, 382, 391, 434, 500, 550, 610, 650, 730,620,550,400]
-							        },
-							        {
-							            name:'确认警情',
-							            type:'line',
-							            
-							            data:[200, 232, 201, 254, 300, 330, 410,500,530,450,300,200]
-							        }
-							    ]
-							};
-						alarmTendency.setOption(option);
-					}
-				)
+					datas.unshift(da);
+				}
+				for(var j=0;j<data[0].data.length;j++){
+					item.unshift(data[0].data[j].month);
+				}
+				option = {
+					    tooltip : {
+					    	show: false,
+					        trigger: 'axis'
+					    },
+					    legend: {
+					        data: legend
+					    },
+					    grid : {
+					    	x: 30,
+					    	x2: 10
+					    },
+					    calculable : false,
+					    xAxis : [
+					        {
+					            type : 'category',
+					            boundaryGap : false,
+					            data : item,
+					            axisLabel: {
+					            	show:true,
+					            	interval:0,
+					            	formatter: function(params){
+                                        var oneLineLength =2;
+                                        var newParamsName = '';
+                                        var paramsNameNumber = params.length;
+                                        var provideNumber = oneLineLength;
+                                        var rowNumber = Math.ceil(paramsNameNumber / provideNumber);
+                                        if (paramsNameNumber > provideNumber) {
+                                            for (var p = 0; p < rowNumber; p++) {
+                                                var tempStr = '';
+                                                var start = p * provideNumber;
+                                                var end = start + provideNumber;
+                                                if (p === rowNumber - 1) {
+                                                    tempStr = params.substring(start, paramsNameNumber);
+                                                } else {
+                                                    tempStr = params.substring(start, end) + '\n';
+                                                }
+                                                newParamsName += tempStr;
+                                            }
+                                        } else {
+                                            newParamsName = params;
+                                        }
+                                        return newParamsName;
+                                    }
+					            }
+					        }
+					    ],
+					    yAxis : [
+					        {
+					            type : 'value',
+					            name : '单位：' + unit,
+					        }
+					    ],
+					    series : (function () {
+					    	var series = [];
+					    	for(var l=0;l<datas.length;l++){
+					    		var d = {};
+					    		d.name = '';
+					    		d.data = [];
+					    		d.name = legend[l];
+					    		d.type = 'line';
+					    		d.smooth = false;
+					    		d.data = datas[l];
+					    		series.unshift(d);
+					    	}
+					
+					    	return series;
+					    }()),
+					    color: ['#C0392B','#F39C12','#8E44AD','#2980B9','#1ABC9C']
+					};
+				alarmTendency.setOption(option);
 			}
 		},'json');
+		var goUrl = function (url){
+			if(url === undefined){
+				document.getElementById('trendPopover').style.display = 'none';
+			}else{
+				mui.openWindow({url: url});
+			}
+			
+		};
+		window.onresize = function () {
+			var timeout;
+			timeout = setTimeout(function(){
+				var alarmTendency = echarts.init(document.getElementById('alarmTendency'),'macarons');
+				alarmTendency.setOption(option);
+			},200);
+		}
 	</script>
 </body>
 </html>
