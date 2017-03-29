@@ -17,7 +17,7 @@ import com.fire.app.util.ContextHolderUtils;
  * @author wangzhiwang
  * @description
  */
-@RequestMapping("/app/fireEvent")
+@RequestMapping("/fireEvent")
 @Controller
 public class FireEventController {
 
@@ -42,37 +42,5 @@ public class FireEventController {
 
         return CommonResult.success(result);
 
-    }
-    
-    /**
-     * @createDate 2017年3月29日上午9:21:37 
-     * @author wangzhiwang
-     * @return 
-     * @description 跳转到基本数据页面
-     */
-    @RequestMapping("/toBasePage")
-    private String toBasePage() {
-        
-       /* if (!ContextHolderUtils.isLogin()) {
-            return "login/login";
-        }*/
-        
-        return "alarm/alarm-fire";
-    }
-    
-    @RequestMapping("/getBaseData")
-    private CommonResult getBaseData(String type,String beginDate,String endDate) {
-        
-        /*if (!ContextHolderUtils.isLogin()) {
-            return "login/login";
-        }
-        */
-        //fireEventServcie.getbaseData(type,beginDate,endDate);
-        
-        
-        
-        
-        
-        return null;
     }
 }
