@@ -102,7 +102,7 @@ public class FireEventServiceImpl implements FireEventService {
 
         two.put("type", "冒烟警情");
         two.put("unit", "起");
-        two.put("data", oneSum);
+        two.put("data", twoSum);
 
         three.put("type", "确认警情");
         three.put("unit", "起");
