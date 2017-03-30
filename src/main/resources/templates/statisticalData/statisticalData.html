@@ -15,7 +15,7 @@
 						<div class="mui-content-padded">
 							<!-- 内容区域 -->
 							<div class="chartBox mt20 mb20">
-								<img src="../custom/upload/chart1.png" width="100%" />
+								<img th:src="@{/custom/upload/chart1.png}" width="100%" />
 							</div>
 							<!-- 内容区域 end -->
 						</div>
@@ -25,7 +25,7 @@
 				<div class="mui-off-canvas-backdrop"></div>
 			</div>
 		</div>
-	<script src="../js/mui.js"></script>
-	<script src="../js/normal.js"></script>
+    <script th:src="@{/js/mui.js}"></script>
+    <script th:src="@{/js/normal.js}"></script>
 </body>
 </html>
