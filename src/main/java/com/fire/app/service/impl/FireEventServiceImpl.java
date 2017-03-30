@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSONObject;
 import com.fire.app.domain.AppFireEvent;
 import com.fire.app.domain.AppFireEventRepository;
-import com.fire.app.domain.BlockRepository;
 import com.fire.app.domain.Street;
 import com.fire.app.domain.StreetRepository;
 import com.fire.app.service.FireEventService;
