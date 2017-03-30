@@ -47,7 +47,7 @@ public interface AppPunishmentRepository extends JpaRepository<AppPunishment, Lo
      * @param id
      * @return 
      * @description  查询每个街道临时查封的数据
-     */
+     */     
     @Query(value = "SELECT * FROM app_punishment t where t.seal_up_time_begin between ?1 and ?2 and t.punish_method = '临时查封' and t.block_name like %?3%", nativeQuery = true)
     List<AppPunishment> findSealUpStreetData(Date bTime, Date eTime, String streetName);
 
@@ -62,5 +62,29 @@ public interface AppPunishmentRepository extends JpaRepository<AppPunishment, Lo
      */
     @Query(value = "SELECT * FROM app_punishment t where t.execute_time between ?1 and ?2 and t.punish_method != '临时查封' and t.block_name like %?3%", nativeQuery = true)
     List<AppPunishment> findStreetData(Date bTime, Date eTime, String streetName);
+
+    /**
+     * @createDate 2017年3月30日下午8:23:53 
+     * @author wangzhiwang
+     * @param string
+     * @param string2
+     * @param streetName
+     * @return 
+     * @description
+     */
+    @Query(value = "SELECT * FROM app_punishment t where YEAR(t.seal_up_time_begin)=?1 AND MONTH(t.seal_up_time_begin)=?2 and t.punish_method = '临时查封' and t.block_name like %?3%", nativeQuery = true)
+    List<AppPunishment> findSealStreetDateToMonth(String year, String month, String streetName);
+
+    /**
+     * @createDate 2017年3月30日下午8:23:59 
+     * @author wangzhiwang
+     * @param string
+     * @param string2
+     * @param streetName
+     * @return 
+     * @description
+     */
+    @Query(value = "SELECT * FROM app_punishment t where YEAR(t.execute_time)=?1 AND MONTH(t.execute_time)=?2 and t.punish_method != '临时查封' and t.block_name like %?3%", nativeQuery = true)
+    List<AppPunishment> findStreetDateToMonth(String year, String month, String streetName);
 
 }

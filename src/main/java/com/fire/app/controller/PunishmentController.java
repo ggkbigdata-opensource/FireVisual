@@ -102,13 +102,13 @@ public class PunishmentController {
      */
     @RequestMapping(value = "/getAreaDate", method = RequestMethod.POST)
     @ResponseBody
-    private List<JSONObject> getAreaDate(@RequestParam(required = true) Long id) {
+    private List<JSONObject> getAreaDate(@RequestParam(required = true) Long streetId) {
 
         /*
          * if (!ContextHolderUtils.isLogin()) { return "login/login"; }
          */
 
-        List<JSONObject> result = punishmentService.getAreaDate(id);
+        List<JSONObject> result = punishmentService.getAreaDate(streetId);
 
         return result;
     }
