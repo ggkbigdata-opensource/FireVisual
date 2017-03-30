@@ -58,7 +58,6 @@
                 verifCode : verifCode
               }, function(data) {
                 //服务器返回响应，根据响应结果，分析是否登录成功；
-                console.log(data);
                 if (data.successful === true) {
                   mui.openWindow({
                     url : [[@{/app/index}]]

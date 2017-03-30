@@ -25,25 +25,25 @@
             <div class="mui-scroll">
                 <div class="menu-title">菜单</div>
                 <ul class="menu">
-                    <li><button
+                    <li><a
                             th:href="@{/regionalProfile/regionalProfile}">
                             <i class="iconfont icon-region"></i>区域概况
-                        </button></li>
-                    <li><button
+                        </a></li>
+                    <li><a
                             th:href="@{/hiddenInvestigation/hiddenInvestigation}">
                             <i class="iconfont icon-hidden"></i>隐患排查项目统计
-                        </button></li>
-                    <li><button th:href="@{/alarm/alarm-tianHe}">
+                        </a></li>
+                    <li><a th:href="@{/app/fireEvent/}">
                             <i class="iconfont icon-warn"></i>警情
-                        </button></li>
-                    <li><button
-                            th:href="@{/lawEnforcement/lawEnforcement-tianHe}">
+                        </a></li>
+                    <li><a
+                            th:href="@{/app/punishment/}">
                             <i class="iconfont icon-police"></i>执法
-                        </button></li>
-                    <li><button
+                        </a></li>
+                    <li><a
                             th:href="@{/statisticalData/statisticalData}">
                             <i class="iconfont icon-bar-chart"></i>统计数据展示
-                        </button></li>
+                        </a></li>
                 </ul>
             </div>
         </div>
@@ -70,7 +70,18 @@
                     th:href="@{/app/fireEvent/toBasePage}">分类警情数据</a></li>
         </ul>
     </div>
-
+    
+    <!-- 执法下拉列表 -->
+    <div th:fragment="law-menu" id="trendPopover" style="display: none" class="popoverbox">
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell"><a
+                    th:href="@{/app/punishment/}">天河全区执法趋势</a></li>
+            <li class="mui-table-view-cell"><a
+                    th:href="@{/app/fireEvent/toAreaPage}">街道执法趋势</a></li>
+            <li class="mui-table-view-cell"><a
+                    th:href="@{/app/fireEvent/toBasePage}">分类执法数据</a></li>
+        </ul>
+    </div>
 </body>
 
 <footer></footer>
