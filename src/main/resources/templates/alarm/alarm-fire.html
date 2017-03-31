@@ -27,10 +27,10 @@
                                         <div class="tl font-red pl15 mb10">输入范围</div>
                                         <form class="mui-input-group">
                                             <div class="mui-input-row">
-                                                <label style="font-size:14px;">开始时间：</label> <input type="text" id="beginTime" placeholder="年月">
+                                                <label style="font-size:14px;">开始时间：</label><input id="beginTime" type="text" onclick="beginTim()" placeholder="年月" readonly="readonly">
                                             </div>
                                             <div class="mui-input-row">
-                                                <label style="font-size:14px;">结束时间：</label> <input type="text" disabled id="endTime" placeholder="年月">
+                                                <label style="font-size:14px;">结束时间：</label><input id="endTime" type="text" onclick="endTim()" placeholder="年月" readonly="readonly">
                                             </div>
                                             <div class="mui-button-row range-button">
                                                 <button type="button" class="mui-btn">确认</button>
@@ -43,106 +43,20 @@
                                         <ul class="selectRangeList">
                                             <li>
                                                 <div class="tit tr fl">按年份：</div>
-                                                <div class="oh">
-                                                    <a class="selected"
-                                                        href="javascirpt:;">2016年</a>
-                                                    <a
-                                                        href="javascirpt:;">2015年</a>
-                                                </div>
+                                                <div class="oh" id="selectYear"></div>
                                             </li>
                                             <li>
                                                 <div class="tit tr fl">按半年：</div>
-                                                <div class="oh">
-                                                    <a
-                                                        href="javascirpt:;">2016年下半年</a>
-                                                    <a
-                                                        href="javascirpt:;">2016年上半年</a>
-                                                    <a
-                                                        href="javascirpt:;">2015年下半年</a>
-                                                    <a
-                                                        href="javascirpt:;">2015年上半年</a>
-                                                </div>
+                                                <div class="oh" id="selectHalfYear"></div>
                                             </li>
                                             <li>
                                                 <div class="tit tr fl">按季度：</div>
-                                                <div class="oh">
-                                                    <a
-                                                        href="javascirpt:;">2016年4季度</a>
-                                                    <a
-                                                        href="javascirpt:;">2016年3季度</a>
-                                                    <a
-                                                        href="javascirpt:;">2016年2季度</a>
-                                                    <a
-                                                        href="javascirpt:;">2016年1季度</a>
-                                                    <a
-                                                        href="javascirpt:;">2016年2季度</a>
-                                                    <a
-                                                        href="javascirpt:;">2016年1季度</a>
-                                                </div>
+                                                <div class="oh" id="selectQuarter"></div>
                                             </li>
                                             <li>
                                                 <div class="tit tr fl">按月份：</div>
                                                 <div class="oh">
-                                                    <div
-                                                        class="month-item">
-                                                        <div class="tit">2016年</div>
-                                                        <div class="oh">
-                                                            <a
-                                                                href="javascirpt:;">1月</a>
-                                                            <a
-                                                                href="javascirpt:;">2月</a>
-                                                            <a
-                                                                href="javascirpt:;">3月</a>
-                                                            <a
-                                                                href="javascirpt:;">4月</a>
-                                                            <a
-                                                                href="javascirpt:;">5月</a>
-                                                            <a
-                                                                href="javascirpt:;">6月</a>
-                                                            <a
-                                                                href="javascirpt:;">7月</a>
-                                                            <a
-                                                                href="javascirpt:;">8月</a>
-                                                            <a
-                                                                href="javascirpt:;">9月</a>
-                                                            <a
-                                                                href="javascirpt:;">10月</a>
-                                                            <a
-                                                                href="javascirpt:;">11月</a>
-                                                            <a
-                                                                href="javascirpt:;">12月</a>
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        class="month-item">
-                                                        <div class="tit">2015年</div>
-                                                        <div class="oh">
-                                                            <a
-                                                                href="javascirpt:;">1月</a>
-                                                            <a
-                                                                href="javascirpt:;">2月</a>
-                                                            <a
-                                                                href="javascirpt:;">3月</a>
-                                                            <a
-                                                                href="javascirpt:;">4月</a>
-                                                            <a
-                                                                href="javascirpt:;">5月</a>
-                                                            <a
-                                                                href="javascirpt:;">6月</a>
-                                                            <a
-                                                                href="javascirpt:;">7月</a>
-                                                            <a
-                                                                href="javascirpt:;">8月</a>
-                                                            <a
-                                                                href="javascirpt:;">9月</a>
-                                                            <a
-                                                                href="javascirpt:;">10月</a>
-                                                            <a
-                                                                href="javascirpt:;">11月</a>
-                                                            <a
-                                                                href="javascirpt:;">12月</a>
-                                                        </div>
-                                                    </div>
+                                                    <div class="month-item"  id="selectMonth"></div>
                                                 </div>
                                             </li>
                                         </ul>
@@ -913,54 +827,124 @@
     </div>
     <script th:src="@{/js/mui.js}"></script>
     <script th:src="@{/js/normal.js}"></script>
+    <script th:src="@{/js/mui.picker.min.js}"></script>
     <script th:src="@{/js/jquery-2.1.0.js}"></script>
     <script th:inline="javascript">
-    /*<![CDATA[*/
-          mui.init();
-/* 		  $('#beginTime').on('click',function(){
-				var dDate = new Date();
-				dDate.setFullYear(2014, 7, 16);
-				var minDate = new Date();
-				minDate.setFullYear(2010, 0, 1);
-				var maxDate = new Date();
-				maxDate.setFullYear(2016, 11, 31);
-				mui.plusReady(function(){
-					plus.nativeUI.pickDate(function(e) {
-						var d = e.date;
-						$('#beginTime').innerText = '您选择的日期是:' + d.getFullYear() + "-" + (d.getMonth() + 1);
-					}, function(e) {
-						$('#beginTime').innerText = "您没有选择日期";
-					}, {
-						title: "请选择日期",
-						date: dDate,
-						minDate: minDate,
-						maxDate: maxDate
-					});
-				})
-
-		  }); */
-			document.getElementById("beginTime").addEventListener('tap', function() {
-				var dDate = new Date();
-				dDate.setFullYear(2014, 7, 16);
-				var minDate = new Date();
-				minDate.setFullYear(2010, 0, 1);
-				var maxDate = new Date();
-				maxDate.setFullYear(2016, 11, 31);
-				mui.plusReady(function(){
-					plus.nativeUI.pickDate(function(e) {
-						var d = e.date;
-						$('#beginTime').innerText = '您选择的日期是:' + d.getFullYear() + "-" + (d.getMonth() + 1);
-					}, function(e) {
-						$('#beginTime').innerText = "您没有选择日期";
-					}, {
-						title: "请选择日期",
-						date: dDate,
-						minDate: minDate,
-						maxDate: maxDate
-					});
-				})
-			})
-          /*]]>*/
-        </script>
+    	/*<![CDATA[*/
+        mui.init();
+        var now = new Date();
+    	//##################选择时间段开始###############################
+   		var pickerB,pickerE;
+ 	  	//开始时间控件
+ 	    var optionsBegin = {type:'month'};
+	    var optionsB = optionsBegin;
+	    optionsB.endYear = now.getFullYear();
+	    optionsB.endMonth = now.getMonth() + 1;
+	    pickerB = new mui.DtPicker(optionsB);
+		function beginTim (){
+		  pickerB.show(function(res){
+			  $('#beginTime').val(res.y.text + '-' + res.m.text);
+			  startYear = res.y.text;
+			  startMonth = res.m.text;
+		  });
+	    }
+		//结束时间控件
+		var optionsEnd = {type:'month'};
+		var optionsE = optionsEnd;
+	    optionsE.endYear = now.getFullYear();
+	    optionsE.endMonth = now.getMonth() + 1;
+	    pickerE = new mui.DtPicker(optionsE);
+	    function endTim(){
+	    	pickerE.show(function (res){
+	    		$('#endTime').val(res.y.text + '-' + res.m.text);
+	    	});
+	    }
+	    //按年份range=1
+	    for(var i=0;i<3;i++){
+	    	$('#selectYear').append('<button onclick="checkRange(' + (now.getFullYear()-i) + ',\'1\')">' + (now.getFullYear()-i) + '</button>');
+	    }
+	    //按半年range=2；按季度range=3；按月份range=4；
+	    for(var j=0;j<2;j++){
+	    	for(var k=0;k<2;k++){
+	    		var str = '';
+	    		if(k===0){
+	    			str = '上半年';
+	    		}else{
+	    			str = '下半年';
+	    		}
+	    		$('#selectHalfYear').append('<button onclick="checkRange(' + (now.getFullYear()-j-1) + ',\'2\',' + k + ')">' + (now.getFullYear()-j-1) + str + '</button>');
+	    	}
+	    	for(var l=0;l<4;l++){
+	    		var quarter = '';
+	    		if(l===0){
+	    			quarter = '年第4季度';
+	    		}else if(l===1){
+	    			quarter = '年第3季度';
+	    		}else if(l===2){
+	    			quarter = '年第2季度';
+	    		}else {
+	    			quarter = '年第1季度';
+	    		}
+	    		$('#selectQuarter').append('<button onclick="checkRange(' + (now.getFullYear()-j-1) + ',\'3\',\'\',' + l + ')">' + (now.getFullYear()-j-1) + quarter + '</button>');
+	    	}
+	    	var strMonths = '';
+	    	var divMonths = '';
+	    	for(var m=1;m<13;m++){
+	    		var months = m + '月';
+	    		strMonths += '<button onclick="checkRange(' + (now.getFullYear()-j-1) + ',\'4\',\'\',\'\',' + m + ')">' + months + '</button>';
+	    	}
+	    	divMonths = '<div class="oh">' + strMonths + '</div>';
+	    	$('#selectMonth').append('<div class="tit">' + (now.getFullYear()-j-1) + '年' + '</div>' + divMonths);
+	    }
+	    //##################选择时间段结束###############################
+	    //点击确认提交时间获取数据
+	    function checkRange (year,range,half,quarter,month){
+	    	if(range==='1'){
+	    		beginRange = year + '-01';
+	    		endRange = year + '-12';
+	    	}else if(range === '2'){
+	    		if(half === 0){
+	    			beginRange = year + '-01';
+	    			endRange = year + '-06';
+	    		}else{
+	    			beginRange = year + '-07';
+	    			endRange = year + '-12';
+	    		}
+	    	}else if(range === '3'){
+	    		if(quarter === 0){
+	    			beginRange = year + '-10';
+	    			endRange = year + '-12';
+	    		}else if(quarter === 1){
+	    			beginRange = year + '-07';
+	    			endRange = year + '-09';
+	    		}else if(quarter === 2){
+	    			beginRange = year + '-04';
+	    			endRange = year + '-06';
+	    		}else{
+	    			beginRange = year + '-01';
+	    			endRange = year + '-03';
+	    		}
+	    	}else if(range === '4'){
+	    		var monthOne = '0' + month;
+	    		var monthStr = '-' + monthOne.slice(-2);
+				beginRange = '' + year + monthStr;
+				endRange = beginRange;
+	    	}else{
+	    		return;
+	    	}
+			
+	    	mui.post([[@{/app/fireEvent/getBaseDate}]],{
+        		beginTime: beginRange,
+        		endTime: endRange
+        	},function(data){
+        		if(data){
+        			console.log(data);
+        			
+        		}
+        	});
+	    	$('#timePopover').hide();
+	    }
+        /*]]>*/
+     </script>
 </body>
 </html>
