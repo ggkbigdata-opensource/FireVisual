@@ -15,27 +15,36 @@
                 class="mui-content mui-scroll-wrapper">
                 <div class="mui-scroll">
                     <div class="filterBox">
-                        <button onclick="hide('trendPopover')" class="fl btn-filter">火灾警情基本数据 <i class="mui-icon mui-icon-arrowdown"></i></button>
+                        <button onclick="hidePopover('trendPopover')" class="fl btn-filter">分类警情数据 <i class="mui-icon mui-icon-arrowdown"></i></button>
                         <!-- 火情下拉列表 -->
                         <div th:replace="/layouts/layout::alarm-menu"></div>
-                        <button onclick="hide('timePopover')" class="fr btn-filter">选择时间段 <i class="mui-icon mui-icon-arrowdown"></i></button>
+                        <button onclick="hidePopover('timePopover')" class="fr btn-filter">选择时间段 <i class="mui-icon mui-icon-arrowdown"></i></button>
                         <div id="timePopover" style="display: none" class="popoverbox">
                             <div class="mui-scroll-wrapper time-scroll-wrapper">
                                 <div class="mui-scroll">
-                                    <div class="regionCurrent">当前：<span>2016年1月-7月</span></div>
+                                    <div class="regionCurrent" name="currentTime">当前：<span></span></div>
                                     <div class="rangeBox tc mt10">
                                         <div class="tl font-red pl15 mb10">输入范围</div>
-                                        <form class="mui-input-group">
-                                            <div class="mui-input-row">
-                                                <label style="font-size:14px;">开始时间：</label><input id="beginTime" type="text" onclick="beginTim()" placeholder="年月" readonly="readonly">
-                                            </div>
-                                            <div class="mui-input-row">
-                                                <label style="font-size:14px;">结束时间：</label><input id="endTime" type="text" onclick="endTim()" placeholder="年月" readonly="readonly">
-                                            </div>
-                                            <div class="mui-button-row range-button">
-                                                <button type="button" class="mui-btn">确认</button>
-                                            </div>
-                                        </form>
+                                        <div class="dateSelect">
+							 			<div class="mui-row oh">
+									        <div class="mui-col-xs-5">
+									        	<div class="fr ml5 mr10">年</div>
+									            <div class="oh"><input type="text" onclick="chooseYear()" id="chooseYear" class="input-year" readOnly="readOnly" /></div>
+									        </div>
+									        <div class="mui-col-xs-3">
+									            <div class="fr ml5">月</div>
+									            <div class="oh"><input type="text" onclick="beginMonth()" id="beginMonth" class="input-month" readOnly="readOnly" /></div>
+									        </div>
+									        <div class="mui-col-xs-1 tc">-</div>
+									         <div class="mui-col-xs-3">
+									            <div class="fr ml5">月</div>
+									            <div class="oh"><input type="text" onclick="endMonth()" id="endMonth" class="input-month" readOnly="readOnly" /></div>
+									        </div>
+									    </div>
+										<div class="mui-button-row range-button">
+											<button type="button" onclick="getData()" class="mui-btn">确认</button>
+										</div>
+									</div>
                                     </div>
                                     <div class="selectRangeBox">
                                         <div
@@ -67,7 +76,7 @@
                     </div>
   						<div class="mui-content-padded">
 							<!-- 内容区域 -->
-							<div class="timeBox tc fb font-red">2016年1月-7月</div>
+							<div class="timeBox tc fb font-red" name="currentTime"><span></span></div>
 							<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-red mt15">
 								<a class="mui-control-item mui-active" href="#item1">原始</a>
 								<a class="mui-control-item" href="#item2">冒烟</a>
@@ -86,7 +95,7 @@
 												<th class="blueBg" colspan="3">原始火灾警情</th>
 											</tr>
 											<tr>
-												<th class="blueBg light">2017</th>
+												<th class="blueBg light" name="thisYear"></th>
 												<th class="blueBg light">同期</th>
 												<th class="blueBg light">同比</th>
 											</tr>
@@ -94,104 +103,6 @@
 										<tbody>
 											<tr>
 												<td class="grayBg">1</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">2</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">3</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">4</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">5</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">6</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">7</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">8</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">9</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">10</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">11</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">12</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">13</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">14</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">15</td>
 												<td class="greenBg">员村</td>
 												<td class="blueBg">10</td>
 												<td class="blueBg">11</td>
@@ -209,118 +120,12 @@
 												<th class="blueBg" colspan="3">冒烟类成灾警情</th>
 											</tr>
 											<tr>
-												<th class="blueBg light">2017</th>
+												<th class="blueBg light" name="thisYear"></th>
 												<th class="blueBg light">同期</th>
 												<th class="blueBg light">同比</th>
 											</tr>
 										</thead>
-										<tbody>
-											<tr>
-												<td class="grayBg">1</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">2</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">3</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">4</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">5</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">6</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">7</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">8</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">9</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">10</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">11</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">12</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">13</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">14</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">15</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-										</tbody>
+										<tbody></tbody>
 									</table>
 								</div>
 								<div id="item3" class="mui-control-content">
@@ -332,117 +137,13 @@
 												<th class="blueBg" colspan="3">确认类成灾警情</th>
 											</tr>
 											<tr>
-												<th class="blueBg light">2017</th>
+												<th class="blueBg light" name="thisYear"></th>
 												<th class="blueBg light">同期</th>
 												<th class="blueBg light">同比</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td class="grayBg">1</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">2</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">3</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">4</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">5</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">6</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">7</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">8</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">9</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">10</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">11</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">12</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">13</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">14</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">15</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
+											
 										</tbody>
 									</table>
 								</div>
@@ -455,118 +156,12 @@
 												<th class="blueBg" colspan="3">直接经济损失</th>
 											</tr>
 											<tr>
-												<th class="blueBg light">2017</th>
+												<th class="blueBg light" name="thisYear"></th>
 												<th class="blueBg light">同期</th>
 												<th class="blueBg light">同比</th>
 											</tr>
 										</thead>
-										<tbody>
-											<tr>
-												<td class="grayBg">1</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">2</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">3</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">4</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">5</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">6</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">7</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">8</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">9</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">10</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">11</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">12</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">13</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">14</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">15</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-										</tbody>
+										<tbody></tbody>
 									</table>
 								</div>
 								<div id="item5" class="mui-control-content">
@@ -578,118 +173,12 @@
 												<th class="blueBg" colspan="3">受伤</th>
 											</tr>
 											<tr>
-												<th class="blueBg light">2017</th>
+												<th class="blueBg light" name="thisYear"></th>
 												<th class="blueBg light">同期</th>
 												<th class="blueBg light">同比</th>
 											</tr>
 										</thead>
-										<tbody>
-											<tr>
-												<td class="grayBg">1</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">2</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">3</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">4</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">5</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">6</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">7</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">8</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">9</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">10</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">11</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">12</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">13</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">14</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">15</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-										</tbody>
+										<tbody></tbody>
 									</table>
 								</div>
 								<div id="item6" class="mui-control-content">
@@ -701,118 +190,12 @@
 												<th class="blueBg" colspan="3">死亡</th>
 											</tr>
 											<tr>
-												<th class="blueBg light">2017</th>
+												<th class="blueBg light" name="thisYear"></th>
 												<th class="blueBg light">同期</th>
 												<th class="blueBg light">同比</th>
 											</tr>
 										</thead>
-										<tbody>
-											<tr>
-												<td class="grayBg">1</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">2</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">3</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">4</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">5</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">6</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">7</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">8</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">9</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">10</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">11</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">12</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">13</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">14</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-											<tr>
-												<td class="grayBg">15</td>
-												<td class="greenBg">员村</td>
-												<td class="blueBg">10</td>
-												<td class="blueBg">11</td>
-												<td class="blueBg">45.45</td>
-											</tr>
-										</tbody>
+										<tbody></tbody>
 									</table>
 								</div>
 							</div>
@@ -832,33 +215,66 @@
     <script th:inline="javascript">
     	/*<![CDATA[*/
         mui.init();
+    	//初始化并获取当年数据
         var now = new Date();
+    	var beginMon=13;
+    	var endMon=13;
+        var beginRange = now.getFullYear() + '-01';
+        var endRange = now.getFullYear() + '-' + ('0'+(now.getMonth()+1)).slice(-2);
+        var currentTime = now.getFullYear() + '年01月-' + ('0' + (now.getMonth()+1)).slice(-2) + '月';
+        $('div[name="currentTime"] span').text(currentTime);
+    	mui.post([[@{/app/fireEvent/getBaseDate}]],{
+    		beginTime: beginRange,
+    		endTime: endRange
+    	},function(data){
+    		if(data){
+    			console.log(data);
+    			showData(data);
+    		}
+    	});
     	//##################选择时间段开始###############################
-   		var pickerB,pickerE;
- 	  	//开始时间控件
- 	    var optionsBegin = {type:'month'};
-	    var optionsB = optionsBegin;
-	    optionsB.endYear = now.getFullYear();
-	    optionsB.endMonth = now.getMonth() + 1;
-	    pickerB = new mui.DtPicker(optionsB);
-		function beginTim (){
-		  pickerB.show(function(res){
-			  $('#beginTime').val(res.y.text + '-' + res.m.text);
-			  startYear = res.y.text;
-			  startMonth = res.m.text;
-		  });
-	    }
-		//结束时间控件
-		var optionsEnd = {type:'month'};
-		var optionsE = optionsEnd;
-	    optionsE.endYear = now.getFullYear();
-	    optionsE.endMonth = now.getMonth() + 1;
-	    pickerE = new mui.DtPicker(optionsE);
-	    function endTim(){
-	    	pickerE.show(function (res){
-	    		$('#endTime').val(res.y.text + '-' + res.m.text);
-	    	});
-	    }
+    	//范围选择
+    	function chooseYear(){
+        	var pickerYear = new mui.PopPicker();
+        	var arrYear = [];
+        	for(var i=0;i<4;i++){
+        		var oneYear = {};
+        		oneYear = {value: ((now.getFullYear()-i)+''),text:((now.getFullYear()-i)+'')};
+        		arrYear.push(oneYear)
+        	}
+        	pickerYear.setData(arrYear);
+    		pickerYear.show(function(res){
+    			$('#chooseYear').val(res[0].text);
+    		});
+    	}
+		function beginMonth(){
+			var pickerBegin = new mui.PopPicker();
+			var arrMon = [];
+			for(var i=1;i<endMon;i++){
+				var oneMon = {};
+				oneMon = {value: (('0'+i).slice(-2)),text: (('0'+i).slice(-2))};
+				arrMon.push(oneMon);
+			}
+			pickerBegin.setData(arrMon);
+			pickerBegin.show(function(res){
+    			$('#beginMonth').val(res[0].text);
+    			beginMon = parseInt(res[0].text);
+    		});
+		}
+		function endMonth(){
+			var pickerEnd = new mui.PopPicker();
+			var arrMon = [];
+			for(var i=beginMon;i<13;i++){
+				var oneMon = {};
+				oneMon = {value: (('0'+i).slice(-2)),text: (('0'+i).slice(-2))};
+				arrMon.push(oneMon);
+			}
+			pickerEnd.setData(arrMon);
+			pickerEnd.show(function(res){
+    			$('#endMonth').val(res[0].text);
+    			endMon = parseInt(res[0].text);
+    		});
+		}
 	    //按年份range=1
 	    for(var i=0;i<3;i++){
 	    	$('#selectYear').append('<button onclick="checkRange(' + (now.getFullYear()-i) + ',\'1\')">' + (now.getFullYear()-i) + '</button>');
@@ -868,9 +284,9 @@
 	    	for(var k=0;k<2;k++){
 	    		var str = '';
 	    		if(k===0){
-	    			str = '上半年';
+	    			str = '年上半年';
 	    		}else{
-	    			str = '下半年';
+	    			str = '年下半年';
 	    		}
 	    		$('#selectHalfYear').append('<button onclick="checkRange(' + (now.getFullYear()-j-1) + ',\'2\',' + k + ')">' + (now.getFullYear()-j-1) + str + '</button>');
 	    	}
@@ -902,47 +318,116 @@
 	    	if(range==='1'){
 	    		beginRange = year + '-01';
 	    		endRange = year + '-12';
+	    		currentTime = year + '年';
 	    	}else if(range === '2'){
 	    		if(half === 0){
 	    			beginRange = year + '-01';
 	    			endRange = year + '-06';
+	    			currentTime = year+'年上半年';
 	    		}else{
 	    			beginRange = year + '-07';
 	    			endRange = year + '-12';
+	    			currentTime = year+'年下半年';
 	    		}
 	    	}else if(range === '3'){
 	    		if(quarter === 0){
 	    			beginRange = year + '-10';
 	    			endRange = year + '-12';
+	    			currentTime = year+'年第4季度';
 	    		}else if(quarter === 1){
 	    			beginRange = year + '-07';
 	    			endRange = year + '-09';
+	    			currentTime = year+'年第3季度';
 	    		}else if(quarter === 2){
 	    			beginRange = year + '-04';
 	    			endRange = year + '-06';
+	    			currentTime = year+'年第2季度';
 	    		}else{
 	    			beginRange = year + '-01';
 	    			endRange = year + '-03';
+	    			currentTime = year+'年第1季度';
 	    		}
 	    	}else if(range === '4'){
 	    		var monthOne = '0' + month;
 	    		var monthStr = '-' + monthOne.slice(-2);
 				beginRange = '' + year + monthStr;
 				endRange = beginRange;
+				currentTime = year+'年'+monthOne.slice(-2)+'月';
 	    	}else{
 	    		return;
 	    	}
-			
+	    	$('div[name="currentTime"] span').text(currentTime);
 	    	mui.post([[@{/app/fireEvent/getBaseDate}]],{
         		beginTime: beginRange,
         		endTime: endRange
         	},function(data){
         		if(data){
         			console.log(data);
-        			
+        			showData(data);
         		}
         	});
+		    isTime = false;
 	    	$('#timePopover').hide();
+	    }
+		//“输入范围”点击确认
+		function getData(){
+			var year = $('#chooseYear').val();
+			var beginMon = $('#beginMonth').val();
+			var endMon =  $('#endMonth').val();
+			if(!year){
+				mui.toast('请选择年份');
+				return;
+			}else if(!beginMon){
+				mui.toast('请选择开始月份');
+				return;
+			}else if(!endMon){
+				mui.toast('请选择结束月份');
+				return;
+			}
+			currentTime = year + '年' + beginMon + '月-' + endMon + '月'; 
+			$('div[name="currentTime"] span').text(currentTime);
+			mui.post([[@{/app/fireEvent/getBaseDate}]],{
+        		beginTime: year + '-' + beginMon,
+        		endTime: year + '-' + endMon
+        	},function(data){
+        		if(data){
+        			console.log(data);
+        			showData(data);
+        		}
+        	});
+			isTime = false;
+	    	$('#timePopover').hide();
+		}
+	    //分类警情数据和选择时间段弹窗点击关闭另外一个
+	    var isTrend = false;
+	    var isTime = false;
+	    function hidePopover(popover){
+	    	if(popover === 'trendPopover'){
+	    		$('#timePopover').hide();
+	    		isTime = false;
+	    		if(isTrend){
+	    			$('#trendPopover').hide();
+	    			isTrend = false;
+	    		}else{
+	    			$('#trendPopover').show();
+	    			isTrend = true;
+	    		}
+	    	}else if(popover === 'timePopover'){
+	    		$('#trendPopover').hide();
+	    		isTrend = false;
+	    		if(isTime){
+	    			$('#timePopover').hide();
+	    			isTime = false;
+	    		}else{
+	    			$('#timePopover').show();
+	    			isTime = true;
+	    		}
+	    	}
+	    }
+	    //展示表格数据
+	    function showData (data) {
+	    	console.log(currentTime.substr(0,4));
+	    	$('th[name="thisYear"]').text(currentTime.substr(0,4));
 	    }
         /*]]>*/
      </script>

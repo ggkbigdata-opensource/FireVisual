@@ -36,6 +36,9 @@ body,
 .font-green { color: #119d35;}
 .font-red { color:  #f56060;}
 
+.popoverbox .mui-table-view-cell:after {
+	right: 15px;
+}
 .mui-table-view-cell>button:not(.mui-btn) {
     position: relative;
     display: block;
@@ -52,9 +55,18 @@ body,
 .mui-table-view-cell>button:active {
 	color: #f66e6e;
 }
+.mui-toast-container {
+	bottom: 50% !important;/*离布局底部的距离*/
+}
+.mui-toast-message {
+	color: #fff;
+    border-radius: 6px;
+    background-color: rgba(0,0,0,.7);
+}
 /*login*/
 .login-bar {
 	height: 180px;
+	background-color: #ec4040;
 }
 .login-bar .logo {
 	width: 100%;
@@ -423,6 +435,23 @@ body,
 	background-color: #fff;
 	padding: 10px 0;
 }
+.dateSelect {
+	padding: 0 15px;
+	line-height: 30px;
+}
+.dateSelect input[type=text] {
+	padding: 5px 10px;
+	margin: 0;
+	height: 30px;
+	border-radius: 0;
+	line-height: 18px;
+}
+.dateSelect input[type=text]:focus {
+	border-color: #f66e6e;
+}
+.dateSelect .form-group + .form-group {
+	margin-top: 10px;
+}
 .rangeBox .mui-input-group:before,
 .rangeBox .mui-input-group:after {
 	display: none;
@@ -526,12 +555,13 @@ body,
 .fireDataTable > tbody > tr > td {
 	border-right: 1px solid #F3F3F3;
 	border-bottom: 1px solid #F3F3F3;
-	padding: 0 3px;
+	padding: 5px 3px;
+	font-size: 16px;
 }
 .fireDataTable > thead > tr > th {
 	color: #fff;
-	font-size: 18px;
-	padding: 5px 0;
+	font-weight: bold;
+	font-size: 17px;
 }
 .fireDataTable > tbody > tr > td {
 	color: #838080;
@@ -567,6 +597,7 @@ body,
 .streetName:active {
 	background-color: #d15e5e;
 }
+.hiddenBox .groupList > li,
 .heatlistBox .groupList > li {
 	padding: 7px;
 }
@@ -574,6 +605,7 @@ body,
 	border-bottom: 0;
 }
 /*mui-segmented-control*/
+.mui-segmented-control { font-size: 16px;}
 .mui-segmented-control-red.mui-segmented-control,
 .mui-segmented-control-red.mui-segmented-control .mui-control-item {
 	color: #f66e6e;
@@ -583,4 +615,38 @@ body,
 	color: #fff;
 	background-color: #f66e6e;
 } 
-
+/*dataBox*/
+.dataBox .mui-table-view-cell:after {
+	left: 0;
+}
+.dataBox .mui-table-view:before {
+	display: none;
+}
+.mui-table-view-cell {
+	padding: 11px 10px;
+}
+.mui-table-view-cell>a:not(.mui-btn) {
+	margin: -11px -10px;
+}
+/*remarkBox*/
+.remarkBox {
+	color: #666;
+}
+.remarkBox .tit {
+	font-size: 16px;
+	line-height: 23px;
+	font-weight: bold;
+}
+.remarkContent li {
+	position: relative;
+	padding-left: 20px;
+	line-height: 23px;
+}
+.remarkContent li + li {
+	margin-top: 5px;
+}
+.remarkContent li:before {
+	position: absolute;
+	left: 0;
+	top: 0;
+}

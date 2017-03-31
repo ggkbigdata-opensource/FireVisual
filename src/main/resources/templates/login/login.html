@@ -2,12 +2,12 @@
 <head th:with="title=${'登录'}" th:include="/layouts/layout::head">
 </head>
 <body>
-    <header class="mui-bar mui-bar-nav login-bar">
+    <div class="mui-content loginBox">
+    <div class="login-bar">
         <div class="logo">
             <img th:src="@{/img/logo.png}" />
         </div>
-    </header>
-    <div class="mui-content loginBox">
+    </div>
         <div class="mui-content-padded">
             <form id='login-form' class="mui-input-group">
                 <div class="mui-input-row">
