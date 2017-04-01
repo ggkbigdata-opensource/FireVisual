@@ -144,7 +144,9 @@ public class FireEventServiceImpl implements FireEventService {
                 int hurtBefore = 0;
                 int deadBefore = 0;
                 
-                List<AppFireEvent> nowValue = fireEventRepository.findStreetData(bTime, eTime, street.getId());
+                java.text.DecimalFormat   df=new   java.text.DecimalFormat("#.##");   
+                
+                List<AppFireEvent> nowValue = fireEventRepository.findStreetData(bTime, eTime, street.getName());
                 
                 for (AppFireEvent appFireEvent : nowValue) {
                     if ("原始警情".equals(appFireEvent)) {
@@ -175,7 +177,7 @@ public class FireEventServiceImpl implements FireEventService {
                 calendar.add(Calendar.YEAR, -1);// 当前时间减去一年，即一年前的时间
                 eTime = calendar.getTime();
 
-                List<AppFireEvent> beforeValue = fireEventRepository.findStreetData(bTime, eTime, street.getId());
+                List<AppFireEvent> beforeValue = fireEventRepository.findStreetData(bTime, eTime, street.getName());
 
                 for (AppFireEvent appFireEvent : beforeValue) {
                     if ("原始警情".equals(appFireEvent)) {
@@ -204,7 +206,7 @@ public class FireEventServiceImpl implements FireEventService {
                 if (primitiveBefore==0) {
                     streetResult.put("primitiveYearBefore", 0);
                 }else{
-                    streetResult.put("primitiveYearBefore", (primitiveNow-primitiveBefore)/primitiveBefore);
+                    streetResult.put("primitiveYearBefore", df.format((primitiveNow-primitiveBefore)/primitiveBefore));
                 }
                 //冒烟警情
                 streetResult.put("smokingNow", smokingNow);
@@ -212,7 +214,7 @@ public class FireEventServiceImpl implements FireEventService {
                 if (smokingBefore==0) {
                     streetResult.put("smokingYearBefore", 0);
                 }else{
-                    streetResult.put("smokingYearBefore", (smokingNow-smokingBefore)/smokingBefore);
+                    streetResult.put("smokingYearBefore", df.format((smokingNow-smokingBefore)/smokingBefore));
                 }
                 //确认警情
                 streetResult.put("affirmNow", affirmNow);
@@ -220,7 +222,7 @@ public class FireEventServiceImpl implements FireEventService {
                 if (affirmBefore==0) {
                     streetResult.put("affirmYearBefore", 0);
                 }else{
-                    streetResult.put("affirmYearBefore", (affirmNow-affirmBefore)/affirmBefore);
+                    streetResult.put("affirmYearBefore", df.format((affirmNow-affirmBefore)/affirmBefore));
                 }
                 //损失
                 streetResult.put("lossNow", lossNow);
@@ -228,7 +230,7 @@ public class FireEventServiceImpl implements FireEventService {
                 if (lossBefore==0) {
                     streetResult.put("lossYearBefore", 0);
                 }else{
-                    streetResult.put("lossYearBefore", (lossNow-lossBefore)/lossBefore);
+                    streetResult.put("lossYearBefore", df.format((lossNow-lossBefore)/lossBefore));
                 }
                 //受伤
                 streetResult.put("hurtNow", hurtNow);
@@ -236,7 +238,7 @@ public class FireEventServiceImpl implements FireEventService {
                 if (hurtBefore==0) {
                     streetResult.put("hurtYearBefore", 0);
                 }else{
-                    streetResult.put("hurtYearBefore", (hurtNow-hurtBefore)/hurtBefore);
+                    streetResult.put("hurtYearBefore", df.format((hurtNow-hurtBefore)/hurtBefore));
                 }
                 //死亡
                 streetResult.put("deadNow", deadNow);
@@ -244,7 +246,7 @@ public class FireEventServiceImpl implements FireEventService {
                 if (deadBefore==0) {
                     streetResult.put("deadYearBefore", 0);
                 }else{
-                    streetResult.put("deadYearBefore", (lossNow-deadBefore)/deadBefore);
+                    streetResult.put("deadYearBefore", df.format((lossNow-deadBefore)/deadBefore));
                 }
                 
                 
@@ -276,13 +278,16 @@ public class FireEventServiceImpl implements FireEventService {
         List<JSONObject> oneSum = new ArrayList<JSONObject>();
         List<JSONObject> twoSum = new ArrayList<JSONObject>();
         List<JSONObject> threeSum = new ArrayList<JSONObject>();
+        
+        
+        Street street = streetRepository.getOne(streetId);
 
         for (int i = 1; i < 13; i++) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             calendar1.add(calendar.MONTH, -1);// 获取上个月月份
             String[] date1 = sdf.format(calendar1.getTime()).split("-");
 
-            List<AppFireEvent> list = fireEventRepository.findAreaDateToMonth(date1[0], date1[1], streetId);
+            List<AppFireEvent> list = fireEventRepository.findAreaDateToMonth(date1[0], date1[1], street.getName());
             int oned = 0;
             int twod = 0;
             int threed = 0;
@@ -326,7 +331,7 @@ public class FireEventServiceImpl implements FireEventService {
 
         two.put("type", "冒烟警情");
         two.put("unit", "起");
-        two.put("data", oneSum);
+        two.put("data", twoSum);
 
         three.put("type", "确认警情");
         three.put("unit", "起");

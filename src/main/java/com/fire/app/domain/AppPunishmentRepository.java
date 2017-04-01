@@ -87,4 +87,15 @@ public interface AppPunishmentRepository extends JpaRepository<AppPunishment, Lo
     @Query(value = "SELECT * FROM app_punishment t where YEAR(t.execute_time)=?1 AND MONTH(t.execute_time)=?2 and t.punish_method != '临时查封' and t.block_name like %?3%", nativeQuery = true)
     List<AppPunishment> findStreetDateToMonth(String year, String month, String streetName);
 
+    /**
+     * @createDate 2017年3月31日上午11:04:43 
+     * @author wangzhiwang
+     * @param newYear
+     * @param nowTime
+     * @param name 
+     * @description   查询时间段里面对应街道的所有执法数据
+     */
+    @Query(value = "SELECT * FROM app_punishment t where YEAR(t.execute_time)=?1 AND MONTH(t.execute_time)=?2 and t.block_name like %?3%", nativeQuery = true)
+    List<AppPunishment> findAllDataByTime(Date newYear, Date nowTime, String name);
+
 }

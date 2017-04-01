@@ -36,8 +36,8 @@ public interface AppFireEventRepository extends JpaRepository<AppFireEvent, Long
      * @return 
      * @description
      */
-    @Query(value = "SELECT * FROM app_fire_event t where t.occur_time between ?1 and ?2 and t.block_id in( select b.id from block b where b.street_id = ?3)", nativeQuery = true)
-    List<AppFireEvent> findStreetData(Date beginTime, Date endTime, Long id);
+    @Query(value = "SELECT * FROM app_fire_event t where t.occur_time between ?1 and ?2 and t.block_name like %?3%", nativeQuery = true)
+    List<AppFireEvent> findStreetData(Date beginTime, Date endTime, String streetName);
 
     /**
      * @createDate 2017年3月29日下午4:42:27 
@@ -48,8 +48,8 @@ public interface AppFireEventRepository extends JpaRepository<AppFireEvent, Long
      * @return 
      * @description
      */
-    @Query(value = "SELECT * FROM app_fire_event t where YEAR(t.occur_time)=?1 AND MONTH(t.occur_time)=?2 and t.block_id in( select b.id from block b where b.street_id = ?3)", nativeQuery = true)
-    List<AppFireEvent> findAreaDateToMonth(String string, String string2, Long id);
+    @Query(value = "SELECT * FROM app_fire_event t where YEAR(t.occur_time)=?1 AND MONTH(t.occur_time)=?2 and t.block_name like %?3%", nativeQuery = true)
+    List<AppFireEvent> findAreaDateToMonth(String string, String string2, String streetName);
 
    
 

@@ -16,6 +16,7 @@ public class BsBuildingInfo {
     @GeneratedValue
     private Long id;
     private String itemNumber;
+    private Long streetId;
     private String propertyCompanyName;
     private String buildingAddress;
     private String designCompany;
@@ -48,6 +49,17 @@ public class BsBuildingInfo {
     public BsBuildingInfo(){
         
     }
+
+    
+    public Long getStreetId() {
+        return streetId;
+    }
+
+    public void setStreetId(Long streetId) {
+        this.streetId = streetId;
+    }
+
+
 
     public Long getId() {
         return id;
