@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>2016年1-12月天河区消防执法情况</title>
+    <link href="../css/base.css" rel="stylesheet"/>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <link href="../css/mui.picker.min.css" rel="stylesheet"/>
+    <link href="../common/iconfont/iconfont.css" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
+</head>
+<body>
+	<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+			<!--菜单部分-->
+			<aside id="offCanvasSide" class="mui-off-canvas-right">
+				<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="menu-title">菜单</div>
+						<ul class="menu">
+							<li><a href="../regionalProfile/regionalProfile.html"><i class="iconfont icon-region"></i>区域概况</a></li>
+							<li><a href="../hiddenInvestigation/hiddenInvestigation.html"><i class="iconfont icon-hidden"></i>隐患统计</a></li>
+							<li><a href="../alarm/alarm-tianHe.html"><i class="iconfont icon-warn"></i>警情</a></li>
+							<li><a href="../lawEnforcement/lawEnforcement-tianHe.html"><i class="iconfont icon-police"></i>执法</a></li>
+							<li><a href="../statisticalData/statisticalData.html"><i class="iconfont icon-bar-chart"></i>统计数据展示</a></li>
+						</ul>
+					</div>
+				</div>
+			</aside>
+			<div class="mui-inner-wrap">
+				<header class="mui-bar mui-bar-nav">
+					<div class="logo">
+						<img src="../img/logo.png" />
+					</div>
+					<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
+					<h1 class="mui-title">统计数据展示</h1>
+				</header>
+				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="filterBox">
+							<a href="statisticalData.html" class="fl btn-filter" >
+								<i class="mui-icon mui-icon-arrowleft"></i>
+								返回
+							</a>
+						</div>
+						<div class="mui-content-padded">
+							<!-- 内容区域 -->
+							<div class="timeBox tc fb font-red">2016年1-12月天河区消防执法情况</div>
+							<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-red mt15">
+								<a class="mui-control-item mui-active" href="#item1">行政拘留</a>
+								<a class="mui-control-item" href="#item2">行政罚款</a>
+								<a class="mui-control-item" href="#item3">三停</a>
+								<a class="mui-control-item" href="#item4">临时查封</a>
+							</div>
+							<div class="tableBox mt10">
+								<div id="item1" class="mui-control-content mui-active">
+									<table class="table fireDataTable">
+										<thead>
+											<tr>
+												<th width="45" class="grayBg" rowspan="2">排序</th>
+												<th width="60" class="greenBg" rowspan="2">街道</th>
+												<th class="blueBg" colspan="2">行政拘留</th>
+											</tr>
+											<tr>
+												<th class="blueBg light">2016</th>
+												<th class="blueBg light">同期</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="grayBg">1</td>
+												<td class="greenBg">沙河</td>
+												<td class="blueBg">22</td>
+												<td class="blueBg">26</td>
+											</tr>
+											<tr>
+												<td class="grayBg">2</td>
+												<td class="greenBg">员村</td>
+												<td class="blueBg">13</td>
+												<td class="blueBg">18</td>
+											</tr>
+											<tr>
+												<td class="grayBg">2</td>
+												<td class="greenBg">冼村</td>
+												<td class="blueBg">13</td>
+												<td class="blueBg">20</td>
+											</tr>
+											<tr>
+												<td class="grayBg">4</td>
+												<td class="greenBg">珠吉</td>
+												<td class="blueBg">12</td>
+												<td class="blueBg">14</td>
+											</tr>
+											<tr>
+												<td class="grayBg">4</td>
+												<td class="greenBg">龙洞</td>
+												<td class="blueBg">12</td>
+												<td class="blueBg">13</td>
+											</tr>
+											<tr>
+												<td class="grayBg">6</td>
+												<td class="greenBg">棠下</td>
+												<td class="blueBg">11</td>
+												<td class="blueBg">14</td>
+											</tr>
+											<tr>
+												<td class="grayBg">6</td>
+												<td class="greenBg">前进</td>
+												<td class="blueBg">11</td>
+												<td class="blueBg">12</td>
+											</tr>
+											<tr>
+												<td class="grayBg">6</td>
+												<td class="greenBg">车陂</td>
+												<td class="blueBg">11</td>
+												<td class="blueBg">13</td>
+											</tr>
+											<tr>
+												<td class="grayBg">9</td>
+												<td class="greenBg">长兴</td>
+												<td class="blueBg">10</td>
+												<td class="blueBg">5</td>
+											</tr>
+											<tr>
+												<td class="grayBg">10</td>
+												<td class="greenBg">元岗</td>
+												<td class="blueBg">9</td>
+												<td class="blueBg">4</td>
+											</tr>
+											<tr>
+												<td class="grayBg">10</td>
+												<td class="greenBg">新塘</td>
+												<td class="blueBg">9</td>
+												<td class="blueBg">10</td>
+											</tr>
+											<tr>
+												<td class="grayBg">12</td>
+												<td class="greenBg">沙东</td>
+												<td class="blueBg">8</td>
+												<td class="blueBg">4</td>
+											</tr>
+											<tr>
+												<td class="grayBg">12</td>
+												<td class="greenBg">天河南</td>
+												<td class="blueBg">8</td>
+												<td class="blueBg">22</td>
+											</tr>
+											<tr>
+												<td class="grayBg">14</td>
+												<td class="greenBg">天园</td>
+												<td class="blueBg">6</td>
+												<td class="blueBg">9</td>
+											</tr>
+											<tr>
+												<td class="grayBg">14</td>
+												<td class="greenBg">凤凰</td>
+												<td class="blueBg">6</td>
+												<td class="blueBg">7</td>
+											</tr>
+											<tr>
+												<td class="grayBg">16</td>
+												<td class="greenBg">兴华</td>
+												<td class="blueBg">5</td>
+												<td class="blueBg">7</td>
+											</tr>
+											<tr>
+												<td class="grayBg">16</td>
+												<td class="greenBg">黄村</td>
+												<td class="blueBg">5</td>
+												<td class="blueBg">12</td>
+											</tr>
+											<tr>
+												<td class="grayBg">18</td>
+												<td class="greenBg">林和</td>
+												<td class="blueBg">4</td>
+												<td class="blueBg">5</td>
+											</tr>
+											<tr>
+												<td class="grayBg">18</td>
+												<td class="greenBg">石牌</td>
+												<td class="blueBg">4</td>
+												<td class="blueBg">6</td>
+											</tr>
+											<tr>
+												<td class="grayBg">20</td>
+												<td class="greenBg">五山</td>
+												<td class="blueBg">3</td>
+												<td class="blueBg">6</td>
+											</tr>
+											<tr>
+												<td class="grayBg">21</td>
+												<td class="greenBg">猎德</td>
+												<td class="blueBg">0</td>
+												<td class="blueBg">4</td>
+											</tr>
+											<tr>
+												<td class="greenBg fb" colspan="2">全区</td>
+												<td class="blueBg fb">182</td>
+												<td class="blueBg fb">231</td>
+											</tr>
+										</tbody>
+									</table>
+
+								</div>
+								<div id="item2" class="mui-control-content">
+									<table class="table fireDataTable">
+										<thead>
+											<tr>
+												<th width="45" class="grayBg" rowspan="3">排序</th>
+												<th width="60" class="greenBg" rowspan="3">街道</th>
+												<th class="blueBg" colspan="4">行政罚款</th>
+											</tr>
+											<tr>
+												<th class="blueBg light" colspan="2">2016</th>
+												<th class="blueBg light" colspan="2">同期</th>
+											</tr>
+											<tr>
+												<th class="blueBg light">宗</th>
+												<th class="blueBg light">元</th>
+												<th class="blueBg light">宗</th>
+												<th class="blueBg light">元</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="grayBg">1</td>
+												<td class="greenBg">石牌</td>
+												<td class="blueBg">20</td>
+												<td class="blueBg">636000</td>
+												<td class="blueBg">27</td>
+												<td class="blueBg">651500</td>
+											</tr>
+											<tr>
+												<td class="grayBg">2</td>
+												<td class="greenBg">黄村</td>
+												<td class="blueBg">11</td>
+												<td class="blueBg">381000</td>
+												<td class="blueBg">6</td>
+												<td class="blueBg">51000</td>
+											</tr>
+											<tr>
+												<td class="grayBg">3</td>
+												<td class="greenBg">林和</td>
+												<td class="blueBg">14</td>
+												<td class="blueBg">355000</td>
+												<td class="blueBg">10</td>
+												<td class="blueBg">405000</td>
+											</tr>
+											<tr>
+												<td class="grayBg">4</td>
+												<td class="greenBg">天河南</td>
+												<td class="blueBg">10</td>
+												<td class="blueBg">340000</td>
+												<td class="blueBg">9</td>
+												<td class="blueBg">385000</td>
+											</tr>
+											<tr>
+												<td class="grayBg">5</td>
+												<td class="greenBg">冼村</td>
+												<td class="blueBg">18</td>
+												<td class="blueBg">316500</td>
+												<td class="blueBg">23</td>
+												<td class="blueBg">550000</td>
+											</tr>
+											<tr>
+												<td class="grayBg">6</td>
+												<td class="greenBg">沙河</td>
+												<td class="blueBg">6</td>
+												<td class="blueBg">300000</td>
+												<td class="blueBg">135</td>
+												<td class="blueBg">354000</td>
+											</tr>
+											<tr>
+												<td class="grayBg">7</td>
+												<td class="greenBg">棠下</td>
+												<td class="blueBg">15</td>
+												<td class="blueBg">295500</td>
+												<td class="blueBg">28</td>
+												<td class="blueBg">440000</td>
+											</tr>
+											<tr>
+												<td class="grayBg">8</td>
+												<td class="greenBg">猎德</td>
+												<td class="blueBg">8</td>
+												<td class="blueBg">255000</td>
+												<td class="blueBg">23</td>
+												<td class="blueBg">300000</td>
+											</tr>
+											<tr>
+												<td class="grayBg">9</td>
+												<td class="greenBg">五山</td>
+												<td class="blueBg">12</td>
+												<td class="blueBg">198000</td>
+												<td class="blueBg">13</td>
+												<td class="blueBg">54000</td>
+											</tr>
+											<tr>
+												<td class="grayBg">10</td>
+												<td class="greenBg">珠吉</td>
+												<td class="blueBg">8</td>
+												<td class="blueBg">190500</td>
+												<td class="blueBg">12</td>
+												<td class="blueBg">136000</td>
+											</tr>
+											<tr>
+												<td class="grayBg">11</td>
+												<td class="greenBg">兴华</td>
+												<td class="blueBg">11</td>
+												<td class="blueBg">184000</td>
+												<td class="blueBg">14</td>
+												<td class="blueBg">190000</td>
+											</tr>
+											<tr>
+												<td class="grayBg">12</td>
+												<td class="greenBg">天园</td>
+												<td class="blueBg">6</td>
+												<td class="blueBg">160000</td>
+												<td class="blueBg">12</td>
+												<td class="blueBg">175500</td>
+											</tr>
+											<tr>
+												<td class="grayBg">13</td>
+												<td class="greenBg">凤凰</td>
+												<td class="blueBg">12</td>
+												<td class="blueBg">150500</td>
+												<td class="blueBg">8</td>
+												<td class="blueBg">111000</td>
+											</tr>
+											<tr>
+												<td class="grayBg">14</td>
+												<td class="greenBg">员村</td>
+												<td class="blueBg">7</td>
+												<td class="blueBg">145000</td>
+												<td class="blueBg">7</td>
+												<td class="blueBg">190000</td>
+											</tr>
+											<tr>
+												<td class="grayBg">15</td>
+												<td class="greenBg">车陂</td>
+												<td class="blueBg">10</td>
+												<td class="blueBg">140000</td>
+												<td class="blueBg">14</td>
+												<td class="blueBg">180500</td>
+											</tr>
+											<tr>
+												<td class="grayBg">16</td>
+												<td class="greenBg">沙东</td>
+												<td class="blueBg">16</td>
+												<td class="blueBg">120000</td>
+												<td class="blueBg">18</td>
+												<td class="blueBg">297500</td>
+											</tr>
+											<tr>
+												<td class="grayBg">16</td>
+												<td class="greenBg">新塘</td>
+												<td class="blueBg">2</td>
+												<td class="blueBg">120000</td>
+												<td class="blueBg">6</td>
+												<td class="blueBg">61500</td>
+											</tr>
+											<tr>
+												<td class="grayBg">18</td>
+												<td class="greenBg">元岗</td>
+												<td class="blueBg">9</td>
+												<td class="blueBg">94300</td>
+												<td class="blueBg">8</td>
+												<td class="blueBg">41500</td>
+											</tr>
+											<tr>
+												<td class="grayBg">19</td>
+												<td class="greenBg">长兴</td>
+												<td class="blueBg">11</td>
+												<td class="blueBg">78500</td>
+												<td class="blueBg">10</td>
+												<td class="blueBg">39000</td>
+											</tr>
+											<tr>
+												<td class="grayBg">20</td>
+												<td class="greenBg">前进</td>
+												<td class="blueBg">12</td>
+												<td class="blueBg">72500</td>
+												<td class="blueBg">11</td>
+												<td class="blueBg">74500</td>
+											</tr>
+											<tr>
+												<td class="grayBg">21</td>
+												<td class="greenBg">龙洞</td>
+												<td class="blueBg">9</td>
+												<td class="blueBg">67000</td>
+												<td class="blueBg">9</td>
+												<td class="blueBg">140500</td>
+											</tr>
+											<tr>
+												<td class="greenBg fb" colspan="2">全区</td>
+												<td class="blueBg fb">227</td>
+												<td class="blueBg fb">4599300</td>
+												<td class="blueBg fb">403</td>
+												<td class="blueBg fb">4828000</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div id="item3" class="mui-control-content">
+									<table class="table fireDataTable">
+										<thead>
+											<tr>
+												<th width="45" class="grayBg" rowspan="2">排序</th>
+												<th width="60" class="greenBg" rowspan="2">街道</th>
+												<th class="blueBg" colspan="2">三停</th>
+											</tr>
+											<tr>
+												<th class="blueBg light">2016</th>
+												<th class="blueBg light">同期</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="grayBg">1</td>
+												<td class="greenBg">石牌</td>
+												<td class="blueBg">14</td>
+												<td class="blueBg">11</td>
+											</tr>
+											<tr>
+												<td class="grayBg">2</td>
+												<td class="greenBg">林和</td>
+												<td class="blueBg">9</td>
+												<td class="blueBg">9</td>
+											</tr>
+											<tr>
+												<td class="grayBg">3</td>
+												<td class="greenBg">五山</td>
+												<td class="blueBg">5</td>
+												<td class="blueBg">2</td>
+											</tr>
+											<tr>
+												<td class="grayBg">4</td>
+												<td class="greenBg">冼村</td>
+												<td class="blueBg">4</td>
+												<td class="blueBg">12</td>
+											</tr>
+											<tr>
+												<td class="grayBg">4</td>
+												<td class="greenBg">棠下</td>
+												<td class="blueBg">4</td>
+												<td class="blueBg">6</td>
+											</tr>
+											<tr>
+												<td class="grayBg">4</td>
+												<td class="greenBg">黄村</td>
+												<td class="blueBg">4</td>
+												<td class="blueBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">7</td>
+												<td class="greenBg">员村</td>
+												<td class="blueBg">3</td>
+												<td class="blueBg">5</td>
+											</tr>
+											<tr>
+												<td class="grayBg">7</td>
+												<td class="greenBg">猎德</td>
+												<td class="blueBg">3</td>
+												<td class="blueBg">4</td>
+											</tr>
+											<tr>
+												<td class="grayBg">7</td>
+												<td class="greenBg">天河南</td>
+												<td class="blueBg">3</td>
+												<td class="blueBg">6</td>
+											</tr>
+											<tr>
+												<td class="grayBg">10</td>
+												<td class="greenBg">兴华</td>
+												<td class="blueBg">2</td>
+												<td class="blueBg">2</td>
+											</tr>
+											<tr>
+												<td class="grayBg">10</td>
+												<td class="greenBg">天园</td>
+												<td class="blueBg">2</td>
+												<td class="blueBg">2</td>
+											</tr>
+											<tr>
+												<td class="grayBg">10</td>
+												<td class="greenBg">新塘</td>
+												<td class="blueBg">2</td>
+												<td class="blueBg">0</td>
+											</tr>
+											<tr>
+												<td class="grayBg">10</td>
+												<td class="greenBg">珠吉</td>
+												<td class="blueBg">2</td>
+												<td class="blueBg">0</td>
+											</tr>
+											<tr>
+												<td class="grayBg">14</td>
+												<td class="greenBg">沙河</td>
+												<td class="blueBg">1</td>
+												<td class="blueBg">2</td>
+											</tr>
+											<tr>
+												<td class="grayBg">14</td>
+												<td class="greenBg">沙东</td>
+												<td class="blueBg">1</td>
+												<td class="blueBg">4</td>
+											</tr>
+											<tr>
+												<td class="grayBg">14</td>
+												<td class="greenBg">前进</td>
+												<td class="blueBg">0</td>
+												<td class="blueBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">14</td>
+												<td class="greenBg">元岗</td>
+												<td class="blueBg">0</td>
+												<td class="blueBg">1</td>
+											</tr>
+											<tr>
+												<td class="grayBg">14</td>
+												<td class="greenBg">车陂</td>
+												<td class="blueBg">1</td>
+												<td class="blueBg">0</td>
+											</tr>
+											<tr>
+												<td class="grayBg">14</td>
+												<td class="greenBg">凤凰</td>
+												<td class="blueBg">1</td>
+												<td class="blueBg">0</td>
+											</tr>
+											<tr>
+												<td class="grayBg">14</td>
+												<td class="greenBg">龙洞</td>
+												<td class="blueBg">1</td>
+												<td class="blueBg">2</td>
+											</tr>
+											<tr>
+												<td class="grayBg">21</td>
+												<td class="greenBg">长兴</td>
+												<td class="blueBg">0</td>
+												<td class="blueBg">1</td>
+											</tr>
+											<tr>
+												<td class="greenBg fb" colspan="2">全区</td>
+												<td class="blueBg fb">64</td>
+												<td class="blueBg fb">69</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div id="item4" class="mui-control-content">
+									<table class="table fireDataTable">
+										<thead>
+											<tr>
+												<th width="45" class="grayBg" rowspan="2">排序</th>
+												<th width="60" class="greenBg" rowspan="2">街道</th>
+												<th class="blueBg" colspan="2">临时查封</th>
+											</tr>
+											<tr>
+												<th class="blueBg light">2016</th>
+												<th class="blueBg light">同期</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="grayBg">1</td>
+												<td class="greenBg">沙河</td>
+												<td class="blueBg">615</td>
+												<td class="blueBg">632</td>
+											</tr>
+											<tr>
+												<td class="grayBg">2</td>
+												<td class="greenBg">石牌</td>
+												<td class="blueBg">174</td>
+												<td class="blueBg">246</td>
+											</tr>
+											<tr>
+												<td class="grayBg">3</td>
+												<td class="greenBg">沙东</td>
+												<td class="blueBg">171</td>
+												<td class="blueBg">223</td>
+											</tr>
+											<tr>
+												<td class="grayBg">4</td>
+												<td class="greenBg">龙洞</td>
+												<td class="blueBg">84</td>
+												<td class="blueBg">61</td>
+											</tr>
+											<tr>
+												<td class="grayBg">5</td>
+												<td class="greenBg">棠下</td>
+												<td class="blueBg">61</td>
+												<td class="blueBg">75</td>
+											</tr>
+											<tr>
+												<td class="grayBg">6</td>
+												<td class="greenBg">车陂</td>
+												<td class="blueBg">42</td>
+												<td class="blueBg">13</td>
+											</tr>
+											<tr>
+												<td class="grayBg">7</td>
+												<td class="greenBg">珠吉</td>
+												<td class="blueBg">30</td>
+												<td class="blueBg">24</td>
+											</tr>
+											<tr>
+												<td class="grayBg">8</td>
+												<td class="greenBg">天河南</td>
+												<td class="blueBg">24</td>
+												<td class="blueBg">29</td>
+											</tr>
+											<tr>
+												<td class="grayBg">9</td>
+												<td class="greenBg">凤凰</td>
+												<td class="blueBg">23</td>
+												<td class="blueBg">13</td>
+											</tr>
+											<tr>
+												<td class="grayBg">10</td>
+												<td class="greenBg">黄村</td>
+												<td class="blueBg">19</td>
+												<td class="blueBg">17</td>
+											</tr>
+											<tr>
+												<td class="grayBg">11</td>
+												<td class="greenBg">前进</td>
+												<td class="blueBg">15</td>
+												<td class="blueBg">13</td>
+											</tr>
+											<tr>
+												<td class="grayBg">12</td>
+												<td class="greenBg">兴华</td>
+												<td class="blueBg">14</td>
+												<td class="blueBg">14</td>
+											</tr>
+											<tr>
+												<td class="grayBg">12</td>
+												<td class="greenBg">元岗</td>
+												<td class="blueBg">14</td>
+												<td class="blueBg">11</td>
+											</tr>
+											<tr>
+												<td class="grayBg">14</td>
+												<td class="greenBg">新塘</td>
+												<td class="blueBg">12</td>
+												<td class="blueBg">22</td>
+											</tr>
+											<tr>
+												<td class="grayBg">15</td>
+												<td class="greenBg">长兴</td>
+												<td class="blueBg">11</td>
+												<td class="blueBg">6</td>
+											</tr>
+											<tr>
+												<td class="grayBg">15</td>
+												<td class="greenBg">五山</td>
+												<td class="blueBg">11</td>
+												<td class="blueBg">8</td>
+											</tr>
+											<tr>
+												<td class="grayBg">17</td>
+												<td class="greenBg">员村</td>
+												<td class="blueBg">7</td>
+												<td class="blueBg">8</td>
+											</tr>
+											<tr>
+												<td class="grayBg">18</td>
+												<td class="greenBg">天园</td>
+												<td class="blueBg">3</td>
+												<td class="blueBg">3</td>
+											</tr>
+											<tr>
+												<td class="grayBg">19</td>
+												<td class="greenBg">林和</td>
+												<td class="blueBg">2</td>
+												<td class="blueBg">7</td>
+											</tr>
+											<tr>
+												<td class="grayBg">20</td>
+												<td class="greenBg">冼村</td>
+												<td class="blueBg">0</td>
+												<td class="blueBg">11</td>
+											</tr>
+											<tr>
+												<td class="grayBg">20</td>
+												<td class="greenBg">猎德</td>
+												<td class="blueBg">0</td>
+												<td class="blueBg">0</td>
+											</tr>
+											<tr>
+												<td class="greenBg fb" colspan="2">全区</td>
+												<td class="blueBg fb">1332</td>
+												<td class="blueBg fb">1436</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="remarkBox mt10">
+								<div class="tit fl">备注：</div>
+								<ul class="remarkContent oh">
+									<li class="iconfont icon-triangle">今年1月份至12月份，我区因违反刑法第139条（消防安全责任事故罪）刑事拘留1人（同期为零），行政拘留累计182人，同比下降21.21%（同期231人）；行政罚款累计227宗，同比下降43.67%（同期403宗）；罚款总额累计4599300元，同比下降4.74%（同期4828000元）；“三停”累计64宗，同比下降7.25%（同期69宗）；临时查封累计1332间，同比下降7.24%（同期1436间）。</li>
+									<li class="iconfont icon-triangle">数据来源于各派出所递交的行政处罚、临时查封等决定书，统计时间为2015年12月26日至2016年12月25日。</li>
+									<li class="iconfont icon-star">同等排序不分先后</li>
+								</ul>
+							</div>
+							<!-- 内容区域 end -->
+						</div>
+					</div>
+				</div>
+				<!-- off-canvas backdrop -->
+				<div class="mui-off-canvas-backdrop"></div>
+			</div>
+		</div>
+	<script src="../js/mui.js"></script>
+	<script src="../js/normal.js"></script>
+</body>
+</html>

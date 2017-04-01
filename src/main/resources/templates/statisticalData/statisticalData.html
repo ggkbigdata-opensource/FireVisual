@@ -1,21 +1,63 @@
 <!DOCTYPE html>
 <html>
-<head th:with="title=${'统计数据展示'}" th:include="/layouts/layout::head">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>统计数据展示</title>
+    <link href="../css/base.css" rel="stylesheet"/>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <link href="../common/iconfont/iconfont.css" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
 </head>
 <body>
-    <div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
-        <!--菜单部分-->
-        <div th:replace="/layouts/layout::menu"></div>
-        <div class="mui-inner-wrap">
-            <!-- Header 部分 -->
-            <div th:with="headTitle=${'统计数据展示'}"></div>
-            <div th:replace="/layouts/layout::menu"></div>
+	<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+			<!--菜单部分-->
+			<aside id="offCanvasSide" class="mui-off-canvas-right">
+				<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="menu-title">菜单</div>
+						<ul class="menu">
+							<li><a href="../regionalProfile/regionalProfile.html"><i class="iconfont icon-region"></i>区域概况</a></li>
+							<li><a href="../hiddenInvestigation/hiddenInvestigation.html"><i class="iconfont icon-hidden"></i>隐患统计</a></li>
+							<li><a href="../alarm/alarm-tianHe.html"><i class="iconfont icon-warn"></i>警情</a></li>
+							<li><a href="../lawEnforcement/lawEnforcement-tianHe.html"><i class="iconfont icon-police"></i>执法</a></li>
+							<li><a href="../statisticalData/statisticalData.html"><i class="iconfont icon-bar-chart"></i>统计数据展示</a></li>
+						</ul>
+					</div>
+				</div>
+			</aside>
+			<div class="mui-inner-wrap">
+				<header class="mui-bar mui-bar-nav">
+					<div class="logo">
+						<img src="../img/logo.png" />
+					</div>
+					<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
+					<h1 class="mui-title">统计数据展示</h1>
+				</header>
 				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
 					<div class="mui-scroll">
 						<div class="mui-content-padded">
 							<!-- 内容区域 -->
-							<div class="chartBox mt20 mb20">
-								<img th:src="@{/custom/upload/chart1.png}" width="100%" />
+							<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-red mt10">
+								<a class="mui-control-item mui-active" href="#item1">警情</a>
+								<a class="mui-control-item" href="#item2">执法</a>
+							</div>
+							<div class="dataBox mt10">
+								<div id="item1" class="mui-control-content mui-active">
+									<ul class="mui-table-view">
+									    <li class="mui-table-view-cell"><a class="mui-navigate-right" href="alarm201601-201612.html">2016年1-12月天河区火灾警情基本数据</a></li>
+									    <li class="mui-table-view-cell"><a class="mui-navigate-right" href="alarm201701-201703.html">2017年1-3月天河区火灾警情基本数据</a></li>
+									</ul>
+								</div>
+								<div id="item2" class="mui-control-content">
+									<ul class="mui-table-view">
+									    <li class="mui-table-view-cell"><a class="mui-navigate-right" href="lawEnforcement201501-201512.html">2015年1-12月份天河区消防执法情况</a></li>
+									    <li class="mui-table-view-cell"><a class="mui-navigate-right" href="lawEnforcement201601-201612.html">2016年1-12月份天河区消防执法情况</a></li>
+									    <li class="mui-table-view-cell"><a class="mui-navigate-right" href="lawEnforcement201701-201703.html">2017年1-3月天河区消防执法情况</a></li>
+									</ul>
+								</div>
 							</div>
 							<!-- 内容区域 end -->
 						</div>
@@ -25,7 +67,7 @@
 				<div class="mui-off-canvas-backdrop"></div>
 			</div>
 		</div>
-    <script th:src="@{/js/mui.js}"></script>
-    <script th:src="@{/js/normal.js}"></script>
+	<script src="../js/mui.js"></script>
+	<script src="../js/normal.js"></script>
 </body>
 </html>
