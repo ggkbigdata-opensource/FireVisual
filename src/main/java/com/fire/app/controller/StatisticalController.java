@@ -22,51 +22,64 @@ import com.fire.app.util.ContextHolderUtils;
 @Controller
 public class StatisticalController {
 
-
     @RequestMapping("")
     private String toMainPage() {
-        
+
         if (!ContextHolderUtils.isLogin()) {
             return "login/login";
         }
-        
+
         return "statisticalData/statisticalData";
     }
+
     @RequestMapping("/toEventOne")
     private String toEventPageOne() {
-        
+
         if (!ContextHolderUtils.isLogin()) {
             return "login/login";
         }
-        
-        return "statisticalData/statisticalData";
+
+        return "statisticalData/alarm201601-201612";
     }
+
     @RequestMapping("/toEventTwo")
     private String toEventPageTwo() {
-        
+
         if (!ContextHolderUtils.isLogin()) {
             return "login/login";
         }
-        
-        return "statisticalData/statisticalData";
+
+        return "statisticalData/alarm201701-201703";
     }
+
     @RequestMapping("/toPunishOne")
     private String toPunishmentOne() {
-        
+
         if (!ContextHolderUtils.isLogin()) {
             return "login/login";
         }
-        
-        return "statisticalData/statisticalData";
+
+        return "statisticalData/lawEnforcement201501-201512";
     }
+
     @RequestMapping("/toPunishTwo")
     private String toPunishmentTwo() {
-        
+
         if (!ContextHolderUtils.isLogin()) {
             return "login/login";
         }
-        
-        return "statisticalData/statisticalData";
+
+        return "statisticalData/lawEnforcement201601-201612";
     }
-    
+
+    @RequestMapping("/toPunishThree")
+    private String toPunishmentThree() {
+
+        if (!ContextHolderUtils.isLogin()) {
+            return "login/login";
+        }
+
+        return "statisticalData/lawEnforcement201701-201703";
+    }
+
 }
