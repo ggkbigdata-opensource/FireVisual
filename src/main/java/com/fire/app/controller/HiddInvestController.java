@@ -39,11 +39,11 @@ public class HiddInvestController {
      * @return 
      * @description 进入页面后获取隐患等级数据
      */
-    @RequestMapping(value = "/hidVersion")
+    @RequestMapping(value = "/hidGrade")
     @ResponseBody
-    public List<JSONObject> hidVersion() {
+    public List<JSONObject> hidGrade() {
 
-        List<JSONObject> result = hiddInvestService.getHidVersion();
+        List<JSONObject> result = hiddInvestService.getHidGrade();
 
         return result;
 
@@ -65,9 +65,9 @@ public class HiddInvestController {
      * @return 
      * @description  获取街道里面的详细数据
      */
-    @RequestMapping(value = "/hidVersion/getDetail")
+    @RequestMapping(value = "/getDetail")
     @ResponseBody
-    public List<JSONObject> hidVersionStreetDetail(Long streetId) {
+    public List<JSONObject> hidGradeStreetDetail(Long streetId) {
         
         List<JSONObject> result = hiddInvestService.getDetailDate(streetId);
         

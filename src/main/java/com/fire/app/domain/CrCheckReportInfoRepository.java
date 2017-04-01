@@ -1,7 +1,5 @@
 package com.fire.app.domain;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -21,7 +19,7 @@ public interface CrCheckReportInfoRepository extends JpaRepository<CrCheckReport
      * @return 
      * @description
      */
-    List<CrCheckReportInfo> findByReportNum(String reportNum);
+    CrCheckReportInfo findByReportNum(String reportNum);
 
    
 

@@ -17,7 +17,7 @@ public interface HiddInvestService {
      * @return 
      * @description 获取隐患等级
      */
-    List<JSONObject> getHidVersion();
+    List<JSONObject> getHidGrade();
 
     /**
      * @createDate 2017年3月31日下午5:33:18 

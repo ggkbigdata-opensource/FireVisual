@@ -102,19 +102,16 @@ public class SituationServiceImpl implements SituationService {
             if (infos != null && infos.size() > 0) {
                 obj.put("buildingInfoNum", infos.size());
                 // 获取检测报告的数据
-                List<CrCheckReportInfo> checkReportInfos = checkReportInfoRepository.findByReportNum(infos.get(0).getItemNumber());
-                if (checkReportInfos != null && checkReportInfos.size() > 0) {
-                    int num = 0;// 危险等级超过4的数量
-                    for (CrCheckReportInfo info : checkReportInfos) {
-                        String riskLevel = info.getRiskLevel();
-                        if (riskLevel.contains("4")) {
-                            num++;
-                        }
+                CrCheckReportInfo reportInfo = checkReportInfoRepository.findByReportNum(infos.get(0).getItemNumber());
+                int num = 0;// 危险等级超过4的数量
+                if (reportInfo != null) {
+                    if (reportInfo.getRiskLevel().contains("4")) {
+                        num++;
                     }
+                }
 
-                    if (num > checkValue) {
-                        version++;
-                    }
+                if (num > checkValue) {
+                    version++;
                 }
             } else {
                 obj.put("buildingInfoNum", 0);

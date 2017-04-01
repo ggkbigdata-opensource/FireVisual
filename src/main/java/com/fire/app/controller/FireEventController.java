@@ -58,7 +58,7 @@ public class FireEventController {
     /**
      * @createDate 2017年3月29日上午10:14:53 
      * @author wangzhiwang
-     * @param type
+     * @param
      * @param beginTime
      * @param endTime
      * @return 
@@ -91,10 +91,7 @@ public class FireEventController {
     /**
      * @createDate 2017年3月29日上午10:14:53 
      * @author wangzhiwang
-     * @param type
-     * @param beginTime
-     * @param endTime
-     * @return 
+     * @return
      * @description 获取街道的详情
      */
     @RequestMapping(value = "/getAreaDate",method = RequestMethod.POST)
