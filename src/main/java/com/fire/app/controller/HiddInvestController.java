@@ -16,14 +16,14 @@ import com.fire.app.util.ContextHolderUtils;
  * @author wangzhiwang
  * @description
  */
-@RequestMapping("/app/hiddInvest")
+@RequestMapping(value = "/app/hiddInvest")
 @Controller
 public class HiddInvestController {
 
     @Autowired
     private HiddInvestService hiddInvestService;
 
-    @RequestMapping("/")
+    @RequestMapping(value="")
     private String toPage() {
         
         if (!ContextHolderUtils.isLogin()) {
@@ -47,6 +47,32 @@ public class HiddInvestController {
 
         return result;
 
+    }
+    
+    @RequestMapping(value = "/toDetail")
+    private String toDetail() {
+        
+        if (!ContextHolderUtils.isLogin()) {
+            return "login/login";
+        }
+        
+        return "hiddenInvestigation/securityDetail";
+    }
+    /**
+     * @createDate 2017年4月1日下午2:48:42 
+     * @author wangzhiwang
+     * @param streetId
+     * @return 
+     * @description  获取街道里面的详细数据
+     */
+    @RequestMapping(value = "/hidVersion/getDetail")
+    @ResponseBody
+    public List<JSONObject> hidVersionStreetDetail(Long streetId) {
+        
+        List<JSONObject> result = hiddInvestService.getDetailDate(streetId);
+        
+        return result;
+        
     }
     /**
      * @createDate 2017年3月31日下午5:27:49 

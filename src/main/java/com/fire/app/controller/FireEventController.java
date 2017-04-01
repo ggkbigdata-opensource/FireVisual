@@ -18,7 +18,7 @@ import com.fire.app.util.ContextHolderUtils;
  * @author wangzhiwang
  * @description
  */
-@RequestMapping("/app/fireEvent")
+@RequestMapping(value = "/app/fireEvent")
 @Controller
 public class FireEventController {
 

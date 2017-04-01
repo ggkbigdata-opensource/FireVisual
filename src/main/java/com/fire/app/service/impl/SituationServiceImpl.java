@@ -41,8 +41,9 @@ public class SituationServiceImpl implements SituationService {
     private BsBuildingInfoRepository buildingInfoRepository;
     @Autowired
     private CrCheckReportInfoRepository checkReportInfoRepository;
-    //@Autowired
-   // private CrCheckReportResultStatRepository checkReportResultStatRepository;
+    // @Autowired
+    // private CrCheckReportResultStatRepository
+    // checkReportResultStatRepository;
 
     @Value("${punishment}")
     private Integer punishmentValue;
@@ -78,7 +79,6 @@ public class SituationServiceImpl implements SituationService {
             // 查询执法数据
             List<AppPunishment> sealUp = punishmentRepository.findSealUpStreetData(newYear, nowTime, street.getName());
             List<AppPunishment> notSealUp = punishmentRepository.findStreetData(newYear, nowTime, street.getName());
-            
 
             if (streets != null && streets.size() > 0) {
                 obj.put("eventNum", events.size());
@@ -101,10 +101,18 @@ public class SituationServiceImpl implements SituationService {
             List<BsBuildingInfo> infos = buildingInfoRepository.findByStreetId(street.getId());
             if (infos != null && infos.size() > 0) {
                 obj.put("buildingInfoNum", infos.size());
-                //获取检测报告的数据
+                // 获取检测报告的数据
                 List<CrCheckReportInfo> checkReportInfos = checkReportInfoRepository.findByReportNum(infos.get(0).getItemNumber());
-                if (checkReportInfos != null && checkReportInfos.size()>0) {
-                    if (checkReportInfos.size() > checkValue) {
+                if (checkReportInfos != null && checkReportInfos.size() > 0) {
+                    int num = 0;// 危险等级超过4的数量
+                    for (CrCheckReportInfo info : checkReportInfos) {
+                        String riskLevel = info.getRiskLevel();
+                        if (riskLevel.contains("4")) {
+                            num++;
+                        }
+                    }
+
+                    if (num > checkValue) {
                         version++;
                     }
                 }
@@ -115,7 +123,7 @@ public class SituationServiceImpl implements SituationService {
             if (punishNum > punishmentValue) {
                 version++;
             }
-            
+
             obj.put("version", version);
             obj.put("streetId", street.getId());
             obj.put("streetName", street.getName());

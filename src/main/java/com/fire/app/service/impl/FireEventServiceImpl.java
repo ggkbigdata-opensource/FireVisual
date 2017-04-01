@@ -213,7 +213,7 @@ public class FireEventServiceImpl implements FireEventService {
                 streetResult.put("smokingNow", smokingNow);
                 streetResult.put("smokingBefore", smokingBefore);
                 if (smokingBefore==0) {
-                    streetResult.put("smokingYearBefore", 0);
+                    streetResult.put("smokingYearBefore", "-");
                 }else{
                     streetResult.put("smokingYearBefore", df.format((float)(smokingNow-smokingBefore)/smokingBefore));
                 }
@@ -221,7 +221,7 @@ public class FireEventServiceImpl implements FireEventService {
                 streetResult.put("affirmNow", affirmNow);
                 streetResult.put("affirmBefore", affirmBefore);
                 if (affirmBefore==0) {
-                    streetResult.put("affirmYearBefore", 0);
+                    streetResult.put("affirmYearBefore", "-");
                 }else{
                     streetResult.put("affirmYearBefore", df.format((float)(affirmNow-affirmBefore)/affirmBefore));
                 }
@@ -229,7 +229,7 @@ public class FireEventServiceImpl implements FireEventService {
                 streetResult.put("lossNow", lossNow);
                 streetResult.put("lossBefore", lossBefore);
                 if (lossBefore==0) {
-                    streetResult.put("lossYearBefore", 0);
+                    streetResult.put("lossYearBefore", "-");
                 }else{
                     streetResult.put("lossYearBefore", df.format((float)(lossNow-lossBefore)/lossBefore));
                 }
@@ -237,7 +237,7 @@ public class FireEventServiceImpl implements FireEventService {
                 streetResult.put("hurtNow", hurtNow);
                 streetResult.put("hurtBefore", hurtBefore);
                 if (hurtBefore==0) {
-                    streetResult.put("hurtYearBefore", 0);
+                    streetResult.put("hurtYearBefore", "-");
                 }else{
                     streetResult.put("hurtYearBefore", df.format((float)(hurtNow-hurtBefore)/hurtBefore));
                 }
@@ -245,7 +245,7 @@ public class FireEventServiceImpl implements FireEventService {
                 streetResult.put("deadNow", deadNow);
                 streetResult.put("deadBefore", deadBefore);
                 if (deadBefore==0) {
-                    streetResult.put("deadYearBefore", 0);
+                    streetResult.put("deadYearBefore", "-");
                 }else{
                     streetResult.put("deadYearBefore", df.format((float)(deadNow-deadBefore)/deadBefore));
                 }
