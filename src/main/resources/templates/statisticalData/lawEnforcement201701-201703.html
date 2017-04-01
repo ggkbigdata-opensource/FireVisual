@@ -1,38 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>2017年1-3月天河区消防执法情况</title>
-    <link href="../css/base.css" rel="stylesheet"/>
-    <link href="../css/mui.min.css" rel="stylesheet"/>
-    <link href="../css/mui.picker.min.css" rel="stylesheet"/>
-    <link href="../common/iconfont/iconfont.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
+<head th:with="title=${'2017年1-3月天河区消防执法情况'}" th:include="/layouts/layout::head">
 </head>
 <body>
 	<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
 			<!--菜单部分-->
-			<aside id="offCanvasSide" class="mui-off-canvas-right">
-				<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<div class="menu-title">菜单</div>
-						<ul class="menu">
-							<li><a href="../regionalProfile/regionalProfile.html"><i class="iconfont icon-region"></i>区域概况</a></li>
-							<li><a href="../hiddenInvestigation/hiddenInvestigation.html"><i class="iconfont icon-hidden"></i>隐患统计</a></li>
-							<li><a href="../alarm/alarm-tianHe.html"><i class="iconfont icon-warn"></i>警情</a></li>
-							<li><a href="../lawEnforcement/lawEnforcement-tianHe.html"><i class="iconfont icon-police"></i>执法</a></li>
-							<li><a href="../statisticalData/statisticalData.html"><i class="iconfont icon-bar-chart"></i>统计数据展示</a></li>
-						</ul>
-					</div>
-				</div>
-			</aside>
+			<div th:replace="/layouts/layout::menu"></div>
 			<div class="mui-inner-wrap">
 				<header class="mui-bar mui-bar-nav">
 					<div class="logo">
-						<img src="../img/logo.png" />
+						<img th:src="@{/img/logo.png}" />
 					</div>
 					<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
 					<h1 class="mui-title">统计数据展示</h1>
@@ -40,7 +17,7 @@
 				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
 					<div class="mui-scroll">
 						<div class="filterBox">
-							<a href="statisticalData.html" class="fl btn-filter" >
+							<a th:href="@{/app/statistical}" class="fl btn-filter" >
 								<i class="mui-icon mui-icon-arrowleft"></i>
 								返回
 							</a>
@@ -850,9 +827,9 @@
 							<div class="remarkBox mt10">
 								<div class="tit fl">备注：</div>
 								<ul class="remarkContent oh">
-									<li class="iconfont icon-triangle">今年1-3月份，我区因违反消防法行政罚款35宗，同比下降18.61%（同期43宗），罚款总额70.9万元，同比下降45.27%（同期129.55万元）；行政拘留22人，同比下降24.14%（同期29人）；临时查封22间，同比下降90.8%（同期239间）；“三停”11宗，同比下降50%（同期22宗）；刑事拘留5人（同期为零）。</li>
-									<li class="iconfont icon-triangle">数据来源于各派出所递交的行政处罚、临时查封等决定书，统计时间为每月25日。临时查封统计以《临时查封决定书》、《同意进入临时查封现场决定书》、《同意解除临时查封决定书》为依据。</li>
-									<li class="iconfont icon-star">同等排序不分先后</li>
+									<li class="iconfont icon-triangle" style="padding-left:0px;text-indent:2em;">今年1-3月份，我区因违反消防法行政罚款35宗，同比下降18.61%（同期43宗），罚款总额70.9万元，同比下降45.27%（同期129.55万元）；行政拘留22人，同比下降24.14%（同期29人）；临时查封22间，同比下降90.8%（同期239间）；“三停”11宗，同比下降50%（同期22宗）；刑事拘留5人（同期为零）。</li>
+									<li class="iconfont icon-triangle" style="padding-left:0px;text-indent:2em;">数据来源于各派出所递交的行政处罚、临时查封等决定书，统计时间为每月25日。临时查封统计以《临时查封决定书》、《同意进入临时查封现场决定书》、《同意解除临时查封决定书》为依据。</li>
+									<li class="iconfont icon-star" style="padding-left:0px;text-indent:2em;">同等排序不分先后</li>
 								</ul>
 							</div>
 							<!-- 内容区域 end -->
@@ -863,7 +840,7 @@
 				<div class="mui-off-canvas-backdrop"></div>
 			</div>
 		</div>
-	<script src="../js/mui.js"></script>
-	<script src="../js/normal.js"></script>
+	<script th:src="@{/js/mui.js}"></script>
+	<script th:src="@{/js/normal.js}"></script>
 </body>
 </html>

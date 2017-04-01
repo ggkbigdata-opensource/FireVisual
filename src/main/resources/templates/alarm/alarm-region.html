@@ -15,11 +15,11 @@
                 class="mui-content mui-scroll-wrapper">
                 <div class="mui-scroll">
                     <div class="filterBox">
-                        <button onclick="hide('trendPopover')" class="fl btn-filter">
+                        <button onclick="hidePopover('trendPopover')" class="fl btn-filter">
                            	街道警情趋势 <i class="mui-icon mui-icon-arrowdown"></i>
                         </button>
                         <div th:replace="/layouts/layout::alarm-menu"></div>
-                        <button id="selectedBlock" onclick="selectedBlock()" class="fr btn-filter"></button>
+                        <button id="selectedBlock" onclick="hidePopover('regionPopover')" class="fr btn-filter"></button>
                         <div id="regionPopover" style="display: none" class="popoverbox">
                             <div class="regionCurrent"></div>
                             <ul class="regionList" id="blocks"></ul>
@@ -48,26 +48,32 @@
     	/*<![CDATA[*/
         mui.init();
     	var selected='';
-    	var isClosed = true;
-        var goUrl = function(url) {
-          if (url === undefined) {
-            document.getElementById('trendPopover').style.display = 'none';
-          } else {
-            mui.openWindow({
-              url : url
-            });
-          }
-        };
-        //街道选取按钮
-        function selectedBlock () {
-        	if(isClosed){
-        		$('#regionPopover').show();
-        		isClosed = false;
-        	}else{
-        		$('#regionPopover').hide();
-        		isClosed = true;
-        	}
-        }
+      	//分类警情数据和选择时间段弹窗点击关闭另外一个
+	    var isTrend = false;
+	    var isRegion = false;
+	    function hidePopover(popover){
+	    	if(popover === 'trendPopover'){
+	    		$('#regionPopover').hide();
+	    		isRegion = false;
+	    		if(isTrend){
+	    			$('#trendPopover').hide();
+	    			isTrend = false;
+	    		}else{
+	    			$('#trendPopover').show();
+	    			isTrend = true;
+	    		}
+	    	}else if(popover === 'regionPopover'){
+	    		$('#trendPopover').hide();
+	    		isTrend = false;
+	    		if(isRegion){
+	    			$('#regionPopover').hide();
+	    			isRegion = false;
+	    		}else{
+	    			$('#regionPopover').show();
+	    			isRegion = true;
+	    		}
+	    	}
+	    }
         
         //获取所有街道
         function getRegion () {
@@ -95,7 +101,6 @@
         		id: id
         	},function(data){
         		if(data && data.length>0){
-        			console.log(data);
         			var legend = [];
     				var item = [];
     				var datas = [];
@@ -116,7 +121,7 @@
         		}
         	});
         	//关闭街道选择区
-        	isClosed = true;
+        	isRegion = false;
         	$('#regionPopover').hide();
         }
         function init () {

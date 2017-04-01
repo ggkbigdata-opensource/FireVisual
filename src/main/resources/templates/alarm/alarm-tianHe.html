@@ -3,9 +3,7 @@
 <head th:with="title=${'警情'}" th:include="/layouts/layout::head">
 </head>
 <body>
-
 	<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
-
 		<!--菜单部分-->
 		<div th:replace="/layouts/layout::menu"></div>
 		<div class="mui-inner-wrap">
@@ -25,7 +23,6 @@
 					<div class="mui-content-padded" style="height: 100%">
 						<!-- 内容区域 -->
 						<div class="chartBox mt20 mb20">
-							<!-- <img src="../custom/upload/chart1.png" width="100%" /> -->
 							<div id="alarmTendency" style="height: 225px;"></div>
 						</div>
 						<!-- 内容区域 end -->
