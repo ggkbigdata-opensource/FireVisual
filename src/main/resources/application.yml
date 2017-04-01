@@ -6,6 +6,10 @@ spring:
     mode: LEGACYHTML5
 server: 
   context-path: /fire-visual
+punishment: 5
+fireEvent: 5
+check: 5
+  
   
   
 ---
@@ -15,11 +19,11 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/fire?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8
     username: root
-    password: 
+    password: root
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: false
+    show-sql: true
 server:
   port: 8080
   
