@@ -4,6 +4,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -96,7 +98,12 @@ public class HiddInvestServiceImpl implements HiddInvestService {
         List<BsBuildingInfo> infos = buildingInfoRepository.findByStreetId(streetId);
         for (BsBuildingInfo info : infos) {
             JSONObject obj = new JSONObject();
-            CrCheckReportInfo checkReportInfos = checkReportInfoRepository.findByReportNum(info.getItemNumber());
+            
+            String itemNumber = info.getItemNumber();
+            if (StringUtils.isNotEmpty(itemNumber)) {
+                itemNumber = info.getItemNumber().replace("天消", "");
+            }
+            CrCheckReportInfo checkReportInfos = checkReportInfoRepository.findByReportNum(itemNumber);
             if (checkReportInfos != null && !"".equals(checkReportInfos)) {
                 obj.put("riskLevel", checkReportInfos.getRiskLevel());
             } else {
