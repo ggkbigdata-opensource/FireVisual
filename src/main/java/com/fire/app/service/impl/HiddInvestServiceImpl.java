@@ -54,25 +54,26 @@ public class HiddInvestServiceImpl implements HiddInvestService {
             
             JSONObject obj = new JSONObject();
             List<BsBuildingInfo> infos = buildingInfoRepository.findByStreetId(street.getId());
-            if (infos != null && !"".equals(infos)) {
+            if (infos != null && infos.size()>0) {
                 obj.put("buildingInfoNum", infos.size());
                 reportNum=infos.get(0).getItemNumber();
                 
                 CrCheckReportInfo checkReportInfos = checkReportInfoRepository.findByReportNum(reportNum);
-                String riskLevel = checkReportInfos.getRiskLevel();
-                if (riskLevel.contains("1")) {//隐患等级1
-                    versionOne++;
+                if (checkReportInfos!=null&!"".equals(checkReportInfos)) {
+                    String riskLevel = checkReportInfos.getRiskLevel();
+                    if (riskLevel.contains("1")) {//隐患等级1
+                        versionOne++;
+                    }
+                    if (riskLevel.contains("2")) {//隐患等级2
+                        versionTwo++;
+                    }
+                    if (riskLevel.contains("3")) {//隐患等级3
+                        versionThree++;
+                    }
+                    if (riskLevel.contains("4")) {//隐患等级4
+                        versionFour++;
+                    }
                 }
-                if (riskLevel.contains("2")) {//隐患等级2
-                    versionTwo++;
-                }
-                if (riskLevel.contains("3")) {//隐患等级3
-                    versionThree++;
-                }
-                if (riskLevel.contains("4")) {//隐患等级4
-                    versionFour++;
-                }
-                
             }else {
                 obj.put("buildingInfoNum", 0);
             }
@@ -100,7 +101,11 @@ public class HiddInvestServiceImpl implements HiddInvestService {
         for (BsBuildingInfo info : infos) {
             JSONObject obj = new JSONObject();
             CrCheckReportInfo checkReportInfos = checkReportInfoRepository.findByReportNum(info.getItemNumber());
-            obj.put("riskLevel", checkReportInfos.getRiskLevel());
+            if (checkReportInfos!=null&&!"".equals(checkReportInfos)) {
+                obj.put("riskLevel", checkReportInfos.getRiskLevel());
+            }else{
+                obj.put("riskLevel", null);
+            }
 
             List<CrCheckReportResultStat> stats  = checkReportResultStatRepository.findByReportNum(info.getItemNumber());
             int unqualifiedNum =0;//不合格项
