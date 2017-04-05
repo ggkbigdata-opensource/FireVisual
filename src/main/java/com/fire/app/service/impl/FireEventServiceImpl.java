@@ -150,13 +150,13 @@ public class FireEventServiceImpl implements FireEventService {
                 List<AppFireEvent> nowValue = fireEventRepository.findStreetData(bTime, eTime, street.getName());
                 
                 for (AppFireEvent appFireEvent : nowValue) {
-                    if ("原始警情".equals(appFireEvent.getFireType())) {
+                    if ("原始".equals(appFireEvent.getFireType())) {
                         primitiveNow++;
                     }
-                    if ("冒烟警情".equals(appFireEvent.getFireType())) {
+                    if ("冒烟".equals(appFireEvent.getFireType())) {
                         smokingNow++;
                     }
-                    if ("确认警情".equals(appFireEvent.getFireType())) {
+                    if ("确认".equals(appFireEvent.getFireType())) {
                         affirmNow++;
                     }
                     
@@ -188,13 +188,13 @@ public class FireEventServiceImpl implements FireEventService {
                 List<AppFireEvent> beforeValue = fireEventRepository.findStreetData(bTime, eTime, street.getName());
                 
                 for (AppFireEvent appFireEvent : beforeValue) {
-                    if ("原始警情".equals(appFireEvent.getFireType())) {
+                    if ("原始".equals(appFireEvent.getFireType())) {
                         primitiveBefore++;
                     }
-                    if ("冒烟警情".equals(appFireEvent.getFireType())) {
+                    if ("冒烟".equals(appFireEvent.getFireType())) {
                         smokingBefore++;
                     }
-                    if ("确认警情".equals(appFireEvent.getFireType())) {
+                    if ("确认".equals(appFireEvent.getFireType())) {
                         affirmBefore++;
                     }
                     
