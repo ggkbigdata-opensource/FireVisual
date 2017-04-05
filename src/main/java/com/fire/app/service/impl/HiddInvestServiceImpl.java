@@ -80,9 +80,9 @@ public class HiddInvestServiceImpl implements HiddInvestService {
 
             
             obj.put("versionOne", versionOne);
-            obj.put("versionOne", versionTwo);
-            obj.put("versionOne", versionThree);
-            obj.put("versionOne", versionFour);
+            obj.put("versionTwo", versionTwo);
+            obj.put("versionThree", versionThree);
+            obj.put("versionFour", versionFour);
             obj.put("streetId", street.getId());
             obj.put("streetName", street.getName());
             result.add(obj);
