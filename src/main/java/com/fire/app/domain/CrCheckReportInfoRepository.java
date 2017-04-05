@@ -1,6 +1,7 @@
 package com.fire.app.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  * @fileName AppFireEventRepository.java
@@ -19,6 +20,7 @@ public interface CrCheckReportInfoRepository extends JpaRepository<CrCheckReport
      * @return 
      * @description
      */
+    @Query(value = "SELECT * FROM cr_check_report_info t where t.report_num  like %?1%", nativeQuery = true)
     CrCheckReportInfo findByReportNum(String reportNum);
 
    

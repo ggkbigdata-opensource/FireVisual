@@ -22,6 +22,7 @@ public interface CrCheckReportResultStatRepository extends JpaRepository<CrCheck
      * @return 
      * @description
      */
+    @Query(value = "SELECT * FROM cr_check_report_result_stat t where t.report_num like %?1%", nativeQuery = true)
     List<CrCheckReportResultStat> findByReportNum(String itemNumber);
 
     /**

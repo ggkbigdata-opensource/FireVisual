@@ -62,13 +62,13 @@ public class FireEventServiceImpl implements FireEventService {
             int twod = 0;
             int threed = 0;
             for (AppFireEvent event : list) {
-                if ("原始警情".equals(event.getFireType())) {
+                if ("原始".equals(event.getFireType())) {
                     oned++;
                 }
-                if ("冒烟警情".equals(event.getFireType())) {
+                if ("冒烟".equals(event.getFireType())) {
                     twod++;
                 }
-                if ("确认警情".equals(event.getFireType())) {
+                if ("确认".equals(event.getFireType())) {
                     threed++;
                 }
             }
