@@ -50,6 +50,7 @@
 	<script th:inline="javascript">
 		/*<![CDATA[*/
 		mui.init();
+		var now = new Date();
 		mui.get([[@{/app/fireEvent/main}]], '', function(data) {
 			if (data && data.length > 0) {
 				var legend = [];
@@ -59,7 +60,7 @@
 				var tbodytr = '';
 				unit = data[0].unit;
 				for (var i = 0; i < data.length; i++) {
-					legend.unshift(data[i].type);
+					legend.unshift(data[i].type.substr(0,2));
 					var da = [];
 					for (var k = 0; k < data[i].data.length; k++) {
 						da.unshift(data[i].data[k].value);
@@ -79,7 +80,7 @@
 				for(var k=0;k<legend.length;k++){
 					th += '<th class="blueBg">' + legend[k] + '</th>';
 				}
-				var theadtr = '<tr><th width="45" class="greenBg">月份</th>' + th + '</tr>';
+				var theadtr = '<tr><th width="80" class="greenBg">年月</th>' + th + '</tr>';
 				$('table thead').text('');
 				$('table tbody').text('');
 				$('table thead').append(theadtr);

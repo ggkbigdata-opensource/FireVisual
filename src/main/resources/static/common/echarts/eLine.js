@@ -22,7 +22,8 @@ function echartLine (id,legend,item,datas,unit) {
             axisLabel : {
                 show : true,
                 interval : 0,
-                formatter : function(params) {
+                rotate : 35
+                /*formatter : function(params) {
                     var oneLineLength = 2;
                     var newParamsName = '';
                     var paramsNameNumber = params.length;
@@ -48,7 +49,7 @@ function echartLine (id,legend,item,datas,unit) {
                         newParamsName = params;
                     }
                     return newParamsName;
-                }
+                }*/
             }
         } ],
         yAxis : [ {
