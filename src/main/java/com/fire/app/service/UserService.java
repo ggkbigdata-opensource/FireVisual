@@ -18,4 +18,14 @@ public interface UserService {
      */
     Boolean selectByUsernameAndPassword(String name, String phone);
 
+    /**
+     * @createDate 2017年4月5日下午6:46:00 
+     * @author wangzhiwang
+     * @param name
+     * @param phone
+     * @return 
+     * @description
+     */
+    Boolean selectByUsernameAndPassword2(String name, String phone);
+
 }

@@ -44,12 +44,16 @@ public class LoginController {
 
         session.removeAttribute(App.USER_SESSION_KEY);
 
-        phone = AppHelper.encryptPassword(phone);
-        Boolean flag = this.userService.selectByUsernameAndPassword(name,phone);
+        //phone = AppHelper.encryptPassword(phone);
+        //Boolean flag = this.userService.selectByUsernameAndPassword(name,phone);
+        
+        Boolean flag = this.userService.selectByUsernameAndPassword2(name,phone);
+        
+        
+        
+        
 
         if (flag) {
-            
-            
             
             return CommonResult.success("success");
         }

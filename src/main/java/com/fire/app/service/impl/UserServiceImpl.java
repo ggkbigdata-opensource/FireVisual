@@ -34,4 +34,15 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+    @Override
+    public Boolean selectByUsernameAndPassword2(String name, String phone) {
+        User user = userRepository.findByUsernameAndPassword(name,phone);
+        if (user !=null ) {
+            HttpSession session = ContextHolderUtils.getSession();
+            session.setAttribute(App.USER_SESSION_KEY, user);
+            return true;
+        }
+        return false;
+    }
+
 }
