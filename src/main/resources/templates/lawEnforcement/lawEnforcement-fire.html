@@ -11,8 +11,7 @@
             <div th:replace="/layouts/layout::header"></div>
             <div th:with="headTitle=${'执法'}"></div>
             <div th:replace="/layouts/layout::menu"></div>
-            <div id="offCanvasContentScroll"
-                class="mui-content mui-scroll-wrapper">
+            <div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
                 <div class="mui-scroll">
                     <div class="filterBox">
                         <button onclick="hidePopover('trendPopover')" class="fl btn-filter">分类执法数据 <i class="mui-icon mui-icon-arrowdown"></i></button>
@@ -74,7 +73,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mui-content-padded">
+                    <div class="mui-content-padded" id="bodyContent">
                         <!-- 内容区域 -->
                         <div class="timeBox tc fb font-red" name="currentTime"><span></span></div>
                         <div id="segmentedControl" class="mui-segmented-control mui-segmented-control-red mt15">
@@ -455,6 +454,11 @@
 				$('#tbody' + m).append(arrStr[m-1]);
 			}  
 	    }
+	    $('#bodyContent').bind('tap',function(){
+	    	isTrend = false;
+        	isTime = false;
+        	$(".popoverbox").hide();
+        });
     </script>
 </body>
 </html>

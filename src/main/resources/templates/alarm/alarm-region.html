@@ -25,11 +25,15 @@
                             <ul class="regionList" id="blocks"></ul>
                         </div>
                     </div>
-                    <div class="mui-content-padded">
+                    <div class="mui-content-padded" id="bodyContent">
                         <!-- 内容区域 -->
                         <div class="chartBox mt20 mb20">
                             <div id="regionTendency" style="height: 225px;"></div>
                         </div>
+                        <table class="table fireDataTable">
+							<thead></thead>
+							<tbody></tbody>
+						</table>
                         <!-- 内容区域 end -->
                     </div>
                 </div>
@@ -105,6 +109,7 @@
     				var item = [];
     				var datas = [];
     				var unit = [];
+    				var tbodytr = '';
     				unit = data[0].unit;
     				for (var i = 0; i < data.length; i++) {
     					legend.unshift(data[i].type);
@@ -116,8 +121,22 @@
     				}
     				for (var j = 0; j < data[0].data.length; j++) {
     					item.unshift(data[0].data[j].month);
+    					var tr = '';
+    					for(var l=data.length-1;l>-1;l--){
+    						tr += '<td class="blueBg">' + data[l].data[j].value + '</td>';
+    					}
+    					tbodytr += '<tr><td class="greenBg">' + data[0].data[j].month + '</td>' + tr + '</tr>';
     				}
     				echartLine('regionTendency',legend,item,datas,unit);
+    				var th = '';
+    				for(var k=0;k<legend.length;k++){
+    					th += '<th class="blueBg">' + legend[k] + '</th>';
+    				}
+    				var theadtr = '<tr><th width="45" class="greenBg">月份</th>' + th + '</tr>';
+    				$('table thead').text('');
+    				$('table tbody').text('');
+    				$('table thead').append(theadtr);
+    				$('table tbody').append(tbodytr);
         		}
         	});
         	//关闭街道选择区
@@ -128,6 +147,13 @@
         	getRegion();
         }
         init();
+        
+        $('#bodyContent').bind('tap',function(){
+        	isRegion = false;
+        	isTrend = false;
+        	$(".popoverbox").hide();
+        });
+        
         /*]]>*/
     </script>
 </body>

@@ -74,7 +74,7 @@
                             </div>
                         </div>
                     </div>
-  						<div class="mui-content-padded">
+  						<div class="mui-content-padded" id="bodyContent">
 							<!-- 内容区域 -->
 							<div class="timeBox tc fb font-red" name="currentTime"><span></span></div>
 							<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-red mt15">
@@ -483,6 +483,11 @@
 				$('#tbody' + m).append(arrStr[m-1]);
 			}   	
 	    }
+	    $('#bodyContent').bind('tap',function(){
+	    	isTrend = false;
+        	isTime = false;
+        	$(".popoverbox").hide();
+        });
         /*]]>*/
      </script>
 </body>

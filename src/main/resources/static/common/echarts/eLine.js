@@ -53,7 +53,8 @@ function echartLine (id,legend,item,datas,unit) {
         } ],
         yAxis : [ {
             type : 'value',
-            name : unit ? ('单位：' + unit) : ''
+            name : unit ? ('单位：' + unit) : '',
+            splitNumber : 4
         } ],
         series : (function() {
             var series = [];

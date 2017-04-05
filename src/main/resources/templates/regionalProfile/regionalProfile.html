@@ -26,16 +26,16 @@
 								<div class="mui-content oh tc">
 								    <div class="mui-row">
 								        <div class="mui-col-xs-3">
-								        		<i class="iconfont icon-circle mr5 font-red" ></i>1级
+								        		<i class="iconfont icon-circle mr5 level1" ></i>1级
 								        </div>
 								        <div class="mui-col-xs-3">
-								        		<i class="iconfont icon-circle mr5 font-orange"></i>2级
+								        		<i class="iconfont icon-circle mr5 level2"></i>2级
 								        </div>
 								        <div class="mui-col-xs-3">
-								        		<i class="iconfont icon-circle mr5 font-yellow"></i>3级
+								        		<i class="iconfont icon-circle mr5 level3"></i>3级
 								        </div>
 								        <div class="mui-col-xs-3">
-								        		<i class="iconfont icon-circle mr5 font-blackishGreen"></i>4级
+								        		<i class="iconfont icon-circle mr5 level4"></i>4级
 								        </div>
 								    </div>
 								</div>
@@ -4127,14 +4127,15 @@
 	    	$('#tbody1').append(arrStr);
     	}
     	function heatMap (id,version) {
+    		version = (Math.floor(Math.random()*4) + 1)+'';
     		if(version === '1'){
-    			$('#street' + id).attr('fill','#d53d38');
+    			$('#street' + id).attr('fill','#02dd03');
     		}else if(version === '2'){
-    			$('#street' + id).attr('fill','#da804c');
+    			$('#street' + id).attr('fill','#fcab1e');
     		}else if(version === '3'){
-    			$('#street' + id).attr('fill','#dde56e');
+    			$('#street' + id).attr('fill','#fe0000');
     		}else if(version === '4'){
-    			$('#street' + id).attr('fill','#97da7b');
+    			$('#street' + id).attr('fill','#98004b');
     		}
     	}
     	function init(){

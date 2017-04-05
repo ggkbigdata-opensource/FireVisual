@@ -234,10 +234,11 @@ body,
 	border-bottom: 1px solid #f4dede;
 }
 .groupList.hiddenList .mui-row .mui-col-xs-4 {
-	font-size: 18px;
+	height: 27px;
+	font-size: 17px;
 	font-weight: bold;
 	line-height: 25px;
-	padding-top: 5px;
+	padding-top: 4px;
 }
 .groupList.hiddenList .icon-circle {
 	position: relative;
@@ -253,8 +254,9 @@ body,
 }
 .groupList .mui-row .tit,
 .groupList .mui-row .num {
-	font-size: 14px;
-	line-height: 30px;
+	padding-top: 5px;
+	font-size: 15px;
+	line-height: 25px;
 }
 .groupList .mui-row .tit {
 	position: relative;
@@ -562,6 +564,10 @@ body,
     background-color: #f4f3f3;
 }
 .icon-circle { font-size: 14px;}
+.icon-circle.level1 {color: #02dd03;}
+.icon-circle.level2 {color: #fcab1e;}
+.icon-circle.level3 {color: #fe0000;}
+.icon-circle.level4 {color: #98004b;}
 .icon-circle.font-red { color: #d53d38;}
 .icon-circle.font-orange { color: #da804c;}
 .icon-circle.font-yellow { color: #dde56e;}

@@ -25,40 +25,34 @@
 						</div>
 						<div class="mui-content-padded">
 							<!-- 内容区域 -->
-							<ul class="groupList">
+							<ul class="groupList" id="hiddenDetail">
 								<li>
 									<h1>检查项目检查项目检查项目</h1>
 									<div class="mui-row">
-								        <div class="mui-col-xs-5">
+								        <div class="mui-col-xs-6">
 								            <div class="tit fl">安全隐患等级</div>
 								            <div class="oh fb num">
-								            	<i class="iconfont icon-circle mr5 font-red"><em>1</em></i>
+								            	<i class="iconfont icon-circle mr5 level1"><em>1</em></i>
 								            </div>
 								        </div>
-								        <div class="mui-col-xs-4">
+								        <div class="mui-col-xs-6">
 								            <div class="tit fl">不合格项目</div>
 								            <div class="oh fb num font-red">23</div>
-								        </div>
-								        <div class="mui-col-xs-3 tr">
-								            <a class="btn-detail" href="javascript:;">查看详情<i class="mui-icon mui-icon-arrowright"></i></a>
 								        </div>
 								    </div>
 								</li>
 								<li>
 									<h1>检查项目检查项目检查项目</h1>
 									<div class="mui-row">
-								        <div class="mui-col-xs-5">
+								        <div class="mui-col-xs-6">
 								            <div class="tit fl">安全隐患等级</div>
 								            <div class="oh fb num">
-								            	<i class="iconfont icon-circle mr5 font-orange"><em>2</em></i>
+								            	<i class="iconfont icon-circle mr5 level2"><em>2</em></i>
 								            </div>
 								        </div>
-								        <div class="mui-col-xs-4">
+								        <div class="mui-col-xs-6">
 								            <div class="tit fl">不合格项目</div>
 								            <div class="oh fb num font-red">23</div>
-								        </div>
-								        <div class="mui-col-xs-3 tr">
-								            <a class="btn-detail" href="javascript:;">查看详情<i class="mui-icon mui-icon-arrowright"></i></a>
 								        </div>
 								    </div>
 								</li>
@@ -76,12 +70,23 @@
 	<script th:src="@{/js/jquery-2.1.0.js}"></script>
 	<script th:inline="javascript">
 		mui.init();
-		function getDetail(){
+		function getDetail(streetId){
 			mui.post([[@{/app/hiddInvest/getDetail}]],{
-				streetId: 1
+				streetId: streetId
 			},function(data){
 	    		if(data){
 	    			console.log(data);
+	    			$('#hiddenDetail').text('');
+	    			for(var i=0;i<data.length;i++){
+	    				var str = '';
+	    				if(data[i].riskLevel === null){
+	    					data[i].riskLevel = '1';
+	    				}
+	    				var levelStr = '<div class="mui-col-xs-6"><div class="tit fl">安全隐患等级</div><div class="oh fb num"><i class="iconfont icon-circle mr5 level' + data[i].riskLevel + '"><em>' + data[i].riskLevel + '</em></i></div></div>';
+	    				var unqStr = '<div class="mui-col-xs-6"> <div class="tit fl">不合格项目</div><div class="oh fb num font-red">' + data[i].unqualifiedNum + '</div></div>';
+	    				str = '<li><h1>' + data[i].ropertyCompanyName + '</h1><div class="mui-row">' + levelStr + unqStr + '</div></li>';
+	    				$('#hiddenDetail').append(str);
+	    			}
 	    		}
 	    	});
 		}
@@ -105,8 +110,7 @@
 		}
 		function init(){
 			var streetId = getParam('streetId');
-			console.log(streetId);
-			getDetail();
+			getDetail(streetId);
 		}
 		init();
 	</script>
