@@ -17,7 +17,7 @@
 				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
 					<div class="mui-scroll">
 						<div class="filterBox">
-							<h1>凤凰街区消防安全详情</h1>
+							<h1 id="detailTitle"></h1>
 							<a th:href="@{/app/hiddInvest}" class="fl btn-filter" >
 								<i class="mui-icon mui-icon-arrowleft"></i>
 								返回
@@ -70,12 +70,13 @@
 	<script th:src="@{/js/jquery-2.1.0.js}"></script>
 	<script th:inline="javascript">
 		mui.init();
+		var streetId = '';
 		function getDetail(streetId){
 			mui.post([[@{/app/hiddInvest/getDetail}]],{
 				streetId: streetId
 			},function(data){
 	    		if(data){
-	    			console.log(data);
+	    			getRegion();
 	    			$('#hiddenDetail').text('');
 	    			for(var i=0;i<data.length;i++){
 	    				var str = '';
@@ -87,9 +88,12 @@
 	    				str = '<li><h1>' + data[i].ropertyCompanyName + '</h1><div class="mui-row">' + levelStr + unqStr + '</div></li>';
 	    				$('#hiddenDetail').append(str);
 	    			}
+	    		}else{
+	    			getRegion();
 	    		}
 	    	});
 		}
+		//获取参数
 		function getParam(paramName) {
 		    paramValue = "";
 		    isFound = false;
@@ -108,8 +112,23 @@
 		    }
 		    return paramValue;
 		}
+        //获取所有街道
+        function getRegion () {
+        	mui.get([[@{/app/street/findAll}]],'',function(data){
+        		if(data && data.length > 0){
+        			for(var i=0;i<data.length;i++){
+        				if((data[i].id+'') === streetId){
+        					var str = data[i].name + '消防安全详情';
+            				$('#detailTitle').append(str);
+            				break;
+        				}
+        			}
+        		}
+        	},'json');
+        }
 		function init(){
-			var streetId = getParam('streetId');
+			streetId = getParam('streetId');
+			$('#detailTitle').text('');
 			getDetail(streetId);
 		}
 		init();

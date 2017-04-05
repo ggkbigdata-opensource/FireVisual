@@ -8,17 +8,20 @@
         <div th:replace="/layouts/layout::menu"></div>
         <div class="mui-inner-wrap">
             <!-- Header 部分 -->
-            <div th:replace="/layouts/layout::header"></div>
-            <div th:with="headTitle=${'执法'}"></div>
-            <div th:replace="/layouts/layout::menu"></div>
-            <div id="offCanvasContentScroll"
-                class="mui-content mui-scroll-wrapper">
+            <header class="mui-bar mui-bar-nav">
+				<div class="logo">
+					<img th:src="@{/img/logo.png}" />
+				</div>
+				<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
+				<h1 class="mui-title">执法</h1>
+			</header>
+            <div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
                 <div class="mui-scroll">
                     <div class="filterBox">
                         <button onclick="hide('trendPopover')" class="fl btn-filter">天河区执法趋势 <i class="mui-icon mui-icon-arrowdown"></i></button>
                         <div th:replace="/layouts/layout::law-menu"></div>
                     </div>
-                    <div class="mui-content-padded">
+                    <div class="mui-content-padded" id="bodyContent">
                         <!-- 内容区域 -->
                         <div class="chartBox mt20 mb20">
                             <div id="lowTendency" style="height: 225px;"></div>
@@ -79,6 +82,9 @@
 				$('table tbody').append(tbodytr);
 			}
 		}, 'json');
+		$('#bodyContent').bind('tap',function(){
+        	$(".popoverbox").hide();
+        });
 	</script>
 </body>
 </html>

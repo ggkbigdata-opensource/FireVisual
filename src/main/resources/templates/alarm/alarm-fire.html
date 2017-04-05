@@ -8,11 +8,14 @@
         <div th:replace="/layouts/layout::menu"></div>
         <div class="mui-inner-wrap">
             <!-- Header 部分 -->
-            <div th:replace="/layouts/layout::header"></div>
-            <div th:with="headTitle=${'警情'}"></div>
-            <div th:replace="/layouts/layout::menu"></div>
-            <div id="offCanvasContentScroll"
-                class="mui-content mui-scroll-wrapper">
+            <header class="mui-bar mui-bar-nav">
+				<div class="logo">
+					<img th:src="@{/img/logo.png}" />
+				</div>
+				<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
+				<h1 class="mui-title">警情</h1>
+			</header>
+            <div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
                 <div class="mui-scroll">
                     <div class="filterBox">
                         <button onclick="hidePopover('trendPopover')" class="fl btn-filter">分类警情数据 <i class="mui-icon mui-icon-arrowdown"></i></button>

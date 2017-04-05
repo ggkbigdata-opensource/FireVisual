@@ -141,9 +141,9 @@
 	    			$('#itemHidden').text('');
 	    			for(var i=0;i<data.length;i++){
 	    				var str = '';
-	    				var qualifiedStr = '<div class="mui-col-xs-4"><i class="iconfont icon-circle mr15 font-green"></i>' + data[i].qualifiedNum + '</div>';
-	    				var unqualifiedStr = '<div class="mui-col-xs-4"><i class="iconfont icon-circle mr15 font-red"></i>' + data[i].unqualifiedNum + '</div>';
-	    				var qualifiedPercentStr = '<div class="mui-col-xs-4"><i class="iconfont icon-circle mr15 font-blue"></i>' + data[i].qualifiedPercent + '</div>';
+	    				var qualifiedStr = '<div class="mui-col-xs-4"><i class="iconfont icon-circle mr15 font-green"></i><em class="checkNum">' + data[i].qualifiedNum + '</em></div>';
+	    				var unqualifiedStr = '<div class="mui-col-xs-4"><i class="iconfont icon-circle mr15 font-red"></i><em class="checkNum">' + data[i].unqualifiedNum + '</em></div>';
+	    				var qualifiedPercentStr = '<div class="mui-col-xs-4"><i class="iconfont icon-circle mr15 font-blue"></i><em class="checkNum">' + ((data[i].qualifiedPercent*100) + '%') + '</em></div>';
 	    				str = '<li><h1>' + data[i].itemName + '</h1><div class="mui-row tc">' + qualifiedStr + unqualifiedStr + qualifiedPercentStr + '</div></li>';
 	    				$('#itemHidden').append(str);
 	    			}

@@ -252,6 +252,12 @@ body,
 	height: 15px;
 	background-color: #f5b4b4;
 }
+.groupList.hiddenList .checkNum {
+	display: inline-block;
+	font-style: normal;
+	min-width: 44px;
+	text-align: left;
+}
 .groupList .mui-row .tit,
 .groupList .mui-row .num {
 	padding-top: 5px;
@@ -261,7 +267,7 @@ body,
 .groupList .mui-row .tit {
 	position: relative;
 	padding-right: 5px;
-	margin-right: 5px;
+	margin-right: 10px;
 }
 .groupList .mui-row .tit:after {
 	content: "";
@@ -362,6 +368,18 @@ body,
 	color: #f66e6e;
 	line-height: 40px;
 	text-align: center;
+}
+.filter-backdrop {
+	position: absolute;
+    z-index: 10;
+    top: 40px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+    transition: background 350ms cubic-bezier(.165,.84,.44,1);
+    background: rgba(0,0,0,.4);
+    -webkit-tap-highlight-color: transparent;
 }
 .filterBox .btn-filter {
 	position: absolute;
@@ -569,10 +587,7 @@ body,
 .icon-circle.level3 {color: #fe0000;}
 .icon-circle.level4 {color: #98004b;}
 .icon-circle.font-red { color: #d53d38;}
-.icon-circle.font-orange { color: #da804c;}
-.icon-circle.font-yellow { color: #dde56e;}
 .icon-circle.font-green { color: #119d35;}
-.icon-circle.font-blackishGreen { color: #97da7b;}
 .icon-circle.font-blue { color: #628bf4;}
 .heatlistBox .mui-content {
 	background-color: transparent;

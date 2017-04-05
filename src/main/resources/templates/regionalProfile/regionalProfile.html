@@ -4062,9 +4062,9 @@
 										<tr>
 											<th width="45" class="grayBg">排序</th>
 											<th width="60" class="greenBg">街道</th>
-											<th class="blueBg">警情</th>
-											<th class="blueBg">执法</th>
-											<th class="blueBg">重要单位</th>
+											<th class="blueBg sortBy" name="eventNum">警情</th>
+											<th class="blueBg sortBy" name="punishNum">执法</th>
+											<th class="blueBg sortBy" name="buildingInfoNum">重要单位</th>
 <!-- 											<th class="blueBg"><button onclick="sortData('eventNum')">警情</button></th>
 											<th class="blueBg"><button onclick="sortData('punishNum')">执法</button></th>
 											<th class="blueBg"><button onclick="sortData('buildingInfoNum')">重要单位</button></th> -->
@@ -4086,7 +4086,7 @@
     <script th:src="@{/js/jquery-2.1.0.js}"></script>
     <script th:inline="javascript">
     	var regionData = []; 
-	    //排序函数
+	    //排序函数-1 0 1；
 	    function compare(fields){
 			return function (a,b){
 				var value1 = a[fields];
@@ -4094,6 +4094,7 @@
 				return value2 - value1;
 			}
 		}
+	    //获取所有数据
     	function getAllData(){
     		var arrStr = '';
     		mui.get([[@{/app/situation/getAllStreetSituation}]],'',function(data){
@@ -4107,7 +4108,6 @@
         	    		arrStr += tr1;
         	    		heatMap(data[j].streetId,data[j].version+'');
         	    	}
-        	    	console.log(data);        	    	
         	    	$('#tbody1').append(arrStr);
         	    	regionData = data;
         		}
@@ -4126,8 +4126,13 @@
 	    	}
 	    	$('#tbody1').append(arrStr);
     	}
+    	//点击排序，目前先不注释
+    	$('.sortBy').bind('tap',function () {
+    		//sortData($(this).attr('name'));
+    	});
+    	//区域按等级赋值颜色
     	function heatMap (id,version) {
-    		version = (Math.floor(Math.random()*4) + 1)+'';
+    		//version = (Math.floor(Math.random()*4) + 1)+'';
     		if(version === '1'){
     			$('#street' + id).attr('fill','#02dd03');
     		}else if(version === '2'){
