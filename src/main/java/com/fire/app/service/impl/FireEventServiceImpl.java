@@ -160,9 +160,16 @@ public class FireEventServiceImpl implements FireEventService {
                         affirmNow++;
                     }
                     
-                    lossNow = appFireEvent.getLoss()+lossNow;
-                    hurtNow = appFireEvent.getHurtNum()+hurtNow;
-                    deadNow = appFireEvent.getDeadNum()+deadNow;
+                    if (appFireEvent.getLoss()!=null) {
+                        lossNow = appFireEvent.getLoss()+lossNow;
+                    }
+                    if (appFireEvent.getHurtNum()!=null) {
+                        hurtNow = appFireEvent.getHurtNum()+hurtNow;
+                    }
+                    if (appFireEvent.getDeadNum()!=null) {
+                        deadNow = appFireEvent.getDeadNum()+deadNow;
+                    }
+                   
                     
                 }
                 
@@ -191,9 +198,15 @@ public class FireEventServiceImpl implements FireEventService {
                         affirmBefore++;
                     }
                     
-                    lossBefore = appFireEvent.getLoss()+lossBefore;
-                    hurtBefore = appFireEvent.getHurtNum()+hurtBefore;
-                    deadBefore = appFireEvent.getDeadNum()+deadBefore;
+                    if (appFireEvent.getLoss()!=null) {
+                        lossBefore = appFireEvent.getLoss()+lossBefore;
+                    }
+                    if (appFireEvent.getHurtNum()!=null) {
+                        hurtBefore = appFireEvent.getHurtNum()+hurtBefore;
+                    }
+                    if (appFireEvent.getDeadNum()!=null) {
+                        deadBefore = appFireEvent.getDeadNum()+deadBefore;
+                    }
                     
                 }
                 
