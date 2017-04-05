@@ -124,7 +124,7 @@ public class HiddInvestServiceImpl implements HiddInvestService {
     public List<JSONObject> getInvestigateItem() {
         ArrayList<JSONObject> result = new ArrayList<JSONObject>();
         List<Object> list = checkReportResultStatRepository.findGroupByItemCode();
-        DecimalFormat   df=new   DecimalFormat("0.00");   
+        DecimalFormat   df=new   DecimalFormat("0.0000");   
         
         for (Object object : list) {
             JSONObject obj = new JSONObject();
