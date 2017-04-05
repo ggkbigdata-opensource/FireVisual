@@ -438,7 +438,10 @@
 	    	for(var i=0;i<data.length;i++){
 	    		var tr1 = '';
 	    		var str1 = '';
-	    		str1 = '<td class="greenBg">' + data[i].streetName + '</td><td class="blueBg">' + data[i].primitiveNow + '</td><td class="blueBg">' + data[i].primitiveBefore + '</td><td class="blueBg">' + data[i].primitiveYearBefore + '%</td>';
+	    		if(data[i].primitiveYearBefore !== '-'){
+	    			data[i].primitiveYearBefore = data[i].primitiveYearBefore + '%';
+	    		}
+	    		str1 = '<td class="greenBg">' + data[i].streetName + '</td><td class="blueBg">' + data[i].primitiveNow + '</td><td class="blueBg">' + data[i].primitiveBefore + '</td><td class="blueBg">' + data[i].primitiveYearBefore + '</td>';
 	    		tr1 = '<tr><td class="grayBg">' + (i+1) + '</td>' + str1 + '</tr>';
 	    		arrStr[0]+=tr1;
 	    	}
@@ -446,7 +449,10 @@
 	    	for(var j=0;j<data.length;j++){
 	    		var tr2 = '';
 	    		var str2 = '';
-	    		str2 = '<td class="greenBg">' + data[j].streetName + '</td><td class="blueBg">' + data[j].smokingNow + '</td><td class="blueBg">' + data[j].smokingBefore + '</td><td class="blueBg">' + data[j].smokingYearBefore + '%</td>';
+	    		if(data[j].smokingYearBefore !== '-'){
+	    			data[j].smokingYearBefore = data[j].smokingYearBefore + '%';
+	    		}
+	    		str2 = '<td class="greenBg">' + data[j].streetName + '</td><td class="blueBg">' + data[j].smokingNow + '</td><td class="blueBg">' + data[j].smokingBefore + '</td><td class="blueBg">' + data[j].smokingYearBefore + '</td>';
 	    		tr2 = '<tr><td class="grayBg">' + (j+1) + '</td>' + str2 + '</tr>';
 	    		arrStr[1]+=tr2;
 	    	}
@@ -454,7 +460,10 @@
 	    	for(var k=0;k<data.length;k++){
 	    		var tr3 = '';
 	    		var str3 = '';
-	    		str3 = '<td class="greenBg">' + data[k].streetName + '</td><td class="blueBg">' + data[k].affirmNow + '</td><td class="blueBg">' + data[k].affirmBefore + '</td><td class="blueBg">' + data[k].affirmYearBefore + '%</td>';
+	    		if(data[k].affirmYearBefore !== '-'){
+	    			data[k].affirmYearBefore = data[k].affirmYearBefore + '%';
+	    		}
+	    		str3 = '<td class="greenBg">' + data[k].streetName + '</td><td class="blueBg">' + data[k].affirmNow + '</td><td class="blueBg">' + data[k].affirmBefore + '</td><td class="blueBg">' + data[k].affirmYearBefore + '</td>';
 	    		tr3 = '<tr><td class="grayBg">' + (k+1) + '</td>' + str3 + '</tr>';
 	    		arrStr[2]+=tr3;
 	    	}
@@ -462,7 +471,10 @@
 	    	for(var l=0;l<data.length;l++){
 	    		var tr4 = '';
 	    		var str4 = '';
-	    		str4 = '<td class="greenBg">' + data[l].streetName + '</td><td class="blueBg">' + data[l].lossNow + '</td><td class="blueBg">' + data[l].lossBefore + '</td><td class="blueBg">' + data[l].lossYearBefore + '%</td>';
+	    		if(data[l].lossYearBefore !== '-'){
+	    			data[l].lossYearBefore = data[l].lossYearBefore + '%';
+	    		}
+	    		str4 = '<td class="greenBg">' + data[l].streetName + '</td><td class="blueBg">' + data[l].lossNow + '</td><td class="blueBg">' + data[l].lossBefore + '</td><td class="blueBg">' + data[l].lossYearBefore + '</td>';
 	    		tr4 = '<tr><td class="grayBg">' + (l+1) + '</td>' + str4 + '</tr>';
 	    		arrStr[3]+=tr4;
 	    	}
@@ -470,7 +482,10 @@
 	    	for(var m=0;m<data.length;m++){
 	    		var tr5 = '';
 	    		var str5 = '';
-	    		str5 = '<td class="greenBg">' + data[m].streetName + '</td><td class="blueBg">' + data[m].hurtNow + '</td><td class="blueBg">' + data[m].hurtBefore + '</td><td class="blueBg">' + data[m].hurtYearBefore + '%</td>';
+	    		if(data[m].hurtYearBefore !== '-'){
+	    			data[m].hurtYearBefore = data[m].hurtYearBefore + '%';
+	    		}
+	    		str5 = '<td class="greenBg">' + data[m].streetName + '</td><td class="blueBg">' + data[m].hurtNow + '</td><td class="blueBg">' + data[m].hurtBefore + '</td><td class="blueBg">' + data[m].hurtYearBefore + '</td>';
 	    		tr5 = '<tr><td class="grayBg">' + (m+1) + '</td>' + str5 + '</tr>';
 	    		arrStr[4]+=tr5;
 	    	}
@@ -478,7 +493,10 @@
 	    	for(var o=0;o<data.length;o++){
 	    		var tr6 = '';
 	    		var str6 = '';
-	    		str6 = '<td class="greenBg">' + data[o].streetName + '</td><td class="blueBg">' + data[o].deadNow + '</td><td class="blueBg">' + data[o].deadBefore + '</td><td class="blueBg">' + data[o].deadYearBefore + '%</td>';
+	    		if(data[o].deadYearBefore !== '-'){
+	    			data[o].deadYearBefore = data[o].deadYearBefore + '%';
+	    		}
+	    		str6 = '<td class="greenBg">' + data[o].streetName + '</td><td class="blueBg">' + data[o].deadNow + '</td><td class="blueBg">' + data[o].deadBefore + '</td><td class="blueBg">' + data[o].deadYearBefore + '</td>';
 	    		tr6 = '<tr><td class="grayBg">' + (o+1) + '</td>' + str6 + '</tr>';
 	    		arrStr[5]+=tr6;
 	    	}
