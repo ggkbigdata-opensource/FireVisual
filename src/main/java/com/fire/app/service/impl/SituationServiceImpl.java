@@ -73,7 +73,7 @@ public class SituationServiceImpl implements SituationService {
         List<JSONObject> result = new ArrayList<JSONObject>();
         for (Street street : streets) {
             JSONObject obj = new JSONObject();
-            int version = 0; // 等级，，，即不合格数
+            int version = 1; // 等级，，，即不合格数
             // 查询警情数据
             List<AppFireEvent> events = fireEventRepository.findStreetData(newYear, nowTime, street.getName());
             // 查询执法数据

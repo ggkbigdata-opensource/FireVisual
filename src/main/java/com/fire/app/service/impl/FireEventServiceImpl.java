@@ -74,15 +74,15 @@ public class FireEventServiceImpl implements FireEventService {
             }
 
             JSONObject one = new JSONObject();
-            one.put("month", date1[1] + "月");
+            one.put("month", date1[0]+date1[1]);
             one.put("value", oned);
 
             JSONObject two = new JSONObject();
-            two.put("month", date1[1] + "月");
+            two.put("month", date1[0]+date1[1]);
             two.put("value", twod);
 
             JSONObject three = new JSONObject();
-            three.put("month", date1[1] + "月");
+            three.put("month", date1[0]+date1[1]);
             three.put("value", threed);
 
             oneSum.add(one);
@@ -306,27 +306,27 @@ public class FireEventServiceImpl implements FireEventService {
             int twod = 0;
             int threed = 0;
             for (AppFireEvent event : list) {
-                if ("原始警情".equals(event.getFireType())) {
+                if ("原始".equals(event.getFireType())) {
                     oned++;
                 }
-                if ("冒烟警情".equals(event.getFireType())) {
+                if ("冒烟".equals(event.getFireType())) {
                     twod++;
                 }
-                if ("确认警情".equals(event.getFireType())) {
+                if ("确认".equals(event.getFireType())) {
                     threed++;
                 }
             }
 
             JSONObject one = new JSONObject();
-            one.put("month", date1[1] + "月");
+            one.put("month", date1[0]+date1[1]);
             one.put("value", oned);
 
             JSONObject two = new JSONObject();
-            two.put("month", date1[1] + "月");
+            two.put("month", date1[0]+date1[1]);
             two.put("value", twod);
 
             JSONObject three = new JSONObject();
-            three.put("month", date1[1] + "月");
+            three.put("month",date1[0]+date1[1]);
             three.put("value", threed);
 
             oneSum.add(one);

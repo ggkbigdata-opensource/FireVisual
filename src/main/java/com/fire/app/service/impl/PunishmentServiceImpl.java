@@ -85,23 +85,23 @@ public class PunishmentServiceImpl implements PunishmentService {
             }
 
             JSONObject one = new JSONObject();// 行政执法
-            one.put("month", date1[1] + "月");
+            one.put("month", date1[0]+date1[1]);
             one.put("value", oned);
 
             JSONObject two = new JSONObject();// 行政拘留
-            two.put("month", date1[1] + "月");
+            two.put("month", date1[0]+date1[1]);
             two.put("value", twod);
 
             JSONObject three = new JSONObject();// 刑事拘留
-            three.put("month", date1[1] + "月");
+            three.put("month", date1[0]+date1[1]);
             three.put("value", threed);
 
             JSONObject four = new JSONObject(); // 三停
-            four.put("month", date1[1] + "月");
+            four.put("month", date1[0]+date1[1]);
             four.put("value", fourd);
 
             JSONObject five = new JSONObject(); // 临时查封
-            five.put("month", date1[1] + "月");
+            five.put("month", date1[0]+date1[1]);
             five.put("value", seald);
 
             oneSum.add(one);
@@ -204,23 +204,23 @@ public class PunishmentServiceImpl implements PunishmentService {
             }
 
             JSONObject one = new JSONObject();// 行政执法
-            one.put("month", date1[1] + "月");
+            one.put("month", date1[0]+date1[1]);
             one.put("value", oned);
 
             JSONObject two = new JSONObject();// 行政拘留
-            two.put("month", date1[1] + "月");
+            two.put("month", date1[0]+date1[1]);
             two.put("value", twod);
 
             JSONObject three = new JSONObject();// 刑事拘留
-            three.put("month", date1[1] + "月");
+            three.put("month", date1[0]+date1[1]);
             three.put("value", threed);
 
             JSONObject four = new JSONObject(); // 三停
-            four.put("month", date1[1] + "月");
+            four.put("month", date1[0]+date1[1]);
             four.put("value", fourd);
 
             JSONObject five = new JSONObject(); // 临时查封
-            five.put("month", date1[1] + "月");
+            five.put("month", date1[0]+date1[1]);
             five.put("value", seald);
 
             oneSum.add(one);
