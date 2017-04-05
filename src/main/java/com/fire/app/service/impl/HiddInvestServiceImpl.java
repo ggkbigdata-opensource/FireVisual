@@ -43,42 +43,39 @@ public class HiddInvestServiceImpl implements HiddInvestService {
 
         List<Street> streets = streetRepository.findAll();
         for (Street street : streets) {
-            
-            int versionOne= 0;
-            int versionTwo= 0;
-            int versionThree= 0;
-            int versionFour= 0;
-            
-            String reportNum=null;
-            
-            
+
+            int versionOne = 0;
+            int versionTwo = 0;
+            int versionThree = 0;
+            int versionFour = 0;
+
+            String reportNum = null;
+
             JSONObject obj = new JSONObject();
             List<BsBuildingInfo> infos = buildingInfoRepository.findByStreetId(street.getId());
-            if (infos != null && infos.size()>0) {
+            if (infos != null && infos.size() > 0) {
                 obj.put("buildingInfoNum", infos.size());
-                reportNum=infos.get(0).getItemNumber();
-                
-                CrCheckReportInfo checkReportInfos = checkReportInfoRepository.findByReportNum(reportNum);
-                if (checkReportInfos!=null&!"".equals(checkReportInfos)) {
+                reportNum = infos.get(0).getItemNumber();
+                CrCheckReportInfo checkReportInfos = checkReportInfoRepository.findByReportNum(reportNum.replace("天消", ""));
+                if (checkReportInfos != null & !"".equals(checkReportInfos)) {
                     String riskLevel = checkReportInfos.getRiskLevel();
-                    if (riskLevel.contains("1")) {//隐患等级1
+                    if (riskLevel.contains("1")) {// 隐患等级1
                         versionOne++;
                     }
-                    if (riskLevel.contains("2")) {//隐患等级2
+                    if (riskLevel.contains("2")) {// 隐患等级2
                         versionTwo++;
                     }
-                    if (riskLevel.contains("3")) {//隐患等级3
+                    if (riskLevel.contains("3")) {// 隐患等级3
                         versionThree++;
                     }
-                    if (riskLevel.contains("4")) {//隐患等级4
+                    if (riskLevel.contains("4")) {// 隐患等级4
                         versionFour++;
                     }
                 }
-            }else {
+            } else {
                 obj.put("buildingInfoNum", 0);
             }
 
-            
             obj.put("versionOne", versionOne);
             obj.put("versionTwo", versionTwo);
             obj.put("versionThree", versionThree);
@@ -92,7 +89,6 @@ public class HiddInvestServiceImpl implements HiddInvestService {
         return result;
     }
 
-    
     @Override
     public List<JSONObject> getDetailDate(Long streetId) {
 
@@ -101,14 +97,14 @@ public class HiddInvestServiceImpl implements HiddInvestService {
         for (BsBuildingInfo info : infos) {
             JSONObject obj = new JSONObject();
             CrCheckReportInfo checkReportInfos = checkReportInfoRepository.findByReportNum(info.getItemNumber());
-            if (checkReportInfos!=null&&!"".equals(checkReportInfos)) {
+            if (checkReportInfos != null && !"".equals(checkReportInfos)) {
                 obj.put("riskLevel", checkReportInfos.getRiskLevel());
-            }else{
+            } else {
                 obj.put("riskLevel", null);
             }
 
-            List<CrCheckReportResultStat> stats  = checkReportResultStatRepository.findByReportNum(info.getItemNumber());
-            int unqualifiedNum =0;//不合格项
+            List<CrCheckReportResultStat> stats = checkReportResultStatRepository.findByReportNum(info.getItemNumber());
+            int unqualifiedNum = 0;// 不合格项
             for (CrCheckReportResultStat stat : stats) {
                 unqualifiedNum = unqualifiedNum + stat.getUnqualifiedNum();
             }
@@ -119,32 +115,34 @@ public class HiddInvestServiceImpl implements HiddInvestService {
         }
         return result;
     }
-    
+
     @Override
     public List<JSONObject> getInvestigateItem() {
         ArrayList<JSONObject> result = new ArrayList<JSONObject>();
         List<Object> list = checkReportResultStatRepository.findGroupByItemCode();
-        DecimalFormat   df=new   DecimalFormat("0.0000");   
-        
+        DecimalFormat df = new DecimalFormat("0.0000");
+
         for (Object object : list) {
             JSONObject obj = new JSONObject();
-            String str = JSONArray.toJSONString(object);//存入的数据为[1,1,"1","1"]  checkNum, unqualifiedNum itemCode itemName
+            String str = JSONArray.toJSONString(object);// 存入的数据为[1,1,"1","1"]
+                                                        // checkNum,
+                                                        // unqualifiedNum
+                                                        // itemCode itemName
             String[] data = str.replace("[", "").replace("]", "").replace("\"", "").split(",");
 
-            
-            int qualifiedNum = Integer.parseInt(data[0])-Integer.parseInt(data[1]);
+            int qualifiedNum = Integer.parseInt(data[0]) - Integer.parseInt(data[1]);
             obj.put("qualifiedNum", qualifiedNum);
             obj.put("unqualifiedNum", data[1]);
             obj.put("itemCode", data[2]);
             obj.put("itemName", data[3]);
-            obj.put("qualifiedPercent", df.format((float)qualifiedNum/Integer.parseInt(data[0])));
+            obj.put("qualifiedPercent", df.format((float) qualifiedNum / Integer.parseInt(data[0])));
             
+
             result.add(obj);
-            
+
         }
 
         return result;
     }
-
 
 }
