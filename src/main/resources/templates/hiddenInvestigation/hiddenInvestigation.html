@@ -143,7 +143,7 @@
 	    				var str = '';
 	    				var qualifiedStr = '<div class="mui-col-xs-4"><i class="iconfont icon-circle mr15 font-green"></i>' + data[i].qualifiedNum + '</div>';
 	    				var unqualifiedStr = '<div class="mui-col-xs-4"><i class="iconfont icon-circle mr15 font-red"></i>' + data[i].unqualifiedNum + '</div>';
-	    				var qualifiedPercentStr = '<div class="mui-col-xs-4"><i class="iconfont icon-circle mr15 font-blue"></i>' + ((data[i].qualifiedPercent*100) + '%') + '</div>';
+	    				var qualifiedPercentStr = '<div class="mui-col-xs-4"><i class="iconfont icon-circle mr15 font-blue"></i>' + ((data[i].qualifiedPercent*100).toFixed(2) + '%') + '</div>';
 	    				str = '<li><h1>' + data[i].itemName + '</h1><div class="mui-row">' + qualifiedStr + unqualifiedStr + qualifiedPercentStr + '</div></li>';
 	    				$('#itemHidden').append(str);
 	    			}

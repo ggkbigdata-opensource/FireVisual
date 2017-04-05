@@ -439,7 +439,7 @@
 	    		var tr1 = '';
 	    		var str1 = '';
 	    		if(data[i].primitiveYearBefore !== '-'){
-	    			data[i].primitiveYearBefore = data[i].primitiveYearBefore + '%';
+	    			data[i].primitiveYearBefore = (data[i].primitiveYearBefore*100).toFixed(2) + '%';
 	    		}
 	    		str1 = '<td class="greenBg">' + data[i].streetName + '</td><td class="blueBg">' + data[i].primitiveNow + '</td><td class="blueBg">' + data[i].primitiveBefore + '</td><td class="blueBg">' + data[i].primitiveYearBefore + '</td>';
 	    		tr1 = '<tr><td class="grayBg">' + (i+1) + '</td>' + str1 + '</tr>';
@@ -450,7 +450,7 @@
 	    		var tr2 = '';
 	    		var str2 = '';
 	    		if(data[j].smokingYearBefore !== '-'){
-	    			data[j].smokingYearBefore = data[j].smokingYearBefore + '%';
+	    			data[j].smokingYearBefore = (data[j].smokingYearBefore*100).toFixed(2) + '%';
 	    		}
 	    		str2 = '<td class="greenBg">' + data[j].streetName + '</td><td class="blueBg">' + data[j].smokingNow + '</td><td class="blueBg">' + data[j].smokingBefore + '</td><td class="blueBg">' + data[j].smokingYearBefore + '</td>';
 	    		tr2 = '<tr><td class="grayBg">' + (j+1) + '</td>' + str2 + '</tr>';
@@ -461,7 +461,7 @@
 	    		var tr3 = '';
 	    		var str3 = '';
 	    		if(data[k].affirmYearBefore !== '-'){
-	    			data[k].affirmYearBefore = data[k].affirmYearBefore + '%';
+	    			data[k].affirmYearBefore = (data[k].affirmYearBefore*100).toFixed(2) + '%';
 	    		}
 	    		str3 = '<td class="greenBg">' + data[k].streetName + '</td><td class="blueBg">' + data[k].affirmNow + '</td><td class="blueBg">' + data[k].affirmBefore + '</td><td class="blueBg">' + data[k].affirmYearBefore + '</td>';
 	    		tr3 = '<tr><td class="grayBg">' + (k+1) + '</td>' + str3 + '</tr>';
@@ -472,7 +472,7 @@
 	    		var tr4 = '';
 	    		var str4 = '';
 	    		if(data[l].lossYearBefore !== '-'){
-	    			data[l].lossYearBefore = data[l].lossYearBefore + '%';
+	    			data[l].lossYearBefore = (data[l].lossYearBefore*100).toFixed(2) + '%';
 	    		}
 	    		str4 = '<td class="greenBg">' + data[l].streetName + '</td><td class="blueBg">' + data[l].lossNow + '</td><td class="blueBg">' + data[l].lossBefore + '</td><td class="blueBg">' + data[l].lossYearBefore + '</td>';
 	    		tr4 = '<tr><td class="grayBg">' + (l+1) + '</td>' + str4 + '</tr>';
@@ -483,7 +483,7 @@
 	    		var tr5 = '';
 	    		var str5 = '';
 	    		if(data[m].hurtYearBefore !== '-'){
-	    			data[m].hurtYearBefore = data[m].hurtYearBefore + '%';
+	    			data[m].hurtYearBefore = (data[m].hurtYearBefore*100).toFixed(2) + '%';
 	    		}
 	    		str5 = '<td class="greenBg">' + data[m].streetName + '</td><td class="blueBg">' + data[m].hurtNow + '</td><td class="blueBg">' + data[m].hurtBefore + '</td><td class="blueBg">' + data[m].hurtYearBefore + '</td>';
 	    		tr5 = '<tr><td class="grayBg">' + (m+1) + '</td>' + str5 + '</tr>';
@@ -494,7 +494,7 @@
 	    		var tr6 = '';
 	    		var str6 = '';
 	    		if(data[o].deadYearBefore !== '-'){
-	    			data[o].deadYearBefore = data[o].deadYearBefore + '%';
+	    			data[o].deadYearBefore = (data[o].deadYearBefore*100).toFixed(2) + '%';
 	    		}
 	    		str6 = '<td class="greenBg">' + data[o].streetName + '</td><td class="blueBg">' + data[o].deadNow + '</td><td class="blueBg">' + data[o].deadBefore + '</td><td class="blueBg">' + data[o].deadYearBefore + '</td>';
 	    		tr6 = '<tr><td class="grayBg">' + (o+1) + '</td>' + str6 + '</tr>';
