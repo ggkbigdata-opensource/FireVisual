@@ -53,25 +53,39 @@
 		var now = new Date();
 		mui.get([[@{/app/fireEvent/main}]], '', function(data) {
 			if (data && data.length > 0) {
-				var legend = [];
+				console.log(data);
+				var legend = ['原始','确认','冒烟'];
 				var item = [];
 				var datas = [];
 				var unit = [];
 				var tbodytr = '';
 				unit = data[0].unit;
 				for (var i = 0; i < data.length; i++) {
-					legend.unshift(data[i].type.substr(0,2));
+					//legend.push(data[i].type.substr(0,2));
 					var da = [];
 					for (var k = 0; k < data[i].data.length; k++) {
 						da.unshift(data[i].data[k].value);
 					}
-					datas.unshift(da);
+					if(data[i].type.substr(0,2) === '原始'){
+						datas[0] = da;
+					}else if(data[i].type.substr(0,2) === '确认') {
+						datas[1] = da;
+					}else {
+						datas[2] = da;
+					}
+					
 				}
 				for (var j = 0; j < data[0].data.length; j++) {
 					item.unshift(data[0].data[j].month);
 					var tr = '';
-					for(var l=data.length-1;l>-1;l--){
-						tr += '<td class="blueBg">' + data[l].data[j].value + '</td>';
+					for(var l=0;l<data.length;l++){
+						if(data[l].type.substr(0,2) === '原始'){
+							tr += '<td class="blueBg">' + data[0].data[j].value + '</td>';
+						}else if(data[l].type.substr(0,2) === '确认') {
+							tr += '<td class="blueBg">' + data[1].data[j].value + '</td>';
+						}else {
+							tr += '<td class="blueBg">' + data[2].data[j].value + '</td>';
+						}
 					}
 					tbodytr += '<tr><td class="greenBg">' + data[0].data[j].month + '</td>' + tr + '</tr>';
 				}
