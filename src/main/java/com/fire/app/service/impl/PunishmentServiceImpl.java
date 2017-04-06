@@ -70,7 +70,7 @@ public class PunishmentServiceImpl implements PunishmentService {
             int threed = 0;// 刑事拘留
             int fourd = 0;// 三停
             for (AppPunishment punish : list) {
-                if ("行政执法".equals(punish.getPunishMethod())) {
+                if ("行政罚款".equals(punish.getPunishMethod())) {
                     oned++;
                 }
                 if ("行政拘留".equals(punish.getPunishMethod())) {
@@ -189,7 +189,7 @@ public class PunishmentServiceImpl implements PunishmentService {
             int threed = 0;// 刑事拘留
             int fourd = 0;// 三停
             for (AppPunishment punish : list) {
-                if ("行政执法".equals(punish.getPunishMethod())) {
+                if ("行政罚款".equals(punish.getPunishMethod())) {
                     oned++;
                 }
                 if ("行政拘留".equals(punish.getPunishMethod())) {

@@ -20,7 +20,7 @@ public interface CrCheckReportInfoRepository extends JpaRepository<CrCheckReport
      * @return 
      * @description
      */
-    @Query(value = "SELECT * FROM cr_check_report_info t where t.report_num  like %?1%", nativeQuery = true)
+    @Query(value = "SELECT * FROM cr_check_report_info t where t.report_num  like %?1% limit 0,1" , nativeQuery = true)
     CrCheckReportInfo findByReportNum(String reportNum);
 
    

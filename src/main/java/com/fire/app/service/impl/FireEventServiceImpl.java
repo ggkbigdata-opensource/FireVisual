@@ -71,12 +71,21 @@ public class FireEventServiceImpl implements FireEventService {
                 if ("确认".equals(event.getFireType())) {
                     threed++;
                 }
+                //暂时修改
+                if ("火灾".equals(event.getFireType())) {
+                    threed++;
+                }
+            }
+            
+            if (list!=null && list.size()>0) {
+                oned=list.size();
             }
 
             JSONObject one = new JSONObject();
             one.put("month", date1[0]+date1[1]);
             one.put("value", oned);
-
+            
+            
             JSONObject two = new JSONObject();
             two.put("month", date1[0]+date1[1]);
             two.put("value", twod);
@@ -84,6 +93,7 @@ public class FireEventServiceImpl implements FireEventService {
             JSONObject three = new JSONObject();
             three.put("month", date1[0]+date1[1]);
             three.put("value", threed);
+
 
             oneSum.add(one);
             twoSum.add(two);
@@ -159,6 +169,10 @@ public class FireEventServiceImpl implements FireEventService {
                     if ("确认".equals(appFireEvent.getFireType())) {
                         affirmNow++;
                     }
+                    //暂时修改
+                    if ("火灾".equals(appFireEvent.getFireType())) {
+                        affirmNow++;
+                    }
                     
                     if (appFireEvent.getLoss()!=null) {
                         lossNow = appFireEvent.getLoss()+lossNow;
@@ -171,6 +185,10 @@ public class FireEventServiceImpl implements FireEventService {
                     }
                    
                     
+                }
+                    //暂时修改
+                if (nowValue!=null && nowValue.size()>0) {
+                    primitiveNow=nowValue.size();
                 }
                 
                 
@@ -197,6 +215,11 @@ public class FireEventServiceImpl implements FireEventService {
                     if ("确认".equals(appFireEvent.getFireType())) {
                         affirmBefore++;
                     }
+                    //暂时修改
+                    if ("火灾".equals(appFireEvent.getFireType())) {
+                        affirmBefore++;
+                    }
+                    
                     
                     if (appFireEvent.getLoss()!=null) {
                         lossBefore = appFireEvent.getLoss()+lossBefore;
@@ -208,6 +231,10 @@ public class FireEventServiceImpl implements FireEventService {
                         deadBefore = appFireEvent.getDeadNum()+deadBefore;
                     }
                     
+                }
+                //暂时修改
+                if (beforeValue!=null && beforeValue.size()>0) {
+                    primitiveBefore=beforeValue.size();
                 }
                 
                 
@@ -315,19 +342,31 @@ public class FireEventServiceImpl implements FireEventService {
                 if ("确认".equals(event.getFireType())) {
                     threed++;
                 }
+                //暂时更改
+                if ("火灾".equals(event.getFireType())) {
+                    threed++;
+                }
+            }
+            
+            if (list!=null && list.size()>0) {
+                oned=list.size();
             }
 
+            
+            
             JSONObject one = new JSONObject();
             one.put("month", date1[0]+date1[1]);
             one.put("value", oned);
 
+            JSONObject three = new JSONObject();
+            three.put("month",date1[0]+date1[1]);
+            three.put("value", threed);
+            
             JSONObject two = new JSONObject();
             two.put("month", date1[0]+date1[1]);
             two.put("value", twod);
 
-            JSONObject three = new JSONObject();
-            three.put("month",date1[0]+date1[1]);
-            three.put("value", threed);
+            
 
             oneSum.add(one);
             twoSum.add(two);
