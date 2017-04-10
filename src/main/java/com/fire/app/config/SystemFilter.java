@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fire.app.common.App;
 import com.fire.app.domain.User;
 
-@WebFilter(filterName="systemFilter",urlPatterns="/*")
+@WebFilter(filterName="systemFilter",value="/app/**")
 public class SystemFilter implements Filter {
 
     @Override
@@ -28,7 +28,8 @@ public class SystemFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         
-        
+     // 设置字符集  
+        req.setCharacterEncoding("utf-8");  
         String servletPath = req.getServletPath();
         if (servletPath.contains("app")) {
             User user = (User) req.getSession().getAttribute(App.USER_SESSION_KEY);
