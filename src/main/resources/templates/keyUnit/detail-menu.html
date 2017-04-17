@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>项目概况表</title>
+    <link href="../img/favicon.ico" rel="apple-touch-icon-precomposed">
+	<link href="../img/favicon.ico" sizes="114x114" rel="apple-touch-icon-precomposed">
+    <link href="../css/base.css" rel="stylesheet"/>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <link href="../common/iconfont/iconfont.css" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
+</head>
+<body>
+	<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+			<!--菜单部分-->
+			<aside id="offCanvasSide" class="mui-off-canvas-right">
+				<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="menu-title">菜单</div>
+						<ul class="menu">
+							<li><a href="../regionalProfile/regionalProfile.html"><i class="iconfont icon-region"></i>区域概况</a></li>
+							<li><a href="../hiddenInvestigation/hiddenInvestigation.html"><i class="iconfont icon-hidden"></i>隐患排查</a></li>
+							<li><a href="../alarm/alarm-tianHe.html"><i class="iconfont icon-warn"></i>警情</a></li>
+							<li><a href="../lawEnforcement/lawEnforcement-tianHe.html"><i class="iconfont icon-police"></i>执法</a></li>
+							<li><a href="../statisticalData/statisticalData.html"><i class="iconfont icon-bar-chart"></i>数据统计</a></li>
+                            <li><a href="../keyUnit/keyUnit.html"><i class="iconfont icon-star"></i>重点单位信息</a></li>
+						</ul>
+					</div>
+				</div>
+			</aside>
+			<div class="mui-inner-wrap">
+				<header class="mui-bar mui-bar-nav">
+					<div class="logo">
+						<img src="../img/logo.png" />
+					</div>
+					<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
+					<h1 class="mui-title">重点单位信息</h1>
+				</header>
+				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="filterBox">
+							<h1>沙河小学</h1>
+							<a href="keyUnit.html" class="fl btn-filter" >
+								<i class="mui-icon mui-icon-arrowleft"></i>
+								返回
+							</a>
+						</div>
+						<div class="mui-content-padded" id="contentBox">
+							<!-- 内容区域 -->
+							<ul class="menu detail-menu">
+								<li><a href="buildingProfile.html">建筑物概况表</a></li>
+								<li><a href="javascript:;">建筑物主要使用功能表</a></li>
+								<li><a href="javascript:;">物业管理单位概况表</a></li>
+								<li><a href="javascript:;">消防重点部位概况表</a></li>
+								<li><a href="javascript:;">主要消防系统概况表</a></li>
+							</ul>
+							<!-- 内容区域 end -->
+						</div>
+					</div>
+				</div>
+				<!-- off-canvas backdrop -->
+				<div class="mui-off-canvas-backdrop"></div>
+			</div>
+		</div>
+	<script src="../js/mui.js"></script>
+	<script src="../js/jquery-2.1.0.js"></script>
+	<script src="../js/normal.js"></script>
+</body>
+</html>

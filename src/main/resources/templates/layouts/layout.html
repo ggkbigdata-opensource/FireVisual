@@ -27,25 +27,22 @@
             <div class="mui-scroll">
                 <div class="menu-title">菜单</div>
                 <ul class="menu">
-                    <li><a
-                            th:href="@{/app/situation}">
+                    <li><a th:href="@{/app/situation}">
                             <i class="iconfont icon-region"></i>区域概况
                         </a></li>
-                    <li><a
-                            th:href="@{/app/hiddInvest}">
+                    <li><a th:href="@{/app/hiddInvest}">
                             <i class="iconfont icon-hidden"></i>隐患排查
                         </a></li>
                     <li><a th:href="@{/app/fireEvent/}">
                             <i class="iconfont icon-warn"></i>警情
                         </a></li>
-                    <li><a
-                            th:href="@{/app/punishment/}">
+                    <li><a th:href="@{/app/punishment/}">
                             <i class="iconfont icon-police"></i>执法
                         </a></li>
-                    <li><a
-                            th:href="@{/app/statistical}">
+                    <li><a th:href="@{/app/statistical}">
                             <i class="iconfont icon-bar-chart"></i>数据统计
                         </a></li>
+                    <li><a href="#"><i class="iconfont icon-star"></i>重点单位信息</a></li>
                 </ul>
             </div>
         </div>
@@ -65,11 +62,11 @@
     <div th:fragment="alarm-menu" id="trendPopover" style="display: none" class="popoverbox">
         <ul class="mui-table-view">
             <li class="mui-table-view-cell"><a
-                    th:href="@{/app/fireEvent/}">天河全区警情趋势</a></li>
+                    th:href="@{/app/fireEvent/}">天河区警情趋势</a></li>
             <li class="mui-table-view-cell"><a
                     th:href="@{/app/fireEvent/toAreaPage}">街道警情趋势</a></li>
             <li class="mui-table-view-cell"><a
-                    th:href="@{/app/fireEvent/toBasePage}">分类警情数据</a></li>
+                    th:href="@{/app/fireEvent/toBasePage}">火灾警情基本数据</a></li>
         </ul>
     </div>
     
@@ -77,11 +74,11 @@
     <div th:fragment="law-menu" id="trendPopover" style="display: none" class="popoverbox">
         <ul class="mui-table-view">
             <li class="mui-table-view-cell"><a
-                    th:href="@{/app/punishment/}">天河全区执法趋势</a></li>
+                    th:href="@{/app/punishment/}">天河区执法趋势</a></li>
             <li class="mui-table-view-cell"><a
                     th:href="@{/app/punishment/toAreaPage}">街道执法趋势</a></li>
             <li class="mui-table-view-cell"><a
-                    th:href="@{/app/punishment/toBasePage}">分类执法数据</a></li>
+                    th:href="@{/app/punishment/toBasePage}">火灾执法基本数据</a></li>
         </ul>
     </div>
 </body>

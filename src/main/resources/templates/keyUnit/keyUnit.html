@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>重点单位信息</title>
+    <link href="../img/favicon.ico" rel="apple-touch-icon-precomposed">
+	<link href="../img/favicon.ico" sizes="114x114" rel="apple-touch-icon-precomposed">
+    <link href="../css/base.css" rel="stylesheet"/>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <link href="../common/iconfont/iconfont.css" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
+</head>
+<body>
+	<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+			<!--菜单部分-->
+			<aside id="offCanvasSide" class="mui-off-canvas-right">
+				<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="menu-title">菜单</div>
+						<ul class="menu">
+							<li><a href="../regionalProfile/regionalProfile.html"><i class="iconfont icon-region"></i>区域概况</a></li>
+							<li><a href="../hiddenInvestigation/hiddenInvestigation.html"><i class="iconfont icon-hidden"></i>隐患排查</a></li>
+							<li><a href="../alarm/alarm-tianHe.html"><i class="iconfont icon-warn"></i>警情</a></li>
+							<li><a href="../lawEnforcement/lawEnforcement-tianHe.html"><i class="iconfont icon-police"></i>执法</a></li>
+							<li><a href="../statisticalData/statisticalData.html"><i class="iconfont icon-bar-chart"></i>数据统计</a></li>
+                            <li><a href="../keyUnit/keyUnit.html"><i class="iconfont icon-star"></i>重点单位信息</a></li>
+						</ul>
+					</div>
+				</div>
+			</aside>
+			<div class="mui-inner-wrap">
+				<header class="mui-bar mui-bar-nav">
+					<div class="logo">
+						<img src="../img/logo.png" />
+					</div>
+					<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
+					<h1 class="mui-title">重点单位信息</h1>
+				</header>
+				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="mui-content-padded" id="contentBox">
+							<!-- 内容区域 -->
+							<div class="mui-input-row mui-search searchBox">
+								<input type="search" class="mui-input-clear input-search" placeholder="输入重点单位名称">
+								<button type="button" class="button-search">搜索</button>
+							</div>
+							<!-- 无记录 -->
+							<div class="no-record tc">
+								<div class="no-record-main oh">
+									<i class="mui-icon mui-icon-search fl"></i>
+									<div class="fl">
+										<h1>无搜索记录</h1>
+										<p>请输入关键字查看重点单位信息</p>
+									</div>
+								</div>
+							</div>
+							<!-- 无记录end -->
+							
+							<!-- 有记录 -->
+							<div class="recordBox">
+								<h2>最近浏览记录</h2>
+								<ul class="groupList recordList">
+									<li>
+										<h1>沙河小学<a class="btn-detail pa" href="detail-menu.html">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>
+										<div class="mui-row">
+											<div class="mui-col-xs-6">
+									            <div class="tit fl">街道：</div>
+									            <div class="oh">员村</div>
+									        </div>
+									        <div class="mui-col-xs-6">
+									            <div class="tit fl">安全隐患等级：</div>
+									            <div class="oh fb num">
+									            	<i class="iconfont icon-circle level1"><em>1</em></i>
+									            </div>
+									        </div>
+									        <div class="mui-col-xs-6">
+									            <div class="tit fl">使用性质：</div>
+									            <div class="oh">商业用地</div>
+									        </div>
+									        <div class="mui-col-xs-6">
+									            <div class="tit fl">建筑类别：</div>
+									            <div class="oh">超高层</div>
+									        </div>
+									    </div>
+									</li>
+									<li>
+										<h1>沙河小学<a class="btn-detail pa" href="detail-menu.html">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>
+										<div class="mui-row">
+											<div class="mui-col-xs-6">
+									            <div class="tit fl">街道：</div>
+									            <div class="oh">员村</div>
+									        </div>
+									        <div class="mui-col-xs-6">
+									            <div class="tit fl">安全隐患等级：</div>
+									            <div class="oh fb num">
+									            	<i class="iconfont icon-circle level1"><em>1</em></i>
+									            </div>
+									        </div>
+									        <div class="mui-col-xs-6">
+									            <div class="tit fl">使用性质：</div>
+									            <div class="oh">商业用地</div>
+									        </div>
+									        <div class="mui-col-xs-6">
+									            <div class="tit fl">建筑类别：</div>
+									            <div class="oh">超高层</div>
+									        </div>
+									    </div>
+									</li>
+								</ul>
+							</div>
+							<!-- 内容区域 end -->
+						</div>
+					</div>
+				</div>
+				<!-- off-canvas backdrop -->
+				<div class="mui-off-canvas-backdrop"></div>
+			</div>
+		</div>
+	<script src="../js/mui.js"></script>
+	<script src="../js/jquery-2.1.0.js"></script>
+	<script src="../js/normal.js"></script>
+</body>
+</html>

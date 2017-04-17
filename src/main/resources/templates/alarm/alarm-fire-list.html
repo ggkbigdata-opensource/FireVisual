@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head th:with="title=${'警情'}" th:include="/layouts/layout::head">
+</head>
+<body>
+	<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+			<!--菜单部分-->
+			<div th:replace="/layouts/layout::menu"></div>
+			<div class="mui-inner-wrap">
+				<header class="mui-bar mui-bar-nav">
+					<div class="logo">
+						<img src="../img/logo.png" />
+					</div>
+					<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
+					<h1 class="mui-title">警情</h1>
+				</header>
+				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="filterBox">
+							<h1>员村警情</h1>
+							<a href="alarm-fire.html" class="fl btn-filter" >
+								<i class="mui-icon mui-icon-arrowleft"></i>
+								返回
+							</a>
+						</div>
+						<div class="mui-content-padded" id="contentBox">
+							<!-- 内容区域 -->
+							<table class="table fireDataTable">
+								<thead>
+									<tr>
+										<th width="45">排序</th>
+										<th>发生时间</th>
+										<th>街道</th>
+										<th>社区</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr onclick="location.href='alarm-fire-detail.html';">
+										<td>1</td>
+										<td>2017/01/01</td>
+										<td>沙河</td>
+										<td>先烈东横路</td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>2017/01/01</td>
+										<td>沙河</td>
+										<td>先烈东横路</td>
+									</tr>
+									<tr>
+										<td>3</td>
+										<td>2017/01/01</td>
+										<td>沙河</td>
+										<td>先烈东横路</td>
+									</tr>
+									<tr>
+										<td>4</td>
+										<td>2017/01/01</td>
+										<td>沙河</td>
+										<td>先烈东横路</td>
+									</tr>
+									<tr>
+										<td>5</td>
+										<td>2017/01/01</td>
+										<td>沙河</td>
+										<td>先烈东横路</td>
+									</tr>
+									<tr>
+										<td>6</td>
+										<td>2017/01/01</td>
+										<td>沙河</td>
+										<td>先烈东横路</td>
+									</tr>
+									<tr>
+										<td>7</td>
+										<td>2017/01/01</td>
+										<td>沙河</td>
+										<td>先烈东横路</td>
+									</tr>
+									<tr>
+										<td>8</td>
+										<td>2017/01/01</td>
+										<td>沙河</td>
+										<td>先烈东横路</td>
+									</tr>
+									<tr>
+										<td>9</td>
+										<td>2017/01/01</td>
+										<td>沙河</td>
+										<td>先烈东横路</td>
+									</tr>
+									<tr>
+										<td>10</td>
+										<td>2017/01/01</td>
+										<td>沙河</td>
+										<td>先烈东横路</td>
+									</tr>
+									<tr>
+										<td>11</td>
+										<td>2017/01/01</td>
+										<td>沙河</td>
+										<td>先烈东横路</td>
+									</tr>
+									<tr>
+										<td>12</td>
+										<td>2017/01/01</td>
+										<td>沙河</td>
+										<td>先烈东横路</td>
+									</tr>
+								</tbody>
+							</table>
+							<!-- 内容区域 end -->
+						</div>
+					</div>
+				</div>
+				<!-- off-canvas backdrop -->
+				<div class="mui-off-canvas-backdrop"></div>
+			</div>
+		</div>
+	<script src="../js/mui.js"></script>
+	<script src="../js/jquery-2.1.0.js"></script>
+	<script src="../js/normal.js"></script>
+</body>
+</html>

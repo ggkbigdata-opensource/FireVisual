@@ -18,7 +18,7 @@
             <div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
                 <div class="mui-scroll">
                     <div class="filterBox">
-                        <button onclick="hidePopover('trendPopover')" class="fl btn-filter">分类警情数据 <i class="mui-icon mui-icon-arrowdown"></i></button>
+                        <button onclick="hidePopover('trendPopover')" class="fl btn-filter">火灾警情基本数据<i class="mui-icon mui-icon-arrowdown"></i></button>
                         <!-- 火情下拉列表 -->
                         <div th:replace="/layouts/layout::alarm-menu"></div>
                         <button onclick="hidePopover('timePopover')" class="fr btn-filter">选择时间段 <i class="mui-icon mui-icon-arrowdown"></i></button>
@@ -442,7 +442,7 @@
 	    			data[i].primitiveYearBefore = (data[i].primitiveYearBefore*100).toFixed(2) + '%';
 	    		}
 	    		str1 = '<td class="greenBg">' + data[i].streetName + '</td><td class="blueBg">' + data[i].primitiveNow + '</td><td class="blueBg">' + data[i].primitiveBefore + '</td><td class="blueBg">' + data[i].primitiveYearBefore + '</td>';
-	    		tr1 = '<tr><td class="grayBg">' + (i+1) + '</td>' + str1 + '</tr>';
+	    		tr1 = '<tr onclick="fireList(' + data[i].id + ')"><td class="grayBg">' + (i+1) + '</td>' + str1 + '</tr>';
 	    		arrStr[0]+=tr1;
 	    	}
 	    	data.sort(compare('smokingNow'));
@@ -509,6 +509,9 @@
         	isTime = false;
         	$(".popoverbox").hide();
         });
+	    function fireList(id){
+	    	console.log(id);
+	    }
         /*]]>*/
      </script>
 </body>
