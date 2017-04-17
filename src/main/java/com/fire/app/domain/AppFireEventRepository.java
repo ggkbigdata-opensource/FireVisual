@@ -36,8 +36,8 @@ public interface AppFireEventRepository extends JpaRepository<AppFireEvent, Long
      * @return 
      * @description
      */
-    @Query(value = "SELECT * FROM app_fire_event t where t.occur_time between ?1 and ?2 and t.block_name like %?3%", nativeQuery = true)
-    List<AppFireEvent> findStreetData(Date beginTime, Date endTime, String streetName);
+    @Query(value = "SELECT * FROM app_fire_event t where t.occur_time between ?1 and ?2 and t.street_id = ?3", nativeQuery = true)
+    List<AppFireEvent> findStreetData(Date beginTime, Date endTime, Long streetId);
 
     /**
      * @createDate 2017年3月29日下午4:42:27 
@@ -48,8 +48,29 @@ public interface AppFireEventRepository extends JpaRepository<AppFireEvent, Long
      * @return 
      * @description
      */
-    @Query(value = "SELECT * FROM app_fire_event t where YEAR(t.occur_time)=?1 AND MONTH(t.occur_time)=?2 and t.block_name like %?3%", nativeQuery = true)
-    List<AppFireEvent> findAreaDateToMonth(String string, String string2, String streetName);
+    //@Query(value = "SELECT * FROM app_fire_event t where YEAR(t.occur_time)=?1 AND MONTH(t.occur_time)=?2 and t.block_name like %?3%", nativeQuery = true)
+   // List<AppFireEvent> findAreaDateToMonth(String string, String string2, String streetName);
+    @Query(value = "SELECT * FROM app_fire_event t where YEAR(t.occur_time)=?1 AND MONTH(t.occur_time)=?2 and t.street_id = ?3", nativeQuery = true)
+    List<AppFireEvent> findAreaDateToMonth(String string, String string2, Long streetId);
+
+    /**
+     * @createDate 2017年4月17日上午9:37:49 
+     * @author wangzhiwang
+     * @param streetId
+     * @return 
+     * @description
+     */
+    @Query(value = "SELECT * FROM app_fire_event t where t.street_id = ?1 order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findByStreetId(Long streetId);
+
+    /**
+     * @createDate 2017年4月17日上午10:04:26 
+     * @author wangzhiwang
+     * @param id
+     * @return 
+     * @description
+     */
+    AppFireEvent findById(Long id);
 
    
 

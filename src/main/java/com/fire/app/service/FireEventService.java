@@ -3,6 +3,7 @@ package com.fire.app.service;
 import java.util.List;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fire.app.domain.AppFireEvent;
 
 /**
  * @createDate 2017年3月28日下午4:08:47
@@ -37,5 +38,23 @@ public interface FireEventService {
      * @description 
      */
     List<JSONObject> getAreaDate(Long id);
+
+    /**
+     * @createDate 2017年4月17日上午9:35:04 
+     * @author wangzhiwang
+     * @param streetId
+     * @return 
+     * @description
+     */
+    List<AppFireEvent> getStreetEvent(Long streetId);
+
+    /**
+     * @createDate 2017年4月17日上午9:56:57 
+     * @author wangzhiwang
+     * @param id
+     * @return 
+     * @description
+     */
+    AppFireEvent getEventById(Long id);
 
 }

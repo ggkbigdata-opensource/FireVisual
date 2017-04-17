@@ -10,6 +10,8 @@ public class AppPunishment {
     @Id
     @GeneratedValue
     private Long id;
+    private Long streetId;
+    private String streetName;
     private Long blockId;
     private String blockName;
     private String buildingName;
@@ -300,6 +302,22 @@ public class AppPunishment {
 
     public void setLawsuitAcceptUnit(String lawsuitAcceptUnit) {
         this.lawsuitAcceptUnit = lawsuitAcceptUnit;
+    }
+
+    public Long getStreetId() {
+        return streetId;
+    }
+
+    public void setStreetId(Long streetId) {
+        this.streetId = streetId;
+    }
+
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
     }
     
     

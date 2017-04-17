@@ -157,7 +157,8 @@ public class FireEventServiceImpl implements FireEventService {
                 
                 DecimalFormat   df=new   DecimalFormat("0.00");   
                 
-                List<AppFireEvent> nowValue = fireEventRepository.findStreetData(bTime, eTime, street.getName());
+               // List<AppFireEvent> nowValue = fireEventRepository.findStreetData(bTime, eTime, street.getName());
+                List<AppFireEvent> nowValue = fireEventRepository.findStreetData(bTime, eTime, street.getId());
                 
                 for (AppFireEvent appFireEvent : nowValue) {
                     if ("原始".equals(appFireEvent.getFireType())) {
@@ -203,7 +204,8 @@ public class FireEventServiceImpl implements FireEventService {
                 calendar.add(Calendar.YEAR, -1);// 当前时间减去一年，即一年前的时间
                 eTime = calendar.getTime();
 
-                List<AppFireEvent> beforeValue = fireEventRepository.findStreetData(bTime, eTime, street.getName());
+               // List<AppFireEvent> beforeValue = fireEventRepository.findStreetData(bTime, eTime, street.getName());
+                List<AppFireEvent> beforeValue = fireEventRepository.findStreetData(bTime, eTime, street.getId());
                 
                 for (AppFireEvent appFireEvent : beforeValue) {
                     if ("原始".equals(appFireEvent.getFireType())) {
@@ -328,7 +330,8 @@ public class FireEventServiceImpl implements FireEventService {
             calendar1.add(calendar.MONTH, -1);// 获取上个月月份
             String[] date1 = sdf.format(calendar1.getTime()).split("-");
 
-            List<AppFireEvent> list = fireEventRepository.findAreaDateToMonth(date1[0], date1[1], street.getName());
+           // List<AppFireEvent> list = fireEventRepository.findAreaDateToMonth(date1[0], date1[1], street.getName());
+            List<AppFireEvent> list = fireEventRepository.findAreaDateToMonth(date1[0], date1[1], street.getId());
             int oned = 0;
             int twod = 0;
             int threed = 0;
@@ -395,6 +398,20 @@ public class FireEventServiceImpl implements FireEventService {
         result.add(two);
         result.add(three);
 
+        return result;
+    }
+
+    @Override
+    public List<AppFireEvent> getStreetEvent(Long streetId) {
+
+        List<AppFireEvent> result = fireEventRepository.findByStreetId(streetId);
+        
+        return result;
+    }
+
+    @Override
+    public AppFireEvent getEventById(Long id) {
+        AppFireEvent result = fireEventRepository.findById(id);
         return result;
     }
 

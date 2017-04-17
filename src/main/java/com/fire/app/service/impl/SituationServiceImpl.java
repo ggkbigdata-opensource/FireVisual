@@ -75,10 +75,13 @@ public class SituationServiceImpl implements SituationService {
             JSONObject obj = new JSONObject();
             int version = 1; // 等级，，，即不合格数
             // 查询警情数据
-            List<AppFireEvent> events = fireEventRepository.findStreetData(newYear, nowTime, street.getName());
+            //List<AppFireEvent> events = fireEventRepository.findStreetData(newYear, nowTime, street.getName());
+            List<AppFireEvent> events = fireEventRepository.findStreetData(newYear, nowTime, street.getId());
             // 查询执法数据
-            List<AppPunishment> sealUp = punishmentRepository.findSealUpStreetData(newYear, nowTime, street.getName());
-            List<AppPunishment> notSealUp = punishmentRepository.findStreetData(newYear, nowTime, street.getName());
+            //List<AppPunishment> sealUp = punishmentRepository.findSealUpStreetData(newYear, nowTime, street.getName());
+            //List<AppPunishment> notSealUp = punishmentRepository.findStreetData(newYear, nowTime, street.getName());
+            List<AppPunishment> sealUp = punishmentRepository.findSealUpStreetData(newYear, nowTime, street.getId());
+            List<AppPunishment> notSealUp = punishmentRepository.findStreetData(newYear, nowTime, street.getId());
 
             if (streets != null && streets.size() > 0) {
                 obj.put("eventNum", events.size());

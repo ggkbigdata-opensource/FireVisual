@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fire.app.common.App;
 import com.fire.app.domain.User;
 
-@WebFilter(filterName="systemFilter",value="/app/**")
+/*@WebFilter(filterName="systemFilter",value="/app/**")
 public class SystemFilter implements Filter {
 
     @Override
@@ -48,4 +48,4 @@ public class SystemFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
     }
 
-}
+}*/

@@ -179,11 +179,13 @@ public class PunishmentServiceImpl implements PunishmentService {
             String[] date1 = sdf.format(calendar1.getTime()).split("-");
 
             // 获取临时查封
-            List<AppPunishment> seals = punishmentRepository.findSealStreetDateToMonth(date1[0], date1[1],street.getName());
+            //List<AppPunishment> seals = punishmentRepository.findSealStreetDateToMonth(date1[0], date1[1],street.getName());
+            List<AppPunishment> seals = punishmentRepository.findSealStreetDateToMonth(date1[0], date1[1],street.getId());
             int seald = seals.size();
 
             // 获取行政执法，行政拘留，刑事拘留，三停
-            List<AppPunishment> list = punishmentRepository.findStreetDateToMonth(date1[0], date1[1],street.getName());
+            //List<AppPunishment> list = punishmentRepository.findStreetDateToMonth(date1[0], date1[1],street.getName());
+            List<AppPunishment> list = punishmentRepository.findStreetDateToMonth(date1[0], date1[1],street.getId());
             int oned = 0;// 行政执法
             int twod = 0;// 行政拘留
             int threed = 0;// 刑事拘留
@@ -290,13 +292,15 @@ public class PunishmentServiceImpl implements PunishmentService {
                 int ThreeStopNow = 0;// 三停
 
                 // 获取临时查封的数据
-                List<AppPunishment> sealUpValue = punishmentRepository.findSealUpStreetData(bTime, eTime,street.getName());
+                //List<AppPunishment> sealUpValue = punishmentRepository.findSealUpStreetData(bTime, eTime,street.getName());
+                List<AppPunishment> sealUpValue = punishmentRepository.findSealUpStreetData(bTime, eTime,street.getId());
                 if (sealUpValue != null) {
                     sealUpNow = sealUpValue.size();
                 }
 
                 // 获取行政处罚，行政拘留，刑事拘留，三停的数据
-                List<AppPunishment> otherValue = punishmentRepository.findStreetData(bTime, eTime, street.getName());
+                //List<AppPunishment> otherValue = punishmentRepository.findStreetData(bTime, eTime, street.getName());
+                List<AppPunishment> otherValue = punishmentRepository.findStreetData(bTime, eTime, street.getId());
                 for (AppPunishment punish : otherValue) {
                     if ("行政罚款".equals(punish.getPunishMethod())) {
                         fineNumNow++;// 行政处罚宗数
@@ -337,13 +341,15 @@ public class PunishmentServiceImpl implements PunishmentService {
                 
 
                 // 获取临时查封的数据
-                List<AppPunishment> sealUpBeforeValue = punishmentRepository.findSealUpStreetData(bTime, eTime,street.getName());
+               // List<AppPunishment> sealUpBeforeValue = punishmentRepository.findSealUpStreetData(bTime, eTime,street.getName());
+                List<AppPunishment> sealUpBeforeValue = punishmentRepository.findSealUpStreetData(bTime, eTime,street.getId());
                 if (sealUpBeforeValue != null) {
                     sealUpBefore = sealUpBeforeValue.size();
                 }
 
                 // 获取行政处罚，行政拘留，刑事拘留，三停的数据
-                List<AppPunishment> otherBeforeValue = punishmentRepository.findStreetData(bTime, eTime, street.getName());
+                //List<AppPunishment> otherBeforeValue = punishmentRepository.findStreetData(bTime, eTime, street.getName());
+                List<AppPunishment> otherBeforeValue = punishmentRepository.findStreetData(bTime, eTime, street.getId());
 
                 for (AppPunishment punish : otherBeforeValue) {
                     if ("行政罚款".equals(punish.getPunishMethod())) {

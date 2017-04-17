@@ -14,6 +14,8 @@ public class AppFireEvent{
     @Id
     @GeneratedValue
     private Long id;
+    private Long streetId;
+    private String streetName;
     private Long blockId;
     private String blockName;
     private Date occurTime;
@@ -305,6 +307,22 @@ public class AppFireEvent{
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public Long getStreetId() {
+        return streetId;
+    }
+
+    public void setStreetId(Long streetId) {
+        this.streetId = streetId;
+    }
+
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
     }
     
 

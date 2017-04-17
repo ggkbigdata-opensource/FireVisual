@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fire.app.domain.AppFireEvent;
 import com.fire.app.service.FireEventService;
 import com.fire.app.util.ContextHolderUtils;
 
@@ -103,6 +104,46 @@ public class FireEventController {
         }*/
         
         List<JSONObject> result = fireEventServcie.getAreaDate(id);
+        
+        return result;
+    }
+    
+    /**
+     * @createDate 2017年4月17日上午9:56:22 
+     * @author wangzhiwang
+     * @param streetId
+     * @return 
+     * @description 查询街道下所有警情
+     */
+    @RequestMapping(value = "/getStreetEvent",method = RequestMethod.GET)
+    @ResponseBody
+    private List<AppFireEvent> getStreetEvent(@RequestParam(required=true) Long streetId) {
+        
+        /*  if (!ContextHolderUtils.isLogin()) {
+            return "login/login";
+        }*/
+        
+        List<AppFireEvent> result = fireEventServcie.getStreetEvent(streetId);
+        
+        return result;
+    }
+    
+    /**
+     * @createDate 2017年4月17日上午9:56:39 
+     * @author wangzhiwang
+     * @param id
+     * @return 
+     * @description 通过id获取警情数据
+     */
+    @RequestMapping(value = "/getEvent",method = RequestMethod.GET)
+    @ResponseBody
+    private AppFireEvent getEvent(@RequestParam(required=true) Long id) {
+        
+        /*  if (!ContextHolderUtils.isLogin()) {
+            return "login/login";
+        }*/
+        
+        AppFireEvent result = fireEventServcie.getEventById(id);
         
         return result;
     }

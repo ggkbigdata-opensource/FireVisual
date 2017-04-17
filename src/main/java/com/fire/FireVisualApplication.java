@@ -2,10 +2,7 @@ package com.fire;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-
-import com.fire.app.config.SystemFilter;
 
 @SpringBootApplication
 @ComponentScan("com.fire.app.controller")
@@ -16,8 +13,8 @@ public class FireVisualApplication {
 		SpringApplication.run(FireVisualApplication.class, args);
 	}
 	
-	@Bean
+	/*@Bean
     public SystemFilter  systemFilter () {
         return new SystemFilter();
-    }
+    }*/
 }
