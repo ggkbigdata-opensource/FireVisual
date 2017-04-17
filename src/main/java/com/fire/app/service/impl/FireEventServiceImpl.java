@@ -292,7 +292,7 @@ public class FireEventServiceImpl implements FireEventService {
                     streetResult.put("deadYearBefore", df.format((float)(deadNow-deadBefore)/deadBefore));
                 }
                 
-                
+                streetResult.put("id", street.getId());
                 
                 result.add(streetResult);
 
