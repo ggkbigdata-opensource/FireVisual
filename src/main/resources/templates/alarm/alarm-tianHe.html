@@ -19,8 +19,8 @@
 				class="mui-content mui-scroll-wrapper">
 				<div class="mui-scroll">
 					<div class="filterBox">
-						<button onclick="hide('trendPopover')" class="fl btn-filter">天河区警情趋势 <i class="mui-icon mui-icon-arrowdown"></i>
-						</button>
+						<span id="hidePopover" class="fl btn-filter">天河区警情趋势 <i class="mui-icon mui-icon-arrowdown"></i>
+						</span>
 						<div th:replace="/layouts/layout::alarm-menu"></div>
 					</div>
 					<div class="mui-content-padded" style="height: 100%" id="bodyContent">
@@ -50,6 +50,7 @@
 		/*<![CDATA[*/
 		mui.init();
 		var now = new Date();
+		var isTrend = false;
 		mui.get([[@{/app/fireEvent/main}]], '', function(data) {
 			if (data && data.length > 0) {
 				console.log(data);
@@ -100,7 +101,25 @@
 				$('table tbody').append(tbodytr);
 			}
 		}, 'json');
+		$('#hidePopover').bind('tap',function(){
+			hidePopover('trendPopover');
+		});
+		function hidePopover(popover){
+			if(popover === 'trendPopover'){
+				if(isTrend){
+					$('#bodyContent').removeAttr('class','content-backdrop');
+					$('#trendPopover').hide();
+					isTrend = false;
+				}else{
+					$('#bodyContent').attr('class','content-backdrop');
+					$('#trendPopover').show();
+					isTrend = true;
+				}
+			}
+		}
 		$('#bodyContent').bind('tap',function(){
+			isTrend = false;
+			$('#bodyContent').removeAttr('class','content-backdrop');
         	$(".popoverbox").hide();
         });
 		/*]]>*/

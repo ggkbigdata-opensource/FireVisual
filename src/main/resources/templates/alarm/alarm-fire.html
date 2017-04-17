@@ -18,10 +18,10 @@
             <div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
                 <div class="mui-scroll">
                     <div class="filterBox">
-                        <button onclick="hidePopover('trendPopover')" class="fl btn-filter">火灾警情基本数据<i class="mui-icon mui-icon-arrowdown"></i></button>
+                        <span id="hidePopover" class="fl btn-filter">火灾警情基本数据<i class="mui-icon mui-icon-arrowdown"></i></span>
                         <!-- 火情下拉列表 -->
                         <div th:replace="/layouts/layout::alarm-menu"></div>
-                        <button onclick="hidePopover('timePopover')" class="fr btn-filter">选择时间段 <i class="mui-icon mui-icon-arrowdown"></i></button>
+                        <span id="hideTimePopover" class="fr btn-filter">选择时间段 <i class="mui-icon mui-icon-arrowdown"></i></span>
                         <div id="timePopover" style="display: none" class="popoverbox">
                             <div class="mui-scroll-wrapper time-scroll-wrapper">
                                 <div class="mui-scroll">
@@ -310,6 +310,7 @@
 	    //##################选择时间段结束###############################
 	    //点击确认提交时间获取数据
 	    function checkRange (year,range,half,quarter,month){
+	    	
 	    	if(range==='1'){
 	    		beginRange = year + '-01';
 	    		endRange = year + '-12';
@@ -362,6 +363,7 @@
         		}
         	});
 		    isTime = false;
+		    $('#bodyContent').removeAttr('class','content-backdrop');
 	    	$('#timePopover').hide();
 	    }
 		//“输入范围”点击确认
@@ -391,30 +393,42 @@
         		}
         	});
 			isTime = false;
+			$('#bodyContent').removeAttr('class','content-backdrop');
 	    	$('#timePopover').hide();
 		}
 	    //分类警情数据和选择时间段弹窗点击关闭另外一个
 	    var isTrend = false;
 	    var isTime = false;
+	    $('#hidePopover').bind('tap',function(){
+	    	hidePopover('trendPopover');
+	    });
+	    $('#hideTimePopover').bind('tap',function(){
+	    	hidePopover('timePopover');
+	    });
 	    function hidePopover(popover){
 	    	if(popover === 'trendPopover'){
 	    		$('#timePopover').hide();
 	    		isTime = false;
 	    		if(isTrend){
 	    			$('#trendPopover').hide();
+	    			$('#bodyContent').removeAttr('class','content-backdrop');
 	    			isTrend = false;
 	    		}else{
 	    			$('#trendPopover').show();
+	    			$('#bodyContent').attr('class','content-backdrop');
 	    			isTrend = true;
 	    		}
+	    		
 	    	}else if(popover === 'timePopover'){
 	    		$('#trendPopover').hide();
 	    		isTrend = false;
 	    		if(isTime){
 	    			$('#timePopover').hide();
+	    			$('#bodyContent').removeAttr('class','content-backdrop');
 	    			isTime = false;
 	    		}else{
 	    			$('#timePopover').show();
+	    			$('#bodyContent').attr('class','content-backdrop');
 	    			isTime = true;
 	    		}
 	    	}
@@ -505,9 +519,12 @@
 			}   	
 	    }
 	    $('#bodyContent').bind('tap',function(){
-	    	isTrend = false;
-        	isTime = false;
-        	$(".popoverbox").hide();
+	    	if(isTrend || isTime){
+		    	isTrend = false;
+	        	isTime = false;
+	        	$('#bodyContent').removeAttr('class','content-backdrop');
+	        	$(".popoverbox").hide();
+	    	}
         });
 	    function fireList(id){
 	    	console.log(id);
