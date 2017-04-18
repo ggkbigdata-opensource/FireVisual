@@ -12,7 +12,7 @@
 						<img th:src="@{/img/logo.png}" />
 					</div>
 					<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
-					<h1 class="mui-title">区域概况</h1>
+					<h1 class="mui-title">隐患排查</h1>
 				</header>
 				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
 					<div class="mui-scroll">
@@ -25,6 +25,11 @@
 						</div>
 						<div class="mui-content-padded">
 							<!-- 内容区域 -->
+							<div class="mui-input-row mui-search searchBox">
+								<input type="search" class="mui-input-clear input-search" placeholder="输入重点单位名称">
+								<button type="button" class="button-search">搜索</button>
+							</div>
+							<div class="spaceline15"></div>
 							<ul class="groupList" id="hiddenDetail"></ul>
 							<!-- 内容区域 end -->
 						</div>

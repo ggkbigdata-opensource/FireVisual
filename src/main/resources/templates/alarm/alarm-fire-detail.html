@@ -9,7 +9,7 @@
 			<div class="mui-inner-wrap">
 				<header class="mui-bar mui-bar-nav">
 					<div class="logo">
-						<img src="../img/logo.png" />
+						<img th:src="@{/img/logo.png}" />
 					</div>
 					<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
 					<h1 class="mui-title">警情</h1>
@@ -18,7 +18,7 @@
 					<div class="mui-scroll">
 						<div class="filterBox">
 							<h1>员村警情</h1>
-							<a href="alarm-fire-list.html" class="fl btn-filter" >
+							<a th:href="@{/app/fireEvent/toStreeEvent}" class="fl btn-filter" >
 								<i class="mui-icon mui-icon-arrowleft"></i>
 								返回
 							</a>
@@ -26,31 +26,151 @@
 						<div class="mui-content-padded" id="contentBox">
 							<!-- 内容区域 -->
 							<div class="profileBox">
+								<h1 class="profileTit">东南社区</h1>
 								<div class="mui-row ">
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>发生时间</h2>
 							        	<p>2016年7月16日早上8时15分</p>
 							        </div>
-							        <div class="mui-col-xs-6 profile-items">
-							        	<h2>街道</h2>
-							        	<p>街道</p>
-							        </div>
-							        <div class="mui-col-xs-6 profile-items">
-							        	<h2>社区</h2>
-							        	<p>广州大道</p>
-							        </div>
-							        <div class="mui-col-xs-12 profile-items">
-							        	<h2>警情种类</h2>
-							        	<p>冒烟</p>
+							        <div class="mui-col-xs-12 profile-items mui-row">
+							        	<div class="mui-col-xs-6">
+								        	<h2>街道</h2>
+								        	<p>员村</p>
+								        </div>
+							        	<div class="mui-col-xs-6">
+								        	<h2>社区</h2>
+								        	<p>东南社区</p>
+								        </div>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
-							        	<h2>具体案情</h2>
-							        	<p>2016年7月16日早上8时15分许，黄埔大道西201号金泽大厦26楼15房冒浓烟，后马上有119消防员和公安人员到场抢救，发现是一间办公室内的电源插线板短路着火冒烟，引起地毯燃烧，经过公安消防员的及时抢救，将现场的火灭掉，最后造成过火面积大约2平方米，没有造成人员伤亡。损失的财物有办公用品等。</p>
+							        	<h2>地址</h2>
+							        	<p>-</p>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items">
+							        	<h2>火情案号</h2>
+							        	<p>-</p>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items">
+							        	<h2>建筑名称</h2>
+							        	<p>-</p>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items">
+							        	<h2>场所名称</h2>
+							        	<p>-</p>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items">
+							        	<h2>地理位置</h2>
+							        	<p>-</p>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items mui-row">
+							        	<div class="mui-col-xs-6">
+								        	<h2>使用性质</h2>
+								        	<p>-</p>
+								        </div>
+							        	<div class="mui-col-xs-6">
+								        	<h2>工程性质</h2>
+								        	<p>-</p>
+								        </div>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items mui-row">
+							        	<div class="mui-col-xs-6">
+							        		<h2>火灾类型</h2>
+							        		<p>冒烟</p>
+								        </div>
+							        	<div class="mui-col-xs-6">
+								        	<h2>值班组</h2>
+								        	<p>金中伟</p>
+								        </div>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items">
+							        	<h2>警情描述</h2>
+							        	<p>2017-01-01 17:02:00天河区棠东毓桂南街禾棠下1号2楼民房民房着火。经了解,是该民房中的电瓶车电池充电过程中电池爆炸,无人员伤亡,直接财产损失轻微。（棠下街，东南社区，派出所出警处理）</p>
 							        </div>
 							        
 							        <div class="mui-col-xs-12 profile-items">
-							        	<h2>火灾警情（消防大队）</h2>
-							        	<p>2016-9-25  21:45:00，致电员村中队谢铭副中队长，其称已归队，3分钟到场，到场未处置。现场是共十层的民房（钢筋混泥土结构）负一层楼的电表着火，其建筑面积约150平方米，燃烧物为电表，燃烧面积约0.5平方米，无人员受伤，中队到场时，明火由当地人员用灭火器扑灭，中队了解情况后移交民警没事返回。</p>
+							        	<h2>现场警情</h2>
+							        	<p>2017-1-1  17:02:00 石牌中队费程福副中队长来电称，已到现场附近经过询问路人无发现异常，因为城中村里面的小巷太复杂找不到现场，联系报警人18620523248称，其是路过的已离开现场接不了警，其离开前有治保会的人在场处理，现场已没事不用到场就可以了，故中队准备返回。</p>
+							        </div>
+							    </div>
+							    <div class="spaceline10"></div>
+							    <div class="mui-row ">
+							        <div class="mui-col-xs-12 profile-items mui-row">
+							        	<div class="mui-col-xs-6">
+							        		<h2>起火位置</h2>
+							        		<p>-</p>
+								        </div>
+							        	<div class="mui-col-xs-6">
+								        	<h2>起火物</h2>
+								        	<p>-</p>
+								        </div>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items mui-row">
+							        	<div class="mui-col-xs-6">
+							        		<h2>起火原因分类</h2>
+							        		<p>-</p>
+								        </div>
+							        	<div class="mui-col-xs-6">
+								        	<h2>起火原因</h2>
+								        	<p>-</p>
+								        </div>
+							        </div>
+							    </div>
+							    <div class="spaceline10"></div>
+							    <div class="mui-row ">
+							        <div class="mui-col-xs-12 profile-items mui-row">
+							        	<div class="mui-col-xs-6">
+							        		<h2>企业性质</h2>
+								        	<p>-</p>
+								        </div>
+							        	<div class="mui-col-xs-6">
+								        	<h2>经济损失</h2>
+							        		<p>10000元</p>
+								        </div>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items mui-row">
+							        	<div class="mui-col-xs-6">
+							        		<h2>受伤人数</h2>
+							        		<p>1</p>
+								        </div>
+							        	<div class="mui-col-xs-6">
+								        	<h2>死亡人数</h2>
+								        	<p>1</p>
+								        </div>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items mui-row">
+							        	<div class="mui-col-xs-6">
+							        		<h2>是否有消防手续</h2>
+								        	<p>是</p>
+								        </div>
+							        	<div class="mui-col-xs-6">
+								        	<h2>是否自救</h2>
+							        		<p>否</p>
+								        </div>
+							        </div>
+							    </div>
+							    <div class="spaceline10"></div>
+							    <div class="mui-row ">
+							        <div class="mui-col-xs-12 profile-items">
+							        	<h2>消防执法案号</h2>
+							        	<p>-</p>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items mui-row">
+							        	<div class="mui-col-xs-6">
+							        		<h2>微型消防站参与</h2>
+								        	<p>-</p>
+								        </div>
+							        	<div class="mui-col-xs-6">
+								        	<h2>移交部门</h2>
+							        		<p>-</p>
+								        </div>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items">
+							        	<h2>数据创建时间</h2>
+							        	<p>-</p>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items">
+							        	<h2>修改时间</h2>
+							        	<p>-</p>
 							        </div>
 							    </div>
 						    </div>
@@ -62,8 +182,16 @@
 				<div class="mui-off-canvas-backdrop"></div>
 			</div>
 		</div>
-	<script src="../js/mui.js"></script>
-	<script src="../js/jquery-2.1.0.js"></script>
-	<script src="../js/normal.js"></script>
+	<script th:src="@{/js/mui.js}"></script>
+	<script th:src="@{/js/jquery-2.1.0.js}"></script>
+	<script th:src="@{/js/normal.js}"></script>
+	<script th:inline="javascript">
+		mui.init();
+		
+		function init(){
+			
+		}
+		init();
+	</script>
 </body>
 </html>

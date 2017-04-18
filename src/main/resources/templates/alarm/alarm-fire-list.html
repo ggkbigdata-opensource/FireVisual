@@ -3,13 +3,14 @@
 <head th:with="title=${'警情'}" th:include="/layouts/layout::head">
 </head>
 <body>
+	
 	<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
 			<!--菜单部分-->
 			<div th:replace="/layouts/layout::menu"></div>
 			<div class="mui-inner-wrap">
 				<header class="mui-bar mui-bar-nav">
 					<div class="logo">
-						<img src="../img/logo.png" />
+						<img th:src="@{/img/logo.png}" />
 					</div>
 					<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
 					<h1 class="mui-title">警情</h1>
@@ -18,97 +19,48 @@
 					<div class="mui-scroll">
 						<div class="filterBox">
 							<h1>员村警情</h1>
-							<a href="alarm-fire.html" class="fl btn-filter" >
+							<a th:href="@{/app/fireEvent/toBasePage}" class="fl btn-filter" >
 								<i class="mui-icon mui-icon-arrowleft"></i>
 								返回
 							</a>
 						</div>
 						<div class="mui-content-padded" id="contentBox">
 							<!-- 内容区域 -->
-							<table class="table fireDataTable">
-								<thead>
-									<tr>
-										<th width="45">排序</th>
-										<th>发生时间</th>
-										<th>街道</th>
-										<th>社区</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr onclick="location.href='alarm-fire-detail.html';">
-										<td>1</td>
-										<td>2017/01/01</td>
-										<td>沙河</td>
-										<td>先烈东横路</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>2017/01/01</td>
-										<td>沙河</td>
-										<td>先烈东横路</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>2017/01/01</td>
-										<td>沙河</td>
-										<td>先烈东横路</td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>2017/01/01</td>
-										<td>沙河</td>
-										<td>先烈东横路</td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td>2017/01/01</td>
-										<td>沙河</td>
-										<td>先烈东横路</td>
-									</tr>
-									<tr>
-										<td>6</td>
-										<td>2017/01/01</td>
-										<td>沙河</td>
-										<td>先烈东横路</td>
-									</tr>
-									<tr>
-										<td>7</td>
-										<td>2017/01/01</td>
-										<td>沙河</td>
-										<td>先烈东横路</td>
-									</tr>
-									<tr>
-										<td>8</td>
-										<td>2017/01/01</td>
-										<td>沙河</td>
-										<td>先烈东横路</td>
-									</tr>
-									<tr>
-										<td>9</td>
-										<td>2017/01/01</td>
-										<td>沙河</td>
-										<td>先烈东横路</td>
-									</tr>
-									<tr>
-										<td>10</td>
-										<td>2017/01/01</td>
-										<td>沙河</td>
-										<td>先烈东横路</td>
-									</tr>
-									<tr>
-										<td>11</td>
-										<td>2017/01/01</td>
-										<td>沙河</td>
-										<td>先烈东横路</td>
-									</tr>
-									<tr>
-										<td>12</td>
-										<td>2017/01/01</td>
-										<td>沙河</td>
-										<td>先烈东横路</td>
-									</tr>
-								</tbody>
-							</table>
+							<!-- <p th:text="${result}" ></p> -->
+							<div class="mui-input-row mui-search searchBox">
+								<input type="search" class="mui-input-clear input-search" placeholder="输入社区中网络">
+								<button type="button" class="button-search">搜索</button>
+							</div>
+							<div class="listBox mt15">
+								<ul class="groupList recordList">
+									<li th:each="list,index:${result}">
+										<h1>社区名称：<span th:text="${list.blockName}"></span><a class="btn-detail pa" th:href="@{'/app/fireEvent/event'(id=${list.id})}">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>
+										<div class="mui-row">
+											<div class="mui-col-xs-6">
+									            <div class="tit fl">日期：</div>
+									            <div class="oh" th:text="${list.time}"></div>
+									        </div>
+									        <div class="mui-col-xs-6">
+									             <div class="tit fl" th:text="${list.type}">种类：误报</div>
+									        </div>
+									    </div>
+									</li>
+									<li>
+										<h1>东南社区<a class="btn-detail pa" href="alarm-fire-detail.html">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>
+										<div class="mui-row">
+											<div class="mui-col-xs-6">
+									            <div class="tit fl">年月：</div>
+									            <div class="oh">201701</div>
+									        </div>
+									        <div class="mui-col-xs-6">
+									             <div class="tit fl">种类：</div>
+									            <div class="oh">报</div>
+									        </div>
+									    </div>
+									</li>
+						
+								</ul>
+							</div>
 							<!-- 内容区域 end -->
 						</div>
 					</div>
@@ -117,8 +69,20 @@
 				<div class="mui-off-canvas-backdrop"></div>
 			</div>
 		</div>
-	<script src="../js/mui.js"></script>
-	<script src="../js/jquery-2.1.0.js"></script>
-	<script src="../js/normal.js"></script>
+	<script th:src="@{/js/mui.js}"></script>
+	<script th:src="@{/js/jquery-2.1.0.js}"></script>
+	<script th:src="@{/js/normal.js}"></script>
+	<script th:inline="javascript">
+		mui.init();
+		function getDatas(){
+			
+			
+		}
+		
+		function init(){
+			getDatas();
+		}
+		init();
+	</script>
 </body>
 </html>

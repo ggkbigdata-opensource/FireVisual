@@ -461,7 +461,7 @@
 	    			data[i].primitiveYearBefore = (data[i].primitiveYearBefore*100).toFixed(2) + '%';
 	    		}
 	    		str1 = '<td class="greenBg">' + data[i].streetName + '</td><td class="blueBg">' + data[i].primitiveNow + '</td><td class="blueBg">' + data[i].primitiveBefore + '</td><td class="blueBg">' + data[i].primitiveYearBefore + '</td>';
-	    		tr1 = '<tr id="primitive' + data[i].id + '"><td class="grayBg">' + (i+1) + '</td>' + str1 + '</tr>';
+	    		tr1 = '<tr id="primitive_' + data[i].id + '"><td class="grayBg">' + (i+1) + '</td>' + str1 + '</tr>';
 	    		arrStr[0] += tr1;
 	    	}
 	    	data.sort(compare('smokingNow'));
@@ -472,7 +472,7 @@
 	    			data[j].smokingYearBefore = (data[j].smokingYearBefore*100).toFixed(2) + '%';
 	    		}
 	    		str2 = '<td class="greenBg">' + data[j].streetName + '</td><td class="blueBg">' + data[j].smokingNow + '</td><td class="blueBg">' + data[j].smokingBefore + '</td><td class="blueBg">' + data[j].smokingYearBefore + '</td>';
-	    		tr2 = '<tr><td class="grayBg">' + (j+1) + '</td>' + str2 + '</tr>';
+	    		tr2 = '<tr id="smoking_' + data[j].id + '"><td class="grayBg">' + (j+1) + '</td>' + str2 + '</tr>';
 	    		arrStr[1]+=tr2;
 	    	}
 	    	data.sort(compare('affirmNow'));
@@ -483,7 +483,7 @@
 	    			data[k].affirmYearBefore = (data[k].affirmYearBefore*100).toFixed(2) + '%';
 	    		}
 	    		str3 = '<td class="greenBg">' + data[k].streetName + '</td><td class="blueBg">' + data[k].affirmNow + '</td><td class="blueBg">' + data[k].affirmBefore + '</td><td class="blueBg">' + data[k].affirmYearBefore + '</td>';
-	    		tr3 = '<tr><td class="grayBg">' + (k+1) + '</td>' + str3 + '</tr>';
+	    		tr3 = '<tr id="affirm_' + data[k].id + '"><td class="grayBg">' + (k+1) + '</td>' + str3 + '</tr>';
 	    		arrStr[2]+=tr3;
 	    	}
 	    	data.sort(compare('lossNow'));
@@ -494,7 +494,7 @@
 	    			data[l].lossYearBefore = (data[l].lossYearBefore*100).toFixed(2) + '%';
 	    		}
 	    		str4 = '<td class="greenBg">' + data[l].streetName + '</td><td class="blueBg">' + data[l].lossNow + '</td><td class="blueBg">' + data[l].lossBefore + '</td><td class="blueBg">' + data[l].lossYearBefore + '</td>';
-	    		tr4 = '<tr><td class="grayBg">' + (l+1) + '</td>' + str4 + '</tr>';
+	    		tr4 = '<tr id="loss_' + data[l].id + '"><td class="grayBg">' + (l+1) + '</td>' + str4 + '</tr>';
 	    		arrStr[3]+=tr4;
 	    	}
 	    	data.sort(compare('hurtNow'));
@@ -505,7 +505,7 @@
 	    			data[m].hurtYearBefore = (data[m].hurtYearBefore*100).toFixed(2) + '%';
 	    		}
 	    		str5 = '<td class="greenBg">' + data[m].streetName + '</td><td class="blueBg">' + data[m].hurtNow + '</td><td class="blueBg">' + data[m].hurtBefore + '</td><td class="blueBg">' + data[m].hurtYearBefore + '</td>';
-	    		tr5 = '<tr><td class="grayBg">' + (m+1) + '</td>' + str5 + '</tr>';
+	    		tr5 = '<tr id="hurt_' + data[m].id + '"><td class="grayBg">' + (m+1) + '</td>' + str5 + '</tr>';
 	    		arrStr[4]+=tr5;
 	    	}
 	    	data.sort(compare('deadNow'));
@@ -516,7 +516,7 @@
 	    			data[o].deadYearBefore = (data[o].deadYearBefore*100).toFixed(2) + '%';
 	    		}
 	    		str6 = '<td class="greenBg">' + data[o].streetName + '</td><td class="blueBg">' + data[o].deadNow + '</td><td class="blueBg">' + data[o].deadBefore + '</td><td class="blueBg">' + data[o].deadYearBefore + '</td>';
-	    		tr6 = '<tr><td class="grayBg">' + (o+1) + '</td>' + str6 + '</tr>';
+	    		tr6 = '<tr id="dead_' + data[o].id + '"><td class="grayBg">' + (o+1) + '</td>' + str6 + '</tr>';
 	    		arrStr[5]+=tr6;
 	    	}
 			for(var m=1;m<7;m++){
@@ -533,13 +533,19 @@
 	    	}
         });
 	    function goList(){
+	    	var arrTitle = ['#primitive_','#smoking_','#affirm_','#loss_','#hurt_','#dead_'];
 	    	if(dataLength){
 	    		for(var i=0;i<dataLength;i++){
-	    			$('#primitive' + dataList[i].id).bind('tap',function(){
-		    	    	mui.openWindow({
-		                    url : [[@{/app/fireEvent/toStreeEvent}]]
-		                  });
-		    		});
+	    			for(var j=0;j<arrTitle.length;j++){
+	    				$(arrTitle[j] + dataList[i].id).attr('name',j+1);
+	    				$(arrTitle[j] + dataList[i].id).bind('tap',function(){
+		    				var id = this.id.substr(this.id.indexOf('_')+1,this.id.length);
+		    				var type = this.attributes['name'].value;
+			    	    	mui.openWindow({
+			                    url : [[@{/app/fireEvent/streeEvent?streetId=}]] + id + '&type=' + type
+			                  });
+			    		});
+	    			}
 	    		}
 	    	}
 	    }
