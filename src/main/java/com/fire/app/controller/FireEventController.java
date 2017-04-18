@@ -154,16 +154,6 @@ public class FireEventController {
                  
             }
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-
             result.add(obj);
         }
 
@@ -230,7 +220,6 @@ public class FireEventController {
      * @description 获取街道的详情
      */
     @RequestMapping(value = "/event")
-    @ResponseBody
     private String getEventById(HttpServletRequest request, @RequestParam(required = true) Long id) {
 
         AppFireEvent event = fireEventServcie.findEventById(id);
