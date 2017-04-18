@@ -107,11 +107,11 @@
 		function hidePopover(popover){
 			if(popover === 'trendPopover'){
 				if(isTrend){
-					$('#bodyContent').removeAttr('class','content-backdrop');
+					$('#bodyContent').removeClass('content-backdrop');
 					$('#trendPopover').hide();
 					isTrend = false;
 				}else{
-					$('#bodyContent').attr('class','content-backdrop');
+					$('#bodyContent').addClass('content-backdrop');
 					$('#trendPopover').show();
 					isTrend = true;
 				}
@@ -119,7 +119,7 @@
 		}
 		$('#bodyContent').bind('tap',function(){
 			isTrend = false;
-			$('#bodyContent').removeAttr('class','content-backdrop');
+			$('#bodyContent').removeClass('content-backdrop');
         	$(".popoverbox").hide();
         });
 		/*]]>*/

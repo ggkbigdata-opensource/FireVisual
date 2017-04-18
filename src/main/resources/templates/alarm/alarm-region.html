@@ -69,11 +69,11 @@
 	    		isRegion = false;
 	    		if(isTrend){
 	    			$('#trendPopover').hide();
-	    			$('#bodyContent').removeAttr('class','content-backdrop');
+	    			$('#bodyContent').removeClass('content-backdrop');
 	    			isTrend = false;
 	    		}else{
 	    			$('#trendPopover').show();
-	    			$('#bodyContent').attr('class','content-backdrop');
+	    			$('#bodyContent').addClass('content-backdrop');
 	    			isTrend = true;
 	    		}
 	    	}else if(popover === 'regionPopover'){
@@ -81,11 +81,11 @@
 	    		isTrend = false;
 	    		if(isRegion){
 	    			$('#regionPopover').hide();
-	    			$('#bodyContent').removeAttr('class','content-backdrop');
+	    			$('#bodyContent').removeClass('content-backdrop');
 	    			isRegion = false;
 	    		}else{
 	    			$('#regionPopover').show();
-	    			$('#bodyContent').attr('class','content-backdrop');
+	    			$('#bodyContent').addClass('content-backdrop');
 	    			isRegion = true;
 	    		}
 	    	}
@@ -166,7 +166,7 @@
         	});
         	//关闭街道选择区
         	isRegion = false;
-        	$('#bodyContent').removeAttr('class','content-backdrop');
+        	$('#bodyContent').removeClass('content-backdrop');
         	$('#regionPopover').hide();
         }
         function init () {
@@ -178,7 +178,7 @@
         	if(isRegion || isTrend){
         		isRegion = false;
             	isTrend = false;
-            	$('#bodyContent').removeAttr('class','content-backdrop');
+            	$('#bodyContent').removeClass('content-backdrop');
             	$(".popoverbox").hide();
         	}
         });

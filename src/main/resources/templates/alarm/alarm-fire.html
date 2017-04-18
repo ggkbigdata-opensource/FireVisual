@@ -363,7 +363,7 @@
         		}
         	});
 		    isTime = false;
-		    $('#bodyContent').removeAttr('class','content-backdrop');
+		    $('#bodyContent').removeClass('content-backdrop');
 	    	$('#timePopover').hide();
 	    }
 		//“输入范围”点击确认
@@ -393,7 +393,7 @@
         		}
         	});
 			isTime = false;
-			$('#bodyContent').removeAttr('class','content-backdrop');
+			$('#bodyContent').removeClass('content-backdrop');
 	    	$('#timePopover').hide();
 		}
 	    //分类警情数据和选择时间段弹窗点击关闭另外一个
@@ -411,11 +411,11 @@
 	    		isTime = false;
 	    		if(isTrend){
 	    			$('#trendPopover').hide();
-	    			$('#bodyContent').removeAttr('class','content-backdrop');
+	    			$('#bodyContent').removeClass('content-backdrop');
 	    			isTrend = false;
 	    		}else{
 	    			$('#trendPopover').show();
-	    			$('#bodyContent').attr('class','content-backdrop');
+	    			$('#bodyContent').addClass('content-backdrop');
 	    			isTrend = true;
 	    		}
 	    		
@@ -424,18 +424,21 @@
 	    		isTrend = false;
 	    		if(isTime){
 	    			$('#timePopover').hide();
-	    			$('#bodyContent').removeAttr('class','content-backdrop');
+	    			$('#bodyContent').removeClass('content-backdrop');
 	    			isTime = false;
 	    		}else{
 	    			$('#timePopover').show();
-	    			$('#bodyContent').attr('class','content-backdrop');
+	    			$('#bodyContent').addClass('content-backdrop');
 	    			isTime = true;
 	    		}
 	    	}
 	    }
 	    
 	    //展示表格数据
+	    var dataLength;
+	    var dataList = [];
 	    function showData (data) {
+	    	dataLength = data.length;
 	    	for(var n=1;n<7;n++){
 	    		$('#tbody' + n).text('');
 	    	}
@@ -449,6 +452,8 @@
 	    		}
 	    	}
 	    	data.sort(compare('primitiveNow'));
+	    	dataList = data;
+	    	arrStr[0] = '';
 	    	for(var i=0;i<data.length;i++){
 	    		var tr1 = '';
 	    		var str1 = '';
@@ -456,8 +461,8 @@
 	    			data[i].primitiveYearBefore = (data[i].primitiveYearBefore*100).toFixed(2) + '%';
 	    		}
 	    		str1 = '<td class="greenBg">' + data[i].streetName + '</td><td class="blueBg">' + data[i].primitiveNow + '</td><td class="blueBg">' + data[i].primitiveBefore + '</td><td class="blueBg">' + data[i].primitiveYearBefore + '</td>';
-	    		tr1 = '<tr onclick="fireList(' + data[i].id + ')"><td class="grayBg">' + (i+1) + '</td>' + str1 + '</tr>';
-	    		arrStr[0]+=tr1;
+	    		tr1 = '<tr id="primitive' + data[i].id + '"><td class="grayBg">' + (i+1) + '</td>' + str1 + '</tr>';
+	    		arrStr[0] += tr1;
 	    	}
 	    	data.sort(compare('smokingNow'));
 	    	for(var j=0;j<data.length;j++){
@@ -516,18 +521,27 @@
 	    	}
 			for(var m=1;m<7;m++){
 				$('#tbody' + m).append(arrStr[m-1]);
-			}   	
+			}
+			goList();
 	    }
 	    $('#bodyContent').bind('tap',function(){
 	    	if(isTrend || isTime){
 		    	isTrend = false;
 	        	isTime = false;
-	        	$('#bodyContent').removeAttr('class','content-backdrop');
+	        	$('#bodyContent').removeClass('content-backdrop');
 	        	$(".popoverbox").hide();
 	    	}
         });
-	    function fireList(id){
-	    	console.log(id);
+	    function goList(){
+	    	if(dataLength){
+	    		for(var i=0;i<dataLength;i++){
+	    			$('#primitive' + dataList[i].id).bind('tap',function(){
+		    	    	mui.openWindow({
+		                    url : [[@{/app/fireEvent/toStreeEvent}]]
+		                  });
+		    		});
+	    		}
+	    	}
 	    }
         /*]]>*/
      </script>
