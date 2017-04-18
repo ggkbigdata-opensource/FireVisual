@@ -116,7 +116,7 @@ public interface AppPunishmentRepository extends JpaRepository<AppPunishment, Lo
      * @return 
      * @description
      */
-    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method = ?2 order by occur_time desc", nativeQuery = true)
+    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method = ?2 order by execute_time desc", nativeQuery = true)
     List<AppPunishment> findBystreetIdAndPunishMethod(Long streetId, String punishMehtod);
 
     /**
@@ -128,7 +128,7 @@ public interface AppPunishmentRepository extends JpaRepository<AppPunishment, Lo
      * @return 
      * @description
      */
-    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method = ?2 and t.block_name like %?3% order by occur_time desc", nativeQuery = true)
+    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method = ?2 and t.block_name like %?3% order by execute_time desc", nativeQuery = true)
     List<AppPunishment> findBystreetIdAndPunishMethodAndBlockName(Long streetId, String punishMehtod, String name);
 
     /**
@@ -152,9 +152,9 @@ public interface AppPunishmentRepository extends JpaRepository<AppPunishment, Lo
      * @return 
      * @description
      */
-    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method in (?2) order by occur_time desc", nativeQuery = true)
+    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method in (?2) order by execute_time desc", nativeQuery = true)
     List<AppPunishment> findStopDataByCondition(Long streetId, String punishMehtod);
-    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method in (?2) and t.block_name like %?3% order by occur_time desc", nativeQuery = true)
+    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method in (?2) and t.block_name like %?3% order by execute_time desc", nativeQuery = true)
     List<AppPunishment> findStopDataByCondition(Long streetId, String punishMehtod, String name);
 
 }
