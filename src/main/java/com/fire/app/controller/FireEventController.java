@@ -114,7 +114,7 @@ public class FireEventController {
         return result;
     }
 
-    @RequestMapping(value = "/streeEvent" ,method = RequestMethod.POST)
+    @RequestMapping(value = "/streeEvent" ,method = RequestMethod.GET)
     private String toStreeEventPage(HttpServletRequest request, @RequestParam(required = true)Long streetId, String name,@RequestParam(required = true) Integer type) {
 
         /*
