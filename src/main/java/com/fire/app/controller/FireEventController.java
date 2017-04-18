@@ -131,9 +131,6 @@ public class FireEventController {
             obj.put("id", event.getId());
             obj.put("blockName", event.getBlockName());
             obj.put("type", event.getFireType());
-            obj.put("deadNum", event.getDeadNum());
-            obj.put("hurtNum", event.getHurtNum());
-            obj.put("loss", event.getLoss());
             
             String time= null;
             if (event.getOccurTime()!=null) {
@@ -144,7 +141,27 @@ public class FireEventController {
             //传上来的参数
             obj.put("streetId", streetId);
             obj.put("name", name);
-            obj.put("type", type);
+            
+            
+            if (type < 4) {
+                obj.put("type", "种类："+event.getFireType());
+            }else if(type == 4){
+                obj.put("type", "损失："+event.getLoss());
+            }else if(type == 5){
+                obj.put("type", "受伤："+event.getHurtNum());
+            }else{
+                obj.put("type", "死亡："+event.getDeadNum());
+                 
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
 
             result.add(obj);
@@ -205,7 +222,7 @@ public class FireEventController {
 
         return result;
     }
-    
+
     /**
      * @createDate 2017年3月29日上午10:14:53
      * @author wangzhiwang
@@ -214,12 +231,12 @@ public class FireEventController {
      */
     @RequestMapping(value = "/event")
     @ResponseBody
-    private String getEventById(HttpServletRequest request,@RequestParam(required = true) Long id) {
+    private String getEventById(HttpServletRequest request, @RequestParam(required = true) Long id) {
 
         AppFireEvent event = fireEventServcie.findEventById(id);
 
         request.setAttribute("event", event);
-        
+
         return "alarm/alarm-fire-detail";
     }
 }

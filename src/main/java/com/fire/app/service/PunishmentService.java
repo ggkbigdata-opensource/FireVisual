@@ -3,6 +3,7 @@ package com.fire.app.service;
 import java.util.List;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fire.app.domain.AppPunishment;
 
 /**
  * @createDate 2017年3月28日下午4:08:47
@@ -37,6 +38,17 @@ public interface PunishmentService {
      * @description
      */
     List<JSONObject> getBaseDate(String beginTime, String endTime);
+
+    /**
+     * @createDate 2017年4月18日下午5:17:26 
+     * @author wangzhiwang
+     * @param streetId
+     * @param name
+     * @param type
+     * @return 
+     * @description
+     */
+    List<AppPunishment> findByStreetIdAndNameAndType(Long streetId, String name, Integer type);
 
 
 }

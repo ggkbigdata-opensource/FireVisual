@@ -1,6 +1,10 @@
 package com.fire.app.controller;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fire.app.domain.AppFireEvent;
+import com.fire.app.domain.AppPunishment;
 import com.fire.app.service.PunishmentService;
 import com.fire.app.util.ContextHolderUtils;
+import com.fire.app.util.DateUtil;
 
 /**
  * @createDate 2017年3月28日下午3:57:31
@@ -111,5 +118,46 @@ public class PunishmentController {
         List<JSONObject> result = punishmentService.getAreaDate(streetId);
 
         return result;
+    }
+    
+    @RequestMapping(value = "/streePunishment" ,method = RequestMethod.GET)
+    private String toStreeEventPage(HttpServletRequest request, @RequestParam(required = true)Long streetId, String name,@RequestParam(required = true) Integer type) {
+
+        /*
+         * if (!ContextHolderUtils.isLogin()) { return "login/login"; }
+         */
+        
+        //type   1--刑罚   2--刑拘   3--刑拘   4--临封   5--三停
+
+        List<AppPunishment> punishments = punishmentService.findByStreetIdAndNameAndType(streetId, name, type);
+        List<JSONObject> result = new ArrayList<JSONObject>();
+
+        for (AppPunishment punishment : punishments) {
+            JSONObject obj = new JSONObject();
+            obj.put("id", punishment.getId());
+            obj.put("blockName", punishment.getBlockName());
+            obj.put("type", punishment.getPunishMethod());
+            
+            Date time = null;
+            if ("临时查封".equals(punishment.getPunishMethod())) {
+                time=punishment.getSealUpTimeBegin();
+            }else{
+                time=punishment.getExecuteTime();
+            }
+            
+            obj.put("time", DateUtil.formatDate(time, "yyyy/MM/dd"));
+
+            //传上来的参数
+            obj.put("streetId", streetId);
+            obj.put("name", name);
+            obj.put("type", type);
+            
+
+            result.add(obj);
+        }
+
+        request.setAttribute("result", result);
+
+        return "alarm/alarm-fire-list";
     }
 }

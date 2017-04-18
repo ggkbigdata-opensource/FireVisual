@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fire.app.domain.AppFireEvent;
 import com.fire.app.domain.AppPunishment;
 import com.fire.app.domain.AppPunishmentRepository;
 import com.fire.app.domain.Street;
@@ -285,7 +286,7 @@ public class PunishmentServiceImpl implements PunishmentService {
                 
                 
                 int fineNumNow = 0;// 行政处罚宗数
-                int finePriceNow = 0;// 行政处罚
+                double finePriceNow = 0;// 行政处罚
                 int admiDetNow = 0;// 行政拘留
                 int crimDetNow = 0;// 刑事拘留
                 int sealUpNow = 0;// 临时查封
@@ -305,7 +306,7 @@ public class PunishmentServiceImpl implements PunishmentService {
                     if ("行政罚款".equals(punish.getPunishMethod())) {
                         fineNumNow++;// 行政处罚宗数
                         if (StringUtils.isNotEmpty(punish.getFineAmount())) {
-                            finePriceNow = Integer.parseInt(punish.getFineAmount()) + finePriceNow;// 行政处罚
+                            finePriceNow = Double.parseDouble(punish.getFineAmount()) + finePriceNow;// 行政处罚
                         }
                     }
                     if ("行政拘留".equals(punish.getPunishMethod())) {
@@ -398,6 +399,45 @@ public class PunishmentServiceImpl implements PunishmentService {
         }
 
         return result;
+    }
+
+    @Override
+    public List<AppPunishment> findByStreetIdAndNameAndType(Long streetId, String name, Integer type) {
+
+      //type   1--行罚   2--行拘   3--刑拘   4--临封   5--三停（停工，停产，停业）
+        
+        List<AppPunishment> result = null;
+        if (type==1||type==2||type==3) {
+            String punishMehtod=null;
+            if (type==1) {
+                punishMehtod="行政处罚";
+            }else if (type==2) {
+                punishMehtod="行政拘留";
+            }else {
+                punishMehtod="刑事拘留";
+            }
+            if (StringUtils.isEmpty(name)) {
+                result = punishmentRepository.findBystreetIdAndPunishMethod(streetId,punishMehtod);
+            }else{
+                result= punishmentRepository.findBystreetIdAndPunishMethodAndBlockName(streetId,punishMehtod,name);
+            }
+        }else if(type==4) {  //火灾表示确认
+            String punishMehtod="临时查封";
+            if (StringUtils.isEmpty(name)) {
+                result= punishmentRepository.findSealUpByCondition(streetId,punishMehtod);
+            }else{
+                result= punishmentRepository.findSealUpByCondition(streetId,name,punishMehtod);
+            }
+        }else{
+            String punishMehtod="'停产','停工','停业'";
+            if (StringUtils.isEmpty(name)) {
+                result = punishmentRepository.findStopDataByCondition(streetId,punishMehtod);
+            }else{
+                result= punishmentRepository.findStopDataByCondition(streetId,punishMehtod,name);
+            }
+        }
+        return result;
+        
     }
 
 }

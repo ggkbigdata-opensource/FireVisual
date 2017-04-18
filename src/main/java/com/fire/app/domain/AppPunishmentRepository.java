@@ -108,4 +108,53 @@ public interface AppPunishmentRepository extends JpaRepository<AppPunishment, Lo
     @Query(value = "SELECT * FROM app_punishment t where YEAR(t.execute_time)=?1 AND MONTH(t.execute_time)=?2 and t.street_id=?3", nativeQuery = true)
     List<AppPunishment> findAllDataByTime(Date newYear, Date nowTime, Long streetId);
 
+    /**
+     * @createDate 2017年4月18日下午5:50:24 
+     * @author wangzhiwang
+     * @param streetId
+     * @param punishMehtod
+     * @return 
+     * @description
+     */
+    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method = ?2 order by occur_time desc", nativeQuery = true)
+    List<AppPunishment> findBystreetIdAndPunishMethod(Long streetId, String punishMehtod);
+
+    /**
+     * @createDate 2017年4月18日下午5:51:03 
+     * @author wangzhiwang
+     * @param streetId
+     * @param punishMehtod
+     * @param name
+     * @return 
+     * @description
+     */
+    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method = ?2 and t.block_name like %?3% order by occur_time desc", nativeQuery = true)
+    List<AppPunishment> findBystreetIdAndPunishMethodAndBlockName(Long streetId, String punishMehtod, String name);
+
+    /**
+     * @createDate 2017年4月18日下午5:59:31 
+     * @author wangzhiwang
+     * @param streetId
+     * @param punishMehtod
+     * @return 
+     * @description
+     */
+    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method = ?2 order by seal_up_time_begin desc", nativeQuery = true)
+    List<AppPunishment> findSealUpByCondition(Long streetId, String punishMehtod);
+    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method = ?3 and t.block_name like %?2% order by seal_up_time_begin desc", nativeQuery = true)
+    List<AppPunishment> findSealUpByCondition(Long streetId, String name, String punishMehtod);
+
+    /**
+     * @createDate 2017年4月18日下午6:02:09 
+     * @author wangzhiwang
+     * @param streetId
+     * @param punishMehtod
+     * @return 
+     * @description
+     */
+    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method in (?2) order by occur_time desc", nativeQuery = true)
+    List<AppPunishment> findStopDataByCondition(Long streetId, String punishMehtod);
+    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method in (?2) and t.block_name like %?3% order by occur_time desc", nativeQuery = true)
+    List<AppPunishment> findStopDataByCondition(Long streetId, String punishMehtod, String name);
+
 }
