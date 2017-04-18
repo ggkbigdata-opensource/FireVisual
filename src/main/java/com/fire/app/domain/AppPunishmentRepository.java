@@ -148,13 +148,13 @@ public interface AppPunishmentRepository extends JpaRepository<AppPunishment, Lo
      * @createDate 2017年4月18日下午6:02:09 
      * @author wangzhiwang
      * @param streetId
-     * @param punishMehtod
+     * @param methods
      * @return 
      * @description
      */
-    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method in (?2) order by execute_time desc", nativeQuery = true)
-    List<AppPunishment> findStopDataByCondition(Long streetId, String punishMehtod);
-    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method in (?2) and t.block_name like %?3% order by execute_time desc", nativeQuery = true)
-    List<AppPunishment> findStopDataByCondition(Long streetId, String punishMehtod, String name);
+    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method in ?2 order by execute_time desc", nativeQuery = true)
+    List<AppPunishment> findStopDataByCondition(Long streetId, List<String> methods);
+    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method in ?2 and t.block_name like %?3% order by execute_time desc", nativeQuery = true)
+    List<AppPunishment> findStopDataByCondition(Long streetId, List<String> methods, String name);
 
 }

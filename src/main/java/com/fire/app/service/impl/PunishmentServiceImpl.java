@@ -410,7 +410,7 @@ public class PunishmentServiceImpl implements PunishmentService {
         if (type==1||type==2||type==3) {
             String punishMehtod=null;
             if (type==1) {
-                punishMehtod="行政处罚";
+                punishMehtod="行政罚款";
             }else if (type==2) {
                 punishMehtod="行政拘留";
             }else {
@@ -429,11 +429,15 @@ public class PunishmentServiceImpl implements PunishmentService {
                 result= punishmentRepository.findSealUpByCondition(streetId,name,punishMehtod);
             }
         }else{
-            String punishMehtod="'停产','停工','停业'";
+            String punishMehtod="停产,停工,停业";
+            List<String> methods = new ArrayList<String>();
+            methods.add("停业");
+            methods.add("停工");
+            methods.add("停产");
             if (StringUtils.isEmpty(name)) {
-                result = punishmentRepository.findStopDataByCondition(streetId,punishMehtod);
+                result = punishmentRepository.findStopDataByCondition(streetId,methods);
             }else{
-                result= punishmentRepository.findStopDataByCondition(streetId,punishMehtod,name);
+                result= punishmentRepository.findStopDataByCondition(streetId,methods,name);
             }
         }
         return result;
