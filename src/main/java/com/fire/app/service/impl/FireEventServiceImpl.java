@@ -453,4 +453,10 @@ public class FireEventServiceImpl implements FireEventService {
         return result;
     }
 
+    @Override
+    public AppFireEvent findEventById(Long id) {
+        AppFireEvent event = fireEventRepository.findById(id);
+        return event;
+    }
+
 }

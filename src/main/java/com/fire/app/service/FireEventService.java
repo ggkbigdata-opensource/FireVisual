@@ -68,4 +68,13 @@ public interface FireEventService {
      */
     List<AppFireEvent> findByStreetIdAndNameAndType(Long streetId, String name, Integer type);
 
+    /**
+     * @createDate 2017年4月18日下午4:31:04 
+     * @author wangzhiwang
+     * @param id
+     * @return 
+     * @description
+     */
+    AppFireEvent findEventById(Long id);
+
 }

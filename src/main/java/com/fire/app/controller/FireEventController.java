@@ -1,6 +1,9 @@
 package com.fire.app.controller;
 
+import static org.hamcrest.CoreMatchers.nullValue;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +19,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.fire.app.domain.AppFireEvent;
 import com.fire.app.service.FireEventService;
 import com.fire.app.util.ContextHolderUtils;
+import com.fire.app.util.DateUtil;
 
 /**
  * @createDate 2017年3月28日下午3:57:31
@@ -130,6 +134,12 @@ public class FireEventController {
             obj.put("deadNum", event.getDeadNum());
             obj.put("hurtNum", event.getHurtNum());
             obj.put("loss", event.getLoss());
+            
+            String time= null;
+            if (event.getOccurTime()!=null) {
+                time = DateUtil.formatDate(event.getOccurTime(), "yyyy/MM/dd");
+            }
+            obj.put("time", time);
 
             //传上来的参数
             obj.put("streetId", streetId);
@@ -176,16 +186,6 @@ public class FireEventController {
         return result;
     }
 
-    @RequestMapping("/toEventDetail")
-    private String toEventDetailPage() {
-
-        /*
-         * if (!ContextHolderUtils.isLogin()) { return "login/login"; }
-         */
-
-        return "alarm/alarm-fire-detail";
-    }
-
     /**
      * @createDate 2017年4月17日上午9:56:39
      * @author wangzhiwang
@@ -204,5 +204,22 @@ public class FireEventController {
         AppFireEvent result = fireEventServcie.getEventById(id);
 
         return result;
+    }
+    
+    /**
+     * @createDate 2017年3月29日上午10:14:53
+     * @author wangzhiwang
+     * @return
+     * @description 获取街道的详情
+     */
+    @RequestMapping(value = "/event")
+    @ResponseBody
+    private String getEventById(HttpServletRequest request,@RequestParam(required = true) Long id) {
+
+        AppFireEvent event = fireEventServcie.findEventById(id);
+
+        request.setAttribute("event", event);
+        
+        return "alarm/alarm-fire-detail";
     }
 }
