@@ -57,20 +57,22 @@ public class HiddInvestServiceImpl implements HiddInvestService {
             if (infos != null && infos.size() > 0) {
                 obj.put("buildingInfoNum", infos.size());
                 reportNum = infos.get(0).getItemNumber();
-                CrCheckReportInfo checkReportInfos = checkReportInfoRepository.findByReportNum(reportNum.replace("天消", ""));
+                CrCheckReportInfo checkReportInfos = checkReportInfoRepository.findByReportNum(reportNum.replace("天消", "").trim());
                 if (checkReportInfos != null & !"".equals(checkReportInfos)) {
                     String riskLevel = checkReportInfos.getRiskLevel();
-                    if (riskLevel.contains("1")) {// 隐患等级1
-                        versionOne++;
-                    }
-                    if (riskLevel.contains("2")) {// 隐患等级2
-                        versionTwo++;
-                    }
-                    if (riskLevel.contains("3")) {// 隐患等级3
-                        versionThree++;
-                    }
-                    if (riskLevel.contains("4")) {// 隐患等级4
-                        versionFour++;
+                    if (StringUtils.isNotEmpty(riskLevel)) {
+                        if (riskLevel.contains("1")) {// 隐患等级1
+                            versionOne++;
+                        }
+                        if (riskLevel.contains("2")) {// 隐患等级2
+                            versionTwo++;
+                        }
+                        if (riskLevel.contains("3")) {// 隐患等级3
+                            versionThree++;
+                        }
+                        if (riskLevel.contains("4")) {// 隐患等级4
+                            versionFour++;
+                        }
                     }
                 }
             } else {

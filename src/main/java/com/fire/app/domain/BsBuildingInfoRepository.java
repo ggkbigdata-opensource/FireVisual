@@ -38,4 +38,14 @@ public interface BsBuildingInfoRepository extends JpaRepository<BsBuildingInfo, 
 
     List<BsBuildingInfo> findByStreetId(Long id);
 
+    /**
+     * @createDate 2017年4月18日上午10:29:21 
+     * @author wangzhiwang
+     * @param name
+     * @return 
+     * @description
+     */
+    @Query(value = "SELECT * FROM bs_building_info t where  t.property_company_name like %?1%", nativeQuery = true)
+    List<BsBuildingInfo> findByPropertyCompanyName(String name);
+
 }

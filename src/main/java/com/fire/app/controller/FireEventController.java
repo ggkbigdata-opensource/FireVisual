@@ -1,5 +1,6 @@
 package com.fire.app.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,13 +130,26 @@ public class FireEventController {
      */
     @RequestMapping(value = "/getStreetEvent",method = RequestMethod.GET)
     @ResponseBody
-    private List<AppFireEvent> getStreetEvent(@RequestParam(required=true) Long streetId) {
+    private List<JSONObject> getStreetEvent(@RequestParam(required=true) Long streetId) {
         
         /*  if (!ContextHolderUtils.isLogin()) {
             return "login/login";
         }*/
         
-        List<AppFireEvent> result = fireEventServcie.getStreetEvent(streetId);
+        List<AppFireEvent> events = fireEventServcie.getStreetEvent(streetId);
+        List<JSONObject> result = new ArrayList<JSONObject>();
+        for (AppFireEvent event : events) {
+            JSONObject obj = new JSONObject();
+            obj.put("id", event.getId());
+            obj.put("occurTime", event.getOccurTime());
+            obj.put("streetName", event.getStreetName());
+            obj.put("blockName", event.getBlockName());
+            
+            result.add(obj);
+            
+        }
+        
+        
         
         return result;
     }

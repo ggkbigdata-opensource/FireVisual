@@ -2,6 +2,7 @@ package com.fire.app.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
@@ -29,8 +30,10 @@ public class CrCheckReportInfo {
     private String reportConclusion;
     private String riskLevel;
     private float riskScore;
-    private String filePath;
     
+    public CrCheckReportInfo(){
+        
+    }
 
     public String getProjectName() {
         return projectName;
@@ -136,12 +139,6 @@ public class CrCheckReportInfo {
         this.riskScore = riskScore;
     }
 
-    public String getFilePath() {
-        return filePath;
-    }
 
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
 
 }
