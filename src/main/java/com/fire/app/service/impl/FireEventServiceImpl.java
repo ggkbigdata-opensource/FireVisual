@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -412,6 +413,43 @@ public class FireEventServiceImpl implements FireEventService {
     @Override
     public AppFireEvent getEventById(Long id) {
         AppFireEvent result = fireEventRepository.findById(id);
+        return result;
+    }
+
+    @Override
+    public List<AppFireEvent> findByStreetIdAndNameAndType(Long streetId, String name, Integer type) {
+        //type   1--原始   2--冒烟   3--确认   4--损失   5--受伤   6--死亡
+       
+        List<AppFireEvent> result = null;
+        if (type==1) {//原始表示所有
+            if (StringUtils.isEmpty(name)) {
+                result = fireEventRepository.findByStreetId(streetId);
+            }else{
+                result= fireEventRepository.findBystreetIdAndBlockName(streetId,name);
+            }
+        }else if(type==2||type==3) {  //火灾表示确认
+            String fireType=null;
+            if (type==2) {
+                fireType="冒烟";
+            }else {
+                fireType="火灾";
+            }
+            
+            if (StringUtils.isEmpty(name)) {
+                result= fireEventRepository.findBystreetIdAndFireType(streetId,fireType);
+            }else{
+                result= fireEventRepository.findBystreetIdAndBlockName(streetId,name,fireType);
+            }
+            
+        }else if(type==4||type==5||type==6) {
+            if (type==4) {
+                result= fireEventRepository.findByLossIsNotNull();
+            }else if (type==5){
+                result= fireEventRepository.findByHurtNumIsNotNull();
+            }else {
+                result= fireEventRepository.findByDeadNumIsNotNull();
+            }
+        }
         return result;
     }
 

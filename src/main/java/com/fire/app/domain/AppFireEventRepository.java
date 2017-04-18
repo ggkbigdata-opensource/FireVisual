@@ -72,6 +72,75 @@ public interface AppFireEventRepository extends JpaRepository<AppFireEvent, Long
      */
     AppFireEvent findById(Long id);
 
+    /**
+     * @createDate 2017年4月18日下午3:24:56 
+     * @author wangzhiwang
+     * @param streetId
+     * @param name
+     * @param fireType
+     * @return 
+     * @description
+     */
+    @Query(value = "SELECT * FROM app_fire_event t where t.street_id = ?1 and t.fire_type = ?3 and t.block_name like %?2% order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findBystreetIdAndBlockName(Long streetId, String name, String fireType);
+
+    /**
+     * @createDate 2017年4月18日下午3:32:52 
+     * @author wangzhiwang
+     * @return 
+     * @description
+     */
+    @Query(value = "SELECT * FROM app_fire_event t where t.loss is not null order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findByLossIsNotNull();
+
+    /**
+     * @createDate 2017年4月18日下午3:32:59 
+     * @author wangzhiwang
+     * @return 
+     * @description
+     */
+    @Query(value = "SELECT * FROM app_fire_event t where t.hurt_num is not null order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findByHurtNumIsNotNull();
+
+    /**
+     * @createDate 2017年4月18日下午3:33:03 
+     * @author wangzhiwang
+     * @return 
+     * @description
+     */
+    @Query(value = "SELECT * FROM app_fire_event t where t.dead_num is not null order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findByDeadNumIsNotNull();
+
+    /**
+     * @createDate 2017年4月18日下午3:42:03 
+     * @author wangzhiwang
+     * @return 
+     * @description
+     */
+    @Query(value = "SELECT * FROM app_fire_event  order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findAllData();
+
+    /**
+     * @createDate 2017年4月18日下午4:17:38 
+     * @author wangzhiwang
+     * @param streetId
+     * @param fireType
+     * @return 
+     * @description
+     */
+    List<AppFireEvent> findBystreetIdAndFireType(Long streetId, String fireType);
+
+    /**
+     * @createDate 2017年4月18日下午4:20:27 
+     * @author wangzhiwang
+     * @param streetId
+     * @param name
+     * @return 
+     * @description
+     */
+    @Query(value = "SELECT * FROM app_fire_event t where t.street_id = ?1 and t.block_name like %?2% order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findBystreetIdAndBlockName(Long streetId, String name);
+
    
 
 }
