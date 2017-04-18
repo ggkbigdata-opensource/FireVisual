@@ -31,9 +31,11 @@ public interface HiddInvestService {
      * @createDate 2017年4月1日下午2:55:52 
      * @author wangzhiwang
      * @param streetId
+     * @param name 
+     * @param itemName 
      * @return 
      * @description
      */
-    List<JSONObject> getDetailDate(Long streetId);
+    List<JSONObject> getDetailDate(Long streetId, String name);
 
 }

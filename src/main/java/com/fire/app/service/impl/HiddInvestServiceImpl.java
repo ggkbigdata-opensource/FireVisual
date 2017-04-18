@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -92,10 +91,15 @@ public class HiddInvestServiceImpl implements HiddInvestService {
     }
 
     @Override
-    public List<JSONObject> getDetailDate(Long streetId) {
+    public List<JSONObject> getDetailDate(Long streetId,String name) {
 
         ArrayList<JSONObject> result = new ArrayList<JSONObject>();
-        List<BsBuildingInfo> infos = buildingInfoRepository.findByStreetId(streetId);
+        List<BsBuildingInfo> infos=null;
+        if (StringUtils.isEmpty(name)) {
+            infos = buildingInfoRepository.findByStreetId(streetId);
+        }else{
+            infos = buildingInfoRepository.findByStreetIdAndName(streetId,name);
+        }
         for (BsBuildingInfo info : infos) {
             JSONObject obj = new JSONObject();
             

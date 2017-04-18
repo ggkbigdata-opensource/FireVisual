@@ -3,6 +3,7 @@ package com.fire.app.domain;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  * @fileName BsBuildingInfoRepository.java
@@ -28,9 +29,13 @@ public interface BsBuildingInfoRepository extends JpaRepository<BsBuildingInfo, 
      * @createDate 2017年3月31日下午4:53:57 
      * @author wangzhiwang
      * @param id
+     * @param name 
      * @return 
      * @description
      */
+    @Query(value = "SELECT * FROM bs_building_info t where t.street_id = ?1 and t.property_company_name like %?2%", nativeQuery = true)
+    List<BsBuildingInfo> findByStreetIdAndName(Long id, String name);
+
     List<BsBuildingInfo> findByStreetId(Long id);
 
 }

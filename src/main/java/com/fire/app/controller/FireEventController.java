@@ -108,6 +108,18 @@ public class FireEventController {
         return result;
     }
     
+    
+    @RequestMapping("/toStreeEvent")
+    private String toStreeEventPage() {
+        
+        /*  if (!ContextHolderUtils.isLogin()) {
+            return "login/login";
+        }*/
+        
+        return "alarm/alarm-fire-list";
+    }
+    
+    
     /**
      * @createDate 2017年4月17日上午9:56:22 
      * @author wangzhiwang
@@ -126,6 +138,16 @@ public class FireEventController {
         List<AppFireEvent> result = fireEventServcie.getStreetEvent(streetId);
         
         return result;
+    }
+    
+    @RequestMapping("/toEventDetail")
+    private String toEventDetailPage() {
+        
+        /*  if (!ContextHolderUtils.isLogin()) {
+            return "login/login";
+        }*/
+        
+        return "alarm/alarm-fire-detail";
     }
     
     /**
