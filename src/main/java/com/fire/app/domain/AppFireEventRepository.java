@@ -128,7 +128,7 @@ public interface AppFireEventRepository extends JpaRepository<AppFireEvent, Long
      * @return 
      * @description
      */
-    @Query(value = "SELECT * FROM app_fire_event t where t.street_id = ?1 and t.fire_tyep = ?2 order by occur_time desc", nativeQuery = true)
+    @Query(value = "SELECT * FROM app_fire_event t where t.street_id = ?1 and t.fire_type = ?2 order by occur_time desc", nativeQuery = true)
     List<AppFireEvent> findBystreetIdAndFireType(Long streetId, String fireType);
 
     /**
