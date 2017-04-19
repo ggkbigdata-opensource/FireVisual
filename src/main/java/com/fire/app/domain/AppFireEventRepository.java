@@ -87,29 +87,32 @@ public interface AppFireEventRepository extends JpaRepository<AppFireEvent, Long
     /**
      * @createDate 2017年4月18日下午3:32:52 
      * @author wangzhiwang
+     * @param streetId 
      * @return 
      * @description
      */
-    @Query(value = "SELECT * FROM app_fire_event t where t.loss is not null order by occur_time desc", nativeQuery = true)
-    List<AppFireEvent> findByLossIsNotNull();
+    @Query(value = "SELECT * FROM app_fire_event t where t.street_id = ?1 and t.loss is not null order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findByLossIsNotNull(Long streetId);
 
     /**
      * @createDate 2017年4月18日下午3:32:59 
      * @author wangzhiwang
+     * @param streetId 
      * @return 
      * @description
      */
-    @Query(value = "SELECT * FROM app_fire_event t where t.hurt_num is not null order by occur_time desc", nativeQuery = true)
-    List<AppFireEvent> findByHurtNumIsNotNull();
+    @Query(value = "SELECT * FROM app_fire_event t where t.street_id = ?1 and t.hurt_num is not null order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findByHurtNumIsNotNull(Long streetId);
 
     /**
      * @createDate 2017年4月18日下午3:33:03 
      * @author wangzhiwang
+     * @param streetId 
      * @return 
      * @description
      */
-    @Query(value = "SELECT * FROM app_fire_event t where t.dead_num is not null order by occur_time desc", nativeQuery = true)
-    List<AppFireEvent> findByDeadNumIsNotNull();
+    @Query(value = "SELECT * FROM app_fire_event t where t.street_id = ?1 and t.dead_num is not null order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findByDeadNumIsNotNull(Long streetId);
 
     /**
      * @createDate 2017年4月18日下午3:42:03 

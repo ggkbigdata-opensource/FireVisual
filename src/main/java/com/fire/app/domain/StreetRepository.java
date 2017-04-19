@@ -21,4 +21,13 @@ public interface StreetRepository extends JpaRepository<Street, Long> {
      */
     Street findByName(String streetName);
 
+    /**
+     * @createDate 2017年4月19日下午2:51:57 
+     * @author wangzhiwang
+     * @param streetId
+     * @return 
+     * @description
+     */
+    Street findById(Long streetId);
+
 }

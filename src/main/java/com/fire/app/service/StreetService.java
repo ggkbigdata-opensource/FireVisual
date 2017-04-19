@@ -19,4 +19,13 @@ public interface StreetService {
      */
     List<Street> findAll();
 
+    /**
+     * @createDate 2017年4月19日下午2:51:16 
+     * @author wangzhiwang
+     * @param streetId
+     * @return 
+     * @description
+     */
+    Street findById(Long streetId);
+
 }

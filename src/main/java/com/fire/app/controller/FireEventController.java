@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fire.app.domain.AppFireEvent;
+import com.fire.app.domain.Street;
 import com.fire.app.service.FireEventService;
+import com.fire.app.service.StreetService;
 import com.fire.app.util.ContextHolderUtils;
 import com.fire.app.util.DateUtil;
 
@@ -29,6 +31,8 @@ public class FireEventController {
 
     @Autowired
     private FireEventService fireEventServcie;
+    @Autowired
+    private StreetService streetService;
 
     @RequestMapping("/")
     private String toFireEvent() {
@@ -121,7 +125,19 @@ public class FireEventController {
         //type   1--原始   2--冒烟   3--确认   4--损失   5--受伤   6--死亡
 
         List<AppFireEvent> events = fireEventServcie.findByStreetIdAndNameAndType(streetId, name, type);
-        List<JSONObject> result = new ArrayList<JSONObject>();
+       
+        Street street = streetService.findById(streetId);
+        
+        if (street==null) {
+            throw new RuntimeException("没有找到对应的街道");
+        }
+        
+        JSONObject result = new JSONObject();
+        result.put("street", street.getName());
+        result.put("streetId", streetId);
+        result.put("type", type);
+        
+        List<JSONObject> list = new ArrayList<JSONObject>();
 
         for (AppFireEvent event : events) {
             JSONObject obj = new JSONObject();
@@ -135,8 +151,6 @@ public class FireEventController {
             obj.put("time", time);
 
             //传上来的参数
-            obj.put("streetId", streetId);
-            obj.put("streetName", event.getStreetName());
             obj.put("name", name);
             
             
@@ -160,9 +174,9 @@ public class FireEventController {
                 obj.put("type", 1);
             }
             
-            result.add(obj);
+            list.add(obj);
         }
-
+        result.put("list", list);
         request.setAttribute("result", result);
 
         return "alarm/alarm-fire-list";

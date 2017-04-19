@@ -443,11 +443,11 @@ public class FireEventServiceImpl implements FireEventService {
             
         }else if(type==4||type==5||type==6) {
             if (type==4) {
-                result= fireEventRepository.findByLossIsNotNull();
+                result= fireEventRepository.findByLossIsNotNull(streetId);
             }else if (type==5){
-                result= fireEventRepository.findByHurtNumIsNotNull();
+                result= fireEventRepository.findByHurtNumIsNotNull(streetId);
             }else {
-                result= fireEventRepository.findByDeadNumIsNotNull();
+                result= fireEventRepository.findByDeadNumIsNotNull(streetId);
             }
         }
         return result;
