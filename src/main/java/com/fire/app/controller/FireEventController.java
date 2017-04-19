@@ -1,9 +1,6 @@
 package com.fire.app.controller;
 
-import static org.hamcrest.CoreMatchers.nullValue;
-
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -180,7 +177,7 @@ public class FireEventController {
      */
     @RequestMapping(value = "/getStreetEvent", method = RequestMethod.GET)
     @ResponseBody
-    private List<JSONObject> getStreetEvent(@RequestParam(required = true) Long streetId,@RequestParam(required = true) Integer type) {
+    private List<JSONObject> getStreetEvent(@RequestParam(required = true) Long streetId) {
 
         /*
          * if (!ContextHolderUtils.isLogin()) { return "login/login"; }
@@ -194,7 +191,6 @@ public class FireEventController {
             obj.put("occurTime", event.getOccurTime());
             obj.put("streetName", event.getStreetName());
             obj.put("blockName", event.getBlockName());
-            obj.put("type", type);
 
             result.add(obj);
 
@@ -230,19 +226,12 @@ public class FireEventController {
      * @description 获取街道的详情
      */
     @RequestMapping(value = "/event")
-    private String getEventById(HttpServletRequest request, @RequestParam(required = true) Long id) {
+    private String getEventById(HttpServletRequest request, @RequestParam(required = true) Long id,@RequestParam(required = true) Integer type) {
 
         AppFireEvent event = fireEventServcie.findEventById(id);
 
-        if ("火灾".equals(event.getFireType())) {
-            
-        }else if ("冒烟".equals(event.getFireType())) {
-            
-        }else{
-            
-        }
         
-        
+        event.setFireType(type+"");
         
         request.setAttribute("event", event);
 

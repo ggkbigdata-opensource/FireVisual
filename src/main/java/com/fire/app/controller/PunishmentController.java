@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
 import com.fire.app.domain.AppPunishment;
 import com.fire.app.service.PunishmentService;
+import com.fire.app.service.impl.PunishmentServiceImpl;
 import com.fire.app.util.ContextHolderUtils;
 import com.fire.app.util.DateUtil;
 
@@ -135,7 +136,19 @@ public class PunishmentController {
             JSONObject obj = new JSONObject();
             obj.put("id", punishment.getId());
             obj.put("blockName", punishment.getBlockName());
-            obj.put("type", punishment.getPunishMethod());
+            
+            if (type==1) {
+               // obj.put("type_change", );
+            }else if (type==2) {
+                
+            }else if (type==3) {
+                
+            }else if (type==4) {
+                
+            }else{
+                
+            }
+            
             obj.put("UnitName", punishment.getPunishmentUnitName());
             
             Date time = null;
@@ -149,6 +162,7 @@ public class PunishmentController {
 
             //传上来的参数
             obj.put("streetId", streetId);
+            obj.put("streetName", punishment.getStreetName());
             obj.put("dutyPerson", punishment.getDutyPersonName());
             obj.put("type", type);
             
@@ -161,13 +175,16 @@ public class PunishmentController {
         return "lawEnforcement/lawEnforcement-fire-list";
     }
     @RequestMapping(value = "/punishment" ,method = RequestMethod.GET)
-    private String toPunishmentPage(HttpServletRequest request, @RequestParam(required = true)Long id) {
+    private String toPunishmentPage(HttpServletRequest request, @RequestParam(required = true)Long id,@RequestParam(required = true)Long type) {
         
         /*
          * if (!ContextHolderUtils.isLogin()) { return "login/login"; }
          */
         
         AppPunishment punishment = punishmentService.fingById(id);
+        
+        punishment.setPunishMethod(type+"");
+        
         request.setAttribute("punishment", punishment);
         
         return "lawEnforcement/lawEnforcement-fire-detail";
