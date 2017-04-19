@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fire.app.domain.AppPunishment;
+import com.fire.app.domain.Street;
 import com.fire.app.service.PunishmentService;
-import com.fire.app.service.impl.PunishmentServiceImpl;
+import com.fire.app.service.StreetService;
 import com.fire.app.util.ContextHolderUtils;
 import com.fire.app.util.DateUtil;
 
@@ -31,6 +32,8 @@ public class PunishmentController {
 
     @Autowired
     private PunishmentService punishmentService;
+    @Autowired
+    private StreetService streetService;
 
     @RequestMapping("/")
     private String toFireEvent() {
@@ -130,23 +133,34 @@ public class PunishmentController {
         //type   1--刑罚   2--刑拘   3--刑拘   4--临封   5--三停
 
         List<AppPunishment> punishments = punishmentService.findByStreetIdAndNameAndType(streetId, name, type);
-        List<JSONObject> result = new ArrayList<JSONObject>();
+        List<JSONObject> list = new ArrayList<JSONObject>();
 
+        
+        Street street = streetService.findById(streetId);
+        if (street==null) {
+            throw new RuntimeException("没有找到对应的街道信息");
+        }
+        
+        JSONObject result = new JSONObject();
+        
+        result.put("streetName", street.getName());
+        result.put("type", type);
+        
         for (AppPunishment punishment : punishments) {
             JSONObject obj = new JSONObject();
             obj.put("id", punishment.getId());
             obj.put("blockName", punishment.getBlockName());
             
             if (type==1) {
-               // obj.put("type_change", );
+               obj.put("type_change", "行罚");
             }else if (type==2) {
-                
+                obj.put("type_change", "行拘");
             }else if (type==3) {
-                
+                obj.put("type_change", "刑拘");
             }else if (type==4) {
-                
+                obj.put("type_change", "临封");
             }else{
-                
+                obj.put("type_change", "三停");
             }
             
             obj.put("UnitName", punishment.getPunishmentUnitName());
@@ -160,16 +174,14 @@ public class PunishmentController {
             
             obj.put("time", DateUtil.formatDate(time, "yyyy/MM/dd"));
 
-            //传上来的参数
-            obj.put("streetId", streetId);
-            obj.put("streetName", punishment.getStreetName());
             obj.put("dutyPerson", punishment.getDutyPersonName());
-            obj.put("type", type);
-            
+            //传上来的参数
 
-            result.add(obj);
+            list.add(obj);
         }
 
+        result.put("list", list);
+        
         request.setAttribute("result", result);
 
         return "lawEnforcement/lawEnforcement-fire-list";
