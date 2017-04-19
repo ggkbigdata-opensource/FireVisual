@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -126,10 +127,42 @@ public class PunishmentController {
     @RequestMapping(value = "/streePunishment" ,method = RequestMethod.GET)
     private String toStreeEventPage(HttpServletRequest request, @RequestParam(required = true)Long streetId, String name,@RequestParam(required = true) Integer type) {
 
+         if (!ContextHolderUtils.isLogin()) { return "login/login"; }
+        //type   1--刑罚   2--刑拘   3--刑拘   4--临封   5--三停
+        JSONObject result = this.getStreeEventData(streetId, name, type);
+        request.setAttribute("result", result);
+
+        return "lawEnforcement/lawEnforcement-fire-list";
+    }
+    
+    @RequestMapping(value = "/searchPunishment" ,method = RequestMethod.GET)
+    @ResponseBody
+    private JSONObject toSearchPunishment(@RequestParam(required = true)Long streetId, String name,@RequestParam(required = true) Integer type) {
+        
+        //type   1--刑罚   2--刑拘   3--刑拘   4--临封   5--三停
+        JSONObject result = this.getStreeEventData(streetId, name, type);
+        
+        return result;
+    }
+    
+    @RequestMapping(value = "/punishment" ,method = RequestMethod.GET)
+    private String toPunishmentPage(HttpServletRequest request, @RequestParam(required = true)Long id,@RequestParam(required = true)Long type) {
+        
         /*
          * if (!ContextHolderUtils.isLogin()) { return "login/login"; }
          */
         
+        AppPunishment punishment = punishmentService.fingById(id);
+        
+        punishment.setPunishMethod(type+"");
+        
+        request.setAttribute("punishment", punishment);
+        
+        return "lawEnforcement/lawEnforcement-fire-detail";
+    }
+    
+    private JSONObject getStreeEventData(@RequestParam(required = true)Long streetId, String name,@RequestParam(required = true) Integer type) {
+
         //type   1--刑罚   2--刑拘   3--刑拘   4--临封   5--三停
 
         List<AppPunishment> punishments = punishmentService.findByStreetIdAndNameAndType(streetId, name, type);
@@ -182,23 +215,7 @@ public class PunishmentController {
 
         result.put("list", list);
         
-        request.setAttribute("result", result);
 
-        return "lawEnforcement/lawEnforcement-fire-list";
-    }
-    @RequestMapping(value = "/punishment" ,method = RequestMethod.GET)
-    private String toPunishmentPage(HttpServletRequest request, @RequestParam(required = true)Long id,@RequestParam(required = true)Long type) {
-        
-        /*
-         * if (!ContextHolderUtils.isLogin()) { return "login/login"; }
-         */
-        
-        AppPunishment punishment = punishmentService.fingById(id);
-        
-        punishment.setPunishMethod(type+"");
-        
-        request.setAttribute("punishment", punishment);
-        
-        return "lawEnforcement/lawEnforcement-fire-detail";
+        return result;
     }
 }
