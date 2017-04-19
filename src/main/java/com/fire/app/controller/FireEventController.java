@@ -133,7 +133,7 @@ public class FireEventController {
         }
         
         JSONObject result = new JSONObject();
-        result.put("street", street.getName());
+        result.put("streetName", street.getName());
         result.put("streetId", streetId);
         result.put("type", type);
         
@@ -156,22 +156,16 @@ public class FireEventController {
             
             if(type == 2){
                 obj.put("type_change", "损失：冒烟");
-                obj.put("type", 2);
             }else if(type == 3){
                 obj.put("type_change", "损失：确认");
-                obj.put("type", 3);
             }else if(type == 4){
                 obj.put("type_change", "损失："+event.getLoss());
-                obj.put("type", 4);
             }else if(type == 5){
                 obj.put("type_change", "受伤："+event.getHurtNum());
-                obj.put("type", 5);
             }else if (type == 6) {
                 obj.put("type_change", "死亡："+event.getDeadNum());
-                obj.put("type", 6);
             }else{
                 obj.put("type_change", "种类：原始");
-                obj.put("type", 1);
             }
             
             list.add(obj);
