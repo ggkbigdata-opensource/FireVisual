@@ -135,7 +135,7 @@ public class PunishmentController {
         return "lawEnforcement/lawEnforcement-fire-list";
     }
     
-    @RequestMapping(value = "/searchPunishment" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/searchPunishment" ,method = RequestMethod.POST)
     @ResponseBody
     private JSONObject toSearchPunishment(@RequestParam(required = true)Long streetId, String name,@RequestParam(required = true) Integer type) {
         

@@ -133,7 +133,7 @@ public class FireEventController {
     }
 
     
-    @RequestMapping(value = "/searchEvent", method = RequestMethod.GET)
+    @RequestMapping(value = "/searchEvent", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject toSearchEvent(HttpServletRequest request, @RequestParam(required = true) Long streetId,
             String name, @RequestParam(required = true) Integer type) {
