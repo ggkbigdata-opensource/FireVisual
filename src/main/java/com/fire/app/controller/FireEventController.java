@@ -115,67 +115,38 @@ public class FireEventController {
         return result;
     }
 
-    @RequestMapping(value = "/streeEvent" ,method = RequestMethod.GET)
-    private String toStreeEventPage(HttpServletRequest request, @RequestParam(required = true)Long streetId, String name,@RequestParam(required = true) Integer type) {
+    @RequestMapping(value = "/streeEvent", method = RequestMethod.GET)
+    public String toStreeEventPage(HttpServletRequest request, @RequestParam(required = true) Long streetId,
+            String name, @RequestParam(required = true) Integer type) {
 
-        /*
-         * if (!ContextHolderUtils.isLogin()) { return "login/login"; }
-         */
-        
-        //type   1--原始   2--冒烟   3--确认   4--损失   5--受伤   6--死亡
-
-        List<AppFireEvent> events = fireEventServcie.findByStreetIdAndNameAndType(streetId, name, type);
-       
-        Street street = streetService.findById(streetId);
-        
-        if (street==null) {
-            throw new RuntimeException("没有找到对应的街道");
+        if (!ContextHolderUtils.isLogin()) {
+            return "login/login";
         }
-        
-        JSONObject result = new JSONObject();
-        result.put("streetName", street.getName());
-        result.put("streetId", streetId);
-        result.put("type", type);
-        
-        List<JSONObject> list = new ArrayList<JSONObject>();
 
-        for (AppFireEvent event : events) {
-            JSONObject obj = new JSONObject();
-            obj.put("id", event.getId());
-            obj.put("blockName", event.getBlockName());
-            
-            String time= null;
-            if (event.getOccurTime()!=null) {
-                time = DateUtil.formatDate(event.getOccurTime(), "yyyy/MM/dd HH:mm");
-            }
-            obj.put("time", time);
+        // type 1--原始 2--冒烟 3--确认 4--损失 5--受伤 6--死亡
 
-            //传上来的参数
-            obj.put("name", name);
-            
-            
-            if(type == 2){
-                obj.put("type_change", "损失：冒烟");
-            }else if(type == 3){
-                obj.put("type_change", "损失：确认");
-            }else if(type == 4){
-                obj.put("type_change", "损失："+event.getLoss());
-            }else if(type == 5){
-                obj.put("type_change", "受伤："+event.getHurtNum());
-            }else if (type == 6) {
-                obj.put("type_change", "死亡："+event.getDeadNum());
-            }else{
-                obj.put("type_change", "种类：原始");
-            }
-            
-            list.add(obj);
-        }
-        result.put("list", list);
+        JSONObject result = this.getStreeEvent(request, streetId, name, type);
+
         request.setAttribute("result", result);
 
         return "alarm/alarm-fire-list";
     }
 
+    
+    @RequestMapping(value = "/searchEvent", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject toSearchEvent(HttpServletRequest request, @RequestParam(required = true) Long streetId,
+            String name, @RequestParam(required = true) Integer type) {
+
+        // type 1--原始 2--冒烟 3--确认 4--损失 5--受伤 6--死亡
+
+        JSONObject result = this.getStreeEvent(request, streetId, name, type);
+
+        return result;
+    }
+    
+    
+    
     /**
      * @createDate 2017年4月17日上午9:56:22
      * @author wangzhiwang
@@ -234,16 +205,70 @@ public class FireEventController {
      * @description 获取街道的详情
      */
     @RequestMapping(value = "/event")
-    private String getEventById(HttpServletRequest request, @RequestParam(required = true) Long id,@RequestParam(required = true) Integer type) {
+    private String getEventById(HttpServletRequest request, @RequestParam(required = true) Long id,
+            @RequestParam(required = true) Integer type) {
 
         AppFireEvent event = fireEventServcie.findEventById(id);
 
-        
-        event.setFireType(type+"");
-        
+        event.setFireType(type + "");
+
         request.setAttribute("event", event);
 
         return "alarm/alarm-fire-detail";
     }
-    
+
+    private JSONObject getStreeEvent(HttpServletRequest request, @RequestParam(required = true) Long streetId,
+            String name, @RequestParam(required = true) Integer type) {
+
+        // type 1--原始 2--冒烟 3--确认 4--损失 5--受伤 6--死亡
+
+        List<AppFireEvent> events = fireEventServcie.findByStreetIdAndNameAndType(streetId, name, type);
+
+        Street street = streetService.findById(streetId);
+
+        if (street == null) {
+            throw new RuntimeException("没有找到对应的街道");
+        }
+
+        JSONObject result = new JSONObject();
+        result.put("streetName", street.getName());
+        result.put("streetId", streetId);
+        result.put("type", type);
+
+        List<JSONObject> list = new ArrayList<JSONObject>();
+
+        for (AppFireEvent event : events) {
+            JSONObject obj = new JSONObject();
+            obj.put("id", event.getId());
+            obj.put("blockName", event.getBlockName());
+
+            String time = null;
+            if (event.getOccurTime() != null) {
+                time = DateUtil.formatDate(event.getOccurTime(), "yyyy/MM/dd HH:mm");
+            }
+            obj.put("time", time);
+
+            // 传上来的参数
+            obj.put("name", name);
+
+            if (type == 2) {
+                obj.put("type_change", "损失：冒烟");
+            } else if (type == 3) {
+                obj.put("type_change", "损失：确认");
+            } else if (type == 4) {
+                obj.put("type_change", "损失：" + event.getLoss());
+            } else if (type == 5) {
+                obj.put("type_change", "受伤：" + event.getHurtNum());
+            } else if (type == 6) {
+                obj.put("type_change", "死亡：" + event.getDeadNum());
+            } else {
+                obj.put("type_change", "种类：原始");
+            }
+
+            list.add(obj);
+        }
+        result.put("list", list);
+
+        return result;
+    }
 }
