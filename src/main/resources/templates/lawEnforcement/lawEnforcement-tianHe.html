@@ -18,7 +18,7 @@
             <div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
                 <div class="mui-scroll">
                     <div class="filterBox">
-                        <button onclick="hide('trendPopover')" class="fl btn-filter">天河区执法趋势 <i class="mui-icon mui-icon-arrowdown"></i></button>
+                        <span id="hidePopover" class="fl btn-filter">天河区执法趋势 <i class="mui-icon mui-icon-arrowdown"></i></span>
                         <div th:replace="/layouts/layout::law-menu"></div>
                     </div>
                     <div class="mui-content-padded" id="bodyContent">
@@ -46,6 +46,7 @@
 	<script th:src="@{/common/echarts/eLine.js}"></script>
 	<script th:inline="javascript">
 		mui.init();
+		var isTrend = false;
 		mui.get([[@{/app/punishment/main}]], '', function(data) {
 			if (data && data.length > 0) {
 				var legend = [];
@@ -82,7 +83,25 @@
 				$('table tbody').append(tbodytr);
 			}
 		}, 'json');
+		$('#hidePopover').bind('tap',function(){
+			hidePopover('trendPopover');
+		});
+		function hidePopover(popover){
+			if(popover === 'trendPopover'){
+				if(isTrend){
+					$('#bodyContent').removeClass('content-backdrop');
+					$('#trendPopover').hide();
+					isTrend = false;
+				}else{
+					$('#bodyContent').addClass('content-backdrop');
+					$('#trendPopover').show();
+					isTrend = true;
+				}
+			}
+		}
 		$('#bodyContent').bind('tap',function(){
+			isTrend = false;
+			$('#bodyContent').removeClass('content-backdrop');
         	$(".popoverbox").hide();
         });
 	</script>

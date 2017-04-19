@@ -632,6 +632,7 @@ body,
 	border-color: #fdcf2e;
 }
 .mui-segmented-control-red.mui-segmented-control .mui-control-item.mui-active {
+	position: relative;
 	color: #000;
 	background-color: #fdcf2e;
 } 
@@ -749,8 +750,8 @@ body,
 	width: 100%;
 	background-color: #ddd;
 }
-.groupList.recordList .mui-row .mui-col-xs-4, 
-.groupList.recordList .mui-row .mui-col-xs-8, 
+.groupList.recordList .mui-row .mui-col-xs-4,
+.groupList.recordList .mui-row .mui-col-xs-8,
 .groupList.recordList .mui-row .mui-col-xs-6 {
 	margin-top: 5px;
 }
@@ -789,6 +790,14 @@ body,
 	margin-bottom: 0;
 	line-height: 30px;
 }
+.no-record-sm { 
+	font-size: 18px;
+	line-height: 40px;
+}
+.no-record-main.no-record-sm .mui-icon-search {
+	font-size: 40px;
+	margin-right: 5px;
+}
 .detail-menu {
 	padding-top: 20px;
 }
@@ -802,9 +811,6 @@ body,
 	width: auto;
 	background-color: #f4f3f3;
 	margin: 0 -10px 10px;
-}
-.profileBox .mui-col-xs-12 {
-	padding-bottom: 5px;
 }
 .profileBox .profile-items {
 	position: relative;
@@ -827,19 +833,20 @@ body,
 	content: "";
 	position: absolute;
 	left: -5px;
-	top: 50%;
+	top: 5%;
 	width: 1px;
-	height: 44px;
-	margin-top: -22px;
+	height: 90%;
 	background-color: #ddd;
 }
 .profileBox .profileTit {
 	width: auto;
+	min-height: 30px;
 	display: block;
-	padding: 5px 10px 15px;
+	padding: 5px 20px 10px;
 	text-align: center;
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: bold;
+	line-height: 25px;
 	margin: 0 -10px 8px;
 	border-bottom: 1px solid #ccc;
 }
@@ -885,6 +892,7 @@ body,
 	right: 0;
 	color: #000;
 	}
+	
 @media screen and (min-width: 330px) and (max-width: 420px) {
 	.paddingTable > thead > tr > th {
 		padding: 5px 10px;
@@ -913,5 +921,11 @@ body,
 		width: 18px;
 		height: 18px;
 		line-height: 18px;
+	}
+	.groupList h1 {
+		font-size: 16px;
+	}
+	.groupList .mui-row .tit {
+		font-size: 14px;
 	}
 }

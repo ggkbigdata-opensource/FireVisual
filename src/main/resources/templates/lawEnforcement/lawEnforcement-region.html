@@ -18,9 +18,9 @@
             <div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
                 <div class="mui-scroll">
                     <div class="filterBox">
-                        <button onclick="hidePopover('trendPopover')" class="fl btn-filter">街道执法趋势 <i class="mui-icon mui-icon-arrowdown"></i></button>
+                        <span id="hidePopover" class="fl btn-filter">街道执法趋势 <i class="mui-icon mui-icon-arrowdown"></i></span>
                         <div th:replace="/layouts/layout::law-menu"></div>
-                        <button id="selectedBlock" onclick="hidePopover('regionPopover')" class="fr btn-filter"></button>
+                        <span id="selectedBlock" onclick="hidePopover('regionPopover')" class="fr btn-filter"></span>
                         <div id="regionPopover" style="display: none" class="popoverbox">
                             <div class="regionCurrent"></div>
                             <ul class="regionList" id="blocks"></ul>
@@ -56,15 +56,23 @@
     	//分类警情数据和选择时间段弹窗点击关闭另外一个
 	    var isTrend = false;
 	    var isRegion = false;
+	    $('#hidePopover').bind('tap',function(){
+	    	hidePopover('trendPopover');
+	    });
+	    $('#selectedBlock').bind('tap',function(){
+	    	hidePopover('regionPopover');
+	    });
 	    function hidePopover(popover){
 	    	if(popover === 'trendPopover'){
 	    		$('#regionPopover').hide();
 	    		isRegion = false;
 	    		if(isTrend){
 	    			$('#trendPopover').hide();
+	    			$('#bodyContent').removeClass('content-backdrop');
 	    			isTrend = false;
 	    		}else{
 	    			$('#trendPopover').show();
+	    			$('#bodyContent').addClass('content-backdrop');
 	    			isTrend = true;
 	    		}
 	    	}else if(popover === 'regionPopover'){
@@ -72,9 +80,11 @@
 	    		isTrend = false;
 	    		if(isRegion){
 	    			$('#regionPopover').hide();
+	    			$('#bodyContent').removeClass('content-backdrop');
 	    			isRegion = false;
 	    		}else{
 	    			$('#regionPopover').show();
+	    			$('#bodyContent').addClass('content-backdrop');
 	    			isRegion = true;
 	    		}
 	    	}
@@ -143,6 +153,7 @@
         	});
         	//关闭街道选择区
         	isRegion = false;
+        	$('#bodyContent').removeClass('content-backdrop');
         	$('#regionPopover').hide();
         }
         function init () {
@@ -151,9 +162,12 @@
         init();
         
         $('#bodyContent').bind('tap',function(){
-        	isRegion = false;
-        	isTrend = false;
-        	$(".popoverbox").hide();
+        	if(isRegion || isTrend){
+        		isRegion = false;
+            	isTrend = false;
+            	$('#bodyContent').removeClass('content-backdrop');
+            	$(".popoverbox").hide();
+        	}
         });
         </script>
 </body>

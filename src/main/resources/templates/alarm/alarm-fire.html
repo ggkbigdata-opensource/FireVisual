@@ -358,7 +358,6 @@
         		endTime: endRange
         	},function(data){
         		if(data){
-        			console.log(data);
         			showData(data);
         		}
         	});
@@ -388,7 +387,6 @@
         		endTime: year + '-' + endMon
         	},function(data){
         		if(data){
-        			console.log(data);
         			showData(data);
         		}
         	});
@@ -433,12 +431,20 @@
 	    		}
 	    	}
 	    }
-	    
+	    $('#bodyContent').bind('tap',function(){
+	    	if(isTrend || isTime){
+		    	isTrend = false;
+	        	isTime = false;
+	        	$('#bodyContent').removeClass('content-backdrop');
+	        	$(".popoverbox").hide();
+	    	}
+        });
 	    //展示表格数据
 	    var dataLength;
 	    var dataList = [];
 	    function showData (data) {
 	    	dataLength = data.length;
+	    	dataList = data;
 	    	for(var n=1;n<7;n++){
 	    		$('#tbody' + n).text('');
 	    	}
@@ -452,7 +458,6 @@
 	    		}
 	    	}
 	    	data.sort(compare('primitiveNow'));
-	    	dataList = data;
 	    	arrStr[0] = '';
 	    	for(var i=0;i<data.length;i++){
 	    		var tr1 = '';
@@ -524,14 +529,7 @@
 			}
 			goList();
 	    }
-	    $('#bodyContent').bind('tap',function(){
-	    	if(isTrend || isTime){
-		    	isTrend = false;
-	        	isTime = false;
-	        	$('#bodyContent').removeClass('content-backdrop');
-	        	$(".popoverbox").hide();
-	    	}
-        });
+	    
 	    function goList(){
 	    	var arrTitle = ['#primitive_','#smoking_','#affirm_','#loss_','#hurt_','#dead_'];
 	    	if(dataLength){

@@ -44,19 +44,6 @@
 									        </div>
 									    </div>
 									</li>
-									<li>
-										<h1>中国联合网络通信有限公司广东省分公司<a class="btn-detail pa" href="lawEnforcement-fire-detail.html">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>
-										<div class="mui-row">
-											<div class="mui-col-xs-6">
-									            <div class="tit fl">时间：</div>
-									            <div class="oh">20161205</div>
-									        </div>
-									        <div class="mui-col-xs-6">
-									            <div class="tit fl">责任人：</div>
-									            <div class="oh">张日天</div>
-									        </div>
-									    </div>
-									</li>
 								</ul>
 							</div>
 							<!-- 内容区域 end -->
@@ -71,7 +58,11 @@
 	<script th:src="@{/js/jquery-2.1.0.js}"></script>
 	<script th:src="@{/js/normal.js}"></script>
 	<script th:inline="javascript">
-	
+		mui.init();
+		function init(){
+			console.log([[${result}]]);
+		}
+		init();
 	</script>
 </body>
 </html>
