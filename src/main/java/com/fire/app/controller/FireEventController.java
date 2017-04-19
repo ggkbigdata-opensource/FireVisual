@@ -130,7 +130,6 @@ public class FireEventController {
             JSONObject obj = new JSONObject();
             obj.put("id", event.getId());
             obj.put("blockName", event.getBlockName());
-            obj.put("type", event.getFireType());
             
             String time= null;
             if (event.getOccurTime()!=null) {
@@ -140,21 +139,28 @@ public class FireEventController {
 
             //传上来的参数
             obj.put("streetId", streetId);
-            obj.put("streetId", event.getStreetName());
+            obj.put("streetName", event.getStreetName());
             obj.put("name", name);
             
             
-            if (type < 3) {
-                obj.put("type", "种类："+event.getFireType());
+            if(type == 2){
+                obj.put("type_change", "损失：冒烟");
+                obj.put("type", 2);
             }else if(type == 3){
-                obj.put("type", "损失：确认");
+                obj.put("type_change", "损失：确认");
+                obj.put("type", 3);
             }else if(type == 4){
-                obj.put("type", "损失："+event.getLoss());
+                obj.put("type_change", "损失："+event.getLoss());
+                obj.put("type", 4);
             }else if(type == 5){
-                obj.put("type", "受伤："+event.getHurtNum());
+                obj.put("type_change", "受伤："+event.getHurtNum());
+                obj.put("type", 5);
+            }else if (type == 6) {
+                obj.put("type_change", "死亡："+event.getDeadNum());
+                obj.put("type", 6);
             }else{
-                obj.put("type", "死亡："+event.getDeadNum());
-                 
+                obj.put("type_change", "种类：原始");
+                obj.put("type", 1);
             }
             
             result.add(obj);
@@ -174,7 +180,7 @@ public class FireEventController {
      */
     @RequestMapping(value = "/getStreetEvent", method = RequestMethod.GET)
     @ResponseBody
-    private List<JSONObject> getStreetEvent(@RequestParam(required = true) Long streetId) {
+    private List<JSONObject> getStreetEvent(@RequestParam(required = true) Long streetId,@RequestParam(required = true) Integer type) {
 
         /*
          * if (!ContextHolderUtils.isLogin()) { return "login/login"; }
@@ -188,6 +194,7 @@ public class FireEventController {
             obj.put("occurTime", event.getOccurTime());
             obj.put("streetName", event.getStreetName());
             obj.put("blockName", event.getBlockName());
+            obj.put("type", type);
 
             result.add(obj);
 
@@ -227,8 +234,19 @@ public class FireEventController {
 
         AppFireEvent event = fireEventServcie.findEventById(id);
 
+        if ("火灾".equals(event.getFireType())) {
+            
+        }else if ("冒烟".equals(event.getFireType())) {
+            
+        }else{
+            
+        }
+        
+        
+        
         request.setAttribute("event", event);
 
         return "alarm/alarm-fire-detail";
     }
+    
 }
