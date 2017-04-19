@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head th:with="title=${'执法'}" th:include="/layouts/layout::head">
+</head>
+<body>
+	<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+			<!--菜单部分-->
+			<div th:replace="/layouts/layout::menu"></div>
+			<div class="mui-inner-wrap">
+				<header class="mui-bar mui-bar-nav">
+					<div class="logo">
+						<img th:src="@{/img/logo.png}" />
+					</div>
+					<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
+					<h1 class="mui-title">执法</h1>
+				</header>
+				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="filterBox">
+							<h1>员村执法</h1>
+							<a href="lawEnforcement-fire.html" class="fl btn-filter" >
+								<i class="mui-icon mui-icon-arrowleft"></i>
+								返回
+							</a>
+						</div>
+						<div class="mui-content-padded" id="contentBox">
+							<!-- 内容区域 -->
+							<div class="mui-input-row mui-search searchBox">
+								<input type="search" class="mui-input-clear input-search" placeholder="输入违法行为人名称、单位名称">
+								<button type="button" class="button-search">搜索</button>
+							</div>
+							<div class="listBox mt15">
+								<ul class="groupList recordList">
+									<li>
+										<h1>广州同创咖啡有限公司（高地朋友圈主题酒吧）<a class="btn-detail pa" href="lawEnforcement-fire-detail.html">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>
+										<div class="mui-row">
+											<div class="mui-col-xs-6">
+									            <div class="tit fl">时间：</div>
+									            <div class="oh">20161205</div>
+									        </div>
+									        <div class="mui-col-xs-6">
+									            <div class="tit fl">责任人：</div>
+									            <div class="oh">张日天</div>
+									        </div>
+									    </div>
+									</li>
+									<li>
+										<h1>中国联合网络通信有限公司广东省分公司<a class="btn-detail pa" href="lawEnforcement-fire-detail.html">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>
+										<div class="mui-row">
+											<div class="mui-col-xs-6">
+									            <div class="tit fl">时间：</div>
+									            <div class="oh">20161205</div>
+									        </div>
+									        <div class="mui-col-xs-6">
+									            <div class="tit fl">责任人：</div>
+									            <div class="oh">张日天</div>
+									        </div>
+									    </div>
+									</li>
+								</ul>
+							</div>
+							<!-- 内容区域 end -->
+						</div>
+					</div>
+				</div>
+				<!-- off-canvas backdrop -->
+				<div class="mui-off-canvas-backdrop"></div>
+			</div>
+		</div>
+	<script th:src="@{/js/mui.js}"></script>
+	<script th:src="@{/js/jquery-2.1.0.js}"></script>
+	<script th:src="@{/js/normal.js}"></script>
+	<script th:inline="javascript">
+	
+	</script>
+</body>
+</html>

@@ -26,7 +26,7 @@
 						<div class="mui-content-padded" id="contentBox">
 							<!-- 内容区域 -->
 							<div class="profileBox">
-								<h1 class="profileTit" th:text="${event.blockName} ==''? '-':${event.blockName}"></h1>
+								<h1 class="profileTit" th:text="${event.blockName} == null?'-':${event.blockName}"></h1>
 								<div class="mui-row ">
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>发生时间</h2>
@@ -44,7 +44,7 @@
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>地址</h2>
-							        	<p th:text="${event.address} ==''?'-':${event.address}"></p>
+							        	<p th:text="${event.address} == null ?'-':${event.address}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>火情案号</h2>
@@ -60,36 +60,36 @@
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>地理位置</h2>
-							        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
+							        	<p th:text="${event.placePositionType} ==''?'-':${event.placePositionType}">-</p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items mui-row">
 							        	<div class="mui-col-xs-6">
 								        	<h2>使用性质</h2>
-								        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
+								        	<p th:text="${event.placeUseType} ==''?'-':${event.placeUseType}">-</p>
 								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>工程性质</h2>
-								        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
+								        	<p th:text="${event.constructionType} ==''?'-':${event.constructionType}">-</p>
 								        </div>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items mui-row">
 							        	<div class="mui-col-xs-6">
 							        		<h2>火灾类型</h2>
-							        		<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">冒烟</p>
+							        		<p id="fType">-</p>
 								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>值班组</h2>
-								        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">金中伟</p>
+								        	<p th:text="${event.dutyPart} ==''?'-':${event.dutyPart}">金中伟</p>
 								        </div>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>警情描述</h2>
-							        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}"></p>
+							        	<p th:text="${event.description} ==''?'-':${event.description}"></p>
 							        </div>
 							        
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>现场警情</h2>
-							        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}"></p>
+							        	<p th:text="${event.sceneDesc} ==''?'-':${event.sceneDesc}"></p>
 							        </div>
 							    </div>
 							    <div class="spaceline10"></div>
@@ -97,21 +97,21 @@
 							        <div class="mui-col-xs-12 profile-items mui-row">
 							        	<div class="mui-col-xs-6">
 							        		<h2>起火位置</h2>
-							        		<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
+							        		<p th:text="${event.firePosition} ==''?'-':${event.firePosition}">-</p>
 								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>起火物</h2>
-								        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
+								        	<p th:text="${event.fireObject} ==''?'-':${event.fireObject}">-</p>
 								        </div>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items mui-row">
 							        	<div class="mui-col-xs-6">
 							        		<h2>起火原因分类</h2>
-							        		<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
+							        		<p th:text="${event.fireReasonType} ==''?'-':${event.fireReasonType}">-</p>
 								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>起火原因</h2>
-								        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
+								        	<p th:text="${event.fireReason} ==''?'-':${event.fireReason}">-</p>
 								        </div>
 							        </div>
 							    </div>
@@ -120,31 +120,31 @@
 							        <div class="mui-col-xs-12 profile-items mui-row">
 							        	<div class="mui-col-xs-6">
 							        		<h2>企业性质</h2>
-								        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
+								        	<p th:text="${event.enterpriseNature} ==''?'-':${event.enterpriseNature}">-</p>
 								        </div>
 							        	<div class="mui-col-xs-6">
-								        	<h2>经济损失</h2>
-							        		<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">10000元</p>
+								        	<h2>经济损失（元）</h2>
+							        		<p th:text="${event.loss} ==''?'-':${event.loss}">10000元</p>
 								        </div>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items mui-row">
 							        	<div class="mui-col-xs-6">
 							        		<h2>受伤人数</h2>
-							        		<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">1</p>
+							        		<p th:text="${event.hurtNum} ==''?'-':${event.hurtNum}">1</p>
 								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>死亡人数</h2>
-								        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">1</p>
+								        	<p th:text="${event.deadNum} ==''?'-':${event.deadNum}">1</p>
 								        </div>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items mui-row">
 							        	<div class="mui-col-xs-6">
 							        		<h2>是否有消防手续</h2>
-								        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">是</p>
+								        	<p th:text="${event.hasProcedure} ==''?'-':${event.hasProcedure}">是</p>
 								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>是否自救</h2>
-							        		<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">否</p>
+							        		<p th:text="${event.selfSave} ==''?'-':${event.selfSave}">否</p>
 								        </div>
 							        </div>
 							    </div>
@@ -152,25 +152,25 @@
 							    <div class="mui-row ">
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>消防执法案号</h2>
-							        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
+							        	<p th:text="${event.punishCaseNumber} ==''?'-':${event.punishCaseNumber}">-</p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items mui-row">
 							        	<div class="mui-col-xs-6">
 							        		<h2>微型消防站参与</h2>
-								        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
+								        	<p th:text="${event.fireStation} ==''?'-':${event.fireStation}">-</p>
 								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>移交部门</h2>
-							        		<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
+							        		<p th:text="${event.handleDepart} ==''?'-':${event.handleDepart}">-</p>
 								        </div>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>数据创建时间</h2>
-							        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
+							        	<p th:text="${event.createDate} ==''?'-':${event.createDate}">-</p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>修改时间</h2>
-							        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
+							        	<p th:text="${event.modDate} ==''?'-':${event.modDate}">-</p>
 							        </div>
 							    </div>
 						    </div>
@@ -208,6 +208,14 @@
                     url : [[@{/app/fireEvent/streeEvent?streetId=}]] + streetId + '&type=' + [[${event.fireType}]]
                   });
     		});
+			//火灾类型
+			var fType = ['原始','冒烟','确认','损失','受伤','死亡'];
+			for(var i=0;i<fType.length;i++){
+				if([[${event.fireType}]] == i+1){
+					$('#fType').text(fType[i]);
+					break;
+				}
+			}
 			
 		}
 		init();
