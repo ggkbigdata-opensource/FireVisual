@@ -54,6 +54,15 @@ public class AppFireEvent  {
     private String remark;
     private String status;
     
+    private String recycleBin;
+    private String rescueEquipment;
+    private String isArrive;
+    private String isDispose;
+    private String halfwayBack;
+    private String rescueType;
+    private String isArriveProspect;
+    private String isPunish;
+    
     public Long getId() {
         return id;
     }
@@ -263,6 +272,54 @@ public class AppFireEvent  {
     }
     public void setStatus(String status) {
         this.status = status;
+    }
+    public String getRecycleBin() {
+        return recycleBin;
+    }
+    public void setRecycleBin(String recycleBin) {
+        this.recycleBin = recycleBin;
+    }
+    public String getRescueEquipment() {
+        return rescueEquipment;
+    }
+    public void setRescueEquipment(String rescueEquipment) {
+        this.rescueEquipment = rescueEquipment;
+    }
+    public String getIsArrive() {
+        return isArrive;
+    }
+    public void setIsArrive(String isArrive) {
+        this.isArrive = isArrive;
+    }
+    public String getIsDispose() {
+        return isDispose;
+    }
+    public void setIsDispose(String isDispose) {
+        this.isDispose = isDispose;
+    }
+    public String getHalfwayBack() {
+        return halfwayBack;
+    }
+    public void setHalfwayBack(String halfwayBack) {
+        this.halfwayBack = halfwayBack;
+    }
+    public String getRescueType() {
+        return rescueType;
+    }
+    public void setRescueType(String rescueType) {
+        this.rescueType = rescueType;
+    }
+    public String getIsArriveProspect() {
+        return isArriveProspect;
+    }
+    public void setIsArriveProspect(String isArriveProspect) {
+        this.isArriveProspect = isArriveProspect;
+    }
+    public String getIsPunish() {
+        return isPunish;
+    }
+    public void setIsPunish(String isPunish) {
+        this.isPunish = isPunish;
     }
 
 }

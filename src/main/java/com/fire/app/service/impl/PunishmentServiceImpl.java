@@ -333,7 +333,7 @@ public class PunishmentServiceImpl implements PunishmentService {
                 eTime = calendar.getTime();
                 
                 int fineNumBefore = 0;// 行政处罚宗数
-                int finePriceBefore = 0;// 行政处罚
+                double finePriceBefore = 0;// 行政处罚
                 int admiDetBefore = 0;// 行政拘留
                 int crimDetBefore = 0;// 刑事拘留
                 int sealUpBefore = 0;// 临时查封
@@ -355,7 +355,7 @@ public class PunishmentServiceImpl implements PunishmentService {
                     if ("行政罚款".equals(punish.getPunishMethod())) {
                         fineNumBefore++;// 行政处罚宗数
                         if (StringUtils.isNotEmpty(punish.getFineAmount())) {
-                            finePriceBefore = Integer.parseInt(punish.getFineAmount()) + finePriceBefore;// 行政处罚
+                            finePriceBefore = Double.parseDouble(punish.getFineAmount()) + finePriceBefore;// 行政处罚
                         }
                     }
                     if ("行政拘留".equals(punish.getPunishMethod())) {

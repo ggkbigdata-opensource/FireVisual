@@ -4,11 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-/**
- * @createDate 2017年3月21日下午5:53:16
- * @author wangzhiwang
- * @description
- */
 @Entity
 public class BsKeyPart {
 

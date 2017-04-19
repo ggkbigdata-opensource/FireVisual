@@ -8,12 +8,6 @@ import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-/**
- * No modifying Company: Scho Co. Ltd
- * 
- * @author Administrator
- * @date 2016-9-28 15:10:32
- */
 @Entity
 public class Block {
 

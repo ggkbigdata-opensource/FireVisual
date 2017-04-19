@@ -54,6 +54,7 @@ public class AppPunishment {
     private String executorName;
     private String reconsiderationUnit;
     private String lawsuitAcceptUnit;
+    private String punishUnitName;
 
     public Long getId() {
         return id;
@@ -326,6 +327,14 @@ public class AppPunishment {
 
     public void setTempEntranceTimeEnd(Date tempEntranceTimeEnd) {
         this.tempEntranceTimeEnd = tempEntranceTimeEnd;
+    }
+
+    public String getPunishUnitName() {
+        return punishUnitName;
+    }
+
+    public void setPunishUnitName(String punishUnitName) {
+        this.punishUnitName = punishUnitName;
     }
     
 }
