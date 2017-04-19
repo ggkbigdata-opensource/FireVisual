@@ -372,6 +372,7 @@ public class PunishmentServiceImpl implements PunishmentService {
 
                 JSONObject streetResult = new JSONObject();
                 streetResult.put("streetName", street.getName());
+                streetResult.put("streetName", street.getId());
 
                 // 临时查封
                 streetResult.put("sealUpNow", sealUpNow);
