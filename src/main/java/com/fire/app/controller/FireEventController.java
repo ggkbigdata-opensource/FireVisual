@@ -134,7 +134,7 @@ public class FireEventController {
             
             String time= null;
             if (event.getOccurTime()!=null) {
-                time = DateUtil.formatDate(event.getOccurTime(), "yyyy/MM/dd");
+                time = DateUtil.formatDate(event.getOccurTime(), "yyyy/MM/dd HH:mm");
             }
             obj.put("time", time);
 
