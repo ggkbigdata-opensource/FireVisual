@@ -144,8 +144,10 @@ public class FireEventController {
             obj.put("name", name);
             
             
-            if (type < 4) {
+            if (type < 3) {
                 obj.put("type", "种类："+event.getFireType());
+            }else if(type == 3){
+                obj.put("type", "损失： 火灾");
             }else if(type == 4){
                 obj.put("type", "损失："+event.getLoss());
             }else if(type == 5){
