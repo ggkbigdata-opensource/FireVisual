@@ -140,6 +140,7 @@ public class FireEventController {
 
             //传上来的参数
             obj.put("streetId", streetId);
+            obj.put("streetId", event.getStreetName());
             obj.put("name", name);
             
             
