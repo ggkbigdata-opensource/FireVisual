@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
-import com.fire.app.domain.AppFireEvent;
 import com.fire.app.domain.AppPunishment;
 import com.fire.app.service.PunishmentService;
 import com.fire.app.util.ContextHolderUtils;
@@ -137,6 +136,7 @@ public class PunishmentController {
             obj.put("id", punishment.getId());
             obj.put("blockName", punishment.getBlockName());
             obj.put("type", punishment.getPunishMethod());
+            obj.put("UnitName", punishment.getPunishmentUnitName());
             
             Date time = null;
             if ("临时查封".equals(punishment.getPunishMethod())) {
@@ -149,7 +149,7 @@ public class PunishmentController {
 
             //传上来的参数
             obj.put("streetId", streetId);
-            obj.put("name", name);
+            obj.put("dutyPerson", punishment.getDutyPersonName());
             obj.put("type", type);
             
 
@@ -158,6 +158,18 @@ public class PunishmentController {
 
         request.setAttribute("result", result);
 
-        return "alarm/alarm-fire-list";
+        return "lawEnforcement/lawEnforcement-fire-list";
+    }
+    @RequestMapping(value = "/punishment" ,method = RequestMethod.GET)
+    private String toPunishmentPage(HttpServletRequest request, @RequestParam(required = true)Long id) {
+        
+        /*
+         * if (!ContextHolderUtils.isLogin()) { return "login/login"; }
+         */
+        
+        AppPunishment punishment = punishmentService.fingById(id);
+        request.setAttribute("punishment", punishment);
+        
+        return "lawEnforcement/lawEnforcement-fire-detail";
     }
 }

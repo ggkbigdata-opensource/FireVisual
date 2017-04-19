@@ -50,5 +50,14 @@ public interface PunishmentService {
      */
     List<AppPunishment> findByStreetIdAndNameAndType(Long streetId, String name, Integer type);
 
+    /**
+     * @createDate 2017年4月19日上午9:10:31 
+     * @author wangzhiwang
+     * @param id
+     * @return 
+     * @description
+     */
+    AppPunishment fingById(Long id);
+
 
 }

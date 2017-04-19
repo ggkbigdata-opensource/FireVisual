@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.fire.app.domain.AppFireEvent;
 import com.fire.app.domain.AppPunishment;
 import com.fire.app.domain.AppPunishmentRepository;
 import com.fire.app.domain.Street;
@@ -429,7 +428,6 @@ public class PunishmentServiceImpl implements PunishmentService {
                 result= punishmentRepository.findSealUpByCondition(streetId,name,punishMehtod);
             }
         }else{
-            String punishMehtod="停产,停工,停业";
             List<String> methods = new ArrayList<String>();
             methods.add("停业");
             methods.add("停工");
@@ -442,6 +440,13 @@ public class PunishmentServiceImpl implements PunishmentService {
         }
         return result;
         
+    }
+
+    @Override
+    public AppPunishment fingById(Long id) {
+
+        AppPunishment punishment = punishmentRepository.findById(id);
+        return punishment;
     }
 
 }
