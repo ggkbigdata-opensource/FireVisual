@@ -18,7 +18,7 @@
 				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
 					<div class="mui-scroll">
 						<div class="filterBox">
-							<h1>员村警情</h1>
+							<h1><span  th:text="${result[0].streetId}"></span>警情</h1>
 							<a th:href="@{/app/fireEvent/toBasePage}" class="fl btn-filter" >
 								<i class="mui-icon mui-icon-arrowleft"></i>
 								返回
@@ -28,37 +28,23 @@
 							<!-- 内容区域 -->
 							<!-- <p th:text="${result}" ></p> -->
 							<div class="mui-input-row mui-search searchBox">
-								<input type="search" class="mui-input-clear input-search" placeholder="输入社区中网络">
-								<button type="button" class="button-search">搜索</button>
+								<input type="search" id="streetName" class="mui-input-clear input-search" placeholder="输入社区中网络">
+								<button type="button" onclick="searchName()" class="button-search">搜索</button>
 							</div>
 							<div class="listBox mt15">
 								<ul class="groupList recordList">
 									<li th:each="list,index:${result}">
-										<h1>社区名称：<span th:text="${list.blockName}"></span><a class="btn-detail pa" th:href="@{'/app/fireEvent/event'(id=${list.id})}">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>
+										<h1><span th:text="${list.blockName}==''?'-':${list.blockName}"></span><a class="btn-detail pa" th:href="@{'/app/fireEvent/event?id=' + ${list.id}(type=${list.type})}">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>
 										<div class="mui-row">
-											<div class="mui-col-xs-6">
+											<div class="mui-col-xs-8">
 									            <div class="tit fl">日期：</div>
 									            <div class="oh" th:text="${list.time}"></div>
 									        </div>
-									        <div class="mui-col-xs-6">
-									             <div class="tit fl" th:text="${list.type}">种类：误报</div>
+									        <div class="mui-col-xs-4">
+									             <div class="tit fl" th:text="${list.type_change}">种类：误报</div>
 									        </div>
 									    </div>
 									</li>
-									<li>
-										<h1>东南社区<a class="btn-detail pa" href="alarm-fire-detail.html">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>
-										<div class="mui-row">
-											<div class="mui-col-xs-6">
-									            <div class="tit fl">年月：</div>
-									            <div class="oh">201701</div>
-									        </div>
-									        <div class="mui-col-xs-6">
-									             <div class="tit fl">种类：</div>
-									            <div class="oh">报</div>
-									        </div>
-									    </div>
-									</li>
-						
 								</ul>
 							</div>
 							<!-- 内容区域 end -->
@@ -74,13 +60,13 @@
 	<script th:src="@{/js/normal.js}"></script>
 	<script th:inline="javascript">
 		mui.init();
-		function getDatas(){
+		function searchName(){
+			console.log($('#streetName').val());
 			
-			
+			$('#streetName').val('');
 		}
 		
 		function init(){
-			getDatas();
 		}
 		init();
 	</script>

@@ -749,8 +749,13 @@ body,
 	width: 100%;
 	background-color: #ddd;
 }
+.groupList.recordList .mui-row .mui-col-xs-4, 
+.groupList.recordList .mui-row .mui-col-xs-8, 
 .groupList.recordList .mui-row .mui-col-xs-6 {
 	margin-top: 5px;
+}
+.listBox .groupList.recordList .mui-row:after {
+	display: none;
 }
 .groupList.recordList .mui-row .tit {
 	margin-right: 0;

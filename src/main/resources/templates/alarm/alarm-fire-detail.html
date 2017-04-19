@@ -17,8 +17,8 @@
 				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
 					<div class="mui-scroll">
 						<div class="filterBox">
-							<h1>员村警情</h1>
-							<a th:href="@{/app/fireEvent/toStreeEvent}" class="fl btn-filter" >
+							<h1><span th:text="${event.streetName}"></span>警情</h1>
+							<a href="#" class="fl btn-filter" id="pageBack">
 								<i class="mui-icon mui-icon-arrowleft"></i>
 								返回
 							</a>
@@ -26,70 +26,70 @@
 						<div class="mui-content-padded" id="contentBox">
 							<!-- 内容区域 -->
 							<div class="profileBox">
-								<h1 class="profileTit">东南社区</h1>
+								<h1 class="profileTit" th:text="${event.blockName} ==''? '-':${event.blockName}"></h1>
 								<div class="mui-row ">
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>发生时间</h2>
-							        	<p>2016年7月16日早上8时15分</p>
+							        	<p id="occurTimes"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items mui-row">
 							        	<div class="mui-col-xs-6">
 								        	<h2>街道</h2>
-								        	<p>员村</p>
+								        	<p th:text="${event.streetName}"></p>
 								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>社区</h2>
-								        	<p>东南社区</p>
+								        	<p th:text="${event.blockName} ==''?'-':${event.blockName}"></p>
 								        </div>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>地址</h2>
-							        	<p>-</p>
+							        	<p th:text="${event.address} ==''?'-':${event.address}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>火情案号</h2>
-							        	<p>-</p>
+							        	<p th:text="${event.caseNumber} ==''?'-':${event.caseNumber}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>建筑名称</h2>
-							        	<p>-</p>
+							        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>场所名称</h2>
-							        	<p>-</p>
+							        	<p th:text="${event.placeName} ==''?'-':${event.placeName}">-</p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>地理位置</h2>
-							        	<p>-</p>
+							        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items mui-row">
 							        	<div class="mui-col-xs-6">
 								        	<h2>使用性质</h2>
-								        	<p>-</p>
+								        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
 								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>工程性质</h2>
-								        	<p>-</p>
+								        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
 								        </div>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items mui-row">
 							        	<div class="mui-col-xs-6">
 							        		<h2>火灾类型</h2>
-							        		<p>冒烟</p>
+							        		<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">冒烟</p>
 								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>值班组</h2>
-								        	<p>金中伟</p>
+								        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">金中伟</p>
 								        </div>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>警情描述</h2>
-							        	<p>2017-01-01 17:02:00天河区棠东毓桂南街禾棠下1号2楼民房民房着火。经了解,是该民房中的电瓶车电池充电过程中电池爆炸,无人员伤亡,直接财产损失轻微。（棠下街，东南社区，派出所出警处理）</p>
+							        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}"></p>
 							        </div>
 							        
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>现场警情</h2>
-							        	<p>2017-1-1  17:02:00 石牌中队费程福副中队长来电称，已到现场附近经过询问路人无发现异常，因为城中村里面的小巷太复杂找不到现场，联系报警人18620523248称，其是路过的已离开现场接不了警，其离开前有治保会的人在场处理，现场已没事不用到场就可以了，故中队准备返回。</p>
+							        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}"></p>
 							        </div>
 							    </div>
 							    <div class="spaceline10"></div>
@@ -97,21 +97,21 @@
 							        <div class="mui-col-xs-12 profile-items mui-row">
 							        	<div class="mui-col-xs-6">
 							        		<h2>起火位置</h2>
-							        		<p>-</p>
+							        		<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
 								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>起火物</h2>
-								        	<p>-</p>
+								        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
 								        </div>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items mui-row">
 							        	<div class="mui-col-xs-6">
 							        		<h2>起火原因分类</h2>
-							        		<p>-</p>
+							        		<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
 								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>起火原因</h2>
-								        	<p>-</p>
+								        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
 								        </div>
 							        </div>
 							    </div>
@@ -120,31 +120,31 @@
 							        <div class="mui-col-xs-12 profile-items mui-row">
 							        	<div class="mui-col-xs-6">
 							        		<h2>企业性质</h2>
-								        	<p>-</p>
+								        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
 								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>经济损失</h2>
-							        		<p>10000元</p>
+							        		<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">10000元</p>
 								        </div>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items mui-row">
 							        	<div class="mui-col-xs-6">
 							        		<h2>受伤人数</h2>
-							        		<p>1</p>
+							        		<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">1</p>
 								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>死亡人数</h2>
-								        	<p>1</p>
+								        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">1</p>
 								        </div>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items mui-row">
 							        	<div class="mui-col-xs-6">
 							        		<h2>是否有消防手续</h2>
-								        	<p>是</p>
+								        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">是</p>
 								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>是否自救</h2>
-							        		<p>否</p>
+							        		<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">否</p>
 								        </div>
 							        </div>
 							    </div>
@@ -152,25 +152,25 @@
 							    <div class="mui-row ">
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>消防执法案号</h2>
-							        	<p>-</p>
+							        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items mui-row">
 							        	<div class="mui-col-xs-6">
 							        		<h2>微型消防站参与</h2>
-								        	<p>-</p>
+								        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
 								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>移交部门</h2>
-							        		<p>-</p>
+							        		<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
 								        </div>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>数据创建时间</h2>
-							        	<p>-</p>
+							        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>修改时间</h2>
-							        	<p>-</p>
+							        	<p th:text="${event.buildingName} ==''?'-':${event.buildingName}">-</p>
 							        </div>
 							    </div>
 						    </div>
@@ -189,6 +189,25 @@
 		mui.init();
 		
 		function init(){
+			//时间渲染
+			var times= new Date([[${event.occurTime}]]);
+			var year = times.getFullYear();
+			var month = times.getMonth() + 1;
+			var day = times.getDate();
+			var hours = times.getHours();
+			var minutes = times.getMinutes();
+			var seconds = times.getSeconds();
+			var ifDay
+			var str = year + '年' + month + '月' + day + '日' + hours + '时' + minutes + '分';
+			$('#occurTimes').text(str);
+			console.log([[${event}]]);
+			//返回按钮地址
+			var streetId = [[${event.streetId}]];
+			$('#pageBack').bind('tap',function(){
+    	    	mui.openWindow({
+                    url : [[@{/app/fireEvent/streeEvent?streetId=}]] + streetId + '&type=' + [[${event.fireType}]]
+                  });
+    		});
 			
 		}
 		init();
