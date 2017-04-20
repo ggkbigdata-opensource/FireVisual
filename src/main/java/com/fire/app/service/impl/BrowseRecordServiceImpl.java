@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fire.app.domain.AppFireEventRepository;
+import com.fire.app.domain.BrowseRecord;
+import com.fire.app.domain.BrowseRecordRepository;
+import com.fire.app.domain.BsBuildingInfoRepository;
 import com.fire.app.service.BrowseRecordService;
 
 /**
@@ -18,12 +21,12 @@ import com.fire.app.service.BrowseRecordService;
 public class BrowseRecordServiceImpl implements BrowseRecordService {
 
     @Autowired
-    private AppFireEventRepository fireEventRepository;
+    private BrowseRecordRepository browseRecordRepository;
 
     @Override
-    public List<JSONObject> findByUid() {
+    public List<JSONObject> findByUid(Long uid) {
 
-        
+        List<BrowseRecord> result= browseRecordRepository.findByUid(uid);
         
         
         return null;

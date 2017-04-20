@@ -46,7 +46,7 @@ public class KeyUnitController {
         List<JSONObject> result=  null;
         if (user!=null) {
             //获取最近浏览记录
-          result = browseRecordService.findByUid();
+          result = browseRecordService.findByUid(user.getUid());
         }
         
         request.setAttribute("result", result);

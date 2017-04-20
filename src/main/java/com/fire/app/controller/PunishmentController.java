@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -145,7 +144,7 @@ public class PunishmentController {
         return result;
     }
     
-    @RequestMapping(value = "/punishment" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/punish" ,method = RequestMethod.GET)
     private String toPunishmentPage(HttpServletRequest request, @RequestParam(required = true)Long id,@RequestParam(required = true)Long type) {
         
         /*
@@ -196,7 +195,7 @@ public class PunishmentController {
                 obj.put("type_change", "三停");
             }
             
-            obj.put("UnitName", punishment.getPunishmentUnitName());
+            obj.put("unitName", punishment.getPunishmentUnitName());
             
             Date time = null;
             if ("临时查封".equals(punishment.getPunishMethod())) {
@@ -205,7 +204,7 @@ public class PunishmentController {
                 time=punishment.getExecuteTime();
             }
             
-            obj.put("time", DateUtil.formatDate(time, "yyyy/MM/dd"));
+            obj.put("time", DateUtil.formatDate(time, "yyyy/MM/dd HH:mm"));
 
             obj.put("dutyPerson", punishment.getDutyPersonName());
             //传上来的参数
