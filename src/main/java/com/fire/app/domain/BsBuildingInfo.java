@@ -1,5 +1,7 @@
 package com.fire.app.domain;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -40,6 +42,8 @@ public class BsBuildingInfo {
     private String remark;
     private String creator;
     private String createTime;
+    
+    private Date importTime;
 
     public BsBuildingInfo(){
         
@@ -286,6 +290,12 @@ public class BsBuildingInfo {
 
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
+    }
+    public Date getImportTime() {
+        return importTime;
+    }
+    public void setImportTime(Date importTime) {
+        this.importTime = importTime;
     }
     
 }

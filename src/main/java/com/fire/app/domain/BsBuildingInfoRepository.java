@@ -33,7 +33,7 @@ public interface BsBuildingInfoRepository extends JpaRepository<BsBuildingInfo, 
      * @return 
      * @description
      */
-    @Query(value = "SELECT * FROM bs_building_info t where t.street_id = ?1 and t.property_company_name like %?2%", nativeQuery = true)
+    @Query(value = "SELECT * FROM bs_building_info t where t.street_id = ?1 and t.property_company_name like %?2% order by t.import_time desc", nativeQuery = true)
     List<BsBuildingInfo> findByStreetIdAndName(Long id, String name);
 
     List<BsBuildingInfo> findByStreetId(Long id);
@@ -45,7 +45,7 @@ public interface BsBuildingInfoRepository extends JpaRepository<BsBuildingInfo, 
      * @return 
      * @description
      */
-    @Query(value = "SELECT * FROM bs_building_info t where  t.property_company_name like %?1%", nativeQuery = true)
+    @Query(value = "SELECT * FROM bs_building_info t where  t.property_company_name like %?1% order by t.import_time desc", nativeQuery = true)
     List<BsBuildingInfo> findByPropertyCompanyName(String name);
 
     /**

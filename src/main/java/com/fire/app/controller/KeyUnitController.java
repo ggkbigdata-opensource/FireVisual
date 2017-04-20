@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fire.app.common.App;
-import com.fire.app.domain.BrowseRecord;
-import com.fire.app.domain.BsBuildingInfo;
 import com.fire.app.domain.User;
-import com.fire.app.service.BrowseRecordService;
 import com.fire.app.service.KeyUnitService;
 import com.fire.app.util.ContextHolderUtils;
 
@@ -30,8 +27,6 @@ public class KeyUnitController {
 
     @Autowired
     private KeyUnitService keyUnitService;
-    @Autowired
-    private BrowseRecordService browseRecordService;
 
     
     @RequestMapping()
@@ -46,7 +41,7 @@ public class KeyUnitController {
         List<JSONObject> result=  null;
         if (user!=null) {
             //获取最近浏览记录
-          result = browseRecordService.findByUid(user.getUid());
+          result = keyUnitService.findByUid(user.getUid());
         }
         
         request.setAttribute("result", result);
@@ -62,7 +57,7 @@ public class KeyUnitController {
         /*  if (!ContextHolderUtils.isLogin()) {
             return "login/login";
         }*/
-        List<JSONObject> result = browseRecordService.findUnitByName(name);
+        List<JSONObject> result = keyUnitService.findUnitByName(name);
         
         return result;
     }
