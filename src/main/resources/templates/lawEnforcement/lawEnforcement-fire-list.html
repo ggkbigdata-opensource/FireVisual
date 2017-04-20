@@ -51,6 +51,12 @@
 										<div class="fl">无搜索记录</div>
 									</div>
 								</div>
+								<div class="no-record tc" id="norecord" style="display:none">
+									<div class="no-record-main oh no-record-sm">
+										<i class="mui-icon mui-icon-search fl"></i>
+										<div class="fl">无记录</div>
+									</div>
+								</div>
 							</div>
 							<!-- 内容区域 end -->
 						</div>
@@ -67,6 +73,7 @@
 		mui.init();
 	 	function searchName(){
 			$('#ulData').text('');
+			$('#norecord').css('display','none');
 			mui.post([[@{/app/punishment/searchPunishment}]],{
 	    		streetId: [[${result.streetId}]],
 	    		type: [[${result.type}]],
@@ -90,7 +97,10 @@
 		}
 		
 		function init(){
-			console.log([[${result}]])
+			console.log([[${result}]]);
+			if([[${result.list}]].length <= 0){
+				$('#norecord').css('display','block');
+			}
 		}
 		init();
 	</script>
