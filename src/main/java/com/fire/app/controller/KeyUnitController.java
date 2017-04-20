@@ -57,12 +57,12 @@ public class KeyUnitController {
     
     @RequestMapping(value = "/getUnit",method = RequestMethod.POST)
     @ResponseBody
-    private List<BsBuildingInfo> getEvent(String name) {
+    private List<JSONObject> getUnitByName(String name) {
         
         /*  if (!ContextHolderUtils.isLogin()) {
             return "login/login";
         }*/
-        List<BsBuildingInfo> result = keyUnitService.findUnitByName(name);
+        List<JSONObject> result = browseRecordService.findUnitByName(name);
         
         return result;
     }

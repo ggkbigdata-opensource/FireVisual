@@ -128,7 +128,7 @@ public interface AppPunishmentRepository extends JpaRepository<AppPunishment, Lo
      * @return 
      * @description
      */
-    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method = ?2 and t.block_name like %?3% order by execute_time desc", nativeQuery = true)
+    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method = ?2 and t.punishment_unit_name like %?3% order by execute_time desc", nativeQuery = true)
     List<AppPunishment> findBystreetIdAndPunishMethodAndBlockName(Long streetId, String punishMehtod, String name);
 
     /**
@@ -141,7 +141,7 @@ public interface AppPunishmentRepository extends JpaRepository<AppPunishment, Lo
      */
     @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method = ?2 order by seal_up_time_begin desc", nativeQuery = true)
     List<AppPunishment> findSealUpByCondition(Long streetId, String punishMehtod);
-    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method = ?3 and t.block_name like %?2% order by seal_up_time_begin desc", nativeQuery = true)
+    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method = ?3 and t.punishment_unit_name like %?2% order by seal_up_time_begin desc", nativeQuery = true)
     List<AppPunishment> findSealUpByCondition(Long streetId, String name, String punishMehtod);
 
     /**
@@ -154,7 +154,7 @@ public interface AppPunishmentRepository extends JpaRepository<AppPunishment, Lo
      */
     @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method in ?2 order by execute_time desc", nativeQuery = true)
     List<AppPunishment> findStopDataByCondition(Long streetId, List<String> methods);
-    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method in ?2 and t.block_name like %?3% order by execute_time desc", nativeQuery = true)
+    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method in ?2 and t.punishment_unit_name like %?3% order by execute_time desc", nativeQuery = true)
     List<AppPunishment> findStopDataByCondition(Long streetId, List<String> methods, String name);
 
     /**

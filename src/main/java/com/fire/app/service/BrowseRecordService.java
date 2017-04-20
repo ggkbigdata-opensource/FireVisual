@@ -20,6 +20,15 @@ public interface BrowseRecordService {
      */
     List<JSONObject> findByUid(Long id);
 
+    /**
+     * @createDate 2017年4月20日上午10:13:18 
+     * @author wangzhiwang
+     * @param name
+     * @return 
+     * @description
+     */
+    List<JSONObject> findUnitByName(String name);
+
     
 
 }
