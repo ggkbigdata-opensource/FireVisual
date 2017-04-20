@@ -123,7 +123,7 @@ public class PunishmentController {
         return result;
     }
     
-    @RequestMapping(value = "/streePunishment" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/streetPunish" ,method = RequestMethod.GET)
     private String toStreeEventPage(HttpServletRequest request, @RequestParam(required = true)Long streetId, String name,@RequestParam(required = true) Integer type) {
 
          if (!ContextHolderUtils.isLogin()) { return "login/login"; }
