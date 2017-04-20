@@ -32,7 +32,7 @@
 								<input type="search" id="streetName" class="mui-input-clear input-search" placeholder="输入社区中网络">
 								<button type="button" onclick="searchName()" class="button-search">搜索</button>
 							</div>
-							<div class="listBox mt15" id="resultData">
+							<div class="listBox mt15">
 								<ul class="groupList recordList" id="ulData">
 									<li th:each="list,index:${result.list}">
 										<h1><span th:text="${list.blockName}==''?'-':${list.blockName}"></span><a class="btn-detail pa" th:href="@{'/app/fireEvent/event?id=' + ${list.id}(type=${result.type})}">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>
@@ -86,7 +86,8 @@
 	    					}else{
 	    						blockName = list[i].blockName;
 	    					}
-	    					var h1= '<h1><span>' + blockName + '</span><a class="btn-detail pa" href="@{/app/fireEvent/event?id=' + list[i].id + '&type=' + list[i].type +'}">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>';
+	    					
+	    					var h1= '<h1><span>' + blockName + '</span><a class="btn-detail pa" href="' + [[@{/app/fireEvent/event?id=}]] + list[i].id + '&type=' + data.type +'">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>';
 	    					var li = '<li>' + h1 + '<div class="mui-row"><div class="mui-col-xs-8"><div class="tit fl">日期：</div><div class="oh">' + list[i].time + '</div></div><div class="mui-col-xs-4"><divclass="tit fl">' + list[i].type_change + '</div></div></div></li>';
 	    					$('#ulData').append(li);
 	    				}

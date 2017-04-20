@@ -17,8 +17,8 @@
 				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
 					<div class="mui-scroll">
 						<div class="filterBox">
-							<h1>员村执法</h1>
-							<a href="lawEnforcement-fire.html" class="fl btn-filter" >
+							<h1><span th:text="${result.streetName}"></span>执法</h1>
+							<a th:href="@{/app/punishment/toBasePage}" class="fl btn-filter" >
 								<i class="mui-icon mui-icon-arrowleft"></i>
 								返回
 							</a>
@@ -26,25 +26,31 @@
 						<div class="mui-content-padded" id="contentBox">
 							<!-- 内容区域 -->
 							<div class="mui-input-row mui-search searchBox">
-								<input type="search" class="mui-input-clear input-search" placeholder="输入违法行为人名称、单位名称">
-								<button type="button" class="button-search">搜索</button>
+								<input type="search" id="streetName" class="mui-input-clear input-search" placeholder="输入违法行为人名称、单位名称">
+								<button type="button" onclick="searchName()" class="button-search">搜索</button>
 							</div>
 							<div class="listBox mt15">
-								<ul class="groupList recordList">
-									<li>
-										<h1>广州同创咖啡有限公司（高地朋友圈主题酒吧）<a class="btn-detail pa" href="lawEnforcement-fire-detail.html">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>
+								<ul class="groupList recordList" id="ulData">
+									<li th:each="list,index:${result.list}">
+										<h1><span th:text="${list.unitName}==''?'-':${list.unitName}"></span><a class="btn-detail pa" th:href="@{'/app/punishment/punish?id=' + ${list.id}(type=${result.type})}">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>
 										<div class="mui-row">
 											<div class="mui-col-xs-6">
-									            <div class="tit fl">时间：</div>
-									            <div class="oh">20161205</div>
+									            <div class="tit fl">日期：</div>
+									            <div class="oh" th:text="${list.time}"></div>
 									        </div>
 									        <div class="mui-col-xs-6">
 									            <div class="tit fl">责任人：</div>
-									            <div class="oh">张日天</div>
+									            <div class="oh" th:text="${list.dutyPerson}"></div>
 									        </div>
 									    </div>
 									</li>
 								</ul>
+								<div class="no-record tc" id="nosearch" style="display:none">
+									<div class="no-record-main oh no-record-sm">
+										<i class="mui-icon mui-icon-search fl"></i>
+										<div class="fl">无搜索记录</div>
+									</div>
+								</div>
 							</div>
 							<!-- 内容区域 end -->
 						</div>
@@ -59,8 +65,32 @@
 	<script th:src="@{/js/normal.js}"></script>
 	<script th:inline="javascript">
 		mui.init();
+	 	function searchName(){
+			$('#ulData').text('');
+			mui.post([[@{/app/punishment/searchPunishment}]],{
+	    		streetId: [[${result.streetId}]],
+	    		type: [[${result.type}]],
+	    		name: $('#streetName').val()
+	    	},function(data){
+	    		if(data){
+	    			var list = data.list;
+	    			if(list.length>0){
+	    				$('#nosearch').css('display','none');
+	    				for(var i=0;i<list.length;i++){
+	    					var h1= '<h1><span>' + list[i].unitName + '</span><a class="btn-detail pa" href="' + [[@{/app/punishment/punish?id=}]] + list[i].id + '&type=' + data.type +'}">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>';
+	    					var li = '<li>' + h1 + '<div class="mui-row"><div class="mui-col-xs-8"><div class="tit fl">日期：</div><div class="oh">' + list[i].time + '</div></div><div class="mui-col-xs-4"><divclass="tit fl">' + list[i].type_change + '</div></div></div></li>';
+	    					$('#ulData').append(li);
+	    				}
+	    			}else{
+	    				$('#nosearch').css('display','block');
+	    			}
+	    		}
+	    	});
+			$('#streetName').blur();
+		}
+		
 		function init(){
-			console.log([[${result}]]);
+			console.log([[${result}]])
 		}
 		init();
 	</script>
