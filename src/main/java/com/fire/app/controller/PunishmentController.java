@@ -176,6 +176,7 @@ public class PunishmentController {
         JSONObject result = new JSONObject();
         
         result.put("streetName", street.getName());
+        result.put("streetId", streetId);
         result.put("type", type);
         
         for (AppPunishment punishment : punishments) {

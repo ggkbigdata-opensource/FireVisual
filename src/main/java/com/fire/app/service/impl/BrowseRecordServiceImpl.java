@@ -22,12 +22,15 @@ public class BrowseRecordServiceImpl implements BrowseRecordService {
 
     @Autowired
     private BrowseRecordRepository browseRecordRepository;
+    @Autowired
+    private BsBuildingInfoRepository buildingInfoRepository;
 
     @Override
     public List<JSONObject> findByUid(Long uid) {
 
-        List<BrowseRecord> result= browseRecordRepository.findByUid(uid);
+        List<BrowseRecord> records= browseRecordRepository.findByUid(uid);
         
+        long[] arr =  new long[3];
         
         return null;
     }
