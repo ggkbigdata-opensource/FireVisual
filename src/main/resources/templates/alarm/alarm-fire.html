@@ -547,6 +547,18 @@
 	    		}
 	    	}
 	    }
+	    
+	    //控制不让点当前表格对应的标题
+	    var occurTitle='';
+	    var compareTitle = '原始';
+	    $('#segmentedControl a').bind('tap',function(){
+	    	occurTitle = this.innerHTML;
+	    	if(occurTitle ==  compareTitle){
+	    		return;
+	    	}else{
+	    		compareTitle = occurTitle;
+	    	}
+	    })
         /*]]>*/
      </script>
 </body>

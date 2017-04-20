@@ -27,7 +27,7 @@
 							<!-- 内容区域 -->
 							<div class="mui-input-row mui-search searchBox">
 								<input type="search" id="streetName" class="mui-input-clear input-search" placeholder="输入违法行为人名称、单位名称">
-								<button type="button" onclick="searchName()" class="button-search">搜索</button>
+								<button onclick="searchName()" class="button-search">搜索</button>
 							</div>
 							<div class="listBox mt15">
 								<ul class="groupList recordList" id="ulData">
@@ -77,7 +77,7 @@
 	    			if(list.length>0){
 	    				$('#nosearch').css('display','none');
 	    				for(var i=0;i<list.length;i++){
-	    					var h1= '<h1><span>' + list[i].unitName + '</span><a class="btn-detail pa" href="' + [[@{/app/punishment/punish?id=}]] + list[i].id + '&type=' + data.type +'}">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>';
+	    					var h1= '<h1><span>' + list[i].unitName + '</span><a class="btn-detail pa" href="' + [[@{/app/punishment/punish?id=}]] + list[i].id + '&type=' + data.type +'">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>';
 	    					var li = '<li>' + h1 + '<div class="mui-row"><div class="mui-col-xs-8"><div class="tit fl">日期：</div><div class="oh">' + list[i].time + '</div></div><div class="mui-col-xs-4"><divclass="tit fl">' + list[i].type_change + '</div></div></div></li>';
 	    					$('#ulData').append(li);
 	    				}
