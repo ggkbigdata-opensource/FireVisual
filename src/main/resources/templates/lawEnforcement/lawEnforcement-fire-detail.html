@@ -26,7 +26,7 @@
 						<div class="mui-content-padded" id="contentBox">
 							<!-- 内容区域 -->
 							<div class="profileBox">
-								<h1 class="profileTit" th:text="${punishment.punishmentUnitName}">广州同创咖啡有限公司（高地朋友圈主题酒吧）</h1>
+								<h1 class="profileTit" th:text="${punishment.punishmentUnitName}"></h1>
 								<div class="mui-row ">
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>执法时间</h2>
@@ -35,34 +35,34 @@
 							        <div class="mui-col-xs-12 profile-items mui-row">
 							        	<div class="mui-col-xs-6">
 							        		<h2>街道</h2>
-							        		<p th:text="${punishment.streetName}">街道</p>
+							        		<p th:text="${punishment.streetName}"></p>
 								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>社区</h2>
-								        	<p th:text="${punishment.blockName}">广州大道</p>
+								        	<p th:text="${punishment.blockName}"></p>
 							        		<p th:text="${punishment.blockName} ==''? '-':''"></p>
 							        		<p th:text="${punishment.blockName} ==null? '-':''"></p>
 								        </div>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>违法单位地址</h2>
-							        	<p th:text="${punishment.punishmentUnitAddr}">广州市天河区临江大道东9号二楼</p>
+							        	<p th:text="${punishment.punishmentUnitAddr}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items mui-row">
-							        	<div class="mui-col-xs-6">
+							        	<!-- <div class="mui-col-xs-6">
 							        		<h2>处罚方式</h2>
 								        	<p id="pMethod">行政罚款</p>
-								        </div>
+								        </div> -->
 							        	<div class="mui-col-xs-6">
 								        	<h2>建筑名称</h2>
-								        	<p th:text="${punishment.buildingName}">XX大厦</p>
-								        	<p th:text="${punishment.buildingName} == ''?'-':''">XX大厦</p>
-							        		<p th:text="${punishment.buildingName} == null?'-':''">XX大厦</p>
+								        	<p th:text="${punishment.buildingName}"></p>
+								        	<p th:text="${punishment.buildingName} == ''?'-':''"></p>
+							        		<p th:text="${punishment.buildingName} == null?'-':''"></p>
 								        </div>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>行政处罚决定书文号</h2>
-							        	<p th:text="${punishment.punishmentDocNumber}">穗公天行罚决字[2016]09463号</p>
+							        	<p th:text="${punishment.punishmentDocNumber}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>现场情况</h2>
@@ -73,107 +73,107 @@
 							    <div class="mui-row ">
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>处罚证据</h2>
-							        	<p th:text="${punishment.punishmentEvidence}">违法人员的陈述；证人证言；书证；</p>
+							        	<p th:text="${punishment.punishmentEvidence}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>行政处罚依据</h2>
-							        	<p th:text="${punishment.punishmentBasis}">《消防法》第五十八条第一款第五项</p>
+							        	<p th:text="${punishment.punishmentBasis}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>发布决定书时间</h2>
-							        	<p id="punishPublicTime">二〇一六年七月八日</p>
+							        	<p id="punishPublicTime"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items mui-row">
 							        	<div class="mui-col-xs-6">
 							        		<h2>处罚金额（元）</h2>
-								        	<p th:text="${punishment.fineAmount} == null?'-':${punishment.fineAmount}">5000</p>
+								        	<p th:text="${punishment.fineAmount} == null?'-':${punishment.fineAmount}"></p>
 								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>责任人</h2>
-								        	<p th:text="${punishment.dutyPersonName}">XX</p>
-								        	<p th:text="${punishment.dutyPersonName} == ''?'-':''">XX</p>
-							        		<p th:text="${punishment.dutyPersonName} == null?'-':''">XX</p>
+								        	<p th:text="${punishment.dutyPersonName}"></p>
+								        	<p th:text="${punishment.dutyPersonName} == ''?'-':''"></p>
+							        		<p th:text="${punishment.dutyPersonName} == null?'-':''"></p>
 								        </div>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>责任人身份证号</h2>
-							        	<p th:text="${punishment.dutyPersonId}">440514199407281317</p>
+							        	<p th:text="${punishment.dutyPersonId}"></p>
 							        </div>
 							    </div>
 							    <div class="spaceline10"></div>
 							    <div class="mui-row ">
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>查封决定书文号</h2>
-							        	<p th:text="${punishment.sealUpDocNumber}">穗公天消封字[2016]xxxx号</p>
+							        	<p th:text="${punishment.sealUpDocNumber}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>查封部位</h2>
-							        	<p th:text="${punishment.sealUpPosition}">二楼厨房</p>
+							        	<p th:text="${punishment.sealUpPosition}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>查封依据</h2>
-							        	<p th:text="${punishment.sealUpBasis}">xxxx法第xx款xx条xx项</p>
+							        	<p th:text="${punishment.sealUpBasis}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>查封开始时间</h2>
-							        	<p id="sealUpBegin">2016年08月11日16时30分</p>
+							        	<p id="sealUpBegin"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>查封结束时间</h2>
-							        	<p id="sealUpEnd">2016年08月11日16时30分</p>
+							        	<p id="sealUpEnd"></p>
 							        </div>
 							    </div>
 							    <div class="spaceline10"></div>
 							    <div class="mui-row ">
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>解除查封决定书文号</h2>
-							        	<p th:text="${punishment.unsealDocNumber}">穗公天消解字[2016]xxxx号</p>
+							        	<p th:text="${punishment.unsealDocNumber}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>解除依据</h2>
-							        	<p th:text="${punishment.unsealBasis}">《消防法》第五十八条第一款第五项</p>
+							        	<p th:text="${punishment.unsealBasis}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>解除时间</h2>
-							        	<p id="unSealTime">2016年8月11日16时30分</p>
+							        	<p id="unSealTime"></p>
 							        </div>
 							    </div>
 							    <div class="spaceline10"></div>
 							    <div class="mui-row ">
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>临时进入决定书文号</h2>
-							        	<p th:text="${punishment.tempEntranceDocNumber}">穗公天消临字[2016]xxxx号</p>
+							        	<p th:text="${punishment.tempEntranceDocNumber}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>临时进入时间开始</h2>
-							        	<p id="tempBegin">2016年8月11日16时30分</p>
+							        	<p id="tempBegin"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>临时进入时间结束</h2>
-							        	<p id="tempEnd">2016年8月11日16时30分</p>
+							        	<p id="tempEnd"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>临时进入依据</h2>
-							        	<p th:text="${punishment.tempEntranceBasis}">《消防法》第五十八条第一款第五项</p>
+							        	<p th:text="${punishment.tempEntranceBasis}"></p>
 							        </div>
 							    </div>
 							    <div class="spaceline10"></div>
 							    <div class="mui-row ">
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>处罚说明</h2>
-							        	<p th:text="${punishment.punishmentDescription}">情况属实，罚款及拘留</p>
+							        	<p th:text="${punishment.punishmentDescription}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>执法人名称</h2>
-							        	<p th:text="${punishment.executorName}">广州市公安局天河区分局</p>
+							        	<p th:text="${punishment.executorName}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>复议单位</h2>
-							        	<p th:text="${punishment.reconsiderationUnit}">广州市公安局天河区分局或天河区人民法院</p>
+							        	<p th:text="${punishment.reconsiderationUnit}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>提起诉讼单位</h2>
-							        	<p th:text="${punishment.lawsuitAcceptUnit}">铁路运输第一法院</p>
+							        	<p th:text="${punishment.lawsuitAcceptUnit}"></p>
 							        </div>
 							    </div>
 						    </div>
