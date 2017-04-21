@@ -44,8 +44,8 @@ public class LoginController {
 
         session.removeAttribute(App.USER_SESSION_KEY);
 
-        phone = AppHelper.encryptPassword(phone);
-        Boolean flag = this.userService.selectByUsernameAndPassword(name,phone);
+        verifCode = AppHelper.encryptPassword(verifCode);
+        Boolean flag = this.userService.selectByUsernameAndPassword(name,phone,verifCode);
         
         if (flag) {
             
