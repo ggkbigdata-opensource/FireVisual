@@ -810,7 +810,7 @@ body,
 .profileBox .spaceline10 {
 	width: auto;
 	background-color: #f4f3f3;
-	margin: 0 -10px 10px;
+	margin: 0 -10px;
 }
 .profileBox .profile-items {
 	position: relative;
@@ -819,7 +819,6 @@ body,
 	border-top: 1px solid #ddd;
 }
 .profileBox .profile-items:first-child {
-	padding-top: 2px;
 	border-top: 0;
 }
 .profileBox .profile-items.mui-col-xs-6:first-child+.mui-col-xs-6 {
@@ -829,13 +828,14 @@ body,
 .profileBox .mui-col-xs-6+.mui-col-xs-6 {
 	padding-left: 10px;
 }
-.profileBox .mui-col-xs-6+.mui-col-xs-6:before {
+.profileBox .profile-items.mui-col-xs-12.mui-row:before {
 	content: "";
 	position: absolute;
-	left: -5px;
-	top: 5%;
+	left: 50%;
+	top: 12%;
+	display: block;
 	width: 1px;
-	height: 90%;
+	height: 76%;
 	background-color: #ddd;
 }
 .profileBox .profileTit {

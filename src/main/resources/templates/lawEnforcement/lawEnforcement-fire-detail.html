@@ -40,8 +40,6 @@
 							        	<div class="mui-col-xs-6">
 								        	<h2>社区</h2>
 								        	<p th:text="${punishment.blockName}"></p>
-							        		<p th:text="${punishment.blockName} ==''? '-':''"></p>
-							        		<p th:text="${punishment.blockName} ==null? '-':''"></p>
 								        </div>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
@@ -49,15 +47,13 @@
 							        	<p th:text="${punishment.punishmentUnitAddr}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items mui-row">
-							        	<!-- <div class="mui-col-xs-6">
+							        	<div class="mui-col-xs-6">
 							        		<h2>处罚方式</h2>
-								        	<p id="pMethod">行政罚款</p>
-								        </div> -->
+								        	<p th:text="${punishment.punishMethod} == 1? '行政罚款':(${punishment.punishMethod}==2?'行政拘留':(${punishment.punishMethod}==3?'刑事拘留':(${punishment.punishMethod}==4?'临时查封':'三停')))">罚款</p>
+								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>建筑名称</h2>
 								        	<p th:text="${punishment.buildingName}"></p>
-								        	<p th:text="${punishment.buildingName} == ''?'-':''"></p>
-							        		<p th:text="${punishment.buildingName} == null?'-':''"></p>
 								        </div>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
@@ -86,13 +82,11 @@
 							        <div class="mui-col-xs-12 profile-items mui-row">
 							        	<div class="mui-col-xs-6">
 							        		<h2>处罚金额（元）</h2>
-								        	<p th:text="${punishment.fineAmount} == null?'-':${punishment.fineAmount}"></p>
+								        	<p th:text="${punishment.fineAmount}"></p>
 								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>责任人</h2>
 								        	<p th:text="${punishment.dutyPersonName}"></p>
-								        	<p th:text="${punishment.dutyPersonName} == ''?'-':''"></p>
-							        		<p th:text="${punishment.dutyPersonName} == null?'-':''"></p>
 								        </div>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
@@ -176,6 +170,21 @@
 							        	<p th:text="${punishment.lawsuitAcceptUnit}"></p>
 							        </div>
 							    </div>
+							    <div class="spaceline10"></div>
+							    <div class="mui-row ">
+							        <div class="mui-col-xs-12 profile-items">
+							        	<h2>主办单位</h2>
+							        	<p th:text="${punishment.punishUnitName}"></p>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items">
+							        	<h2>催告书</h2>
+							        	<p th:text="${punishment.urgeNote}"></p>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items">
+							        	<h2>行政强制执行</h2>
+							        	<p th:text="${punishment.forceExecute}"></p>
+							        </div>
+							    </div>
 						    </div>
 							<!-- 内容区域 end -->
 						</div>
@@ -238,14 +247,6 @@
 	                url : [[@{/app/punishment/streetPunish?streetId=}]] + streetId + '&type=' + [[${punishment.punishMethod}]]
 	              });
 			});
-			//处罚方式
-			var punishMethod = ['行政罚款','行政拘留','刑事拘留','临时查封','三停'];
-			for(var i=0;i<punishMethod.length;i++){
-				if([[${punishment.punishMethod}]] == i+1){
-					$('#pMethod').text(punishMethod[i]);
-				}
-			}
-			
 		}
 		init();
 	</script>
