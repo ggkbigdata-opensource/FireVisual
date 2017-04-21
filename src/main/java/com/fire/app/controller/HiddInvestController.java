@@ -61,9 +61,9 @@ public class HiddInvestController {
             return "login/login";
         }
         
-        List<JSONObject> result = hiddInvestService.getDetailDate(streetId,name);
+        //List<JSONObject> result = hiddInvestService.getDetailDate(streetId,name);
         
-        request.setAttribute("result", result);
+        //request.setAttribute("result", result);
         
         return "hiddenInvestigation/securityDetail";
     }
@@ -71,7 +71,6 @@ public class HiddInvestController {
      * @createDate 2017年4月1日下午2:48:42 
      * @author wangzhiwang
      * @param streetId
-     * @return 
      * @description  获取街道里面的详细数据
      */
     @RequestMapping(value = "/getDetail")

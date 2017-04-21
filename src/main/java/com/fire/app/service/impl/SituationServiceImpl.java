@@ -107,7 +107,7 @@ public class SituationServiceImpl implements SituationService {
                 // 获取检测报告的数据
                 CrCheckReportInfo reportInfo = checkReportInfoRepository.findByReportNum(infos.get(0).getItemNumber());
                 int num = 0;// 危险等级超过4的数量
-                if (reportInfo != null) {
+                if (reportInfo != null&&reportInfo.getRiskLevel()!=null) {
                     if (reportInfo.getRiskLevel().contains("4")) {
                         num++;
                     }
