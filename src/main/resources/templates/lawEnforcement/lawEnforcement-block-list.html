@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head th:with="title=${'警情'}" th:include="/layouts/layout::head">
+<head th:with="title=${'执法'}" th:include="/layouts/layout::head">
 </head>
 <body>
     <div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
@@ -13,20 +13,16 @@
 					<img th:src="@{/img/logo.png}" />
 				</div>
 				<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
-				<h1 class="mui-title">警情</h1>
+				<h1 class="mui-title">执法</h1>
 			</header>
             <div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
                 <div class="mui-scroll">
                     <div class="filterBox">
-                    	<h1><span id="streetName"></span></h1>
-                        <a th:href="@{/app/fireEvent/toBasePage}" class="fl btn-filter" >
-								<i class="mui-icon mui-icon-arrowleft"></i>
-								返回
-							</a>
-                        <!-- 火情下拉列表 -->
-                        <div th:replace="/layouts/layout::alarm-menu"></div>
+                        <span id="hidePopover" class="fl btn-filter">火灾执法基本数据 <i class="mui-icon mui-icon-arrowdown"></i></span>
+                        <div th:replace="/layouts/layout::law-menu"></div>
                         <span id="hideTimePopover" class="fr btn-filter">选择时间段 <i class="mui-icon mui-icon-arrowdown"></i></span>
-                        <div id="timePopover" style="display: none" class="popoverbox">
+                        <div id="timePopover" style="display: none"
+                            class="popoverbox">
                             <div class="mui-scroll-wrapper time-scroll-wrapper">
                                 <div class="mui-scroll">
                                     <div class="regionCurrent" name="currentTime">当前：<span></span></div>
@@ -72,7 +68,7 @@
                                             <li>
                                                 <div class="tit tr fl">按月份：</div>
                                                 <div class="oh">
-                                                    <div class="month-item"  id="selectMonth"></div>
+                                                	<div class="month-item" id="selectMonth"></div>
                                                 </div>
                                             </li>
                                         </ul>
@@ -81,25 +77,34 @@
                             </div>
                         </div>
                     </div>
-  						<div class="mui-content-padded" id="bodyContent">
-							<!-- 内容区域 -->
-							<div class="timeBox tc fb font-red" name="currentTime"><span></span></div>
-							<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-red mt15">
-								<a class="mui-control-item mui-active" href="#item1">原始</a>
-								<a class="mui-control-item" href="#item2">冒烟</a>
-								<a class="mui-control-item" href="#item3">确认</a>
-								<a class="mui-control-item" href="#item4">损失</a>
-								<a class="mui-control-item" href="#item5">受伤</a>
-								<a class="mui-control-item" href="#item6">死亡</a>
-							</div>
-							<div class="tableBox mt10">
+                    <div class="mui-content-padded" id="bodyContent">
+                        <!-- 内容区域 -->
+                        <div class="timeBox tc fb font-red" name="currentTime"><span></span></div>
+                        <div id="segmentedControl" class="mui-segmented-control mui-segmented-control-red mt15">
+							<a class="mui-control-item mui-active" href="#item1">行罚</a>
+							<a class="mui-control-item" href="#item2">行拘</a>
+							<a class="mui-control-item" href="#item3">刑拘</a>
+							<a class="mui-control-item" href="#item4">临封</a>
+							<a class="mui-control-item" href="#item5">三停</a>
+						</div>
+						<div class="tableBox mt10">
 								<div id="item1" class="mui-control-content mui-active">
 									<table class="table fireDataTable">
 										<thead>
 											<tr>
-												<th width="50" class="grayBg">排序</th>
-												<th width="100" class="greenBg">社区</th>
-												<th class="blueBg">原始火灾警情</th>
+												<th width="45" class="grayBg" rowspan="3">排序</th>
+												<th width="60" class="greenBg" rowspan="3">街道</th>
+												<th class="blueBg" colspan="4">行政罚款</th>
+											</tr>
+											<tr>
+												<th class="blueBg light" colspan="2" name="thisYear"></th>
+												<th class="blueBg light" colspan="2">同期</th>
+											</tr>
+											<tr>
+												<th class="blueBg light">宗</th>
+												<th class="blueBg light">元</th>
+												<th class="blueBg light">宗</th>
+												<th class="blueBg light">元</th>
 											</tr>
 										</thead>
 										<tbody id="tbody1"></tbody>
@@ -109,9 +114,13 @@
 									<table class="table fireDataTable">
 										<thead>
 											<tr>
-												<th width="50" class="grayBg">排序</th>
-												<th width="100" class="greenBg">社区</th>
-												<th class="blueBg">冒烟类成灾警情</th>
+												<th width="45" class="grayBg" rowspan="2">排序</th>
+												<th width="60" class="greenBg" rowspan="2">街道</th>
+												<th class="blueBg" colspan="2">行政拘留</th>
+											</tr>
+											<tr>
+												<th class="blueBg light" name="thisYear"></th>
+												<th class="blueBg light">同期</th>
 											</tr>
 										</thead>
 										<tbody id="tbody2"></tbody>
@@ -121,24 +130,29 @@
 									<table class="table fireDataTable">
 										<thead>
 											<tr>
-												<th width="50" class="grayBg">排序</th>
-												<th width="100" class="greenBg">社区</th>
-												<th class="blueBg">确认类成灾警情</th>
+												<th width="45" class="grayBg" rowspan="2">排序</th>
+												<th width="60" class="greenBg" rowspan="2">街道</th>
+												<th class="blueBg" colspan="2">刑事拘留</th>
 											</tr>
-										
+											<tr>
+												<th class="blueBg light" name="thisYear"></th>
+												<th class="blueBg light">同期</th>
+											</tr>
 										</thead>
-										<tbody id="tbody3">
-											
-										</tbody>
+										<tbody id="tbody3"></tbody>
 									</table>
 								</div>
 								<div id="item4" class="mui-control-content">
 									<table class="table fireDataTable">
 										<thead>
 											<tr>
-												<th width="50" class="grayBg">排序</th>
-												<th width="100" class="greenBg">社区</th>
-												<th class="blueBg">直接经济损失</th>
+												<th width="45" class="grayBg" rowspan="2">排序</th>
+												<th width="60" class="greenBg" rowspan="2">街道</th>
+												<th class="blueBg" colspan="2">临时查封</th>
+											</tr>
+											<tr>
+												<th class="blueBg light" name="thisYear"></th>
+												<th class="blueBg light">同期</th>
 											</tr>
 										</thead>
 										<tbody id="tbody4"></tbody>
@@ -148,30 +162,21 @@
 									<table class="table fireDataTable">
 										<thead>
 											<tr>
-												<th width="50" class="grayBg">排序</th>
-												<th width="100" class="greenBg">社区</th>
-												<th class="blueBg">受伤</th>
+												<th width="45" class="grayBg" rowspan="2">排序</th>
+												<th width="60" class="greenBg" rowspan="2">街道</th>
+												<th class="blueBg" colspan="2">三停</th>
+											</tr>
+											<tr>
+												<th class="blueBg light" name="thisYear"></th>
+												<th class="blueBg light">同期</th>
 											</tr>
 										</thead>
 										<tbody id="tbody5"></tbody>
 									</table>
 								</div>
-								<div id="item6" class="mui-control-content">
-									<table class="table fireDataTable">
-										<thead>
-											<tr>
-												<th width="50" class="grayBg">排序</th>
-												<th width="100" class="greenBg">社区</th>
-												<th class="blueBg">死亡</th>
-											</tr>
-										</thead>
-										<tbody id="tbody6"></tbody>
-									</table>
-								</div>
 							</div>
-							<!-- 内容区域 end -->
-						</div>
-                    
+                        <!-- 内容区域 end -->
+                    </div>
                 </div>
             </div>
             <!-- off-canvas backdrop -->
@@ -185,28 +190,6 @@
     <script th:inline="javascript">
     	/*<![CDATA[*/
         mui.init();
-    	//修改样式
-    	$('head').append('<style>.content-backdrop:before{height:' + $(window).height() + 'px}</style>');
-    	//获取参数
-		function getParam(paramName) {
-		    paramValue = "";
-		    isFound = false;
-		    if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
-		        arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&");
-		        i = 0;
-		        while (i < arrSource.length && !isFound) {
-		            if (arrSource[i].indexOf("=") > 0) {
-		                if (arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase()) {
-		                    paramValue = arrSource[i].split("=")[1];
-		                    isFound = true;
-		                }
-		            }
-		            i++;
-		        }
-		    }
-		    return paramValue;
-		}
-		var streetId = getParam('streetId');
     	//初始化并获取当年数据
         var now = new Date();
     	var beginMon=13;
@@ -215,8 +198,7 @@
         var endRange = now.getFullYear() + '-' + ('0'+(now.getMonth()+1)).slice(-2);
         var currentTime = now.getFullYear() + '年01月-' + ('0' + (now.getMonth()+1)).slice(-2) + '月';
         $('div[name="currentTime"] span').text(currentTime);
-    	mui.post([[@{/app/fireEvent/getBlockData}]],{
-    		streetId: streetId,
+    	mui.post([[@{/app/punishment/getBaseDate}]],{
     		beginTime: beginRange,
     		endTime: endRange
     	},function(data){
@@ -308,7 +290,6 @@
 	    //##################选择时间段结束###############################
 	    //点击确认提交时间获取数据
 	    function checkRange (year,range,half,quarter,month){
-	    	
 	    	if(range==='1'){
 	    		beginRange = year + '-01';
 	    		endRange = year + '-12';
@@ -351,8 +332,7 @@
 	    		return;
 	    	}
 	    	$('div[name="currentTime"] span').text(currentTime);
-	    	mui.post([[@{/app/fireEvent/getBlockData}]],{
-	    		streetId: streetId,
+	    	mui.post([[@{/app/punishment/getBaseDate}]],{
         		beginTime: beginRange,
         		endTime: endRange
         	},function(data){
@@ -381,8 +361,7 @@
 			}
 			currentTime = year + '年' + beginMon + '月-' + endMon + '月'; 
 			$('div[name="currentTime"] span').text(currentTime);
-			mui.post([[@{/app/fireEvent/getBlockData}]],{
-				streetId: streetId,
+			mui.post([[@{/app/punishment/getBaseDate}]],{
         		beginTime: year + '-' + beginMon,
         		endTime: year + '-' + endMon
         	},function(data){
@@ -439,21 +418,17 @@
 	        	$(".popoverbox").hide();
 	    	}
         });
-	    //展示表格数据
+	    //数据展示
 	    var dataLength;
 	    var dataList = [];
-	    function showData (block) {
-	    	var data = block.list;
-	    	$('#streetName').text(block.streetName);
-	    	if(data.length ==0){
-	    		return;
-	    	}
+	    function showData(data){
 	    	dataLength = data.length;
 	    	dataList = data;
-	    	for(var n=1;n<7;n++){
+	    	var arrStr = [];
+	    	for(var n=1;n<6;n++){
 	    		$('#tbody' + n).text('');
 	    	}
-	    	var arrStr = [];
+	    	$('th[name="thisYear"]').text(currentTime.substr(0,4));
 	    	function compare(fields){
 	    		return function (a,b){
 	    			var value1 = a[fields];
@@ -461,91 +436,69 @@
 	    			return value2 - value1;
 	    		}
 	    	}
-	    	data.sort(compare('primitiveNow'));
-	    	arrStr[0] = '';
+	    	data.sort(compare('fineNumNow'));
 	    	for(var i=0;i<data.length;i++){
 	    		var tr1 = '';
 	    		var str1 = '';
-	    		str1 = '<td class="greenBg">' + data[i].blockName + '</td><td class="blueBg">' + data[i].primitiveNow + '</td>';
-	    		tr1 = '<tr id="primitive_' + data[i].blockId + '"><td class="grayBg">' + (i+1) + '</td>' + str1 + '</tr>';
-	    		arrStr[0] += tr1;
+	    		str1 = '<td class="greenBg">' + data[i].streetName + '</td><td class="blueBg">' + data[i].fineNumNow + '</td><td class="blueBg">' + data[i].finePriceNow + '</td><td class="blueBg">' + data[i].fineNumBefore + '</td><td class="blueBg">' + data[i].finePriceBefore + '</td>';
+	    		tr1 = '<tr id="fineNum_' + data[i].streetId + '"><td class="grayBg">' + (i+1) + '</td>' + str1 + '</tr>';
+	    		arrStr[0]+=tr1;
 	    	}
-	    	data.sort(compare('smokingNow'));
+	    	data.sort(compare('admiDetNow'));
 	    	for(var j=0;j<data.length;j++){
 	    		var tr2 = '';
 	    		var str2 = '';
-	    		str2 = '<td class="greenBg">' + data[j].blockName + '</td><td class="blueBg">' + data[j].smokingNow + '</td>';
-	    		tr2 = '<tr id="smoking_' + data[j].blockId + '"><td class="grayBg">' + (j+1) + '</td>' + str2 + '</tr>';
+	    		str2 = '<td class="greenBg">' + data[j].streetName + '</td><td class="blueBg">' + data[j].admiDetNow + '</td><td class="blueBg">' + data[j].admiDetBefore + '</td>';
+	    		tr2 = '<tr id="admiDet_' + data[j].streetId + '"><td class="grayBg">' + (j+1) + '</td>' + str2 + '</tr>';
 	    		arrStr[1]+=tr2;
 	    	}
-	    	data.sort(compare('affirmNow'));
+	    	data.sort(compare('crimDetNow'));
 	    	for(var k=0;k<data.length;k++){
 	    		var tr3 = '';
 	    		var str3 = '';
-	    		str3 = '<td class="greenBg">' + data[k].blockName + '</td><td class="blueBg">' + data[k].affirmNow + '</td>';
-	    		tr3 = '<tr id="affirm_' + data[k].blockId + '"><td class="grayBg">' + (k+1) + '</td>' + str3 + '</tr>';
+	    		str3 = '<td class="greenBg">' + data[k].streetName + '</td><td class="blueBg">' + data[k].crimDetNow + '</td><td class="blueBg">' + data[k].crimDetBefore + '</td>';
+	    		tr3 = '<tr id="crimDet_' + data[k].streetId + '"><td class="grayBg">' + (k+1) + '</td>' + str3 + '</tr>';
 	    		arrStr[2]+=tr3;
 	    	}
-	    	data.sort(compare('lossNow'));
+	    	data.sort(compare('sealUpNow'));
 	    	for(var l=0;l<data.length;l++){
 	    		var tr4 = '';
 	    		var str4 = '';
-	    		str4 = '<td class="greenBg">' + data[l].blockName + '</td><td class="blueBg">' + data[l].lossNow + '</td>';
-	    		tr4 = '<tr id="loss_' + data[l].blockId + '"><td class="grayBg">' + (l+1) + '</td>' + str4 + '</tr>';
+	    		str4 = '<td class="greenBg">' + data[l].streetName + '</td><td class="blueBg">' + data[l].sealUpNow + '</td><td class="blueBg">' + data[l].sealUpBefore + '</td>';
+	    		tr4 = '<tr id="sealUp_' + data[l].streetId + '"><td class="grayBg">' + (l+1) + '</td>' + str4 + '</tr>';
 	    		arrStr[3]+=tr4;
 	    	}
-	    	data.sort(compare('hurtNow'));
+	    	data.sort(compare('ThreeStopNow'));
 	    	for(var m=0;m<data.length;m++){
 	    		var tr5 = '';
 	    		var str5 = '';
-	    		str5 = '<td class="greenBg">' + data[m].blockName + '</td><td class="blueBg">' + data[m].hurtNow + '</td>';
-	    		tr5 = '<tr id="hurt_' + data[m].blockId + '"><td class="grayBg">' + (m+1) + '</td>' + str5 + '</tr>';
+	    		str5 = '<td class="greenBg">' + data[m].streetName + '</td><td class="blueBg">' + data[m].ThreeStopNow + '</td><td class="blueBg">' + data[m].ThreeStopBefore + '</td>';
+	    		tr5 = '<tr id="ThreeStop_' + data[m].streetId + '"><td class="grayBg">' + (m+1) + '</td>' + str5 + '</tr>';
 	    		arrStr[4]+=tr5;
 	    	}
-	    	data.sort(compare('deadNow'));
-	    	for(var o=0;o<data.length;o++){
-	    		var tr6 = '';
-	    		var str6 = '';
-	    		str6 = '<td class="greenBg">' + data[o].blockName + '</td><td class="blueBg">' + data[o].deadNow + '</td>';
-	    		tr6 = '<tr id="dead_' + data[o].blockId + '"><td class="grayBg">' + (o+1) + '</td>' + str6 + '</tr>';
-	    		arrStr[5]+=tr6;
-	    	}
-			for(var m=1;m<7;m++){
+	    	for(var m=1;m<6;m++){
 				$('#tbody' + m).append(arrStr[m-1]);
 			}
-			goList();
+	    	goList();
 	    }
 	    
 	    function goList(){
-	    	var arrTitle = ['#primitive_','#smoking_','#affirm_','#loss_','#hurt_','#dead_'];
+	    	var arrTitle = ['#fineNum_','#admiDet_','#crimDet_','#sealUp_','#ThreeStop_'];
 	    	if(dataLength){
 	    		for(var i=0;i<dataLength;i++){
 	    			for(var j=0;j<arrTitle.length;j++){
-	    				$(arrTitle[j] + dataList[i].blockId).attr('name',j+1);
-	    				$(arrTitle[j] + dataList[i].blockId).bind('tap',function(){
+	    				$(arrTitle[j] + dataList[i].streetId).attr('name',j+1);
+	    				$(arrTitle[j] + dataList[i].streetId).bind('tap',function(){
 		    				var id = this.id.substr(this.id.indexOf('_')+1,this.id.length);
 		    				var type = this.attributes['name'].value;
 			    	    	mui.openWindow({
-			    	    		url : [[@{/app/fireEvent/blockEvent?blockId=}]] + id + '&type=' + type + '&streetId=' + streetId
+			                    url : [[@{/app/punishment/streetPunish?streetId=}]] + id + '&type=' + type
 			                  });
 			    		});
 	    			}
 	    		}
 	    	}
 	    }
-	    
-	    //控制不让点当前表格对应的标题
-	    var occurTitle='';
-	    var compareTitle = '原始';
-	    $('#segmentedControl a').bind('tap',function(){
-	    	occurTitle = this.innerHTML;
-	    	if(occurTitle ==  compareTitle){
-	    		return;
-	    	}else{
-	    		compareTitle = occurTitle;
-	    	}
-	    })
-        /*]]>*/
-     </script>
+    </script>
 </body>
 </html>

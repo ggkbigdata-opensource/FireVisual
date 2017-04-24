@@ -266,9 +266,7 @@
 			//返回按钮地址
 			var streetId = [[${event.streetId}]];
 			$('#pageBack').bind('tap',function(){
-    	    	mui.openWindow({
-                    url : [[@{/app/fireEvent/streeEvent?streetId=}]] + streetId + '&type=' + [[${event.fireType}]]
-                  });
+                  window.history.go(-1);
     		});
 		}
 		init();

@@ -774,6 +774,32 @@ body,
 .groupList.recordList .mui-row .num {
 	padding-top: 0;
 }
+.noTitle.groupList .mui-row {
+	padding-bottom: 0;
+}
+.noTitle.groupList .mui-row .tit {
+	line-height: 30px
+}
+.noTitle .tit + .tit {
+	border-top: 1px solid #ccc;
+}
+.groupList.recordList.noTitle .mui-row .mui-col-xs-8,
+.groupList.recordList.noTitle .mui-row .mui-col-xs-4 {
+	margin-top: 0;
+}
+.noTitle.groupList .mui-row:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 10%;
+	right: 30%;
+	height: 80%;
+	width: 1px;
+	background-color: #ccc;
+}
+.noTitle .btn-detail {
+	margin-top: 15px;
+}
 .no-record-main {
 	display: inline-block;
 	padding-top: 120px;
@@ -927,5 +953,12 @@ body,
 	}
 	.groupList .mui-row .tit {
 		font-size: 14px;
+	}
+	.noTitle .btn-detail {
+		font-size: 15px;
+	}
+	.noTitle.groupList .btn-detail, 
+	.noTitle.groupList .btn-detail i {
+		font-size: 16px;
 	}
 }

@@ -18,9 +18,8 @@
 				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
 					<div class="mui-scroll">
 						<div class="filterBox">
-						
-							<h1><span  th:text="${result.streetName}"></span>警情</h1>
-							<a th:href="@{/app/fireEvent/toBasePage}" class="fl btn-filter" >
+							<h1><span  th:text="${result.blockName}"></span></h1>
+							<a href="#" id="pageback"  class="fl btn-filter" >
 								<i class="mui-icon mui-icon-arrowleft"></i>
 								返回
 							</a>
@@ -28,21 +27,16 @@
 						<div class="mui-content-padded" id="contentBox">
 							<!-- 内容区域 -->
 							<!-- <p th:text="${result}" ></p> -->
-							<div class="mui-input-row mui-search searchBox">
-								<input type="search" id="streetName" class="mui-input-clear input-search" placeholder="输入社区中网络">
-								<button type="button" onclick="searchName()" class="button-search">搜索</button>
-							</div>
 							<div class="listBox mt15">
-								<ul class="groupList recordList" id="ulData">
+								<ul class="groupList recordList noTitle" id="ulData">
 									<li th:each="list,index:${result.list}">
-										<h1><span th:text="${list.blockName}==''?'-':${list.blockName}"></span><a class="btn-detail pa" th:href="@{'/app/fireEvent/event?id=' + ${list.id}(type=${result.type})}">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>
 										<div class="mui-row">
 											<div class="mui-col-xs-8">
-									            <div class="tit fl">日期：</div>
-									            <div class="oh" th:text="${list.time}"></div>
+									            <div class="tit">日期：<span th:text="${list.time}"></span></div>
+									            <div class="tit" th:text="${list.type_change}"></div>
 									        </div>
 									        <div class="mui-col-xs-4">
-									             <div class="tit fl" th:text="${list.type_change}">种类：误报</div>
+									             <a class="btn-detail fr" th:href="@{'/app/fireEvent/event?id=' + ${list.id}(type=${result.type})}">查看详情<i class="mui-icon mui-icon-arrowright"></i></a>
 									        </div>
 									    </div>
 									</li>
@@ -74,38 +68,27 @@
 	<script th:src="@{/js/normal.js}"></script>
 	<script th:inline="javascript">
 		mui.init();
-		function searchName(){
-			$('#ulData').text('');
-			$('#norecord').css('display','none');
-			mui.post([[@{/app/fireEvent/searchEvent}]],{
-	    		streetId: [[${result.streetId}]],
-	    		type: [[${result.type}]],
-	    		name: $('#streetName').val()
-	    	},function(data){
-	    		if(data){
-	    			var list = data.list;
-	    			if(list.length>0){
-	    				$('#nosearch').css('display','none');
-	    				for(var i=0;i<list.length;i++){
-	    					var blockName = '';
-	    					if(list[i].blockName =='' || list[i].blockName == null){
-	    						blockName = '-';
-	    					}else{
-	    						blockName = list[i].blockName;
-	    					}
-	    					
-	    					var h1= '<h1><span>' + blockName + '</span><a class="btn-detail pa" href="' + [[@{/app/fireEvent/event?id=}]] + list[i].id + '&type=' + data.type +'">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>';
-	    					var li = '<li>' + h1 + '<div class="mui-row"><div class="mui-col-xs-8"><div class="tit fl">日期：</div><div class="oh">' + list[i].time + '</div></div><div class="mui-col-xs-4"><divclass="tit fl">' + list[i].type_change + '</div></div></div></li>';
-	    					$('#ulData').append(li);
-	    				}
-	    			}else{
-	    				$('#nosearch').css('display','block');
-	    			}
-	    		}
-	    	});
-			$('#streetName').blur();
+		//获取参数
+		function getParam(paramName) {
+		    paramValue = "";
+		    isFound = false;
+		    if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+		        arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&");
+		        i = 0;
+		        while (i < arrSource.length && !isFound) {
+		            if (arrSource[i].indexOf("=") > 0) {
+		                if (arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase()) {
+		                    paramValue = arrSource[i].split("=")[1];
+		                    isFound = true;
+		                }
+		            }
+		            i++;
+		        }
+		    }
+		    return paramValue;
 		}
-		
+		var streetId = getParam('streetId');
+		$('#pageback').attr('href',[[@{/app/fireEvent/toBlockDataPage?streetId=}]] + streetId);
 		function init(){
 			console.log([[${result}]]);
 			if([[${result.list}]].length <= 0){
