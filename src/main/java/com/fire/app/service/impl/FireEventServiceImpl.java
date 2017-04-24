@@ -515,28 +515,26 @@ public class FireEventServiceImpl implements FireEventService {
                     primitiveNow=nowValue.size();
                 }
                 
-                
-                JSONObject streetResult = new JSONObject();
-                
-                //原始警情
-                streetResult.put("primitiveNow", primitiveNow);
-                //冒烟警情
-                streetResult.put("smokingNow", smokingNow);
-                //确认警情
-                streetResult.put("affirmNow", affirmNow);
-                //损失
-                streetResult.put("lossNow", lossNow);
-                //受伤
-                streetResult.put("hurtNow", hurtNow);
-                //死亡
-                streetResult.put("deadNow", deadNow);
-                //社区
-                streetResult.put("blockId", block.getId());
-                streetResult.put("blockName", block.getName());
-                
-                result.add(streetResult);
-
             }
+            JSONObject streetResult = new JSONObject();
+            
+            //原始警情
+            streetResult.put("primitiveNow", primitiveNow);
+            //冒烟警情
+            streetResult.put("smokingNow", smokingNow);
+            //确认警情
+            streetResult.put("affirmNow", affirmNow);
+            //损失
+            streetResult.put("lossNow", lossNow);
+            //受伤
+            streetResult.put("hurtNow", hurtNow);
+            //死亡
+            streetResult.put("deadNow", deadNow);
+            //社区
+            streetResult.put("blockId", block.getId());
+            streetResult.put("blockName", block.getName());
+            
+            result.add(streetResult);
                 
 
         }

@@ -84,23 +84,23 @@ public class PunishmentServiceImpl implements PunishmentService {
             }
 
             JSONObject one = new JSONObject();// 行政执法
-            one.put("month", date1[0]+date1[1]);
+            one.put("month", date1[0] + date1[1]);
             one.put("value", oned);
 
             JSONObject two = new JSONObject();// 行政拘留
-            two.put("month", date1[0]+date1[1]);
+            two.put("month", date1[0] + date1[1]);
             two.put("value", twod);
 
             JSONObject three = new JSONObject();// 刑事拘留
-            three.put("month", date1[0]+date1[1]);
+            three.put("month", date1[0] + date1[1]);
             three.put("value", threed);
 
             JSONObject four = new JSONObject(); // 三停
-            four.put("month", date1[0]+date1[1]);
+            four.put("month", date1[0] + date1[1]);
             four.put("value", fourd);
 
             JSONObject five = new JSONObject(); // 临时查封
-            five.put("month", date1[0]+date1[1]);
+            five.put("month", date1[0] + date1[1]);
             five.put("value", seald);
 
             oneSum.add(one);
@@ -171,20 +171,25 @@ public class PunishmentServiceImpl implements PunishmentService {
 
         //
         Street street = streetRepository.getOne(streetId);
-        
+
         for (int i = 1; i < 13; i++) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             calendar1.add(calendar.MONTH, -1);// 获取上个月月份
             String[] date1 = sdf.format(calendar1.getTime()).split("-");
 
             // 获取临时查封
-            //List<AppPunishment> seals = punishmentRepository.findSealStreetDateToMonth(date1[0], date1[1],street.getName());
-            List<AppPunishment> seals = punishmentRepository.findSealStreetDateToMonth(date1[0], date1[1],street.getId());
+            // List<AppPunishment> seals =
+            // punishmentRepository.findSealStreetDateToMonth(date1[0],
+            // date1[1],street.getName());
+            List<AppPunishment> seals = punishmentRepository.findSealStreetDateToMonth(date1[0], date1[1],
+                    street.getId());
             int seald = seals.size();
 
             // 获取行政执法，行政拘留，刑事拘留，三停
-            //List<AppPunishment> list = punishmentRepository.findStreetDateToMonth(date1[0], date1[1],street.getName());
-            List<AppPunishment> list = punishmentRepository.findStreetDateToMonth(date1[0], date1[1],street.getId());
+            // List<AppPunishment> list =
+            // punishmentRepository.findStreetDateToMonth(date1[0],
+            // date1[1],street.getName());
+            List<AppPunishment> list = punishmentRepository.findStreetDateToMonth(date1[0], date1[1], street.getId());
             int oned = 0;// 行政执法
             int twod = 0;// 行政拘留
             int threed = 0;// 刑事拘留
@@ -205,23 +210,23 @@ public class PunishmentServiceImpl implements PunishmentService {
             }
 
             JSONObject one = new JSONObject();// 行政执法
-            one.put("month", date1[0]+date1[1]);
+            one.put("month", date1[0] + date1[1]);
             one.put("value", oned);
 
             JSONObject two = new JSONObject();// 行政拘留
-            two.put("month", date1[0]+date1[1]);
+            two.put("month", date1[0] + date1[1]);
             two.put("value", twod);
 
             JSONObject three = new JSONObject();// 刑事拘留
-            three.put("month", date1[0]+date1[1]);
+            three.put("month", date1[0] + date1[1]);
             three.put("value", threed);
 
             JSONObject four = new JSONObject(); // 三停
-            four.put("month", date1[0]+date1[1]);
+            four.put("month", date1[0] + date1[1]);
             four.put("value", fourd);
 
             JSONObject five = new JSONObject(); // 临时查封
-            five.put("month", date1[0]+date1[1]);
+            five.put("month", date1[0] + date1[1]);
             five.put("value", seald);
 
             oneSum.add(one);
@@ -273,16 +278,13 @@ public class PunishmentServiceImpl implements PunishmentService {
         // 获取所有的街道
         List<Street> streets = streetRepository.findAll();
         List<JSONObject> result = new ArrayList<JSONObject>();
-        
-        
+
         if (streets != null && streets.size() > 0) {
             for (Street street : streets) {
 
                 Date bTime = DateUtil.parse(beginTime + "-01");
                 Date eTime = DateUtil.parse(endTime + "-30");
-                
-                
-                
+
                 int fineNumNow = 0;// 行政处罚宗数
                 double finePriceNow = 0;// 行政处罚
                 int admiDetNow = 0;// 行政拘留
@@ -291,14 +293,19 @@ public class PunishmentServiceImpl implements PunishmentService {
                 int ThreeStopNow = 0;// 三停
 
                 // 获取临时查封的数据
-                //List<AppPunishment> sealUpValue = punishmentRepository.findSealUpStreetData(bTime, eTime,street.getName());
-                List<AppPunishment> sealUpValue = punishmentRepository.findSealUpStreetData(bTime, eTime,street.getId());
+                // List<AppPunishment> sealUpValue =
+                // punishmentRepository.findSealUpStreetData(bTime,
+                // eTime,street.getName());
+                List<AppPunishment> sealUpValue = punishmentRepository.findSealUpStreetData(bTime, eTime,
+                        street.getId());
                 if (sealUpValue != null) {
                     sealUpNow = sealUpValue.size();
                 }
 
                 // 获取行政处罚，行政拘留，刑事拘留，三停的数据
-                //List<AppPunishment> otherValue = punishmentRepository.findStreetData(bTime, eTime, street.getName());
+                // List<AppPunishment> otherValue =
+                // punishmentRepository.findStreetData(bTime, eTime,
+                // street.getName());
                 List<AppPunishment> otherValue = punishmentRepository.findStreetData(bTime, eTime, street.getId());
                 for (AppPunishment punish : otherValue) {
                     if ("行政罚款".equals(punish.getPunishMethod())) {
@@ -320,8 +327,7 @@ public class PunishmentServiceImpl implements PunishmentService {
                 }
 
                 // 同期
-                
-                
+
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(bTime);
                 calendar.add(Calendar.YEAR, -1);// 当前时间减去一年，即一年前的时间
@@ -330,25 +336,30 @@ public class PunishmentServiceImpl implements PunishmentService {
                 calendar.setTime(eTime);
                 calendar.add(Calendar.YEAR, -1);// 当前时间减去一年，即一年前的时间
                 eTime = calendar.getTime();
-                
+
                 int fineNumBefore = 0;// 行政处罚宗数
                 double finePriceBefore = 0;// 行政处罚
                 int admiDetBefore = 0;// 行政拘留
                 int crimDetBefore = 0;// 刑事拘留
                 int sealUpBefore = 0;// 临时查封
                 int ThreeStopBefore = 0;// 三停
-                
 
                 // 获取临时查封的数据
-               // List<AppPunishment> sealUpBeforeValue = punishmentRepository.findSealUpStreetData(bTime, eTime,street.getName());
-                List<AppPunishment> sealUpBeforeValue = punishmentRepository.findSealUpStreetData(bTime, eTime,street.getId());
+                // List<AppPunishment> sealUpBeforeValue =
+                // punishmentRepository.findSealUpStreetData(bTime,
+                // eTime,street.getName());
+                List<AppPunishment> sealUpBeforeValue = punishmentRepository.findSealUpStreetData(bTime, eTime,
+                        street.getId());
                 if (sealUpBeforeValue != null) {
                     sealUpBefore = sealUpBeforeValue.size();
                 }
 
                 // 获取行政处罚，行政拘留，刑事拘留，三停的数据
-                //List<AppPunishment> otherBeforeValue = punishmentRepository.findStreetData(bTime, eTime, street.getName());
-                List<AppPunishment> otherBeforeValue = punishmentRepository.findStreetData(bTime, eTime, street.getId());
+                // List<AppPunishment> otherBeforeValue =
+                // punishmentRepository.findStreetData(bTime, eTime,
+                // street.getName());
+                List<AppPunishment> otherBeforeValue = punishmentRepository.findStreetData(bTime, eTime,
+                        street.getId());
 
                 for (AppPunishment punish : otherBeforeValue) {
                     if ("行政罚款".equals(punish.getPunishMethod())) {
@@ -390,7 +401,7 @@ public class PunishmentServiceImpl implements PunishmentService {
                 // 三停
                 streetResult.put("ThreeStopNow", ThreeStopNow);
                 streetResult.put("ThreeStopBefore", ThreeStopBefore);
-                
+
                 result.add(streetResult);
 
             }
@@ -403,43 +414,43 @@ public class PunishmentServiceImpl implements PunishmentService {
     @Override
     public List<AppPunishment> findByStreetIdAndNameAndType(Long streetId, String name, Integer type) {
 
-      //type   1--行罚   2--行拘   3--刑拘   4--临封   5--三停（停工，停产，停业）
-        
+        // type 1--行罚 2--行拘 3--刑拘 4--临封 5--三停（停工，停产，停业）
+
         List<AppPunishment> result = null;
-        if (type==1||type==2||type==3) {
-            String punishMehtod=null;
-            if (type==1) {
-                punishMehtod="行政罚款";
-            }else if (type==2) {
-                punishMehtod="行政拘留";
-            }else {
-                punishMehtod="刑事拘留";
+        if (type == 1 || type == 2 || type == 3) {
+            String punishMehtod = null;
+            if (type == 1) {
+                punishMehtod = "行政罚款";
+            } else if (type == 2) {
+                punishMehtod = "行政拘留";
+            } else {
+                punishMehtod = "刑事拘留";
             }
             if (StringUtils.isEmpty(name)) {
-                result = punishmentRepository.findBystreetIdAndPunishMethod(streetId,punishMehtod);
-            }else{
-                result= punishmentRepository.findBystreetIdAndPunishMethodAndBlockName(streetId,punishMehtod,name);
+                result = punishmentRepository.findBystreetIdAndPunishMethod(streetId, punishMehtod);
+            } else {
+                result = punishmentRepository.findBystreetIdAndPunishMethodAndBlockName(streetId, punishMehtod, name);
             }
-        }else if(type==4) {  //火灾表示确认
-            String punishMehtod="临时查封";
+        } else if (type == 4) { // 火灾表示确认
+            String punishMehtod = "临时查封";
             if (StringUtils.isEmpty(name)) {
-                result= punishmentRepository.findSealUpByCondition(streetId,punishMehtod);
-            }else{
-                result= punishmentRepository.findSealUpByCondition(streetId,name,punishMehtod);
+                result = punishmentRepository.findSealUpByCondition(streetId, punishMehtod);
+            } else {
+                result = punishmentRepository.findSealUpByCondition(streetId, name, punishMehtod);
             }
-        }else{
+        } else {
             List<String> methods = new ArrayList<String>();
             methods.add("停业");
             methods.add("停工");
             methods.add("停产");
             if (StringUtils.isEmpty(name)) {
-                result = punishmentRepository.findStopDataByCondition(streetId,methods);
-            }else{
-                result= punishmentRepository.findStopDataByCondition(streetId,methods,name);
+                result = punishmentRepository.findStopDataByCondition(streetId, methods);
+            } else {
+                result = punishmentRepository.findStopDataByCondition(streetId, methods, name);
             }
         }
         return result;
-        
+
     }
 
     @Override
@@ -459,20 +470,19 @@ public class PunishmentServiceImpl implements PunishmentService {
         for (Block block : blocks) {
             Date bTime = DateUtil.parse(beginTime + "-01");
             Date eTime = DateUtil.parse(endTime + "-30");
-            
+
             int fineNumNow = 0;// 行政处罚宗数
             double finePriceNow = 0;// 行政处罚
             int admiDetNow = 0;// 行政拘留
             int crimDetNow = 0;// 刑事拘留
             int sealUpNow = 0;// 临时查封
             int ThreeStopNow = 0;// 三停
-            
-            
-            List<AppPunishment> sealUpValue = punishmentRepository.findSealUpBlockData(bTime, eTime,block.getId());
+
+            List<AppPunishment> sealUpValue = punishmentRepository.findSealUpBlockData(bTime, eTime, block.getId());
             if (sealUpValue != null) {
                 sealUpNow = sealUpValue.size();
             }
-            
+
             // 获取行政处罚，行政拘留，刑事拘留，三停的数据
             List<AppPunishment> otherValue = punishmentRepository.findBlockData(bTime, eTime, block.getId());
             for (AppPunishment punish : otherValue) {
@@ -492,25 +502,24 @@ public class PunishmentServiceImpl implements PunishmentService {
                     ThreeStopNow++;
                 }
 
-                JSONObject streetResult = new JSONObject();
-                streetResult.put("blockName", block.getName());
-                streetResult.put("blockId", block.getId());
-
-                // 临时查封
-                streetResult.put("sealUpNow", sealUpNow);
-                // 行政处罚
-                streetResult.put("fineNumNow", fineNumNow);
-                streetResult.put("finePriceNow", finePriceNow);
-                // 行政拘留
-                streetResult.put("admiDetNow", admiDetNow);
-                // 刑事拘留
-                streetResult.put("crimDetNow", crimDetNow);
-                // 三停
-                streetResult.put("ThreeStopNow", ThreeStopNow);
-
-                result.add(streetResult);
-
             }
+            JSONObject streetResult = new JSONObject();
+            streetResult.put("blockName", block.getName());
+            streetResult.put("blockId", block.getId());
+
+            // 临时查封
+            streetResult.put("sealUpNow", sealUpNow);
+            // 行政处罚
+            streetResult.put("fineNumNow", fineNumNow);
+            streetResult.put("finePriceNow", finePriceNow);
+            // 行政拘留
+            streetResult.put("admiDetNow", admiDetNow);
+            // 刑事拘留
+            streetResult.put("crimDetNow", crimDetNow);
+            // 三停
+            streetResult.put("ThreeStopNow", ThreeStopNow);
+
+            result.add(streetResult);
 
         }
 
