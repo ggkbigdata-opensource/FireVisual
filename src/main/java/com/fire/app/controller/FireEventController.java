@@ -291,9 +291,12 @@ public class FireEventController {
 
         List<JSONObject> result = fireEventServcie.getBlockData(streetId,beginTime, endTime);
         
+        Street street = streetService.findById(streetId);
+        
         JSONObject obj = new JSONObject();
         
         obj.put("streetId", streetId);
+        obj.put("streetName", street.getName());
         obj.put("list", result);
 
         return obj;
