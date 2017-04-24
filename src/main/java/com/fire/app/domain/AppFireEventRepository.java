@@ -145,6 +145,18 @@ public interface AppFireEventRepository extends JpaRepository<AppFireEvent, Long
     @Query(value = "SELECT * FROM app_fire_event t where t.street_id = ?1 and t.block_name like %?2% order by occur_time desc", nativeQuery = true)
     List<AppFireEvent> findBystreetIdAndBlockName(Long streetId, String name);
 
+    /**
+     * @createDate 2017年4月24日上午9:19:28 
+     * @author wangzhiwang
+     * @param bTime
+     * @param eTime
+     * @param id
+     * @return 
+     * @description
+     */
+    @Query(value = "SELECT * FROM app_fire_event t where t.occur_time between ?1 and ?2 and t.block_id = ?3", nativeQuery = true)
+    List<AppFireEvent> findByBlockId(Date bTime, Date eTime, Long id);
+
    
 
 }

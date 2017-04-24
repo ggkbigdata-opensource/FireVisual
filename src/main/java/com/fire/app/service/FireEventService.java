@@ -77,4 +77,15 @@ public interface FireEventService {
      */
     AppFireEvent findEventById(Long id);
 
+    /**
+     * @createDate 2017年4月24日上午9:03:57 
+     * @author wangzhiwang
+     * @param streetId 
+     * @param beginTime
+     * @param endTime
+     * @return 
+     * @description
+     */
+    List<JSONObject> getBlockData(Long streetId, String beginTime, String endTime);
+
 }

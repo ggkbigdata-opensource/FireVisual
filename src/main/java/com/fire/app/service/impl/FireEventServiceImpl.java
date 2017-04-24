@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSONObject;
 import com.fire.app.domain.AppFireEvent;
 import com.fire.app.domain.AppFireEventRepository;
+import com.fire.app.domain.Block;
+import com.fire.app.domain.BlockRepository;
 import com.fire.app.domain.Street;
 import com.fire.app.domain.StreetRepository;
 import com.fire.app.service.FireEventService;
@@ -32,6 +34,8 @@ public class FireEventServiceImpl implements FireEventService {
     private AppFireEventRepository fireEventRepository;
     @Autowired
     private StreetRepository streetRepository;
+    @Autowired
+    private BlockRepository blockRepository;
 
     @Override
     public List<JSONObject> getData() {
@@ -457,6 +461,89 @@ public class FireEventServiceImpl implements FireEventService {
     public AppFireEvent findEventById(Long id) {
         AppFireEvent event = fireEventRepository.findById(id);
         return event;
+    }
+
+    @Override
+    public List<JSONObject> getBlockData(Long streetId,String beginTime, String endTime) {
+
+        List<JSONObject> result = new ArrayList<JSONObject>();
+     // 获取社区
+        List<Block> blocks = blockRepository.findByStreetId(streetId);
+        
+        for (Block block : blocks) {
+            Date bTime = DateUtil.parse(beginTime + "-01");
+            Date eTime = DateUtil.parse(endTime + "-30");
+
+            int primitiveNow = 0;
+            int smokingNow = 0;
+            int affirmNow = 0;
+            
+            double lossNow = 0;
+            int hurtNow = 0;
+            int deadNow = 0;
+            
+            List<AppFireEvent> nowValue = fireEventRepository.findByBlockId(bTime, eTime, block.getId());
+            
+            for (AppFireEvent appFireEvent : nowValue) {
+                if ("原始".equals(appFireEvent.getFireType())) {
+                    primitiveNow++;
+                }
+                if ("冒烟".equals(appFireEvent.getFireType())) {
+                    smokingNow++;
+                }
+                if ("确认".equals(appFireEvent.getFireType())) {
+                    affirmNow++;
+                }
+                //暂时修改
+                if ("火灾".equals(appFireEvent.getFireType())) {
+                    affirmNow++;
+                }
+                
+                if (appFireEvent.getLoss()!=null) {
+                    lossNow = appFireEvent.getLoss()+lossNow;
+                }
+                if (appFireEvent.getHurtNum()!=null) {
+                    hurtNow = appFireEvent.getHurtNum()+hurtNow;
+                }
+                if (appFireEvent.getDeadNum()!=null) {
+                    deadNow = appFireEvent.getDeadNum()+deadNow;
+                }
+                
+                
+                //暂时修改
+                if (nowValue!=null && nowValue.size()>0) {
+                    primitiveNow=nowValue.size();
+                }
+                
+                
+                JSONObject streetResult = new JSONObject();
+                
+                //原始警情
+                streetResult.put("primitiveNow", primitiveNow);
+                //冒烟警情
+                streetResult.put("smokingNow", smokingNow);
+                //确认警情
+                streetResult.put("affirmNow", affirmNow);
+                //损失
+                streetResult.put("lossNow", lossNow);
+                //受伤
+                streetResult.put("hurtNow", hurtNow);
+                //死亡
+                streetResult.put("deadNow", deadNow);
+                //社区
+                streetResult.put("blockId", block.getId());
+                streetResult.put("blockName", block.getName());
+                
+                result.add(streetResult);
+
+            }
+                
+
+        }
+
+        
+        
+        return result;
     }
 
 }

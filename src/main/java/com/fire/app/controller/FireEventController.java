@@ -73,7 +73,7 @@ public class FireEventController {
      * @return
      * @description 获取每个街道详情
      */
-    @RequestMapping(value = "/getBaseDate", method = RequestMethod.POST)
+    @RequestMapping(value = "/getBaseData", method = RequestMethod.POST)
     @ResponseBody
     private List<JSONObject> getBaseDate(String beginTime, String endTime) {
 
@@ -102,7 +102,7 @@ public class FireEventController {
      * @return
      * @description 获取街道的详情
      */
-    @RequestMapping(value = "/getAreaDate", method = RequestMethod.POST)
+    @RequestMapping(value = "/getAreaData", method = RequestMethod.POST)
     @ResponseBody
     private List<JSONObject> getAreaDate(@RequestParam(required = true) Long id) {
 
@@ -132,7 +132,6 @@ public class FireEventController {
         return "alarm/alarm-fire-list";
     }
 
-    
     @RequestMapping(value = "/searchEvent", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject toSearchEvent(HttpServletRequest request, @RequestParam(required = true) Long streetId,
@@ -144,9 +143,7 @@ public class FireEventController {
 
         return result;
     }
-    
-    
-    
+
     /**
      * @createDate 2017年4月17日上午9:56:22
      * @author wangzhiwang
@@ -270,5 +267,43 @@ public class FireEventController {
         result.put("list", list);
 
         return result;
+    }
+
+    /**
+     * @createDate 2017年3月29日上午10:14:53
+     * @author wangzhiwang
+     * @return
+     * @description 点击对应的街道，跳转页面
+     */
+    @RequestMapping(value = "/blockEvent")
+    private String toBlockDataPage(HttpServletRequest request, @RequestParam(required = true) Long id,
+            @RequestParam(required = true) Integer type) {
+
+        if (!ContextHolderUtils.isLogin()) {
+            return "login/login";
+        }
+
+        return "alarm/alarm-block-list";
+    }
+    
+    /**
+     * @createDate 2017年3月29日上午10:14:53
+     * @author wangzhiwang
+     * @return
+     * @description 点击对应的街道，显示所有社区的数据
+     */
+    @RequestMapping(value = "/blockEvent")
+    private JSONObject getBlockData(HttpServletRequest request, @RequestParam(required = true) Long streetId,String beginTime, String endTime
+            ) {
+
+        List<JSONObject> result = fireEventServcie.getBlockData(streetId,beginTime, endTime);
+        
+        JSONObject obj = new JSONObject();
+        
+        obj.put("streetId", streetId);
+        obj.put("list", result);
+        
+
+        return obj;
     }
 }
