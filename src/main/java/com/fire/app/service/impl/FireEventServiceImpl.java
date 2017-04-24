@@ -539,9 +539,78 @@ public class FireEventServiceImpl implements FireEventService {
 
         }
 
-        
-        
         return result;
+    }
+
+    @Override
+    public JSONObject getBlockEvent(Long blockId, Integer type) {
+
+        Block block = blockRepository.findOne(blockId);
+        if (block == null) {
+            throw new RuntimeException("没有找到对应的社区");
+        }
+        
+      //type   1--原始   2--冒烟   3--确认   4--损失   5--受伤   6--死亡
+        
+        List<AppFireEvent> events = null;
+        if (type==1) {//原始表示所有
+            events = fireEventRepository.findByBlockId(blockId);
+        }else if(type==2||type==3) {  //火灾表示确认
+            String fireType=null;
+            if (type==2) {
+                fireType="冒烟";
+            }else {
+                fireType="火灾";
+            }
+            
+            events= fireEventRepository.findByBlockIdAndFireType(blockId,fireType);
+            
+        }else if(type==4||type==5||type==6) {
+            if (type==4) {
+                events= fireEventRepository.findByLossIsNotNull(blockId);
+            }else if (type==5){
+                events= fireEventRepository.findByHurtNumIsNotNull(blockId);
+            }else {
+                events= fireEventRepository.findByDeadNumIsNotNull(blockId);
+            }
+        }
+        
+        JSONObject result = new JSONObject();
+        result.put("blockName", block.getName());
+        result.put("blockId", blockId);
+        result.put("type", type);
+
+        List<JSONObject> list = new ArrayList<JSONObject>();
+
+        for (AppFireEvent event : events) {
+            JSONObject obj = new JSONObject();
+
+            String time = null;
+            if (event.getOccurTime() != null) {
+                time = DateUtil.formatDate(event.getOccurTime(), "yyyy/MM/dd HH:mm");
+            }
+            obj.put("time", time);
+
+            if (type == 2) {
+                obj.put("type_change", "损失：冒烟");
+            } else if (type == 3) {
+                obj.put("type_change", "损失：确认");
+            } else if (type == 4) {
+                obj.put("type_change", "损失：" + event.getLoss());
+            } else if (type == 5) {
+                obj.put("type_change", "受伤：" + event.getHurtNum());
+            } else if (type == 6) {
+                obj.put("type_change", "死亡：" + event.getDeadNum());
+            } else {
+                obj.put("type_change", "种类：原始");
+            }
+
+            list.add(obj);
+        }
+        result.put("list", list);
+
+        return result;
+        
     }
 
 }

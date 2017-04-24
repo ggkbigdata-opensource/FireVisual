@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fire.app.domain.AppFireEvent;
+import com.fire.app.domain.BlockRepository;
 import com.fire.app.domain.Street;
 import com.fire.app.service.FireEventService;
 import com.fire.app.service.StreetService;
@@ -131,6 +132,24 @@ public class FireEventController {
 
         return "alarm/alarm-fire-list";
     }
+    
+    
+    @RequestMapping(value = "/blockEvent", method = RequestMethod.GET)
+    public String toBlockEventPage(HttpServletRequest request, @RequestParam(required = true) Long blockId,@RequestParam(required = true) Integer type) {
+
+        if (!ContextHolderUtils.isLogin()) {
+            return "login/login";
+        }
+        
+        // type 1--原始 2--冒烟 3--确认 4--损失 5--受伤 6--死亡
+
+        JSONObject result = fireEventServcie.getBlockEvent(blockId, type);
+
+        request.setAttribute("result", result);
+
+        return "alarm/alarm-fire-list";
+    }
+    
 
     @RequestMapping(value = "/searchEvent", method = RequestMethod.POST)
     @ResponseBody
@@ -302,8 +321,9 @@ public class FireEventController {
         
         obj.put("streetId", streetId);
         obj.put("list", result);
-        
 
         return obj;
     }
+    
+    
 }

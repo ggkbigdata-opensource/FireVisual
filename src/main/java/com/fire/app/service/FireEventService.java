@@ -88,4 +88,14 @@ public interface FireEventService {
      */
     List<JSONObject> getBlockData(Long streetId, String beginTime, String endTime);
 
+    /**
+     * @createDate 2017年4月24日下午2:43:34 
+     * @author wangzhiwang
+     * @param blockId
+     * @param type
+     * @return 
+     * @description
+     */
+    JSONObject getBlockEvent(Long blockId, Integer type);
+
 }
