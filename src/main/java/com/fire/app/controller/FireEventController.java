@@ -292,6 +292,7 @@ public class FireEventController {
      * @description 点击对应的街道，显示所有社区的数据
      */
     @RequestMapping(value = "/getBlockData")
+    @ResponseBody
     private JSONObject getBlockData(HttpServletRequest request, @RequestParam(required = true) Long streetId,String beginTime, String endTime
             ) {
 
