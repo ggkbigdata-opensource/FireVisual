@@ -542,6 +542,7 @@ public class PunishmentServiceImpl implements PunishmentService {
             }
 
             obj.put("unitName", punishment.getPunishmentUnitName());
+            obj.put("id", punishment.getId());
 
             Date time = null;
             if ("临时查封".equals(punishment.getPunishMethod())) {
