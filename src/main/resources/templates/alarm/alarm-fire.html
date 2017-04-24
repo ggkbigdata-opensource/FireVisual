@@ -540,7 +540,7 @@
 	    		tr4 = '<tr id="loss_' + data[l].id + '"><td class="grayBg">' + (l+1) + '</td>' + str4 + '</tr>';
 	    		arrStr[3]+=tr4;
 	    	}
-	    	if(totalAffBefore != 0){
+	    	if(totalLosBefore != 0){
 	    		totalLosYearBefore = ((totalLosNow - totalLosBefore)/totalLosBefore*100).toFixed(2) + '%';
 	    	}
 	    	totalStr[3] = '<tr><td class="greenBg fb" colspan="2">全区</td><td class="blueBg fb">' + totalLosNow + '</td><td class="blueBg fb">' + totalLosBefore + '</td><td class="blueBg fb">' + totalLosYearBefore + '</td></tr>';
@@ -561,10 +561,10 @@
 	    		tr5 = '<tr id="hurt_' + data[m].id + '"><td class="grayBg">' + (m+1) + '</td>' + str5 + '</tr>';
 	    		arrStr[4]+=tr5;
 	    	}
-	    	if(totalAffBefore != 0){
-	    		totalLosYearBefore = ((totalLosNow - totalLosBefore)/totalLosBefore*100).toFixed(2) + '%';
+	    	if(totalHurBefore != 0){
+	    		totalHurYearBefore = ((totalHurNow - totalHurBefore)/totalHurBefore*100).toFixed(2) + '%';
 	    	}
-	    	totalStr[3] = '<tr><td class="greenBg fb" colspan="2">全区</td><td class="blueBg fb">' + totalLosNow + '</td><td class="blueBg fb">' + totalLosBefore + '</td><td class="blueBg fb">' + totalLosYearBefore + '</td></tr>';
+	    	totalStr[4] = '<tr><td class="greenBg fb" colspan="2">全区</td><td class="blueBg fb">' + totalHurNow + '</td><td class="blueBg fb">' + totalHurBefore + '</td><td class="blueBg fb">' + totalHurYearBefore + '</td></tr>';
 	    	//死亡
 	    	data.sort(compare('deadNow'));
 	    	var totalDeaNow = 0;
@@ -573,6 +573,8 @@
 	    	for(var o=0;o<data.length;o++){
 	    		var tr6 = '';
 	    		var str6 = '';
+	    		totalDeaNow += data[o].hurtNow;
+	    		totalDeaBefore += data[o].hurtBefore;
 	    		if(data[o].deadYearBefore !== '-'){
 	    			data[o].deadYearBefore = (data[o].deadYearBefore*100).toFixed(2) + '%';
 	    		}
@@ -580,6 +582,11 @@
 	    		tr6 = '<tr id="dead_' + data[o].id + '"><td class="grayBg">' + (o+1) + '</td>' + str6 + '</tr>';
 	    		arrStr[5]+=tr6;
 	    	}
+	    	if(totalDeaBefore != 0){
+	    		totalDeaYearBefore = ((totalDeaNow - totalDeaBefore)/totalDeaBefore*100).toFixed(2) + '%';
+	    	}
+	    	totalStr[5] = '<tr><td class="greenBg fb" colspan="2">全区</td><td class="blueBg fb">' + totalDeaBefore + '</td><td class="blueBg fb">' + totalDeaBefore + '</td><td class="blueBg fb">' + totalDeaYearBefore + '</td></tr>';
+	    	//组合
 			for(var m=1;m<7;m++){
 				$('#tbody' + m).append(arrStr[m-1]);
 				$('#tbody' + m).append(totalStr[m-1]);
