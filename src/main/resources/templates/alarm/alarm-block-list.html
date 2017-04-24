@@ -93,14 +93,9 @@
 									<table class="table fireDataTable">
 										<thead>
 											<tr>
-												<th width="45" class="grayBg" rowspan="2">排序</th>
-												<th width="60" class="greenBg" rowspan="2">街道</th>
-												<th class="blueBg" colspan="3">原始火灾警情</th>
-											</tr>
-											<tr>
-												<th class="blueBg light" name="thisYear"></th>
-												<th class="blueBg light">同期</th>
-												<th class="blueBg light">同比</th>
+												<th width="50" class="grayBg">排序</th>
+												<th width="100" class="greenBg">社区</th>
+												<th class="blueBg">原始火灾警情</th>
 											</tr>
 										</thead>
 										<tbody id="tbody1"></tbody>
@@ -110,14 +105,9 @@
 									<table class="table fireDataTable">
 										<thead>
 											<tr>
-												<th width="45" class="grayBg" rowspan="2">排序</th>
-												<th width="60" class="greenBg" rowspan="2">街道</th>
-												<th class="blueBg" colspan="3">冒烟类成灾警情</th>
-											</tr>
-											<tr>
-												<th class="blueBg light" name="thisYear"></th>
-												<th class="blueBg light">同期</th>
-												<th class="blueBg light">同比</th>
+												<th width="50" class="grayBg">排序</th>
+												<th width="100" class="greenBg">社区</th>
+												<th class="blueBg">冒烟类成灾警情</th>
 											</tr>
 										</thead>
 										<tbody id="tbody2"></tbody>
@@ -127,15 +117,11 @@
 									<table class="table fireDataTable">
 										<thead>
 											<tr>
-												<th width="45" class="grayBg" rowspan="2">排序</th>
-												<th width="60" class="greenBg" rowspan="2">街道</th>
-												<th class="blueBg" colspan="3">确认类成灾警情</th>
+												<th width="50" class="grayBg">排序</th>
+												<th width="100" class="greenBg">社区</th>
+												<th class="blueBg">确认类成灾警情</th>
 											</tr>
-											<tr>
-												<th class="blueBg light" name="thisYear"></th>
-												<th class="blueBg light">同期</th>
-												<th class="blueBg light">同比</th>
-											</tr>
+										
 										</thead>
 										<tbody id="tbody3">
 											
@@ -146,14 +132,9 @@
 									<table class="table fireDataTable">
 										<thead>
 											<tr>
-												<th width="45" class="grayBg" rowspan="2">排序</th>
-												<th width="60" class="greenBg" rowspan="2">街道</th>
-												<th class="blueBg" colspan="3">直接经济损失</th>
-											</tr>
-											<tr>
-												<th class="blueBg light" name="thisYear"></th>
-												<th class="blueBg light">同期</th>
-												<th class="blueBg light">同比</th>
+												<th width="50" class="grayBg">排序</th>
+												<th width="100" class="greenBg">社区</th>
+												<th class="blueBg">直接经济损失</th>
 											</tr>
 										</thead>
 										<tbody id="tbody4"></tbody>
@@ -163,14 +144,9 @@
 									<table class="table fireDataTable">
 										<thead>
 											<tr>
-												<th width="45" class="grayBg" rowspan="2">排序</th>
-												<th width="60" class="greenBg" rowspan="2">街道</th>
-												<th class="blueBg" colspan="3">受伤</th>
-											</tr>
-											<tr>
-												<th class="blueBg light" name="thisYear"></th>
-												<th class="blueBg light">同期</th>
-												<th class="blueBg light">同比</th>
+												<th width="50" class="grayBg">排序</th>
+												<th width="100" class="greenBg">社区</th>
+												<th class="blueBg">受伤</th>
 											</tr>
 										</thead>
 										<tbody id="tbody5"></tbody>
@@ -180,14 +156,9 @@
 									<table class="table fireDataTable">
 										<thead>
 											<tr>
-												<th width="45" class="grayBg" rowspan="2">排序</th>
-												<th width="60" class="greenBg" rowspan="2">街道</th>
-												<th class="blueBg" colspan="3">死亡</th>
-											</tr>
-											<tr>
-												<th class="blueBg light" name="thisYear"></th>
-												<th class="blueBg light">同期</th>
-												<th class="blueBg light">同比</th>
+												<th width="50" class="grayBg">排序</th>
+												<th width="100" class="greenBg">社区</th>
+												<th class="blueBg">死亡</th>
 											</tr>
 										</thead>
 										<tbody id="tbody6"></tbody>
@@ -210,6 +181,28 @@
     <script th:inline="javascript">
     	/*<![CDATA[*/
         mui.init();
+    	//修改样式
+    	$('head').append('<style>.content-backdrop:before{height:' + $(window).height() + 'px}</style>');
+    	//获取参数
+		function getParam(paramName) {
+		    paramValue = "";
+		    isFound = false;
+		    if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+		        arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&");
+		        i = 0;
+		        while (i < arrSource.length && !isFound) {
+		            if (arrSource[i].indexOf("=") > 0) {
+		                if (arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase()) {
+		                    paramValue = arrSource[i].split("=")[1];
+		                    isFound = true;
+		                }
+		            }
+		            i++;
+		        }
+		    }
+		    return paramValue;
+		}
+		var streetId = getParam('streetId');
     	//初始化并获取当年数据
         var now = new Date();
     	var beginMon=13;
@@ -218,7 +211,8 @@
         var endRange = now.getFullYear() + '-' + ('0'+(now.getMonth()+1)).slice(-2);
         var currentTime = now.getFullYear() + '年01月-' + ('0' + (now.getMonth()+1)).slice(-2) + '月';
         $('div[name="currentTime"] span').text(currentTime);
-    	mui.post([[@{/app/fireEvent/getBaseData}]],{
+    	mui.post([[@{/app/fireEvent/getBlockData}]],{
+    		streetId: streetId,
     		beginTime: beginRange,
     		endTime: endRange
     	},function(data){
@@ -353,7 +347,8 @@
 	    		return;
 	    	}
 	    	$('div[name="currentTime"] span').text(currentTime);
-	    	mui.post([[@{/app/fireEvent/getBaseData}]],{
+	    	mui.post([[@{/app/fireEvent/getBlockData}]],{
+	    		streetId: streetId,
         		beginTime: beginRange,
         		endTime: endRange
         	},function(data){
@@ -382,7 +377,8 @@
 			}
 			currentTime = year + '年' + beginMon + '月-' + endMon + '月'; 
 			$('div[name="currentTime"] span').text(currentTime);
-			mui.post([[@{/app/fireEvent/getBaseData}]],{
+			mui.post([[@{/app/fireEvent/getBlockData}]],{
+				streetId: streetId,
         		beginTime: year + '-' + beginMon,
         		endTime: year + '-' + endMon
         	},function(data){
@@ -442,7 +438,11 @@
 	    //展示表格数据
 	    var dataLength;
 	    var dataList = [];
-	    function showData (data) {
+	    function showData (block) {
+	    	var data = block.list;
+	    	if(data.length ==0){
+	    		return;
+	    	}
 	    	dataLength = data.length;
 	    	dataList = data;
 	    	for(var n=1;n<7;n++){
@@ -462,10 +462,7 @@
 	    	for(var i=0;i<data.length;i++){
 	    		var tr1 = '';
 	    		var str1 = '';
-	    		if(data[i].primitiveYearBefore !== '-'){
-	    			data[i].primitiveYearBefore = (data[i].primitiveYearBefore*100).toFixed(2) + '%';
-	    		}
-	    		str1 = '<td class="greenBg">' + data[i].streetName + '</td><td class="blueBg">' + data[i].primitiveNow + '</td><td class="blueBg">' + data[i].primitiveBefore + '</td><td class="blueBg">' + data[i].primitiveYearBefore + '</td>';
+	    		str1 = '<td class="greenBg">' + data[i].blockName + '</td><td class="blueBg">' + data[i].primitiveNow + '</td>';
 	    		tr1 = '<tr id="primitive_' + data[i].id + '"><td class="grayBg">' + (i+1) + '</td>' + str1 + '</tr>';
 	    		arrStr[0] += tr1;
 	    	}
@@ -473,10 +470,7 @@
 	    	for(var j=0;j<data.length;j++){
 	    		var tr2 = '';
 	    		var str2 = '';
-	    		if(data[j].smokingYearBefore !== '-'){
-	    			data[j].smokingYearBefore = (data[j].smokingYearBefore*100).toFixed(2) + '%';
-	    		}
-	    		str2 = '<td class="greenBg">' + data[j].streetName + '</td><td class="blueBg">' + data[j].smokingNow + '</td><td class="blueBg">' + data[j].smokingBefore + '</td><td class="blueBg">' + data[j].smokingYearBefore + '</td>';
+	    		str2 = '<td class="greenBg">' + data[j].blockName + '</td><td class="blueBg">' + data[j].smokingNow + '</td>';
 	    		tr2 = '<tr id="smoking_' + data[j].id + '"><td class="grayBg">' + (j+1) + '</td>' + str2 + '</tr>';
 	    		arrStr[1]+=tr2;
 	    	}
@@ -484,10 +478,7 @@
 	    	for(var k=0;k<data.length;k++){
 	    		var tr3 = '';
 	    		var str3 = '';
-	    		if(data[k].affirmYearBefore !== '-'){
-	    			data[k].affirmYearBefore = (data[k].affirmYearBefore*100).toFixed(2) + '%';
-	    		}
-	    		str3 = '<td class="greenBg">' + data[k].streetName + '</td><td class="blueBg">' + data[k].affirmNow + '</td><td class="blueBg">' + data[k].affirmBefore + '</td><td class="blueBg">' + data[k].affirmYearBefore + '</td>';
+	    		str3 = '<td class="greenBg">' + data[k].blockName + '</td><td class="blueBg">' + data[k].affirmNow + '</td>';
 	    		tr3 = '<tr id="affirm_' + data[k].id + '"><td class="grayBg">' + (k+1) + '</td>' + str3 + '</tr>';
 	    		arrStr[2]+=tr3;
 	    	}
@@ -495,10 +486,7 @@
 	    	for(var l=0;l<data.length;l++){
 	    		var tr4 = '';
 	    		var str4 = '';
-	    		if(data[l].lossYearBefore !== '-'){
-	    			data[l].lossYearBefore = (data[l].lossYearBefore*100).toFixed(2) + '%';
-	    		}
-	    		str4 = '<td class="greenBg">' + data[l].streetName + '</td><td class="blueBg">' + data[l].lossNow + '</td><td class="blueBg">' + data[l].lossBefore + '</td><td class="blueBg">' + data[l].lossYearBefore + '</td>';
+	    		str4 = '<td class="greenBg">' + data[l].blockName + '</td><td class="blueBg">' + data[l].lossNow + '</td>';
 	    		tr4 = '<tr id="loss_' + data[l].id + '"><td class="grayBg">' + (l+1) + '</td>' + str4 + '</tr>';
 	    		arrStr[3]+=tr4;
 	    	}
@@ -506,10 +494,7 @@
 	    	for(var m=0;m<data.length;m++){
 	    		var tr5 = '';
 	    		var str5 = '';
-	    		if(data[m].hurtYearBefore !== '-'){
-	    			data[m].hurtYearBefore = (data[m].hurtYearBefore*100).toFixed(2) + '%';
-	    		}
-	    		str5 = '<td class="greenBg">' + data[m].streetName + '</td><td class="blueBg">' + data[m].hurtNow + '</td><td class="blueBg">' + data[m].hurtBefore + '</td><td class="blueBg">' + data[m].hurtYearBefore + '</td>';
+	    		str5 = '<td class="greenBg">' + data[m].blockName + '</td><td class="blueBg">' + data[m].hurtNow + '</td>';
 	    		tr5 = '<tr id="hurt_' + data[m].id + '"><td class="grayBg">' + (m+1) + '</td>' + str5 + '</tr>';
 	    		arrStr[4]+=tr5;
 	    	}
@@ -517,10 +502,7 @@
 	    	for(var o=0;o<data.length;o++){
 	    		var tr6 = '';
 	    		var str6 = '';
-	    		if(data[o].deadYearBefore !== '-'){
-	    			data[o].deadYearBefore = (data[o].deadYearBefore*100).toFixed(2) + '%';
-	    		}
-	    		str6 = '<td class="greenBg">' + data[o].streetName + '</td><td class="blueBg">' + data[o].deadNow + '</td><td class="blueBg">' + data[o].deadBefore + '</td><td class="blueBg">' + data[o].deadYearBefore + '</td>';
+	    		str6 = '<td class="greenBg">' + data[o].blockName + '</td><td class="blueBg">' + data[o].deadNow + '</td>';
 	    		tr6 = '<tr id="dead_' + data[o].id + '"><td class="grayBg">' + (o+1) + '</td>' + str6 + '</tr>';
 	    		arrStr[5]+=tr6;
 	    	}

@@ -112,7 +112,7 @@
 			$('.regionCurrent:eq(0)').html('当前：<span>' + name + '</span>');
 			$('#blocks li').removeClass('selected');
 			$('#selected' + id).addClass('selected');
-        	mui.post([[@{/app/fireEvent/getAreaDate}]],{
+        	mui.post([[@{/app/fireEvent/getAreaData}]],{
         		id: id
         	},function(data){
         		if(data && data.length>0){
