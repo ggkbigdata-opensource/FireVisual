@@ -276,8 +276,7 @@ public class FireEventController {
      * @description 点击对应的街道，跳转页面
      */
     @RequestMapping(value = "/toBlockDataPage")
-    private String toBlockDataPage(HttpServletRequest request, @RequestParam(required = true) Long id,
-            @RequestParam(required = true) Integer type) {
+    private String toBlockDataPage() {
 
         if (!ContextHolderUtils.isLogin()) {
             return "login/login";

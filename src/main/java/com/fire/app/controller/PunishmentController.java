@@ -104,9 +104,6 @@ public class PunishmentController {
     /**
      * @createDate 2017年3月29日上午10:14:53
      * @author wangzhiwang
-     * @param type
-     * @param beginTime
-     * @param endTime
      * @return
      * @description 获取街道的详情
      */
@@ -214,8 +211,42 @@ public class PunishmentController {
         }
 
         result.put("list", list);
-        
 
         return result;
+    }
+
+    /**
+     * @createDate 2017年3月29日上午10:14:53
+     * @author wangzhiwang
+     * @return
+     * @description 点击对应的街道，跳转页面
+     */
+    @RequestMapping(value = "/toBlockDataPage")
+    private String toBlockDataPage() {
+
+        if (!ContextHolderUtils.isLogin()) {
+            return "login/login";
+        }
+
+        return "lawEnforcement/lawEnforcement-block-list";
+    }
+
+    /**
+     * @createDate 2017年3月29日上午10:14:53
+     * @author wangzhiwang
+     * @return
+     * @description 点击对应的街道，显示所有社区的数据
+     */
+    @RequestMapping(value = "/getBlockData")
+    private JSONObject getBlockData(HttpServletRequest request, @RequestParam(required = true) Long streetId,String beginTime, String endTime
+    ) {
+        List<JSONObject> result = punishmentService.getBaseDate(beginTime, endTime);
+        JSONObject obj = new JSONObject();
+
+        obj.put("streetId", streetId);
+        obj.put("list", result);
+
+
+        return obj;
     }
 }
