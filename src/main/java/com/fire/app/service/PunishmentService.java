@@ -60,4 +60,5 @@ public interface PunishmentService {
     AppPunishment fingById(Long id);
 
 
+    List<JSONObject> getBlockData(Long streetId, String beginTime, String endTime);
 }

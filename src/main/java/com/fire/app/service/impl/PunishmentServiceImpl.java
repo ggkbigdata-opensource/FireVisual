@@ -7,15 +7,12 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import com.fire.app.domain.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.fire.app.domain.AppPunishment;
-import com.fire.app.domain.AppPunishmentRepository;
-import com.fire.app.domain.Street;
-import com.fire.app.domain.StreetRepository;
 import com.fire.app.service.PunishmentService;
 import com.fire.app.util.DateUtil;
 
@@ -31,6 +28,8 @@ public class PunishmentServiceImpl implements PunishmentService {
     private AppPunishmentRepository punishmentRepository;
     @Autowired
     private StreetRepository streetRepository;
+    @Autowired
+    private BlockRepository blockRepository;
 
     @SuppressWarnings("static-access")
     @Override
@@ -448,6 +447,74 @@ public class PunishmentServiceImpl implements PunishmentService {
 
         AppPunishment punishment = punishmentRepository.findById(id);
         return punishment;
+    }
+
+    @Override
+    public List<JSONObject> getBlockData(Long streetId, String beginTime, String endTime) {
+
+        // 获取所有的街道
+        List<Block> blocks = blockRepository.findByStreetId(streetId);
+        List<JSONObject> result = new ArrayList<JSONObject>();
+
+        for (Block block : blocks) {
+            Date bTime = DateUtil.parse(beginTime + "-01");
+            Date eTime = DateUtil.parse(endTime + "-30");
+            
+            int fineNumNow = 0;// 行政处罚宗数
+            double finePriceNow = 0;// 行政处罚
+            int admiDetNow = 0;// 行政拘留
+            int crimDetNow = 0;// 刑事拘留
+            int sealUpNow = 0;// 临时查封
+            int ThreeStopNow = 0;// 三停
+            
+            
+            List<AppPunishment> sealUpValue = punishmentRepository.findSealUpBlockData(bTime, eTime,block.getId());
+            if (sealUpValue != null) {
+                sealUpNow = sealUpValue.size();
+            }
+            
+            // 获取行政处罚，行政拘留，刑事拘留，三停的数据
+            List<AppPunishment> otherValue = punishmentRepository.findBlockData(bTime, eTime, block.getId());
+            for (AppPunishment punish : otherValue) {
+                if ("行政罚款".equals(punish.getPunishMethod())) {
+                    fineNumNow++;// 行政处罚宗数
+                    if (StringUtils.isNotEmpty(punish.getFineAmount())) {
+                        finePriceNow = Double.parseDouble(punish.getFineAmount()) + finePriceNow;// 行政处罚
+                    }
+                }
+                if ("行政拘留".equals(punish.getPunishMethod())) {
+                    admiDetNow++;
+                }
+                if ("刑事拘留".equals(punish.getPunishMethod())) {
+                    crimDetNow++;
+                }
+                if ("三停".equals(punish.getPunishMethod())) {
+                    ThreeStopNow++;
+                }
+
+                JSONObject streetResult = new JSONObject();
+                streetResult.put("blockName", block.getName());
+                streetResult.put("blockId", block.getId());
+
+                // 临时查封
+                streetResult.put("sealUpNow", sealUpNow);
+                // 行政处罚
+                streetResult.put("fineNumNow", fineNumNow);
+                streetResult.put("finePriceNow", finePriceNow);
+                // 行政拘留
+                streetResult.put("admiDetNow", admiDetNow);
+                // 刑事拘留
+                streetResult.put("crimDetNow", crimDetNow);
+                // 三停
+                streetResult.put("ThreeStopNow", ThreeStopNow);
+
+                result.add(streetResult);
+
+            }
+
+        }
+
+        return result;
     }
 
 }

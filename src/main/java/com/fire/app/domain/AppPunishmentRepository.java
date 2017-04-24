@@ -166,4 +166,18 @@ public interface AppPunishmentRepository extends JpaRepository<AppPunishment, Lo
      */
     AppPunishment findById(Long id);
 
+    /**
+     * @createDate 2017年4月24日上午10:05:40 
+     * @author wangzhiwang
+     * @param bTime
+     * @param eTime
+     * @param id
+     * @return 
+     * @description
+     */
+    @Query(value = "SELECT * FROM app_punishment t where t.execute_time between ?1 and ?2 and t.punish_method = '临时查封' and t.block_id=?3", nativeQuery = true)
+    List<AppPunishment> findSealUpBlockData(Date bTime, Date eTime, Long id);
+    @Query(value = "SELECT * FROM app_punishment t where t.execute_time between ?1 and ?2 and t.punish_method != '临时查封' and t.block_id=?3", nativeQuery = true)
+    List<AppPunishment> findBlockData(Date bTime, Date eTime, Long id);
+
 }

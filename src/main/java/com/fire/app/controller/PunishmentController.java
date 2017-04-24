@@ -240,7 +240,7 @@ public class PunishmentController {
     @RequestMapping(value = "/getBlockData")
     private JSONObject getBlockData(HttpServletRequest request, @RequestParam(required = true) Long streetId,String beginTime, String endTime
     ) {
-        List<JSONObject> result = punishmentService.getBaseDate(beginTime, endTime);
+        List<JSONObject> result = punishmentService.getBlockData(streetId,beginTime, endTime);
         JSONObject obj = new JSONObject();
 
         obj.put("streetId", streetId);
