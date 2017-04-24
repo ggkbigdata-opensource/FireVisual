@@ -590,6 +590,7 @@ public class FireEventServiceImpl implements FireEventService {
                 time = DateUtil.formatDate(event.getOccurTime(), "yyyy/MM/dd HH:mm");
             }
             obj.put("time", time);
+            obj.put("id", event.getId());
 
             if (type == 2) {
                 obj.put("type_change", "损失：冒烟");

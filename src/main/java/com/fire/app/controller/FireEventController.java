@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fire.app.domain.AppFireEvent;
-import com.fire.app.domain.BlockRepository;
 import com.fire.app.domain.Street;
 import com.fire.app.service.FireEventService;
 import com.fire.app.service.StreetService;
@@ -126,118 +125,6 @@ public class FireEventController {
 
         // type 1--原始 2--冒烟 3--确认 4--损失 5--受伤 6--死亡
 
-        JSONObject result = this.getStreeEvent(request, streetId, name, type);
-
-        request.setAttribute("result", result);
-
-        return "alarm/alarm-fire-list";
-    }
-    
-    
-    @RequestMapping(value = "/blockEvent", method = RequestMethod.GET)
-    public String toBlockEventPage(HttpServletRequest request, @RequestParam(required = true) Long blockId,@RequestParam(required = true) Integer type) {
-
-        if (!ContextHolderUtils.isLogin()) {
-            return "login/login";
-        }
-        
-        // type 1--原始 2--冒烟 3--确认 4--损失 5--受伤 6--死亡
-
-        JSONObject result = fireEventServcie.getBlockEvent(blockId, type);
-
-        request.setAttribute("result", result);
-
-        return "alarm/alarm-fire-list";
-    }
-    
-
-    @RequestMapping(value = "/searchEvent", method = RequestMethod.POST)
-    @ResponseBody
-    public JSONObject toSearchEvent(HttpServletRequest request, @RequestParam(required = true) Long streetId,
-            String name, @RequestParam(required = true) Integer type) {
-
-        // type 1--原始 2--冒烟 3--确认 4--损失 5--受伤 6--死亡
-
-        JSONObject result = this.getStreeEvent(request, streetId, name, type);
-
-        return result;
-    }
-
-    /**
-     * @createDate 2017年4月17日上午9:56:22
-     * @author wangzhiwang
-     * @param streetId
-     * @return
-     * @description 查询街道下所有警情
-     */
-    @RequestMapping(value = "/getStreetEvent", method = RequestMethod.GET)
-    @ResponseBody
-    private List<JSONObject> getStreetEvent(@RequestParam(required = true) Long streetId) {
-
-        /*
-         * if (!ContextHolderUtils.isLogin()) { return "login/login"; }
-         */
-
-        List<AppFireEvent> events = fireEventServcie.getStreetEvent(streetId);
-        List<JSONObject> result = new ArrayList<JSONObject>();
-        for (AppFireEvent event : events) {
-            JSONObject obj = new JSONObject();
-            obj.put("id", event.getId());
-            obj.put("occurTime", event.getOccurTime());
-            obj.put("streetName", event.getStreetName());
-            obj.put("blockName", event.getBlockName());
-
-            result.add(obj);
-
-        }
-
-        return result;
-    }
-
-    /**
-     * @createDate 2017年4月17日上午9:56:39
-     * @author wangzhiwang
-     * @param id
-     * @return
-     * @description 通过id获取警情数据
-     */
-    @RequestMapping(value = "/getEvent", method = RequestMethod.GET)
-    @ResponseBody
-    private AppFireEvent getEvent(@RequestParam(required = true) Long id) {
-
-        /*
-         * if (!ContextHolderUtils.isLogin()) { return "login/login"; }
-         */
-
-        AppFireEvent result = fireEventServcie.getEventById(id);
-
-        return result;
-    }
-
-    /**
-     * @createDate 2017年3月29日上午10:14:53
-     * @author wangzhiwang
-     * @return
-     * @description 获取街道的详情
-     */
-    @RequestMapping(value = "/event")
-    private String getEventById(HttpServletRequest request, @RequestParam(required = true) Long id,
-            @RequestParam(required = true) Integer type) {
-
-        AppFireEvent event = fireEventServcie.findEventById(id);
-
-        event.setFireType(type + "");
-
-        request.setAttribute("event", event);
-
-        return "alarm/alarm-fire-detail";
-    }
-
-    private JSONObject getStreeEvent(HttpServletRequest request, @RequestParam(required = true) Long streetId,
-            String name, @RequestParam(required = true) Integer type) {
-
-        // type 1--原始 2--冒烟 3--确认 4--损失 5--受伤 6--死亡
-
         List<AppFireEvent> events = fireEventServcie.findByStreetIdAndNameAndType(streetId, name, type);
 
         Street street = streetService.findById(streetId);
@@ -285,8 +172,95 @@ public class FireEventController {
         }
         result.put("list", list);
 
+        request.setAttribute("result", result);
+
+        return "alarm/alarm-fire-list";
+    }
+    
+    
+    @RequestMapping(value = "/blockEvent", method = RequestMethod.GET)
+    public String toBlockEventPage(HttpServletRequest request, @RequestParam(required = true) Long blockId,@RequestParam(required = true) Integer type) {
+
+        if (!ContextHolderUtils.isLogin()) {
+            return "login/login";
+        }
+        
+        // type 1--原始 2--冒烟 3--确认 4--损失 5--受伤 6--死亡
+
+        JSONObject result = fireEventServcie.getBlockEvent(blockId, type);
+
+        request.setAttribute("result", result);
+
+        return "alarm/alarm-fire-list";
+    }
+    
+
+    /**
+     * @createDate 2017年4月17日上午9:56:22
+     * @author wangzhiwang
+     * @param streetId
+     * @return
+     * @description 查询街道下所有警情
+     */
+    @RequestMapping(value = "/getStreetEvent", method = RequestMethod.GET)
+    @ResponseBody
+    private List<JSONObject> getStreetEvent(@RequestParam(required = true) Long streetId) {
+
+        /*
+         * if (!ContextHolderUtils.isLogin()) { return "login/login"; }
+         */
+
+        List<AppFireEvent> events = fireEventServcie.getStreetEvent(streetId);
+        List<JSONObject> result = new ArrayList<JSONObject>();
+        for (AppFireEvent event : events) {
+            JSONObject obj = new JSONObject();
+            obj.put("id", event.getId());
+            obj.put("occurTime", event.getOccurTime());
+            obj.put("streetName", event.getStreetName());
+            obj.put("blockName", event.getBlockName());
+
+            result.add(obj);
+
+        }
+
         return result;
     }
+
+    /**
+     * @createDate 2017年4月17日上午9:56:39
+     * @author wangzhiwang
+     * @param id
+     * @return
+     * @description 通过id获取警情数据
+     */
+    @RequestMapping(value = "/getEvent", method = RequestMethod.GET)
+    @ResponseBody
+    private AppFireEvent getEvent(@RequestParam(required = true) Long id) {
+
+        AppFireEvent result = fireEventServcie.getEventById(id);
+
+        return result;
+    }
+
+    /**
+     * @createDate 2017年3月29日上午10:14:53
+     * @author wangzhiwang
+     * @return
+     * @description 获取街道的详情
+     */
+    @RequestMapping(value = "/event")
+    private String getEventById(HttpServletRequest request, @RequestParam(required = true) Long id,
+            @RequestParam(required = true) Integer type) {
+
+        AppFireEvent event = fireEventServcie.findEventById(id);
+
+        event.setFireType(type + "");
+
+        request.setAttribute("event", event);
+
+        return "alarm/alarm-fire-detail";
+    }
+
 
     /**
      * @createDate 2017年3月29日上午10:14:53

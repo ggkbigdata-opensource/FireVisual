@@ -40,17 +40,6 @@ public interface PunishmentService {
     List<JSONObject> getBaseDate(String beginTime, String endTime);
 
     /**
-     * @createDate 2017年4月18日下午5:17:26 
-     * @author wangzhiwang
-     * @param streetId
-     * @param name
-     * @param type
-     * @return 
-     * @description
-     */
-    List<AppPunishment> findByStreetIdAndNameAndType(Long streetId, String name, Integer type);
-
-    /**
      * @createDate 2017年4月19日上午9:10:31 
      * @author wangzhiwang
      * @param id
@@ -61,4 +50,14 @@ public interface PunishmentService {
 
 
     List<JSONObject> getBlockData(Long streetId, String beginTime, String endTime);
+
+    /**
+     * @createDate 2017年4月24日下午3:08:29 
+     * @author wangzhiwang
+     * @param bloclId
+     * @param type
+     * @return 
+     * @description 通过社区id和类型获取执法数据
+     */
+    JSONObject findByBlockIdAndType(Long bloclId, Integer type);
 }

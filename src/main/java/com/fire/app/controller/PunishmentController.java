@@ -1,7 +1,5 @@
 package com.fire.app.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,11 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fire.app.domain.AppPunishment;
-import com.fire.app.domain.Street;
 import com.fire.app.service.PunishmentService;
-import com.fire.app.service.StreetService;
 import com.fire.app.util.ContextHolderUtils;
-import com.fire.app.util.DateUtil;
 
 /**
  * @createDate 2017年3月28日下午3:57:31
@@ -32,8 +27,6 @@ public class PunishmentController {
 
     @Autowired
     private PunishmentService punishmentService;
-    @Autowired
-    private StreetService streetService;
 
     @RequestMapping("/")
     private String toFireEvent() {
@@ -120,26 +113,19 @@ public class PunishmentController {
         return result;
     }
     
-    @RequestMapping(value = "/streetPunish" ,method = RequestMethod.GET)
-    private String toStreeEventPage(HttpServletRequest request, @RequestParam(required = true)Long streetId, String name,@RequestParam(required = true) Integer type) {
+    @RequestMapping(value = "/blockPunish" ,method = RequestMethod.GET)
+    private String toStreeEventPage(HttpServletRequest request, @RequestParam(required = true)Long bloclId,@RequestParam(required = true) Integer type) {
 
          if (!ContextHolderUtils.isLogin()) { return "login/login"; }
-        //type   1--刑罚   2--刑拘   3--刑拘   4--临封   5--三停
-        JSONObject result = this.getStreeEventData(streetId, name, type);
+      //type   1--刑罚   2--刑拘   3--刑拘   4--临封   5--三停
+
+        JSONObject result = punishmentService.findByBlockIdAndType(bloclId, type);
+        
         request.setAttribute("result", result);
 
         return "lawEnforcement/lawEnforcement-fire-list";
     }
     
-    @RequestMapping(value = "/searchPunishment" ,method = RequestMethod.POST)
-    @ResponseBody
-    private JSONObject toSearchPunishment(@RequestParam(required = true)Long streetId, String name,@RequestParam(required = true) Integer type) {
-        
-        //type   1--刑罚   2--刑拘   3--刑拘   4--临封   5--三停
-        JSONObject result = this.getStreeEventData(streetId, name, type);
-        
-        return result;
-    }
     
     @RequestMapping(value = "/punish" ,method = RequestMethod.GET)
     private String toPunishmentPage(HttpServletRequest request, @RequestParam(required = true)Long id,@RequestParam(required = true)Long type) {
@@ -157,64 +143,6 @@ public class PunishmentController {
         return "lawEnforcement/lawEnforcement-fire-detail";
     }
     
-    private JSONObject getStreeEventData(@RequestParam(required = true)Long streetId, String name,@RequestParam(required = true) Integer type) {
-
-        //type   1--刑罚   2--刑拘   3--刑拘   4--临封   5--三停
-
-        List<AppPunishment> punishments = punishmentService.findByStreetIdAndNameAndType(streetId, name, type);
-        List<JSONObject> list = new ArrayList<JSONObject>();
-
-        
-        Street street = streetService.findById(streetId);
-        if (street==null) {
-            throw new RuntimeException("没有找到对应的街道信息");
-        }
-        
-        JSONObject result = new JSONObject();
-        
-        result.put("streetName", street.getName());
-        result.put("streetId", streetId);
-        result.put("type", type);
-        
-        for (AppPunishment punishment : punishments) {
-            JSONObject obj = new JSONObject();
-            obj.put("id", punishment.getId());
-            obj.put("blockName", punishment.getBlockName());
-            
-            if (type==1) {
-               obj.put("type_change", "行罚");
-            }else if (type==2) {
-                obj.put("type_change", "行拘");
-            }else if (type==3) {
-                obj.put("type_change", "刑拘");
-            }else if (type==4) {
-                obj.put("type_change", "临封");
-            }else{
-                obj.put("type_change", "三停");
-            }
-            
-            obj.put("unitName", punishment.getPunishmentUnitName());
-            
-            Date time = null;
-            if ("临时查封".equals(punishment.getPunishMethod())) {
-                time=punishment.getSealUpTimeBegin();
-            }else{
-                time=punishment.getExecuteTime();
-            }
-            
-            obj.put("time", DateUtil.formatDate(time, "yyyy/MM/dd HH:mm"));
-
-            obj.put("dutyPerson", punishment.getDutyPersonName());
-            //传上来的参数
-
-            list.add(obj);
-        }
-
-        result.put("list", list);
-
-        return result;
-    }
-
     /**
      * @createDate 2017年3月29日上午10:14:53
      * @author wangzhiwang
