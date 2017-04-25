@@ -416,7 +416,7 @@ public class FireEventServiceImpl implements FireEventService {
 
     @Override
     public AppFireEvent getEventById(Long id) {
-        AppFireEvent result = fireEventRepository.findById(id);
+        AppFireEvent result = fireEventRepository.findOne(id);
         return result;
     }
 
@@ -459,7 +459,7 @@ public class FireEventServiceImpl implements FireEventService {
 
     @Override
     public AppFireEvent findEventById(Long id) {
-        AppFireEvent event = fireEventRepository.findById(id);
+        AppFireEvent event = fireEventRepository.findOne(id);
         return event;
     }
 
