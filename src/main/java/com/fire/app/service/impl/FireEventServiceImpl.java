@@ -464,7 +464,7 @@ public class FireEventServiceImpl implements FireEventService {
     }
 
     @Override
-    public List<JSONObject> getBlockData(Long streetId,String beginTime, String endTime) {
+    public List<JSONObject> getBlockData(Long streetId,String beginTime, String endTime,Integer type) {
 
         List<JSONObject> result = new ArrayList<JSONObject>();
      // 获取社区
@@ -482,7 +482,28 @@ public class FireEventServiceImpl implements FireEventService {
             int hurtNow = 0;
             int deadNow = 0;
             
-            List<AppFireEvent> nowValue = fireEventRepository.findByBlockId(bTime, eTime, block.getId());
+            
+         // type 1--原始 2--冒烟 3--确认 4--损失 5--受伤 6--死亡
+            List<AppFireEvent> nowValue = null;
+            if (type==1) {//原始表示所有
+                nowValue = fireEventRepository.findByBlockId(bTime, eTime, block.getId());
+            }else if(type==2||type==3) {  //火灾表示确认
+                String fireType=null;
+                if (type==2) {
+                    fireType="冒烟";
+                }else {
+                    fireType="火灾";
+                }
+                nowValue = fireEventRepository.findByBlockId(bTime, eTime, block.getId(),fireType);
+            }else if(type==4||type==5||type==6) {
+                if (type==4) {
+                    nowValue = fireEventRepository.findByBlockIdAndLossIsNotNull(bTime, eTime, block.getId());
+                }else if (type==5){
+                    nowValue = fireEventRepository.findByBlockIdAndHurtNumIsNotNull(bTime, eTime, block.getId());
+                }else {
+                    nowValue = fireEventRepository.findByBlockIdAndDeadNumIsNotNull(bTime, eTime, block.getId());
+                }
+            }
             
             for (AppFireEvent appFireEvent : nowValue) {
                 if ("原始".equals(appFireEvent.getFireType())) {

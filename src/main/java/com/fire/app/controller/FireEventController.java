@@ -1,5 +1,6 @@
 package com.fire.app.controller;
 
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -286,10 +287,13 @@ public class FireEventController {
      */
     @RequestMapping(value = "/getBlockData")
     @ResponseBody
-    private JSONObject getBlockData(HttpServletRequest request, @RequestParam(required = true) Long streetId,String beginTime, String endTime
+    private JSONObject getBlockData(HttpServletRequest request, @RequestParam(required = true) Long streetId,String beginTime, String endTime,
+            @RequestParam(required = true) Integer type
             ) {
 
-        List<JSONObject> result = fireEventServcie.getBlockData(streetId,beginTime, endTime);
+        // type 1--原始 2--冒烟 3--确认 4--损失 5--受伤 6--死亡
+        
+        List<JSONObject> result = fireEventServcie.getBlockData(streetId,beginTime, endTime,type);
         
         Street street = streetService.findById(streetId);
         

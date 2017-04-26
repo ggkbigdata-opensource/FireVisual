@@ -83,10 +83,11 @@ public interface FireEventService {
      * @param streetId 
      * @param beginTime
      * @param endTime
+     * @param type 
      * @return 
      * @description
      */
-    List<JSONObject> getBlockData(Long streetId, String beginTime, String endTime);
+    List<JSONObject> getBlockData(Long streetId, String beginTime, String endTime, Integer type);
 
     /**
      * @createDate 2017年4月24日下午2:43:34 

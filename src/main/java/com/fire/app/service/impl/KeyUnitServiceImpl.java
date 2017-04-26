@@ -69,7 +69,6 @@ public class KeyUnitServiceImpl implements KeyUnitService{
 
             result.add(obj);
         }
-
         return result;
     }
 
