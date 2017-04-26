@@ -54,6 +54,8 @@
 				var datas = [];
 				var unit = [];
 				var tbodytr = '';
+				var totalNum = [];
+				var totalTh = '';
 				unit = data[0].unit;
 				for (var i = 0; i < data.length; i++) {
 					legend.unshift(data[i].type);
@@ -62,11 +64,13 @@
 						da.unshift(data[i].data[k].value);
 					}
 					datas.unshift(da);
+					totalNum[i] = 0;
 				}
 				for (var j = 0; j < data[0].data.length; j++) {
 					item.unshift(data[0].data[j].month);
 					var tr = '';
 					for(var l=data.length-1;l>-1;l--){
+						totalNum[data.length-1-l] += data[l].data[j].value;
 						tr += '<td class="blueBg">' + data[l].data[j].value + '</td>';
 					}
 					tbodytr += '<tr><td class="greenBg">' + data[0].data[j].month + '</td>' + tr + '</tr>';
@@ -75,12 +79,15 @@
 				var th = '';
 				for(var k=0;k<legend.length;k++){
 					th += '<th class="blueBg">' + legend[k] + '</th>';
+					totalTh += '<td class="blueBg fb">' + totalNum[k] + '</td>';
 				}
 				var theadtr = '<tr><th width="60" class="greenBg">年月</th>' + th + '</tr>';
+				var totalStr = '<tr><td class="greenBg fb">合计</td>' + totalTh + '</tr>';
 				$('table thead').text('');
 				$('table tbody').text('');
 				$('table thead').append(theadtr);
 				$('table tbody').append(tbodytr);
+				$('table tbody').append(totalStr);
 			}
 		}, 'json');
 		$('#hidePopover').bind('tap',function(){

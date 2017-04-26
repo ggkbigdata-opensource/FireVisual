@@ -59,6 +59,8 @@
 				var datas = [];
 				var unit = [];
 				var tbodytr = '';
+				var totalNum = [];
+				var totalTh = '';
 				unit = data[0].unit;
 				for (var i = 0; i < data.length; i++) {
 					//legend.push(data[i].type.substr(0,2));
@@ -73,18 +75,21 @@
 					}else {
 						datas[2] = da;
 					}
-					
+					totalNum[i] = 0;
 				}
 				for (var j = 0; j < data[0].data.length; j++) {
 					item.unshift(data[0].data[j].month);
 					var tr = '';
 					for(var l=0;l<data.length;l++){
 						if(data[l].type.substr(0,2) === '原始'){
-							tr += '<td class="blueBg">' + data[0].data[j].value + '</td>';
+							totalNum[l] += data[0].data[j].value;
+							tr += '<td class="blueBg" name="' + data[0].data[j].month + '_1">' + data[0].data[j].value + '</td>';
 						}else if(data[l].type.substr(0,2) === '确认') {
-							tr += '<td class="blueBg">' + data[1].data[j].value + '</td>';
+							totalNum[l] += data[1].data[j].value;
+							tr += '<td class="blueBg" name="' + data[1].data[j].month + '_2">' + data[1].data[j].value + '</td>';
 						}else {
-							tr += '<td class="blueBg">' + data[2].data[j].value + '</td>';
+							totalNum[l] += data[2].data[j].value;
+							tr += '<td class="blueBg" name="' + data[2].data[j].month + '_3">' + data[2].data[j].value + '</td>';
 						}
 					}
 					tbodytr += '<tr><td class="greenBg">' + data[0].data[j].month + '</td>' + tr + '</tr>';
@@ -93,14 +98,31 @@
 				var th = '';
 				for(var k=0;k<legend.length;k++){
 					th += '<th class="blueBg">' + legend[k] + '</th>';
+					totalTh += '<td class="blueBg fb">' + totalNum[k] + '</td>';
 				}
 				var theadtr = '<tr><th width="80" class="greenBg">年月</th>' + th + '</tr>';
+				var totalStr = '<tr><td class="greenBg fb">合计</td>' + totalTh + '</tr>';
 				$('table thead').text('');
 				$('table tbody').text('');
 				$('table thead').append(theadtr);
 				$('table tbody').append(tbodytr);
+				$('table tbody').append(totalStr);
+				setClick(data);
 			}
 		}, 'json');
+		//点击表格数据
+		function setClick(data){
+			for(var i=0;i<data.length;i++){
+				for(var j=0;j<data[i].length;j++){
+					$('td[name="' + data[i].data[j].month + '_' + i + '"]').bind('tap',function(){
+						console.log(this);
+					});
+				}
+			}
+		}
+		
+		
+		
 		$('#hidePopover').bind('tap',function(){
 			hidePopover('trendPopover');
 		});

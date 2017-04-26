@@ -591,7 +591,6 @@
 				$('#tbody' + m).append(arrStr[m-1]);
 				$('#tbody' + m).append(totalStr[m-1]);
 			}
-			
 			goList();
 	    }
 	    
@@ -605,7 +604,7 @@
 		    				var id = this.id.substr(this.id.indexOf('_')+1,this.id.length);
 		    				var type = this.attributes['name'].value;
 			    	    	mui.openWindow({
-			    	    		url: [[@{/app/fireEvent/toBlockDataPage?streetId=}]] + id
+			    	    		url: [[@{/app/fireEvent/toBlockDataPage?streetId=}]] + id + '&type=' + type + '&beginRange=' + beginRange + '&endRange=' + endRange
 			                  });
 			    		});
 	    			}

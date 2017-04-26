@@ -4096,26 +4096,20 @@
 		}
 	    //获取所有数据
     	function getAllData(){
-    		var arrStr = '';
     		mui.get([[@{/app/situation/getAllStreetSituation}]],'',function(data){
         		if(data && data.length > 0){
-        			data.sort(compare('eventNum'));
-        	    	for(var j=0;j<data.length;j++){
-        	    		var tr1 = '';
-        	    		var str1 = '';
-        	    		str1 = '<td class="greenBg">' + data[j].streetName + '</td><td class="blueBg">' + data[j].eventNum + '</td><td class="blueBg">' + data[j].punishNum + '</td><td class="blueBg">' + data[j].buildingInfoNum + '</td>';
-        	    		tr1 = '<tr><td class="grayBg">' + (j+1) + '</td>' + str1 + '</tr>';
-        	    		arrStr += tr1;
-        	    		heatMap(data[j].streetId,data[j].version+'');
-        	    	}
-        	    	$('#tbody1').append(arrStr);
         	    	regionData = data;
+        	    	sortData('eventNum')
         		}
         	},'json');
     	}
     	function sortData (sort) {
     		var arrStr = '';
     		$('#tbody1').text('');
+    		var totalEve = 0;
+    		var totalPun = 0;
+    		var totalBui = 0;
+    		var totalStr = '';
     		regionData.sort(compare(sort));
 	    	for(var j=0;j<regionData.length;j++){
 	    		var tr1 = '';
@@ -4123,8 +4117,14 @@
 	    		str1 = '<td class="greenBg">' + regionData[j].streetName + '</td><td class="blueBg">' + regionData[j].eventNum + '</td><td class="blueBg">' + regionData[j].punishNum + '</td><td class="blueBg">' + regionData[j].buildingInfoNum + '</td>';
 	    		tr1 = '<tr><td class="grayBg">' + (j+1) + '</td>' + str1 + '</tr>';
 	    		arrStr += tr1;
+	    		heatMap(regionData[j].streetId,regionData[j].version+'');
+	    		totalEve += regionData[j].eventNum;
+	    		totalPun += regionData[j].punishNum;
+	    		totalBui += regionData[j].buildingInfoNum;
 	    	}
+	    	totalStr = '<tr><td class="greenBg fb" colspan="2">全区</td><td class="blueBg fb">' + totalEve + '</td><td class="blueBg fb">' + totalPun + '</td><td class="blueBg fb">' + totalBui + '</td></tr>';
 	    	$('#tbody1').append(arrStr);
+	    	$('#tbody1').append(totalStr);
     	}
     	//点击排序，目前先不注释
     	$('.sortBy').bind('tap',function () {

@@ -24,7 +24,7 @@
 								返回
 							</a>
                         <!-- 火情下拉列表 -->
-                        <div th:replace="/layouts/layout::alarm-menu"></div>
+                        
                         <span id="hideTimePopover" class="fr btn-filter">选择时间段 <i class="mui-icon mui-icon-arrowdown"></i></span>
                         <div id="timePopover" style="display: none" class="popoverbox">
                             <div class="mui-scroll-wrapper time-scroll-wrapper">
@@ -84,16 +84,8 @@
   						<div class="mui-content-padded" id="bodyContent">
 							<!-- 内容区域 -->
 							<div class="timeBox tc fb font-red" name="currentTime"><span></span></div>
-							<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-red mt15">
-								<a class="mui-control-item mui-active" href="#item1">原始</a>
-								<a class="mui-control-item" href="#item2">冒烟</a>
-								<a class="mui-control-item" href="#item3">确认</a>
-								<a class="mui-control-item" href="#item4">损失</a>
-								<a class="mui-control-item" href="#item5">受伤</a>
-								<a class="mui-control-item" href="#item6">死亡</a>
-							</div>
 							<div class="tableBox mt10">
-								<div id="item1" class="mui-control-content mui-active">
+								<div id="item1" class="mui-control-content">
 									<table class="table fireDataTable">
 										<thead>
 											<tr>
@@ -168,6 +160,12 @@
 										<tbody id="tbody6"></tbody>
 									</table>
 								</div>
+								<div class="no-record tc" id="norecord" style="display:none">
+									<div class="no-record-main oh no-record-sm">
+										<i class="mui-icon mui-icon-search fl"></i>
+										<div class="fl">无记录</div>
+									</div>
+								</div>
 							</div>
 							<!-- 内容区域 end -->
 						</div>
@@ -207,6 +205,7 @@
 		    return paramValue;
 		}
 		var streetId = getParam('streetId');
+		var type = getParam('type');
     	//初始化并获取当年数据
         var now = new Date();
     	var beginMon=13;
@@ -217,6 +216,7 @@
         $('div[name="currentTime"] span').text(currentTime);
     	mui.post([[@{/app/fireEvent/getBlockData}]],{
     		streetId: streetId,
+    		type: type,
     		beginTime: beginRange,
     		endTime: endRange
     	},function(data){
@@ -353,6 +353,7 @@
 	    	$('div[name="currentTime"] span').text(currentTime);
 	    	mui.post([[@{/app/fireEvent/getBlockData}]],{
 	    		streetId: streetId,
+	    		type: type,
         		beginTime: beginRange,
         		endTime: endRange
         	},function(data){
@@ -383,6 +384,7 @@
 			$('div[name="currentTime"] span').text(currentTime);
 			mui.post([[@{/app/fireEvent/getBlockData}]],{
 				streetId: streetId,
+				type: type,
         		beginTime: year + '-' + beginMon,
         		endTime: year + '-' + endMon
         	},function(data){
@@ -446,12 +448,18 @@
 	    	var data = block.list;
 	    	$('#streetName').text(block.streetName);
 	    	if(data.length ==0){
+	    		$('#norecord').css('display','block');
 	    		return;
+	    	}else{
+	    		$('#norecord').css('display','none');
 	    	}
+	    	var totalNum = [];
+	    	var totalStr = [];
 	    	dataLength = data.length;
 	    	dataList = data;
 	    	for(var n=1;n<7;n++){
 	    		$('#tbody' + n).text('');
+	    		totalNum[n-1] = 0;
 	    	}
 	    	var arrStr = [];
 	    	function compare(fields){
@@ -461,6 +469,7 @@
 	    			return value2 - value1;
 	    		}
 	    	}
+	    	//原始
 	    	data.sort(compare('primitiveNow'));
 	    	arrStr[0] = '';
 	    	for(var i=0;i<data.length;i++){
@@ -469,7 +478,10 @@
 	    		str1 = '<td class="greenBg">' + data[i].blockName + '</td><td class="blueBg">' + data[i].primitiveNow + '</td>';
 	    		tr1 = '<tr id="primitive_' + data[i].blockId + '"><td class="grayBg">' + (i+1) + '</td>' + str1 + '</tr>';
 	    		arrStr[0] += tr1;
+	    		totalNum[0] += data[i].primitiveNow;
 	    	}
+	    	totalStr[0] = '<tr><td class="greenBg fb" colspan="2">合计</td><td class="blueBg fb">' + totalNum[0] + '</td></tr>';
+	    	//冒烟
 	    	data.sort(compare('smokingNow'));
 	    	for(var j=0;j<data.length;j++){
 	    		var tr2 = '';
@@ -477,7 +489,10 @@
 	    		str2 = '<td class="greenBg">' + data[j].blockName + '</td><td class="blueBg">' + data[j].smokingNow + '</td>';
 	    		tr2 = '<tr id="smoking_' + data[j].blockId + '"><td class="grayBg">' + (j+1) + '</td>' + str2 + '</tr>';
 	    		arrStr[1]+=tr2;
+	    		totalNum[1] += data[j].smokingNow;
 	    	}
+	    	totalStr[1] = '<tr><td class="greenBg fb" colspan="2">合计</td><td class="blueBg fb">' + totalNum[1] + '</td></tr>';
+	    	//确认
 	    	data.sort(compare('affirmNow'));
 	    	for(var k=0;k<data.length;k++){
 	    		var tr3 = '';
@@ -485,7 +500,10 @@
 	    		str3 = '<td class="greenBg">' + data[k].blockName + '</td><td class="blueBg">' + data[k].affirmNow + '</td>';
 	    		tr3 = '<tr id="affirm_' + data[k].blockId + '"><td class="grayBg">' + (k+1) + '</td>' + str3 + '</tr>';
 	    		arrStr[2]+=tr3;
+	    		totalNum[2] += data[k].affirmNow;
 	    	}
+	    	totalStr[2] = '<tr><td class="greenBg fb" colspan="2">合计</td><td class="blueBg fb">' + totalNum[2] + '</td></tr>';
+	    	//损失
 	    	data.sort(compare('lossNow'));
 	    	for(var l=0;l<data.length;l++){
 	    		var tr4 = '';
@@ -493,7 +511,10 @@
 	    		str4 = '<td class="greenBg">' + data[l].blockName + '</td><td class="blueBg">' + data[l].lossNow + '</td>';
 	    		tr4 = '<tr id="loss_' + data[l].blockId + '"><td class="grayBg">' + (l+1) + '</td>' + str4 + '</tr>';
 	    		arrStr[3]+=tr4;
+	    		totalNum[3] += data[l].lossNow;
 	    	}
+	    	totalStr[3] = '<tr><td class="greenBg fb" colspan="2">合计</td><td class="blueBg fb">' + totalNum[3] + '</td></tr>';
+	    	//受伤
 	    	data.sort(compare('hurtNow'));
 	    	for(var m=0;m<data.length;m++){
 	    		var tr5 = '';
@@ -501,7 +522,10 @@
 	    		str5 = '<td class="greenBg">' + data[m].blockName + '</td><td class="blueBg">' + data[m].hurtNow + '</td>';
 	    		tr5 = '<tr id="hurt_' + data[m].blockId + '"><td class="grayBg">' + (m+1) + '</td>' + str5 + '</tr>';
 	    		arrStr[4]+=tr5;
+	    		totalNum[4] += data[m].hurtNow;
 	    	}
+	    	totalStr[4] = '<tr><td class="greenBg fb" colspan="2">合计</td><td class="blueBg fb">' + totalNum[4] + '</td></tr>';
+	    	//死亡
 	    	data.sort(compare('deadNow'));
 	    	for(var o=0;o<data.length;o++){
 	    		var tr6 = '';
@@ -509,13 +533,17 @@
 	    		str6 = '<td class="greenBg">' + data[o].blockName + '</td><td class="blueBg">' + data[o].deadNow + '</td>';
 	    		tr6 = '<tr id="dead_' + data[o].blockId + '"><td class="grayBg">' + (o+1) + '</td>' + str6 + '</tr>';
 	    		arrStr[5]+=tr6;
+	    		totalNum[5] += data[o].deadNow;
 	    	}
+	    	totalStr[5] = '<tr><td class="greenBg fb" colspan="2">合计</td><td class="blueBg fb">' + totalNum[5] + '</td></tr>';
 			for(var m=1;m<7;m++){
 				$('#tbody' + m).append(arrStr[m-1]);
+				$('#tbody' + m).append(totalStr[m-1]);
 			}
 			goList();
+			$('#item' + type).css('display','block');
 	    }
-	    
+	    //点击跳转
 	    function goList(){
 	    	var arrTitle = ['#primitive_','#smoking_','#affirm_','#loss_','#hurt_','#dead_'];
 	    	if(dataLength){
@@ -526,7 +554,7 @@
 		    				var id = this.id.substr(this.id.indexOf('_')+1,this.id.length);
 		    				var type = this.attributes['name'].value;
 			    	    	mui.openWindow({
-			    	    		url : [[@{/app/fireEvent/blockEvent?blockId=}]] + id + '&type=' + type + '&streetId=' + streetId
+			    	    		url : [[@{/app/fireEvent/blockEvent?blockId=}]] + id + '&type=' + type + '&streetId=' + streetId + '&beginTime=' + beginRange + '&endTime=' + endRange
 			                  });
 			    		});
 	    			}

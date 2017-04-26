@@ -18,8 +18,11 @@
             <div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
                 <div class="mui-scroll">
                     <div class="filterBox">
-                        <span id="hidePopover" class="fl btn-filter">火灾执法基本数据 <i class="mui-icon mui-icon-arrowdown"></i></span>
-                        <div th:replace="/layouts/layout::law-menu"></div>
+                    	<h1><span id="streetName"></span></h1>
+                        <a th:href="@{/app/punishment/toBasePage}" class="fl btn-filter" >
+							<i class="mui-icon mui-icon-arrowleft"></i>
+							返回
+						</a>
                         <span id="hideTimePopover" class="fr btn-filter">选择时间段 <i class="mui-icon mui-icon-arrowdown"></i></span>
                         <div id="timePopover" style="display: none"
                             class="popoverbox">
@@ -92,17 +95,11 @@
 									<table class="table fireDataTable">
 										<thead>
 											<tr>
-												<th width="45" class="grayBg" rowspan="3">排序</th>
-												<th width="60" class="greenBg" rowspan="3">街道</th>
-												<th class="blueBg" colspan="4">行政罚款</th>
+												<th width="50" class="grayBg" rowspan="2">排序</th>
+												<th width="100" class="greenBg" rowspan="2">社区</th>
+												<th class="blueBg" colspan="2">行政罚款</th>
 											</tr>
 											<tr>
-												<th class="blueBg light" colspan="2" name="thisYear"></th>
-												<th class="blueBg light" colspan="2">同期</th>
-											</tr>
-											<tr>
-												<th class="blueBg light">宗</th>
-												<th class="blueBg light">元</th>
 												<th class="blueBg light">宗</th>
 												<th class="blueBg light">元</th>
 											</tr>
@@ -114,13 +111,9 @@
 									<table class="table fireDataTable">
 										<thead>
 											<tr>
-												<th width="45" class="grayBg" rowspan="2">排序</th>
-												<th width="60" class="greenBg" rowspan="2">街道</th>
-												<th class="blueBg" colspan="2">行政拘留</th>
-											</tr>
-											<tr>
-												<th class="blueBg light" name="thisYear"></th>
-												<th class="blueBg light">同期</th>
+												<th width="50" class="grayBg">排序</th>
+												<th width="100" class="greenBg">街道</th>
+												<th class="blueBg">行政拘留</th>
 											</tr>
 										</thead>
 										<tbody id="tbody2"></tbody>
@@ -130,13 +123,9 @@
 									<table class="table fireDataTable">
 										<thead>
 											<tr>
-												<th width="45" class="grayBg" rowspan="2">排序</th>
-												<th width="60" class="greenBg" rowspan="2">街道</th>
-												<th class="blueBg" colspan="2">刑事拘留</th>
-											</tr>
-											<tr>
-												<th class="blueBg light" name="thisYear"></th>
-												<th class="blueBg light">同期</th>
+												<th width="50" class="grayBg" >排序</th>
+												<th width="100" class="greenBg" >街道</th>
+												<th class="blueBg" >刑事拘留</th>
 											</tr>
 										</thead>
 										<tbody id="tbody3"></tbody>
@@ -146,13 +135,9 @@
 									<table class="table fireDataTable">
 										<thead>
 											<tr>
-												<th width="45" class="grayBg" rowspan="2">排序</th>
-												<th width="60" class="greenBg" rowspan="2">街道</th>
-												<th class="blueBg" colspan="2">临时查封</th>
-											</tr>
-											<tr>
-												<th class="blueBg light" name="thisYear"></th>
-												<th class="blueBg light">同期</th>
+												<th width="50" class="grayBg" >排序</th>
+												<th width="100" class="greenBg" >街道</th>
+												<th class="blueBg" >临时查封</th>
 											</tr>
 										</thead>
 										<tbody id="tbody4"></tbody>
@@ -162,17 +147,19 @@
 									<table class="table fireDataTable">
 										<thead>
 											<tr>
-												<th width="45" class="grayBg" rowspan="2">排序</th>
-												<th width="60" class="greenBg" rowspan="2">街道</th>
-												<th class="blueBg" colspan="2">三停</th>
-											</tr>
-											<tr>
-												<th class="blueBg light" name="thisYear"></th>
-												<th class="blueBg light">同期</th>
+												<th width="50" class="grayBg">排序</th>
+												<th width="100" class="greenBg">街道</th>
+												<th class="blueBg">三停</th>
 											</tr>
 										</thead>
 										<tbody id="tbody5"></tbody>
 									</table>
+								</div>
+							</div>
+							<div class="no-record tc" id="norecord" style="display:none">
+								<div class="no-record-main oh no-record-sm">
+									<i class="mui-icon mui-icon-search fl"></i>
+									<div class="fl">无记录</div>
 								</div>
 							</div>
                         <!-- 内容区域 end -->
@@ -190,6 +177,28 @@
     <script th:inline="javascript">
     	/*<![CDATA[*/
         mui.init();
+    	//设置灰层
+        $('head').append('<style>.content-backdrop:before{height:' + $(window).height() + 'px}</style>');
+    	//获取参数
+		function getParam(paramName) {
+		    paramValue = "";
+		    isFound = false;
+		    if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+		        arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&");
+		        i = 0;
+		        while (i < arrSource.length && !isFound) {
+		            if (arrSource[i].indexOf("=") > 0) {
+		                if (arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase()) {
+		                    paramValue = arrSource[i].split("=")[1];
+		                    isFound = true;
+		                }
+		            }
+		            i++;
+		        }
+		    }
+		    return paramValue;
+		}
+		var streetId = getParam('streetId');
     	//初始化并获取当年数据
         var now = new Date();
     	var beginMon=13;
@@ -198,7 +207,8 @@
         var endRange = now.getFullYear() + '-' + ('0'+(now.getMonth()+1)).slice(-2);
         var currentTime = now.getFullYear() + '年01月-' + ('0' + (now.getMonth()+1)).slice(-2) + '月';
         $('div[name="currentTime"] span').text(currentTime);
-    	mui.post([[@{/app/punishment/getBaseDate}]],{
+    	mui.post([[@{/app/punishment/getBlockData}]],{
+    		streetId: streetId,
     		beginTime: beginRange,
     		endTime: endRange
     	},function(data){
@@ -332,7 +342,8 @@
 	    		return;
 	    	}
 	    	$('div[name="currentTime"] span').text(currentTime);
-	    	mui.post([[@{/app/punishment/getBaseDate}]],{
+	    	mui.post([[@{/app/punishment/getBlockData}]],{
+	    		streetId: streetId,
         		beginTime: beginRange,
         		endTime: endRange
         	},function(data){
@@ -361,7 +372,8 @@
 			}
 			currentTime = year + '年' + beginMon + '月-' + endMon + '月'; 
 			$('div[name="currentTime"] span').text(currentTime);
-			mui.post([[@{/app/punishment/getBaseDate}]],{
+			mui.post([[@{/app/punishment/getBlockData}]],{
+				streetId: streetId,
         		beginTime: year + '-' + beginMon,
         		endTime: year + '-' + endMon
         	},function(data){
@@ -421,7 +433,16 @@
 	    //数据展示
 	    var dataLength;
 	    var dataList = [];
-	    function showData(data){
+	    function showData(block){
+	    	console.log(block);
+	    	var data = block.list;
+	    	$('#streetName').text(block.streetName);
+	    	if(data.length ==0){
+	    		$('#norecord').css('display','block');
+	    		return;
+	    	}else{
+	    		$('#norecord').css('display','none');
+	    	}
 	    	dataLength = data.length;
 	    	dataList = data;
 	    	var arrStr = [];
@@ -440,40 +461,40 @@
 	    	for(var i=0;i<data.length;i++){
 	    		var tr1 = '';
 	    		var str1 = '';
-	    		str1 = '<td class="greenBg">' + data[i].streetName + '</td><td class="blueBg">' + data[i].fineNumNow + '</td><td class="blueBg">' + data[i].finePriceNow + '</td><td class="blueBg">' + data[i].fineNumBefore + '</td><td class="blueBg">' + data[i].finePriceBefore + '</td>';
-	    		tr1 = '<tr id="fineNum_' + data[i].streetId + '"><td class="grayBg">' + (i+1) + '</td>' + str1 + '</tr>';
+	    		str1 = '<td class="greenBg">' + data[i].blockName + '</td><td class="blueBg">' + data[i].fineNumNow + '</td><td class="blueBg">' + data[i].finePriceNow + '</td>';
+	    		tr1 = '<tr id="fineNum_' + data[i].blockId + '"><td class="grayBg">' + (i+1) + '</td>' + str1 + '</tr>';
 	    		arrStr[0]+=tr1;
 	    	}
 	    	data.sort(compare('admiDetNow'));
 	    	for(var j=0;j<data.length;j++){
 	    		var tr2 = '';
 	    		var str2 = '';
-	    		str2 = '<td class="greenBg">' + data[j].streetName + '</td><td class="blueBg">' + data[j].admiDetNow + '</td><td class="blueBg">' + data[j].admiDetBefore + '</td>';
-	    		tr2 = '<tr id="admiDet_' + data[j].streetId + '"><td class="grayBg">' + (j+1) + '</td>' + str2 + '</tr>';
+	    		str2 = '<td class="greenBg">' + data[j].blockName + '</td><td class="blueBg">' + data[j].admiDetNow + '</td>';
+	    		tr2 = '<tr id="admiDet_' + data[j].blockId + '"><td class="grayBg">' + (j+1) + '</td>' + str2 + '</tr>';
 	    		arrStr[1]+=tr2;
 	    	}
 	    	data.sort(compare('crimDetNow'));
 	    	for(var k=0;k<data.length;k++){
 	    		var tr3 = '';
 	    		var str3 = '';
-	    		str3 = '<td class="greenBg">' + data[k].streetName + '</td><td class="blueBg">' + data[k].crimDetNow + '</td><td class="blueBg">' + data[k].crimDetBefore + '</td>';
-	    		tr3 = '<tr id="crimDet_' + data[k].streetId + '"><td class="grayBg">' + (k+1) + '</td>' + str3 + '</tr>';
+	    		str3 = '<td class="greenBg">' + data[k].blockName + '</td><td class="blueBg">' + data[k].crimDetNow + '</td>';
+	    		tr3 = '<tr id="crimDet_' + data[k].blockId + '"><td class="grayBg">' + (k+1) + '</td>' + str3 + '</tr>';
 	    		arrStr[2]+=tr3;
 	    	}
 	    	data.sort(compare('sealUpNow'));
 	    	for(var l=0;l<data.length;l++){
 	    		var tr4 = '';
 	    		var str4 = '';
-	    		str4 = '<td class="greenBg">' + data[l].streetName + '</td><td class="blueBg">' + data[l].sealUpNow + '</td><td class="blueBg">' + data[l].sealUpBefore + '</td>';
-	    		tr4 = '<tr id="sealUp_' + data[l].streetId + '"><td class="grayBg">' + (l+1) + '</td>' + str4 + '</tr>';
+	    		str4 = '<td class="greenBg">' + data[l].blockName + '</td><td class="blueBg">' + data[l].sealUpNow + '</td>';
+	    		tr4 = '<tr id="sealUp_' + data[l].blockId + '"><td class="grayBg">' + (l+1) + '</td>' + str4 + '</tr>';
 	    		arrStr[3]+=tr4;
 	    	}
 	    	data.sort(compare('ThreeStopNow'));
 	    	for(var m=0;m<data.length;m++){
 	    		var tr5 = '';
 	    		var str5 = '';
-	    		str5 = '<td class="greenBg">' + data[m].streetName + '</td><td class="blueBg">' + data[m].ThreeStopNow + '</td><td class="blueBg">' + data[m].ThreeStopBefore + '</td>';
-	    		tr5 = '<tr id="ThreeStop_' + data[m].streetId + '"><td class="grayBg">' + (m+1) + '</td>' + str5 + '</tr>';
+	    		str5 = '<td class="greenBg">' + data[m].blockName + '</td><td class="blueBg">' + data[m].ThreeStopNow + '</td>';
+	    		tr5 = '<tr id="ThreeStop_' + data[m].blockId + '"><td class="grayBg">' + (m+1) + '</td>' + str5 + '</tr>';
 	    		arrStr[4]+=tr5;
 	    	}
 	    	for(var m=1;m<6;m++){
@@ -487,12 +508,12 @@
 	    	if(dataLength){
 	    		for(var i=0;i<dataLength;i++){
 	    			for(var j=0;j<arrTitle.length;j++){
-	    				$(arrTitle[j] + dataList[i].streetId).attr('name',j+1);
-	    				$(arrTitle[j] + dataList[i].streetId).bind('tap',function(){
+	    				$(arrTitle[j] + dataList[i].blockId).attr('name',j+1);
+	    				$(arrTitle[j] + dataList[i].blockId).bind('tap',function(){
 		    				var id = this.id.substr(this.id.indexOf('_')+1,this.id.length);
 		    				var type = this.attributes['name'].value;
 			    	    	mui.openWindow({
-			                    url : [[@{/app/punishment/streetPunish?streetId=}]] + id + '&type=' + type
+			                    url : [[@{/app/punishment/streetPunish?blockId=}]] + id + '&type=' + type + '&streetId' + streetId
 			                  });
 			    		});
 	    			}
