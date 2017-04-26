@@ -564,18 +564,19 @@ public class FireEventServiceImpl implements FireEventService {
     }
 
     @Override
-    public JSONObject getBlockEvent(Long blockId, Integer type) {
+    public JSONObject getBlockEvent(Long blockId, Integer type,String beginTime, String endTime) {
 
         Block block = blockRepository.findOne(blockId);
         if (block == null) {
             throw new RuntimeException("没有找到对应的社区");
         }
-        
+        Date bTime = DateUtil.parse(beginTime + "-01");
+        Date eTime = DateUtil.parse(endTime + "-30");
       //type   1--原始   2--冒烟   3--确认   4--损失   5--受伤   6--死亡
         
         List<AppFireEvent> events = null;
         if (type==1) {//原始表示所有
-            events = fireEventRepository.findByBlockId(blockId);
+            events = fireEventRepository.findByBlockId(bTime, eTime, blockId);
         }else if(type==2||type==3) {  //火灾表示确认
             String fireType=null;
             if (type==2) {
@@ -583,16 +584,15 @@ public class FireEventServiceImpl implements FireEventService {
             }else {
                 fireType="火灾";
             }
-            
-            events= fireEventRepository.findByBlockIdAndFireType(blockId,fireType);
+            events= fireEventRepository.findByBlockId(bTime, eTime, blockId, fireType);
             
         }else if(type==4||type==5||type==6) {
             if (type==4) {
-                events= fireEventRepository.findByLossIsNotNull(blockId);
+                events= fireEventRepository.findByBlockIdAndLossIsNotNull(bTime, eTime, blockId);
             }else if (type==5){
-                events= fireEventRepository.findByHurtNumIsNotNull(blockId);
+                events= fireEventRepository.findByBlockIdAndHurtNumIsNotNull(bTime, eTime, blockId);
             }else {
-                events= fireEventRepository.findByDeadNumIsNotNull(blockId);
+                events= fireEventRepository.findByBlockIdAndDeadNumIsNotNull(bTime, eTime, blockId);
             }
         }
         

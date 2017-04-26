@@ -180,7 +180,10 @@ public class FireEventController {
     
     
     @RequestMapping(value = "/blockEvent", method = RequestMethod.GET)
-    public String toBlockEventPage(HttpServletRequest request, @RequestParam(required = true) Long blockId,@RequestParam(required = true) Integer type) {
+    public String toBlockEventPage(HttpServletRequest request, @RequestParam(required = true) Long blockId,
+            @RequestParam(required = true) Integer type,
+            String beginTime, String endTime
+            ) {
 
         if (!ContextHolderUtils.isLogin()) {
             return "login/login";
@@ -188,7 +191,7 @@ public class FireEventController {
         
         // type 1--原始 2--冒烟 3--确认 4--损失 5--受伤 6--死亡
 
-        JSONObject result = fireEventServcie.getBlockEvent(blockId, type);
+        JSONObject result = fireEventServcie.getBlockEvent(blockId, type,beginTime,endTime);
 
         request.setAttribute("result", result);
 

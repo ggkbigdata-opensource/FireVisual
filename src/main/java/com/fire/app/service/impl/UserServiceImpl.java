@@ -1,5 +1,7 @@
 package com.fire.app.service.impl;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import com.fire.app.domain.User;
 import com.fire.app.domain.UserRepository;
 import com.fire.app.service.UserService;
 import com.fire.app.util.ContextHolderUtils;
+import com.fire.app.util.EncryptUtils;
 
 /**
  * @createDate 2017年3月28日下午2:50:29
@@ -43,6 +46,13 @@ public class UserServiceImpl implements UserService {
             if (phone.equals(mobile)) {
                 HttpSession session = ContextHolderUtils.getSession();
                 session.setAttribute(App.USER_SESSION_KEY, user);
+                
+                String token = EncryptUtils.encryptByMD5(new Date().toString());
+                
+                user.setToken(token);
+                
+                userRepository.save(user);
+                
                 return true;
             }
             return false;

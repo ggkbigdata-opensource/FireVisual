@@ -94,9 +94,11 @@ public interface FireEventService {
      * @author wangzhiwang
      * @param blockId
      * @param type
+     * @param endTime 
+     * @param beginTime 
      * @return 
      * @description
      */
-    JSONObject getBlockEvent(Long blockId, Integer type);
+    JSONObject getBlockEvent(Long blockId, Integer type, String beginTime, String endTime);
 
 }
