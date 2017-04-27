@@ -118,14 +118,14 @@ public class PunishmentController {
     }
     
     @RequestMapping(value = "/blockPunish" ,method = RequestMethod.GET)
-    private String toStreeEventPage(HttpServletRequest request, @RequestParam(required = true)Long bloclId,@RequestParam(required = true) Integer type,
+    private String toStreeEventPage(HttpServletRequest request, @RequestParam(required = true)Long blockId,@RequestParam(required = true) Integer type,
             String beginTime ,String endTime
             ) {
 
          if (!ContextHolderUtils.isLogin()) { return "login/login"; }
       //type   1--刑罚   2--刑拘   3--刑拘   4--临封   5--三停
 
-        JSONObject result = punishmentService.findByBlockIdAndType(bloclId, type,beginTime,endTime);
+        JSONObject result = punishmentService.findByBlockIdAndType(blockId, type,beginTime,endTime);
         
         request.setAttribute("result", result);
 
