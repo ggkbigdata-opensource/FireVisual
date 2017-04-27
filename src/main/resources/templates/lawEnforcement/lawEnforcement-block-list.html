@@ -83,15 +83,8 @@
                     <div class="mui-content-padded" id="bodyContent">
                         <!-- 内容区域 -->
                         <div class="timeBox tc fb font-red" name="currentTime"><span></span></div>
-                        <div id="segmentedControl" class="mui-segmented-control mui-segmented-control-red mt15">
-							<a class="mui-control-item mui-active" href="#item1">行罚</a>
-							<a class="mui-control-item" href="#item2">行拘</a>
-							<a class="mui-control-item" href="#item3">刑拘</a>
-							<a class="mui-control-item" href="#item4">临封</a>
-							<a class="mui-control-item" href="#item5">三停</a>
-						</div>
 						<div class="tableBox mt10">
-								<div id="item1" class="mui-control-content mui-active">
+								<div id="item1" class="mui-control-content">
 									<table class="table fireDataTable">
 										<thead>
 											<tr>
@@ -112,7 +105,7 @@
 										<thead>
 											<tr>
 												<th width="50" class="grayBg">排序</th>
-												<th width="100" class="greenBg">街道</th>
+												<th width="100" class="greenBg">社区</th>
 												<th class="blueBg">行政拘留</th>
 											</tr>
 										</thead>
@@ -124,7 +117,7 @@
 										<thead>
 											<tr>
 												<th width="50" class="grayBg" >排序</th>
-												<th width="100" class="greenBg" >街道</th>
+												<th width="100" class="greenBg" >社区</th>
 												<th class="blueBg" >刑事拘留</th>
 											</tr>
 										</thead>
@@ -136,7 +129,7 @@
 										<thead>
 											<tr>
 												<th width="50" class="grayBg" >排序</th>
-												<th width="100" class="greenBg" >街道</th>
+												<th width="100" class="greenBg" >社区</th>
 												<th class="blueBg" >临时查封</th>
 											</tr>
 										</thead>
@@ -148,7 +141,7 @@
 										<thead>
 											<tr>
 												<th width="50" class="grayBg">排序</th>
-												<th width="100" class="greenBg">街道</th>
+												<th width="100" class="greenBg">社区</th>
 												<th class="blueBg">三停</th>
 											</tr>
 										</thead>
@@ -199,13 +192,15 @@
 		    return paramValue;
 		}
 		var streetId = getParam('streetId');
+		var type = getParam('type');
+		$('#item' + type).css('display','block');
     	//初始化并获取当年数据
         var now = new Date();
     	var beginMon=13;
     	var endMon=13;
-        var beginRange = now.getFullYear() + '-01';
-        var endRange = now.getFullYear() + '-' + ('0'+(now.getMonth()+1)).slice(-2);
-        var currentTime = now.getFullYear() + '年01月-' + ('0' + (now.getMonth()+1)).slice(-2) + '月';
+    	var beginRange = getParam('beginRange');
+        var endRange = getParam('endRange');
+        var currentTime = beginRange.substr(0,4) + '年' + beginRange.substr(beginRange.length-2,2) + '月-' + endRange.substr(endRange.length-2,2) + '月';
         $('div[name="currentTime"] span').text(currentTime);
     	mui.post([[@{/app/punishment/getBlockData}]],{
     		streetId: streetId,
@@ -513,7 +508,7 @@
 		    				var id = this.id.substr(this.id.indexOf('_')+1,this.id.length);
 		    				var type = this.attributes['name'].value;
 			    	    	mui.openWindow({
-			                    url : [[@{/app/punishment/streetPunish?blockId=}]] + id + '&type=' + type + '&streetId' + streetId
+			                    url : [[@{/app/punishment/blockPunish?blockId=}]] + id + '&type=' + type + '&streetId=' + streetId + '&beginTime=' + beginRange + '&endTime=' + endRange
 			                  });
 			    		});
 	    			}

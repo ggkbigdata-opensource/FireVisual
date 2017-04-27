@@ -89,7 +89,9 @@
 		}
 		var type = getParam('type');
 		var streetId = getParam('streetId');
-		$('#pageback').attr('href',[[@{/app/fireEvent/toBlockDataPage?streetId=}]] + streetId + '&type=' + type);
+		var beginRange = getParam('beginTime');
+		var endRange = getParam('endTime');
+		$('#pageback').attr('href',[[@{/app/fireEvent/toBlockDataPage?streetId=}]] + streetId + '&type=' + type + '&beginRange=' + beginRange + '&endRange=' + endRange);
 		function init(){
 			console.log([[${result}]]);
 			if([[${result.list}]].length <= 0){
