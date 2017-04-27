@@ -44,10 +44,10 @@ public interface AppPunishmentRepository extends JpaRepository<AppPunishment, Lo
     List<AppPunishment> findBystreetIdAndPunishMethodAndBlockName(Long streetId, String punishMehtod, String name);
 
     @Query(value = "SELECT * FROM app_punishment t where t.block_id = ?1 and t.punish_method = ?2 and t.seal_up_time_begin between ?3 and ?4 order by seal_up_time_begin desc", nativeQuery = true)
-    List<AppPunishment> findSealUpByCondition(Long blockId, String punishMehtod, String beginTime, String endTime);
+    List<AppPunishment> findSealUpByCondition(Long blockId, String punishMehtod, Date bTime, Date eTime);
 
     @Query(value = "SELECT * FROM app_punishment t where t.block_id = ?1 and t.punish_method in ?2 and t.execute_time between ?1 and ?2 order by execute_time desc", nativeQuery = true)
-    List<AppPunishment> findStopDataByCondition(Long blockId, List<String> methods, String beginTime, String endTime);
+    List<AppPunishment> findStopDataByCondition(Long blockId, List<String> methods, Date bTime, Date eTime);
 
     @Query(value = "SELECT * FROM app_punishment t where t.seal_up_time_begin between ?1 and ?2 and t.punish_method = '临时查封' and t.block_id=?3", nativeQuery = true)
     List<AppPunishment> findSealUpBlockData(Date bTime, Date eTime, Long id);

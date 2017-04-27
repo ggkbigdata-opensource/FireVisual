@@ -510,13 +510,13 @@ public class PunishmentServiceImpl implements PunishmentService {
             punishments = punishmentRepository.findByBlockIdAndPunishMethod(blockId, punishMehtod,bTime,eTime);
         } else if (type == 4) { // 火灾表示确认
             String punishMehtod = "临时查封";
-            punishments = punishmentRepository.findSealUpByCondition(blockId, punishMehtod,beginTime,endTime);
+            punishments = punishmentRepository.findSealUpByCondition(blockId, punishMehtod,bTime,eTime);
         } else {
             List<String> methods = new ArrayList<String>();
             methods.add("停业");
             methods.add("停工");
             methods.add("停产");
-            punishments = punishmentRepository.findStopDataByCondition(blockId, methods,beginTime,endTime);
+            punishments = punishmentRepository.findStopDataByCondition(blockId, methods,bTime,eTime);
         }
 
         List<JSONObject> list = new ArrayList<JSONObject>();
