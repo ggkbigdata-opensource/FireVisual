@@ -309,5 +309,40 @@ public class FireEventController {
         return obj;
     }
     
+    /**
+     * @createDate 2017年3月29日上午10:14:53
+     * @author wangzhiwang
+     * @return
+     * @description 点击街道警情趋势的街道内容，跳转页面
+     */
+    @RequestMapping(value = "/toRegionListPage")
+    private String toRegionListPage() {return "alarm/alarm-region-list";}
+    /**
+     * @createDate 2017年3月29日上午10:14:53
+     * @author wangzhiwang
+     * @return
+     * @description 点击对应的街道，显示所有社区的数据
+     */
+    @RequestMapping(value = "/getRegionList")
+    @ResponseBody
+    private JSONObject getRegionList(HttpServletRequest request, @RequestParam(required = true) Long streetId,String time,
+            @RequestParam(required = true) Integer type
+            ) {
+
+        // type 1--原始 2--冒烟 3--确认 4--损失 5--受伤 6--死亡
+        
+        List<JSONObject> result = fireEventServcie.getRegionList(streetId, time,type);
+        
+        Street street = streetService.findById(streetId);
+        
+        JSONObject obj = new JSONObject();
+        
+        obj.put("streetId", streetId);
+        obj.put("streetName", street.getName());
+        obj.put("list", result);
+
+        return obj;
+    }
+    
     
 }

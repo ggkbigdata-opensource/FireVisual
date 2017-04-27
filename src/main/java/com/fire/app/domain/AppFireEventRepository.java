@@ -69,6 +69,21 @@ public interface AppFireEventRepository extends JpaRepository<AppFireEvent, Long
     @Query(value = "SELECT * FROM app_fire_event t where t.occur_time between ?1 and ?2 and t.block_id = ?3 and t.dead_num is not null order by occur_time desc", nativeQuery = true)
     List<AppFireEvent> findByBlockIdAndDeadNumIsNotNull(Date bTime, Date eTime, Long id);
 
+    @Query(value = "SELECT * FROM app_fire_event t where t.street_id = ?1 and t.occur_time between ?2 and ?3 order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findByStreetId(Long streetId, Date bTime, Date eTime);
+
+    @Query(value = "SELECT * FROM app_fire_event t where t.street_id = ?1 and t.occur_time between ?2 and ?3 and t.fire_type = ?4 order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findByStreetId(Long streetId, Date bTime, Date eTime, String fireType);
+
+    @Query(value = "SELECT * FROM app_fire_event t where t.occur_time between ?1 and ?2 and t.street_id = ?3 and t.loss is not null order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findByStreetIdAndLossIsNotNull(Date bTime, Date eTime, Long streetId);
+
+    @Query(value = "SELECT * FROM app_fire_event t where t.occur_time between ?1 and ?2 and t.street_id = ?3 and t.hurt_num is not null order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findByStreetIdAndHurtNumIsNotNull(Date bTime, Date eTime, Long streetId);
+
+    @Query(value = "SELECT * FROM app_fire_event t where t.occur_time between ?1 and ?2 and t.street_id = ?3 and t.dead_num is not null order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findByStreetIdAndDeadNumIsNotNull(Date bTime, Date eTime, Long streetId);
+
 
 
 }

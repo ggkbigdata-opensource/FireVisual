@@ -101,4 +101,15 @@ public interface FireEventService {
      */
     JSONObject getBlockEvent(Long blockId, Integer type, String beginTime, String endTime);
 
+    /**
+     * @createDate 2017年4月27日上午8:57:59 
+     * @author wangzhiwang
+     * @param streetId
+     * @param time
+     * @param type
+     * @return 
+     * @description 通过固定月份和类型获取街道对应的数据
+     */
+    List<JSONObject> getRegionList(Long streetId, String time, Integer type);
+
 }
