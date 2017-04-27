@@ -485,7 +485,7 @@ public class PunishmentServiceImpl implements PunishmentService {
     }
 
     @Override
-    public JSONObject findByBlockIdAndType(Long blockId, Integer type) {
+    public JSONObject findByBlockIdAndType(Long blockId, Integer type,String beginTime,String endTime) {
         // type 1--行罚 2--行拘 3--刑拘 4--临封 5--三停（停工，停产，停业）
 
         Block block = blockRepository.findOne(blockId);
@@ -494,6 +494,9 @@ public class PunishmentServiceImpl implements PunishmentService {
             throw new RuntimeException("没有找到对应的社区信息");
         }
 
+        Date bTime = DateUtil.parse(beginTime + "-01");
+        Date eTime = DateUtil.parse(endTime + "-30");
+        
         List<AppPunishment> punishments = null;
         if (type == 1 || type == 2 || type == 3) {
             String punishMehtod = null;
@@ -504,16 +507,16 @@ public class PunishmentServiceImpl implements PunishmentService {
             } else {
                 punishMehtod = "刑事拘留";
             }
-            punishments = punishmentRepository.findByBlockIdAndPunishMethod(blockId, punishMehtod);
+            punishments = punishmentRepository.findByBlockIdAndPunishMethod(blockId, punishMehtod,bTime,eTime);
         } else if (type == 4) { // 火灾表示确认
             String punishMehtod = "临时查封";
-            punishments = punishmentRepository.findSealUpByCondition(blockId, punishMehtod);
+            punishments = punishmentRepository.findSealUpByCondition(blockId, punishMehtod,beginTime,endTime);
         } else {
             List<String> methods = new ArrayList<String>();
             methods.add("停业");
             methods.add("停工");
             methods.add("停产");
-            punishments = punishmentRepository.findStopDataByCondition(blockId, methods);
+            punishments = punishmentRepository.findStopDataByCondition(blockId, methods,beginTime,endTime);
         }
 
         List<JSONObject> list = new ArrayList<JSONObject>();
@@ -561,6 +564,78 @@ public class PunishmentServiceImpl implements PunishmentService {
 
         result.put("list", list);
         return result;
+    }
+
+    @Override
+    public List<JSONObject> getLawEnforcementList(Long streetId, String time, Integer type) {
+
+        // type 1--行罚 2--行拘 3--刑拘 4--临封 5--三停（停工，停产，停业）
+
+        String year = time.substring(0, 4);
+        String mounth = time.substring(5, 7);
+        
+        List<AppPunishment> punishments = null;
+        if (type == 1 || type == 2 || type == 3) {
+            String punishMehtod = null;
+            if (type == 1) {
+                punishMehtod = "行政罚款";
+            } else if (type == 2) {
+                punishMehtod = "行政拘留";
+            } else {
+                punishMehtod = "刑事拘留";
+            }
+            punishments = punishmentRepository.findBystreetId(streetId, year,mounth, punishMehtod);
+        } else if (type == 4) { // 
+            String punishMehtod = "临时查封";
+            punishments = punishmentRepository.findSealUpystreetId(streetId, year,mounth, punishMehtod);
+        } else {
+            List<String> methods = new ArrayList<String>();
+            methods.add("停业");
+            methods.add("停工");
+            methods.add("停产");
+            punishments = punishmentRepository.findBystreetId(streetId, year,mounth,methods);
+        }
+
+        List<JSONObject> list = new ArrayList<JSONObject>();
+
+        JSONObject result = new JSONObject();
+
+        for (AppPunishment punishment : punishments) {
+            JSONObject obj = new JSONObject();
+            obj.put("id", punishment.getId());
+            obj.put("blockName", punishment.getBlockName());
+
+            if (type == 1) {
+                obj.put("type_change", "行罚");
+            } else if (type == 2) {
+                obj.put("type_change", "行拘");
+            } else if (type == 3) {
+                obj.put("type_change", "刑拘");
+            } else if (type == 4) {
+                obj.put("type_change", "临封");
+            } else {
+                obj.put("type_change", "三停");
+            }
+
+            obj.put("unitName", punishment.getPunishmentUnitName());
+            obj.put("id", punishment.getId());
+
+            Date time1 = null;
+            if ("临时查封".equals(punishment.getPunishMethod())) {
+                time1 = punishment.getSealUpTimeBegin();
+            } else {
+                time1 = punishment.getExecuteTime();
+            }
+
+            obj.put("time", DateUtil.formatDate(time1, "yyyy/MM/dd HH:mm"));
+
+            obj.put("dutyPerson", punishment.getDutyPersonName());
+            // 传上来的参数
+
+            list.add(obj);
+        }
+        
+        return list;
     }
 
 }

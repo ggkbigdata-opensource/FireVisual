@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fire.app.domain.AppPunishment;
+import com.fire.app.domain.Street;
 import com.fire.app.service.PunishmentService;
+import com.fire.app.service.StreetService;
 import com.fire.app.util.ContextHolderUtils;
 
 /**
@@ -27,6 +29,8 @@ public class PunishmentController {
 
     @Autowired
     private PunishmentService punishmentService;
+    @Autowired
+    private StreetService streetService;
 
     @RequestMapping("/")
     private String toFireEvent() {
@@ -114,12 +118,14 @@ public class PunishmentController {
     }
     
     @RequestMapping(value = "/blockPunish" ,method = RequestMethod.GET)
-    private String toStreeEventPage(HttpServletRequest request, @RequestParam(required = true)Long bloclId,@RequestParam(required = true) Integer type) {
+    private String toStreeEventPage(HttpServletRequest request, @RequestParam(required = true)Long bloclId,@RequestParam(required = true) Integer type,
+            String beginTime ,String endTime
+            ) {
 
          if (!ContextHolderUtils.isLogin()) { return "login/login"; }
       //type   1--刑罚   2--刑拘   3--刑拘   4--临封   5--三停
 
-        JSONObject result = punishmentService.findByBlockIdAndType(bloclId, type);
+        JSONObject result = punishmentService.findByBlockIdAndType(bloclId, type,beginTime,endTime);
         
         request.setAttribute("result", result);
 
@@ -143,11 +149,12 @@ public class PunishmentController {
         return "lawEnforcement/lawEnforcement-fire-detail";
     }
     
+ 
     /**
-     * @createDate 2017年3月29日上午10:14:53
+     * @createDate 2017年4月27日上午9:34:46 
      * @author wangzhiwang
-     * @return
-     * @description 点击对应的街道，跳转页面
+     * @return 
+     * @description 击对应的街道，跳转页面
      */
     @RequestMapping(value = "/toBlockDataPage")
     private String toBlockDataPage() {
@@ -169,12 +176,58 @@ public class PunishmentController {
     @ResponseBody
     private JSONObject getBlockData(HttpServletRequest request, @RequestParam(required = true) Long streetId,String beginTime, String endTime
     ) {
+        Street street = streetService.findById(streetId);
+        
+        if (street==null&&"".equals(street)) {
+            throw new RuntimeException("没有找到对应的街道信息");
+        }
+        
         List<JSONObject> result = punishmentService.getBlockData(streetId,beginTime, endTime);
         JSONObject obj = new JSONObject();
 
         obj.put("streetId", streetId);
+        obj.put("streetName", street.getName());
         obj.put("list", result);
 
+
+        return obj;
+    }
+    
+    /**
+     * @createDate 2017年3月29日上午10:14:53
+     * @author wangzhiwang
+     * @return
+     * @description 点击街道警情趋势的街道内容，跳转页面
+     */
+    @RequestMapping(value = "/toLawEnforcementListPage")
+    private String toRegionListPage() {return "lawEnforcement-region/lawEnforcement-region-list";}
+    /**
+     * @createDate 2017年3月29日上午10:14:53
+     * @author wangzhiwang
+     * @return
+     * @description 点击对应的街道，显示所有社区的数据
+     */
+    @RequestMapping(value = "/getLawEnforcementList" ,method=RequestMethod.POST)
+    @ResponseBody
+    private JSONObject getLawEnforcementList(@RequestParam(required = true) Long streetId,String time,
+            @RequestParam(required = true) Integer type
+            ) {
+
+        // type 1--原始 2--冒烟 3--确认 4--损失 5--受伤 6--死亡
+        
+        Street street = streetService.findById(streetId);
+
+        if (street == null) {
+            throw new RuntimeException("没有找到对应的社区信息");
+        }
+        
+        List<JSONObject> result = punishmentService.getLawEnforcementList(streetId, time,type);
+        
+        JSONObject obj = new JSONObject();
+        
+        obj.put("streetId", streetId);
+        obj.put("streetName", street.getName());
+        obj.put("list", result);
 
         return obj;
     }

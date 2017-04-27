@@ -56,8 +56,21 @@ public interface PunishmentService {
      * @author wangzhiwang
      * @param bloclId
      * @param type
+     * @param endTime 
+     * @param beginTime 
      * @return 
      * @description 通过社区id和类型获取执法数据
      */
-    JSONObject findByBlockIdAndType(Long bloclId, Integer type);
+    JSONObject findByBlockIdAndType(Long bloclId, Integer type, String beginTime, String endTime);
+
+    /**
+     * @createDate 2017年4月27日上午9:42:29 
+     * @author wangzhiwang
+     * @param streetId
+     * @param time
+     * @param type
+     * @return 
+     * @description 通过类型和月份时间，获取街道内的数据
+     */
+    List<JSONObject> getLawEnforcementList(Long streetId, String time, Integer type);
 }
