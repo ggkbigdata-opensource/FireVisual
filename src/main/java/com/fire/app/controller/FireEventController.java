@@ -323,7 +323,7 @@ public class FireEventController {
      * @return
      * @description 点击对应的街道，显示所有社区的数据
      */
-    @RequestMapping(value = "/getRegionList")
+    @RequestMapping(value = "/getRegionList" ,method=RequestMethod.POST)
     @ResponseBody
     private JSONObject getRegionList(HttpServletRequest request, @RequestParam(required = true) Long streetId,String time,
             @RequestParam(required = true) Integer type

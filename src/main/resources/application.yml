@@ -41,3 +41,18 @@ spring:
     show-sql: false
 server:
   port: 8080
+  
+---
+spring:
+  profiles: prod
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/fire_data?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: Fire@gyky408..
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+server:
+  port: 8080
