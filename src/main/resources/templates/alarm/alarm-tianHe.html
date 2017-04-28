@@ -83,13 +83,13 @@
 					for(var l=0;l<data.length;l++){
 						if(data[l].type.substr(0,2) === '原始'){
 							totalNum[l] += data[0].data[j].value;
-							tr += '<td class="blueBg" name="' + data[0].data[j].month + '_1">' + data[0].data[j].value + '</td>';
+							tr += '<td class="blueBg" id="' + data[0].data[j].month + '_1">' + data[0].data[j].value + '</td>';
 						}else if(data[l].type.substr(0,2) === '确认') {
 							totalNum[l] += data[1].data[j].value;
-							tr += '<td class="blueBg" name="' + data[1].data[j].month + '_2">' + data[1].data[j].value + '</td>';
+							tr += '<td class="blueBg" id="' + data[1].data[j].month + '_3">' + data[1].data[j].value + '</td>';
 						}else {
 							totalNum[l] += data[2].data[j].value;
-							tr += '<td class="blueBg" name="' + data[2].data[j].month + '_3">' + data[2].data[j].value + '</td>';
+							tr += '<td class="blueBg" id="' + data[2].data[j].month + '_2">' + data[2].data[j].value + '</td>';
 						}
 					}
 					tbodytr += '<tr><td class="greenBg">' + data[0].data[j].month + '</td>' + tr + '</tr>';
@@ -113,8 +113,8 @@
 		//点击表格数据
 		function setClick(data){
 			for(var i=0;i<data.length;i++){
-				for(var j=0;j<data[i].length;j++){
-					$('td[name="' + data[i].data[j].month + '_' + i + '"]').bind('tap',function(){
+				for(var j=0;j<data[i].data.length;j++){
+					$('#' + data[i].data[j].month + '_' + (i+1)).bind('tap',function(){
 						console.log(this);
 					});
 				}

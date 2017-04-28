@@ -243,10 +243,8 @@
 			//返回按钮地址
 			var streetId = [[${punishment.streetId}]];
 			$('#pageBack').bind('tap',function(){
-		    	mui.openWindow({
-	                url : [[@{/app/punishment/streetPunish?streetId=}]] + streetId + '&type=' + [[${punishment.punishMethod}]]
-	              });
-			});
+                window.history.go(-1);
+  			});
 		}
 		init();
 	</script>

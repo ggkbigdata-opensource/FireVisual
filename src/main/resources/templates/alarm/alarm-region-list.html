@@ -18,7 +18,7 @@
 				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
 					<div class="mui-scroll">
 						<div class="filterBox">
-							<h1><span  th:text="${result.blockName}"></span></h1>
+							<h1><span id="placeName"></span></h1>
 							<a href="#" id="pageback"  class="fl btn-filter" >
 								<i class="mui-icon mui-icon-arrowleft"></i>
 								返回
@@ -26,27 +26,21 @@
 						</div>
 						<div class="mui-content-padded" id="contentBox">
 							<!-- 内容区域 -->
-							<!-- <p th:text="${result}" ></p> -->
+							<div class="timeBox tc fb font-red" name="currentTime"><span></span></div>
 							<div class="listBox mt15">
 								<ul class="groupList recordList noTitle" id="ulData">
-									<li th:each="list,index:${result.list}">
+									<li>
 										<div class="mui-row">
 											<div class="mui-col-xs-8">
-									            <div class="tit">日期：<span th:text="${list.time}"></span></div>
-									            <div class="tit" th:text="${list.type_change}"></div>
+									            <div class="tit">日期：<span ></span></div>
+									            <div class="tit" ></div>
 									        </div>
 									        <div class="mui-col-xs-4">
-									             <a class="btn-detail fr" th:href="@{'/app/fireEvent/event?id=' + ${list.id}(type=${result.type})}">查看详情<i class="mui-icon mui-icon-arrowright"></i></a>
+									             <a href="#" class="btn-detail fr">查看详情<i class="mui-icon mui-icon-arrowright"></i></a>
 									        </div>
 									    </div>
 									</li>
 								</ul>
-								<div class="no-record tc" id="nosearch" style="display:none">
-									<div class="no-record-main oh no-record-sm">
-										<i class="mui-icon mui-icon-search fl"></i>
-										<div class="fl">无搜索记录</div>
-									</div>
-								</div>
 								<div class="no-record tc" id="norecord" style="display:none">
 									<div class="no-record-main oh no-record-sm">
 										<i class="mui-icon mui-icon-search fl"></i>
@@ -54,6 +48,7 @@
 									</div>
 								</div>
 							</div>
+
 							<!-- 内容区域 end -->
 						</div>
 					</div>
@@ -67,6 +62,7 @@
 	<script th:src="@{/js/normal.js}"></script>
 	<script th:inline="javascript">
 		mui.init();
+		var type,streetId,time,timeStr;
 		//获取参数
 		function getParam(paramName) {
 		    paramValue = "";
@@ -86,16 +82,48 @@
 		    }
 		    return paramValue;
 		}
-		var type = getParam('type');
-		var streetId = getParam('streetId');
-		var beginRange = getParam('beginTime');
-		var endRange = getParam('endTime');
-		$('#pageback').attr('href',[[@{/app/fireEvent/toBlockDataPage?streetId=}]] + streetId + '&type=' + type + '&beginRange=' + beginRange + '&endRange=' + endRange);
-		function init(){
-			console.log([[${result}]]);
-			if([[${result.list}]].length <= 0){
-				$('#norecord').css('display','block');
+		//获取数据
+		function getData(){
+			mui.post([[@{/app/fireEvent/getRegionList}]],{
+				streetId: streetId,
+				time: time,
+				type: type
+			},function(data){
+				if(data){
+					console.log(data);
+					$('#placeName').text(data.streetName);
+					if(data.list.length>0){
+						for(var i=0;i<data.list.length;i++){
+							var timeStr = '<div class="mui-col-xs-8"><div class="tit">日期：<span >' + data.list[i].time + '</span></div><div class="tit" >' + data.list[i].type_change + '</div></div>';
+							var detailStr = '<div class="mui-col-xs-4"><a href="#" class="btn-detail fr" id="' + data.list[i].id + '">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></div>';
+							var liStr = '<li><div class="mui-row">' + divStr + '</div></li>';
+							$('#ulData').append(liStr);
+						}
+						setClick(data.list);
+					}else{
+						$('#norecord').css('display','block');
+					}
+				}
+			});
+		}
+		//设置点击事件
+		function setClick(data){
+			for(var i=0;i<data.length;i++){
+				$('#' + data[i]).bind('tap',function(){
+					mui.openWindow({
+						url: [[@{/app/fireEvent/event?id=}]] + data[i].id
+					})
+				});
 			}
+		}
+		function init(){
+			type = getParam('type');
+			streetId = getParam('streetId');
+			time = getParam('time');
+			timeStr = time.substr(0,4) + '年' + time.substr(4,2) + '月';
+			$('div[name="currentTime"] span').text(timeStr);
+			$('#pageback').attr('href',[[@{/app/fireEvent/toAreaPage}]]);
+			getData();
 		}
 		init();
 	</script>
