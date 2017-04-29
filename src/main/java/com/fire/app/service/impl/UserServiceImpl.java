@@ -44,14 +44,15 @@ public class UserServiceImpl implements UserService {
             
             String mobile = user.getMobile();
             if (phone.equals(mobile)) {
-                HttpSession session = ContextHolderUtils.getSession();
-                session.setAttribute(App.USER_SESSION_KEY, user);
                 
                 String token = EncryptUtils.encryptByMD5(new Date().toString());
                 
                 user.setToken(token);
                 
                 userRepository.save(user);
+                
+                HttpSession session = ContextHolderUtils.getSession();
+                session.setAttribute(App.USER_SESSION_KEY, user);
                 
                 return true;
             }

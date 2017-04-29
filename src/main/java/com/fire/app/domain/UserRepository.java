@@ -13,7 +13,7 @@ public interface UserRepository extends JpaRepository<User, Long>{
      * @return 
      * @description
      */
-    User findByUsernameAndPassword(String name, String phone);
+    User findByUsernameAndPassword(String name, String password);
     
 
 }

@@ -11,12 +11,18 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.fire.app.common.App;
 import com.fire.app.domain.User;
+import com.fire.app.domain.UserRepository;
 
 @WebFilter(filterName="systemFilter",value="/app/**")
 public class SystemFilter implements Filter {
 
+    @Autowired
+    UserRepository userRepository;
+    
     @Override
     public void destroy() {
     }
@@ -31,16 +37,20 @@ public class SystemFilter implements Filter {
      // 设置字符集  
         req.setCharacterEncoding("utf-8");  
         String servletPath = req.getServletPath();
+        User user = (User) req.getSession().getAttribute(App.USER_SESSION_KEY);
         if (servletPath.contains("app")) {
-            User user = (User) req.getSession().getAttribute(App.USER_SESSION_KEY);
             if (user ==null||"".equals(user)) {
                  res.sendRedirect("/fire-visual/");
-             }else{
-                 chain.doFilter(request, response);
+                 return ;
              }
-        }else{
-            chain.doFilter(request, response);
+            User dbUser = userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+            if (!user.getToken().equals(dbUser.getToken())) {
+                res.sendRedirect("/fire-visual/");
+                return ;
+            }
         }
+        chain.doFilter(request, response);
+        
         
     }
 
