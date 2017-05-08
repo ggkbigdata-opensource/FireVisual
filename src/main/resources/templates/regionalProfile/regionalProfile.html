@@ -4123,8 +4123,9 @@
 	    		totalBui += regionData[j].buildingInfoNum;
 	    	}
 	    	totalStr = '<tr><td class="greenBg fb" colspan="2">全区</td><td class="blueBg fb">' + totalEve + '</td><td class="blueBg fb">' + totalPun + '</td><td class="blueBg fb">' + totalBui + '</td></tr>';
-	    	$('#tbody1').append(arrStr);
 	    	$('#tbody1').append(totalStr);
+	    	$('#tbody1').append(arrStr);
+	    	
     	}
     	//点击排序，目前先不注释
     	$('.sortBy').bind('tap',function () {

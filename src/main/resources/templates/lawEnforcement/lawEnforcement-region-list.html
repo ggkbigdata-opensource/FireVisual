@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head th:with="title=${'警情'}" th:include="/layouts/layout::head">
+<head th:with="title=${'执法'}" th:include="/layouts/layout::head">
 </head>
 <body>
 	
@@ -13,7 +13,7 @@
 						<img th:src="@{/img/logo.png}" />
 					</div>
 					<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
-					<h1 class="mui-title">警情</h1>
+					<h1 class="mui-title">执法</h1>
 				</header>
 				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
 					<div class="mui-scroll">
@@ -94,7 +94,7 @@
 		}
 		//获取数据
 		function getData(){
-			mui.post([[@{/app/fireEvent/getRegionList}]],{
+			mui.post([[@{/app/punishment/getRegionList}]],{
 				streetId: streetId,
 				time: time,
 				type: type
@@ -122,7 +122,7 @@
 				$('#' + data[i].id).bind('tap',function(){
 					var id = this.id;
 					mui.openWindow({
-						url: [[@{/app/fireEvent/event?id=}]] + id + '&type=' + type
+						url: [[@{/app/punishment/event?id=}]] + id + '&type=' + type
 					})
 				});
 			}
@@ -133,7 +133,7 @@
 			time = getParam('time');
 			timeStr = time.substr(0,4) + '年' + time.substr(4,2) + '月';
 			$('div[name="currentTime"] span').text(timeStr);
-			$('#pageback').attr('href',[[@{/app/fireEvent/toAreaPage}]]);
+			$('#pageback').attr('href',[[@{/app/punishment/toAreaPage}]]);
 			getData1();
 		}
 		init();

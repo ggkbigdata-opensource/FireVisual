@@ -961,4 +961,11 @@ body,
 	.noTitle.groupList .btn-detail i {
 		font-size: 16px;
 	}
+	.fireDataTable > thead > tr > th,
+	.fireDataTable > tbody > tr > td {
+		font-size: 14px;
+	}
+	.fireDataTable > thead > tr > th {
+		font-size: 15px;
+	}
 }

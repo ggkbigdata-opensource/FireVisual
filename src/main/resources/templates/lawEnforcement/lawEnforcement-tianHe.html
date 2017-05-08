@@ -47,8 +47,16 @@
 	<script th:inline="javascript">
 		mui.init();
 		var isTrend = false;
+		var lists = [
+		     	{name:'行政罚款',type:1},
+		     	{name:'行政拘留',type:2},
+		     	{name:'刑事拘留',type:3},
+		     	{name:'临时查封',type:4},
+		     	{name:'三停',type:5}
+             ];
 		mui.get([[@{/app/punishment/main}]], '', function(data) {
 			if (data && data.length > 0) {
+				console.log(data);
 				var legend = [];
 				var item = [];
 				var datas = [];
@@ -71,7 +79,14 @@
 					var tr = '';
 					for(var l=data.length-1;l>-1;l--){
 						totalNum[data.length-1-l] += data[l].data[j].value;
-						tr += '<td class="blueBg">' + data[l].data[j].value + '</td>';
+						var type=0;
+						for(var s=0;s<lists.length;s++){
+							if(data[l].type == lists[s].name){
+								type = lists[s].type;
+								break;
+							}
+						}
+						tr += '<td class="blueBg" id="' + data[0].data[j].month + '_' + type + '">' + data[l].data[j].value + '</td>';
 					}
 					tbodytr += '<tr><td class="greenBg">' + data[0].data[j].month + '</td>' + tr + '</tr>';
 				}
@@ -86,10 +101,27 @@
 				$('table thead').text('');
 				$('table tbody').text('');
 				$('table thead').append(theadtr);
-				$('table tbody').append(tbodytr);
 				$('table tbody').append(totalStr);
+				$('table tbody').append(tbodytr);
+				setClick(data);
 			}
 		}, 'json');
+		//点击表格数据
+		function setClick(data){
+			for(var i=0;i<data.length;i++){
+				for(var j=0;j<data[i].data.length;j++){
+					$('#' + data[i].data[j].month + '_' + (i+1)).bind('tap',function(){
+						var type = this.id.substr(this.id.indexOf('_')+1,this.id.length);
+	    				var time = this.id.substr(0,this.id.indexOf('_'));
+	    				console.log(type,time);
+	    				return;
+	    				mui.openWindow({
+		    	    		url: [[@{/app/punishment/toRegionListPage?}]] + '&type=' + type + '&time=' + time
+		                });
+					});
+				}
+			}
+		}
 		$('#hidePopover').bind('tap',function(){
 			hidePopover('trendPopover');
 		});

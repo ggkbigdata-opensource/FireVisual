@@ -103,13 +103,13 @@
 											<tr>
 												<th width="50" class="grayBg">排序</th>
 												<th width="100" class="greenBg">社区</th>
-												<th class="blueBg">冒烟类成灾警情</th>
+												<th class="blueBg">成灾警情</th>
 											</tr>
 										</thead>
 										<tbody id="tbody2"></tbody>
 									</table>
 								</div>
-								<div id="item3" class="mui-control-content">
+								<!-- <div id="item3" class="mui-control-content">
 									<table class="table fireDataTable">
 										<thead>
 											<tr>
@@ -117,11 +117,22 @@
 												<th width="100" class="greenBg">社区</th>
 												<th class="blueBg">确认类成灾警情</th>
 											</tr>
-										
 										</thead>
 										<tbody id="tbody3">
 											
 										</tbody>
+									</table>
+								</div> -->
+								<div id="item3" class="mui-control-content">
+									<table class="table fireDataTable">
+										<thead>
+											<tr>
+												<th width="50" class="grayBg">排序</th>
+												<th width="100" class="greenBg">社区</th>
+												<th class="blueBg">直接经济损失</th>
+											</tr>
+										</thead>
+										<tbody id="tbody3"></tbody>
 									</table>
 								</div>
 								<div id="item4" class="mui-control-content">
@@ -130,7 +141,7 @@
 											<tr>
 												<th width="50" class="grayBg">排序</th>
 												<th width="100" class="greenBg">社区</th>
-												<th class="blueBg">直接经济损失</th>
+												<th class="blueBg">受伤</th>
 											</tr>
 										</thead>
 										<tbody id="tbody4"></tbody>
@@ -142,22 +153,10 @@
 											<tr>
 												<th width="50" class="grayBg">排序</th>
 												<th width="100" class="greenBg">社区</th>
-												<th class="blueBg">受伤</th>
-											</tr>
-										</thead>
-										<tbody id="tbody5"></tbody>
-									</table>
-								</div>
-								<div id="item6" class="mui-control-content">
-									<table class="table fireDataTable">
-										<thead>
-											<tr>
-												<th width="50" class="grayBg">排序</th>
-												<th width="100" class="greenBg">社区</th>
 												<th class="blueBg">死亡</th>
 											</tr>
 										</thead>
-										<tbody id="tbody6"></tbody>
+										<tbody id="tbody5"></tbody>
 									</table>
 								</div>
 								<div class="no-record tc" id="norecord" style="display:none">
@@ -482,28 +481,20 @@
 	    		totalNum[0] += data[i].primitiveNow;
 	    	}
 	    	totalStr[0] = '<tr><td class="greenBg fb" colspan="2">合计</td><td class="blueBg fb">' + totalNum[0] + '</td></tr>';
-	    	//冒烟
-	    	data.sort(compare('smokingNow'));
+	    	//成灾（冒烟和确认之和）
 	    	for(var j=0;j<data.length;j++){
+	    		data[j].smokingAffirmNow = data[j].smokingNow + data[j].affirmNow;
+	    	}
+	    	data.sort(compare('smokingAffirmNow'));
+	    	for(var k=0;k<data.length;k++){
 	    		var tr2 = '';
 	    		var str2 = '';
-	    		str2 = '<td class="greenBg">' + data[j].blockName + '</td><td class="blueBg">' + data[j].smokingNow + '</td>';
-	    		tr2 = '<tr id="smoking_' + data[j].blockId + '"><td class="grayBg">' + (j+1) + '</td>' + str2 + '</tr>';
+	    		str2 = '<td class="greenBg">' + data[k].blockName + '</td><td class="blueBg">' + data[k].smokingAffirmNow + '</td>';
+	    		tr2 = '<tr id="smokingAffirm_' + data[k].blockId + '"><td class="grayBg">' + (k+1) + '</td>' + str2 + '</tr>';
 	    		arrStr[1]+=tr2;
-	    		totalNum[1] += data[j].smokingNow;
+	    		totalNum[1] += data[k].smokingNow;
 	    	}
 	    	totalStr[1] = '<tr><td class="greenBg fb" colspan="2">合计</td><td class="blueBg fb">' + totalNum[1] + '</td></tr>';
-	    	//确认
-	    	data.sort(compare('affirmNow'));
-	    	for(var k=0;k<data.length;k++){
-	    		var tr3 = '';
-	    		var str3 = '';
-	    		str3 = '<td class="greenBg">' + data[k].blockName + '</td><td class="blueBg">' + data[k].affirmNow + '</td>';
-	    		tr3 = '<tr id="affirm_' + data[k].blockId + '"><td class="grayBg">' + (k+1) + '</td>' + str3 + '</tr>';
-	    		arrStr[2]+=tr3;
-	    		totalNum[2] += data[k].affirmNow;
-	    	}
-	    	totalStr[2] = '<tr><td class="greenBg fb" colspan="2">合计</td><td class="blueBg fb">' + totalNum[2] + '</td></tr>';
 	    	//损失
 	    	data.sort(compare('lossNow'));
 	    	for(var l=0;l<data.length;l++){
@@ -511,10 +502,10 @@
 	    		var str4 = '';
 	    		str4 = '<td class="greenBg">' + data[l].blockName + '</td><td class="blueBg">' + data[l].lossNow + '</td>';
 	    		tr4 = '<tr id="loss_' + data[l].blockId + '"><td class="grayBg">' + (l+1) + '</td>' + str4 + '</tr>';
-	    		arrStr[3]+=tr4;
-	    		totalNum[3] += data[l].lossNow;
+	    		arrStr[2]+=tr4;
+	    		totalNum[2] += data[l].lossNow;
 	    	}
-	    	totalStr[3] = '<tr><td class="greenBg fb" colspan="2">合计</td><td class="blueBg fb">' + totalNum[3] + '</td></tr>';
+	    	totalStr[3] = '<tr><td class="greenBg fb" colspan="2">合计</td><td class="blueBg fb">' + totalNum[2] + '</td></tr>';
 	    	//受伤
 	    	data.sort(compare('hurtNow'));
 	    	for(var m=0;m<data.length;m++){
@@ -522,10 +513,10 @@
 	    		var str5 = '';
 	    		str5 = '<td class="greenBg">' + data[m].blockName + '</td><td class="blueBg">' + data[m].hurtNow + '</td>';
 	    		tr5 = '<tr id="hurt_' + data[m].blockId + '"><td class="grayBg">' + (m+1) + '</td>' + str5 + '</tr>';
-	    		arrStr[4]+=tr5;
-	    		totalNum[4] += data[m].hurtNow;
+	    		arrStr[3]+=tr5;
+	    		totalNum[3] += data[m].hurtNow;
 	    	}
-	    	totalStr[4] = '<tr><td class="greenBg fb" colspan="2">合计</td><td class="blueBg fb">' + totalNum[4] + '</td></tr>';
+	    	totalStr[4] = '<tr><td class="greenBg fb" colspan="2">合计</td><td class="blueBg fb">' + totalNum[3] + '</td></tr>';
 	    	//死亡
 	    	data.sort(compare('deadNow'));
 	    	for(var o=0;o<data.length;o++){
@@ -533,20 +524,19 @@
 	    		var str6 = '';
 	    		str6 = '<td class="greenBg">' + data[o].blockName + '</td><td class="blueBg">' + data[o].deadNow + '</td>';
 	    		tr6 = '<tr id="dead_' + data[o].blockId + '"><td class="grayBg">' + (o+1) + '</td>' + str6 + '</tr>';
-	    		arrStr[5]+=tr6;
-	    		totalNum[5] += data[o].deadNow;
+	    		arrStr[4]+=tr6;
+	    		totalNum[4] += data[o].deadNow;
 	    	}
-	    	totalStr[5] = '<tr><td class="greenBg fb" colspan="2">合计</td><td class="blueBg fb">' + totalNum[5] + '</td></tr>';
-			for(var m=1;m<7;m++){
-				$('#tbody' + m).append(arrStr[m-1]);
+	    	totalStr[5] = '<tr><td class="greenBg fb" colspan="2">合计</td><td class="blueBg fb">' + totalNum[4] + '</td></tr>';
+			for(var m=1;m<6;m++){
 				$('#tbody' + m).append(totalStr[m-1]);
+				$('#tbody' + m).append(arrStr[m-1]);
 			}
 			goList();
-			
 	    }
 	    //点击跳转
 	    function goList(){
-	    	var arrTitle = ['#primitive_','#smoking_','#affirm_','#loss_','#hurt_','#dead_'];
+	    	var arrTitle = ['#primitive_','#smokingAffirm_','','#loss_','#hurt_','#dead_'];
 	    	if(dataLength){
 	    		for(var i=0;i<dataLength;i++){
 	    			for(var j=0;j<arrTitle.length;j++){

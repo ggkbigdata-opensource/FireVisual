@@ -19,8 +19,8 @@
 						<div class="mui-content-padded">
 							<!-- 内容区域 -->
 							<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-red mt10">
-								<a class="mui-control-item mui-active" href="#item1">隐患等级</a>
-								<a class="mui-control-item" href="#item2">隐患排查项目</a>
+								<a class="mui-control-item mui-active" name="item1" href="#">隐患等级</a>
+								<a class="mui-control-item" name="item2" href="#">隐患排查项目</a>
 							</div>
 							<div class="hiddenBox mt15">
 								<div id="item1" class="mui-control-content mui-active">
@@ -110,7 +110,7 @@
 	    				var qualifiedStr = '<div class="mui-col-xs-4"><i class="iconfont icon-circle mr15 font-green"></i>' + data[i].qualifiedNum + '</div>';
 	    				var unqualifiedStr = '<div class="mui-col-xs-4"><i class="iconfont icon-circle mr15 font-red"></i>' + data[i].unqualifiedNum + '</div>';
 	    				var qualifiedPercentStr = '<div class="mui-col-xs-4"><i class="iconfont icon-circle mr15 font-blue"></i>' + ((data[i].qualifiedPercent*100).toFixed(2) + '%') + '</div>';
-	    				str = '<li><h1>' + data[i].itemName + '</h1><div class="mui-row">' + qualifiedStr + unqualifiedStr + qualifiedPercentStr + '</div></li>';
+	    				str = '<li><h1>' + (data[i].itemName == 'null'?'&nbsp;':data[i].itemName) + '</h1><div class="mui-row">' + qualifiedStr + unqualifiedStr + qualifiedPercentStr + '</div></li>';
 	    				$('#itemHidden').append(str);
 	    			}
 	    		}
@@ -125,6 +125,20 @@
 			getHidGrade();
 		}
 		init();
+		
+		//控制不让点当前表格对应的标题
+	    var occurTitle='';
+	    var compareTitle = '隐患等级';
+	    $('#segmentedControl a').bind('tap',function(){
+	    	occurTitle = this.innerHTML;
+	    	if(occurTitle ==  compareTitle){
+	    		return;
+	    	}else{
+    			$('.mui-control-content').removeClass('mui-active');
+	    		$('#' + this.name).addClass('mui-active');
+	    		compareTitle = occurTitle;
+	    	}
+	    })
 	</script>
 </body>
 </html>

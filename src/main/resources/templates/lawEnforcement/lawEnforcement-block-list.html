@@ -428,6 +428,8 @@
 	    //数据展示
 	    var dataLength;
 	    var dataList = [];
+	    var totalNum = [];
+	    var totalStr = [];
 	    function showData(block){
 	    	console.log(block);
 	    	var data = block.list;
@@ -443,6 +445,8 @@
 	    	var arrStr = [];
 	    	for(var n=1;n<6;n++){
 	    		$('#tbody' + n).text('');
+	    		totalNum[n-1] = 0;
+	    		totalStr[n-1] = '';
 	    	}
 	    	$('th[name="thisYear"]').text(currentTime.substr(0,4));
 	    	function compare(fields){
@@ -452,14 +456,20 @@
 	    			return value2 - value1;
 	    		}
 	    	}
+	    	//行罚
 	    	data.sort(compare('fineNumNow'));
+	    	var totalPrice = 0;
 	    	for(var i=0;i<data.length;i++){
 	    		var tr1 = '';
 	    		var str1 = '';
 	    		str1 = '<td class="greenBg">' + data[i].blockName + '</td><td class="blueBg">' + data[i].fineNumNow + '</td><td class="blueBg">' + data[i].finePriceNow + '</td>';
 	    		tr1 = '<tr id="fineNum_' + data[i].blockId + '"><td class="grayBg">' + (i+1) + '</td>' + str1 + '</tr>';
 	    		arrStr[0]+=tr1;
+	    		totalNum[0] += data[i].fineNumNow;
+	    		totalPrice += data[i].finePriceNow;
 	    	}
+	    	totalStr[0] = '<tr class="fb"><td colspan="2">合计</td><td>' + totalNum[0] + '</td><td>' + totalPrice + '</td></tr>';
+	    	//行拘
 	    	data.sort(compare('admiDetNow'));
 	    	for(var j=0;j<data.length;j++){
 	    		var tr2 = '';
@@ -467,7 +477,10 @@
 	    		str2 = '<td class="greenBg">' + data[j].blockName + '</td><td class="blueBg">' + data[j].admiDetNow + '</td>';
 	    		tr2 = '<tr id="admiDet_' + data[j].blockId + '"><td class="grayBg">' + (j+1) + '</td>' + str2 + '</tr>';
 	    		arrStr[1]+=tr2;
+	    		totalNum[1] += data[j].admiDetNow;
 	    	}
+	    	totalStr[1] = '<tr class="fb"><td colspan="2">合计</td><td>' + totalNum[1] + '</td></tr>';
+	    	//刑拘
 	    	data.sort(compare('crimDetNow'));
 	    	for(var k=0;k<data.length;k++){
 	    		var tr3 = '';
@@ -475,7 +488,10 @@
 	    		str3 = '<td class="greenBg">' + data[k].blockName + '</td><td class="blueBg">' + data[k].crimDetNow + '</td>';
 	    		tr3 = '<tr id="crimDet_' + data[k].blockId + '"><td class="grayBg">' + (k+1) + '</td>' + str3 + '</tr>';
 	    		arrStr[2]+=tr3;
+	    		totalNum[2] += data[k].crimDetNow;
 	    	}
+	    	totalStr[2] = '<tr class="fb"><td colspan="2">合计</td><td>' + totalNum[2] + '</td></tr>';
+	    	//临封
 	    	data.sort(compare('sealUpNow'));
 	    	for(var l=0;l<data.length;l++){
 	    		var tr4 = '';
@@ -483,7 +499,10 @@
 	    		str4 = '<td class="greenBg">' + data[l].blockName + '</td><td class="blueBg">' + data[l].sealUpNow + '</td>';
 	    		tr4 = '<tr id="sealUp_' + data[l].blockId + '"><td class="grayBg">' + (l+1) + '</td>' + str4 + '</tr>';
 	    		arrStr[3]+=tr4;
+	    		totalNum[3] += data[l].sealUpNow;
 	    	}
+	    	totalStr[3] = '<tr class="fb"><td colspan="2">合计</td><td>' + totalNum[3] + '</td></tr>';
+	    	//三停
 	    	data.sort(compare('ThreeStopNow'));
 	    	for(var m=0;m<data.length;m++){
 	    		var tr5 = '';
@@ -491,8 +510,11 @@
 	    		str5 = '<td class="greenBg">' + data[m].blockName + '</td><td class="blueBg">' + data[m].ThreeStopNow + '</td>';
 	    		tr5 = '<tr id="ThreeStop_' + data[m].blockId + '"><td class="grayBg">' + (m+1) + '</td>' + str5 + '</tr>';
 	    		arrStr[4]+=tr5;
+	    		totalNum[4] += data[m].ThreeStopNow;
 	    	}
+	    	totalStr[4] = '<tr class="fb"><td colspan="2">合计</td><td>' + totalNum[4] + '</td></tr>';
 	    	for(var m=1;m<6;m++){
+	    		$('#tbody' + m).append(totalStr[m-1]);
 				$('#tbody' + m).append(arrStr[m-1]);
 			}
 	    	goList();

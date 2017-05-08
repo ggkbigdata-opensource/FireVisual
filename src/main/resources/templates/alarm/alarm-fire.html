@@ -81,12 +81,11 @@
 							<!-- 内容区域 -->
 							<div class="timeBox tc fb font-red" name="currentTime"><span></span></div>
 							<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-red mt15">
-								<a class="mui-control-item mui-active" href="#item1">原始</a>
-								<a class="mui-control-item" href="#item2">冒烟</a>
-								<a class="mui-control-item" href="#item3">确认</a>
-								<a class="mui-control-item" href="#item4">损失</a>
-								<a class="mui-control-item" href="#item5">受伤</a>
-								<a class="mui-control-item" href="#item6">死亡</a>
+								<a class="mui-control-item mui-active" name="item1" href="#">原始</a>
+								<a class="mui-control-item" name="item2" href="#">成灾</a>
+								<a class="mui-control-item" name="item3" href="#">损失</a>
+								<a class="mui-control-item" name="item4" href="#">受伤</a>
+								<a class="mui-control-item" name="item5" href="#">死亡</a>
 							</div>
 							<div class="tableBox mt10">
 								<div id="item1" class="mui-control-content mui-active">
@@ -106,7 +105,7 @@
 										<tbody id="tbody1"></tbody>
 									</table>
 								</div>
-								<div id="item2" class="mui-control-content">
+								<!-- <div id="item9" class="mui-control-content">
 									<table class="table fireDataTable">
 										<thead>
 											<tr>
@@ -122,8 +121,40 @@
 										</thead>
 										<tbody id="tbody2"></tbody>
 									</table>
+								</div> -->
+								<div id="item2" class="mui-control-content">
+									<table class="table fireDataTable">
+										<thead>
+											<tr>
+												<th width="45" rowspan="2">排序</th>
+												<th width="60" rowspan="2">街道</th>
+												<th colspan="3">冒烟类</th>
+												<th colspan="3">确认类</th>
+											</tr>
+											<tr>
+												<th name="thisYear"></th>
+												<th>同期</th>
+												<th>同比</th>
+												<th name="thisYear"></th>
+												<th>同期</th>
+												<th>同比</th>
+											</tr>
+										</thead>
+										<tbody id="tbody2">
+											<tr>
+												<td>1</td>
+												<td>员村</td>
+												<td>10</td>
+												<td>11</td>
+												<td>100.00%</td>
+												<td>10</td>
+												<td>11</td>
+												<td>100.00%</td>
+											</tr>
+										</tbody>
+									</table>
 								</div>
-								<div id="item3" class="mui-control-content">
+								<!-- <div id="item3" class="mui-control-content">
 									<table class="table fireDataTable">
 										<thead>
 											<tr>
@@ -141,6 +172,23 @@
 											
 										</tbody>
 									</table>
+								</div> -->
+								<div id="item3" class="mui-control-content">
+									<table class="table fireDataTable">
+										<thead>
+											<tr>
+												<th width="45" class="grayBg" rowspan="2">排序</th>
+												<th width="60" class="greenBg" rowspan="2">街道</th>
+												<th class="blueBg" colspan="3">直接经济损失</th>
+											</tr>
+											<tr>
+												<th class="blueBg light" name="thisYear"></th>
+												<th class="blueBg light">同期</th>
+												<th class="blueBg light">同比</th>
+											</tr>
+										</thead>
+										<tbody id="tbody3"></tbody>
+									</table>
 								</div>
 								<div id="item4" class="mui-control-content">
 									<table class="table fireDataTable">
@@ -148,7 +196,7 @@
 											<tr>
 												<th width="45" class="grayBg" rowspan="2">排序</th>
 												<th width="60" class="greenBg" rowspan="2">街道</th>
-												<th class="blueBg" colspan="3">直接经济损失</th>
+												<th class="blueBg" colspan="3">受伤</th>
 											</tr>
 											<tr>
 												<th class="blueBg light" name="thisYear"></th>
@@ -165,23 +213,6 @@
 											<tr>
 												<th width="45" class="grayBg" rowspan="2">排序</th>
 												<th width="60" class="greenBg" rowspan="2">街道</th>
-												<th class="blueBg" colspan="3">受伤</th>
-											</tr>
-											<tr>
-												<th class="blueBg light" name="thisYear"></th>
-												<th class="blueBg light">同期</th>
-												<th class="blueBg light">同比</th>
-											</tr>
-										</thead>
-										<tbody id="tbody5"></tbody>
-									</table>
-								</div>
-								<div id="item6" class="mui-control-content">
-									<table class="table fireDataTable">
-										<thead>
-											<tr>
-												<th width="45" class="grayBg" rowspan="2">排序</th>
-												<th width="60" class="greenBg" rowspan="2">街道</th>
 												<th class="blueBg" colspan="3">死亡</th>
 											</tr>
 											<tr>
@@ -190,7 +221,7 @@
 												<th class="blueBg light">同比</th>
 											</tr>
 										</thead>
-										<tbody id="tbody6"></tbody>
+										<tbody id="tbody5"></tbody>
 									</table>
 								</div>
 							</div>
@@ -481,48 +512,40 @@
 	    		totalPriYearBefore = ((totalPriNow - totalPriBefore)/totalPriBefore*100).toFixed(2) + '%';
 	    	}
 	    	totalStr[0] = '<tr><td class="greenBg fb" colspan="2">全区</td><td class="blueBg fb">' + totalPriNow + '</td><td class="blueBg fb">' + totalPriBefore + '</td><td class="blueBg fb">' + totalPriYearBefore + '</td></tr>';
-	    	//冒烟
+	    	//成灾（包含冒烟和确认）
 	    	data.sort(compare('smokingNow'));
 	    	var totalSmoNow = 0;
 	    	var totalSmoBefore = 0;
 	    	var totalSmoYearBefore = '-';
+	    	var totalAffNow = 0;
+	    	var totalAffBefore = 0;
+	    	var totalAffYearBefore = '-';
 	    	for(var j=0;j<data.length;j++){
 	    		var tr2 = '';
 	    		var str2 = '';
+	    		var tr3 = '';
+	    		var str3 = '';
 	    		totalSmoNow += data[j].smokingNow;
 	    		totalSmoBefore += data[j].smokingBefore;
+	    		totalAffNow += data[j].affirmNow;
+	    		totalAffBefore += data[j].affirmBefore;
 	    		if(data[j].smokingYearBefore !== '-'){
 	    			data[j].smokingYearBefore = (data[j].smokingYearBefore*100).toFixed(2) + '%';
 	    		}
-	    		str2 = '<td class="greenBg">' + data[j].streetName + '</td><td class="blueBg">' + data[j].smokingNow + '</td><td class="blueBg">' + data[j].smokingBefore + '</td><td class="blueBg">' + data[j].smokingYearBefore + '</td>';
-	    		tr2 = '<tr id="smoking_' + data[j].id + '"><td class="grayBg">' + (j+1) + '</td>' + str2 + '</tr>';
+	    		if(data[j].affirmYearBefore !== '-'){
+	    			data[j].affirmYearBefore = (data[j].affirmYearBefore*100).toFixed(2) + '%';
+	    		}
+	    		str2 = '<td>' + data[j].streetName + '</td><td>' + data[j].smokingNow + '</td><td>' + data[j].smokingBefore + '</td><td>' + data[j].smokingYearBefore + '</td><td>' + data[j].affirmNow + '</td><td>' + data[j].affirmBefore + '</td><td>' + data[j].affirmYearBefore + '</td>';
+	    		tr2 = '<tr id="smokingAffirm_' + data[j].id + '"><td>' + (j+1) + '</td>' + str2 + '</tr>';
 	    		arrStr[1]+=tr2;
 	    	}
 	    	if(totalSmoBefore != 0){
 	    		totalSmoYearBefore = ((totalSmoNow - totalSmoBefore)/totalSmoBefore*100).toFixed(2) + '%';
 	    	}
-	    	totalStr[1] = '<tr><td class="greenBg fb" colspan="2">全区</td><td class="blueBg fb">' + totalSmoNow + '</td><td class="blueBg fb">' + totalSmoBefore + '</td><td class="blueBg fb">' + totalSmoYearBefore + '</td></tr>';
-	    	//警情
-	    	data.sort(compare('affirmNow'));
-	    	var totalAffNow = 0;
-	    	var totalAffBefore = 0;
-	    	var totalAffYearBefore = '-';
-	    	for(var k=0;k<data.length;k++){
-	    		var tr3 = '';
-	    		var str3 = '';
-	    		totalAffNow += data[k].affirmNow;
-	    		totalAffBefore += data[k].affirmBefore;
-	    		if(data[k].affirmYearBefore !== '-'){
-	    			data[k].affirmYearBefore = (data[k].affirmYearBefore*100).toFixed(2) + '%';
-	    		}
-	    		str3 = '<td class="greenBg">' + data[k].streetName + '</td><td class="blueBg">' + data[k].affirmNow + '</td><td class="blueBg">' + data[k].affirmBefore + '</td><td class="blueBg">' + data[k].affirmYearBefore + '</td>';
-	    		tr3 = '<tr id="affirm_' + data[k].id + '"><td class="grayBg">' + (k+1) + '</td>' + str3 + '</tr>';
-	    		arrStr[2]+=tr3;
-	    	}
 	    	if(totalAffBefore != 0){
 	    		totalAffYearBefore = ((totalAffNow - totalAffBefore)/totalAffBefore*100).toFixed(2) + '%';
 	    	}
-	    	totalStr[2] = '<tr><td class="greenBg fb" colspan="2">全区</td><td class="blueBg fb">' + totalAffNow + '</td><td class="blueBg fb">' + totalAffBefore + '</td><td class="blueBg fb">' + totalAffYearBefore + '</td></tr>';
+	    	totalStr[1] = '<tr class="fb"><td colspan="2">全区</td><td>' + totalSmoNow + '</td><td>' + totalSmoBefore + '</td><td>' + totalSmoYearBefore + '</td><td>' + totalAffNow + '</td><td>' + totalAffBefore + '</td><td>' + totalAffYearBefore + '</td></tr>';
 	    	//损失
 	    	data.sort(compare('lossNow'));
 	    	var totalLosNow = 0;
@@ -538,12 +561,12 @@
 	    		}
 	    		str4 = '<td class="greenBg">' + data[l].streetName + '</td><td class="blueBg">' + data[l].lossNow + '</td><td class="blueBg">' + data[l].lossBefore + '</td><td class="blueBg">' + data[l].lossYearBefore + '</td>';
 	    		tr4 = '<tr id="loss_' + data[l].id + '"><td class="grayBg">' + (l+1) + '</td>' + str4 + '</tr>';
-	    		arrStr[3]+=tr4;
+	    		arrStr[2]+=tr4;
 	    	}
 	    	if(totalLosBefore != 0){
 	    		totalLosYearBefore = ((totalLosNow - totalLosBefore)/totalLosBefore*100).toFixed(2) + '%';
 	    	}
-	    	totalStr[3] = '<tr><td class="greenBg fb" colspan="2">全区</td><td class="blueBg fb">' + totalLosNow + '</td><td class="blueBg fb">' + totalLosBefore + '</td><td class="blueBg fb">' + totalLosYearBefore + '</td></tr>';
+	    	totalStr[2] = '<tr><td class="greenBg fb" colspan="2">全区</td><td class="blueBg fb">' + totalLosNow + '</td><td class="blueBg fb">' + totalLosBefore + '</td><td class="blueBg fb">' + totalLosYearBefore + '</td></tr>';
 	    	//受伤
 	    	data.sort(compare('hurtNow'));
 	    	var totalHurNow = 0;
@@ -559,12 +582,12 @@
 	    		}
 	    		str5 = '<td class="greenBg">' + data[m].streetName + '</td><td class="blueBg">' + data[m].hurtNow + '</td><td class="blueBg">' + data[m].hurtBefore + '</td><td class="blueBg">' + data[m].hurtYearBefore + '</td>';
 	    		tr5 = '<tr id="hurt_' + data[m].id + '"><td class="grayBg">' + (m+1) + '</td>' + str5 + '</tr>';
-	    		arrStr[4]+=tr5;
+	    		arrStr[3]+=tr5;
 	    	}
 	    	if(totalHurBefore != 0){
 	    		totalHurYearBefore = ((totalHurNow - totalHurBefore)/totalHurBefore*100).toFixed(2) + '%';
 	    	}
-	    	totalStr[4] = '<tr><td class="greenBg fb" colspan="2">全区</td><td class="blueBg fb">' + totalHurNow + '</td><td class="blueBg fb">' + totalHurBefore + '</td><td class="blueBg fb">' + totalHurYearBefore + '</td></tr>';
+	    	totalStr[3] = '<tr><td class="greenBg fb" colspan="2">全区</td><td class="blueBg fb">' + totalHurNow + '</td><td class="blueBg fb">' + totalHurBefore + '</td><td class="blueBg fb">' + totalHurYearBefore + '</td></tr>';
 	    	//死亡
 	    	data.sort(compare('deadNow'));
 	    	var totalDeaNow = 0;
@@ -580,22 +603,22 @@
 	    		}
 	    		str6 = '<td class="greenBg">' + data[o].streetName + '</td><td class="blueBg">' + data[o].deadNow + '</td><td class="blueBg">' + data[o].deadBefore + '</td><td class="blueBg">' + data[o].deadYearBefore + '</td>';
 	    		tr6 = '<tr id="dead_' + data[o].id + '"><td class="grayBg">' + (o+1) + '</td>' + str6 + '</tr>';
-	    		arrStr[5]+=tr6;
+	    		arrStr[4]+=tr6;
 	    	}
 	    	if(totalDeaBefore != 0){
 	    		totalDeaYearBefore = ((totalDeaNow - totalDeaBefore)/totalDeaBefore*100).toFixed(2) + '%';
 	    	}
-	    	totalStr[5] = '<tr><td class="greenBg fb" colspan="2">全区</td><td class="blueBg fb">' + totalDeaBefore + '</td><td class="blueBg fb">' + totalDeaBefore + '</td><td class="blueBg fb">' + totalDeaYearBefore + '</td></tr>';
+	    	totalStr[4] = '<tr><td class="greenBg fb" colspan="2">全区</td><td class="blueBg fb">' + totalDeaBefore + '</td><td class="blueBg fb">' + totalDeaBefore + '</td><td class="blueBg fb">' + totalDeaYearBefore + '</td></tr>';
 	    	//组合
 			for(var m=1;m<7;m++){
-				$('#tbody' + m).append(arrStr[m-1]);
 				$('#tbody' + m).append(totalStr[m-1]);
+				$('#tbody' + m).append(arrStr[m-1]);
 			}
 			goList();
 	    }
 	    
 	    function goList(){
-	    	var arrTitle = ['#primitive_','#smoking_','#affirm_','#loss_','#hurt_','#dead_'];
+	    	var arrTitle = ['#primitive_','#smokingAffirm_','','#loss_','#hurt_','#dead_'];
 	    	if(dataLength){
 	    		for(var i=0;i<dataLength;i++){
 	    			for(var j=0;j<arrTitle.length;j++){
@@ -620,6 +643,8 @@
 	    	if(occurTitle ==  compareTitle){
 	    		return;
 	    	}else{
+    			$('.mui-control-content').removeClass('mui-active');
+	    		$('#' + this.name).addClass('mui-active');
 	    		compareTitle = occurTitle;
 	    	}
 	    })

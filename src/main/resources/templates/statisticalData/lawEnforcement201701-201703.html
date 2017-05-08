@@ -26,11 +26,11 @@
 							<!-- 内容区域 -->
 							<div class="timeBox tc fb font-red">2017年1-3月天河区消防执法情况</div>
 							<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-red mt15">
-								<a class="mui-control-item mui-active" href="#item1">行罚</a>
-								<a class="mui-control-item" href="#item2">行拘</a>
-								<a class="mui-control-item" href="#item3">刑拘</a>
-								<a class="mui-control-item" href="#item4">临封</a>
-								<a class="mui-control-item" href="#item5">三停</a>
+								<a class="mui-control-item mui-active" name="item1" href="#">行罚</a>
+								<a class="mui-control-item" name="item2" href="#">行拘</a>
+								<a class="mui-control-item" name="item3" href="#">刑拘</a>
+								<a class="mui-control-item" name="item4" href="#">临封</a>
+								<a class="mui-control-item" name="item5" href="#">三停</a>
 							</div>
 							<div class="tableBox mt10">
 								<div id="item1" class="mui-control-content mui-active">
@@ -53,6 +53,13 @@
 											</tr>
 										</thead>
 										<tbody>
+											<tr>
+												<td class="greenBg fb" colspan="2">全区</td>
+												<td class="blueBg fb">35</td>
+												<td class="blueBg fb">709000</td>
+												<td class="blueBg fb">43</td>
+												<td class="blueBg fb">1295500</td>
+											</tr>
 											<tr>
 												<td class="grayBg">1</td>
 												<td class="greenBg">沙河</td>
@@ -221,13 +228,7 @@
 												<td class="blueBg">4</td>
 												<td class="blueBg">105500</td>
 											</tr>
-											<tr>
-												<td class="greenBg fb" colspan="2">全区</td>
-												<td class="blueBg fb">35</td>
-												<td class="blueBg fb">709000</td>
-												<td class="blueBg fb">43</td>
-												<td class="blueBg fb">1295500</td>
-											</tr>
+											
 										</tbody>
 									</table>
 								</div>
@@ -246,6 +247,11 @@
 										</thead>
 										<tbody>
 											<tr>
+												<td class="greenBg fb" colspan="2">全区</td>
+												<td class="blueBg fb">22</td>
+												<td class="blueBg fb">29</td>
+											</tr>
+											<tr>
 												<td class="grayBg">1</td>
 												<td class="greenBg">车陂</td>
 												<td class="blueBg">4</td>
@@ -371,11 +377,7 @@
 												<td class="blueBg">0</td>
 												<td class="blueBg">0</td>
 											</tr>
-											<tr>
-												<td class="greenBg fb" colspan="2">全区</td>
-												<td class="blueBg fb">22</td>
-												<td class="blueBg fb">29</td>
-											</tr>
+											
 										</tbody>
 									</table>
 								</div>
@@ -394,6 +396,11 @@
 										</thead>
 										<tbody>
 											<tr>
+												<td class="greenBg fb" colspan="2">全区</td>
+												<td class="blueBg fb">5</td>
+												<td class="blueBg fb">0</td>
+											</tr>
+											<tr>
 												<td class="grayBg">1</td>
 												<td class="greenBg">车陂</td>
 												<td class="blueBg">0</td>
@@ -519,11 +526,7 @@
 												<td class="blueBg">0</td>
 												<td class="blueBg">0</td>
 											</tr>
-											<tr>
-												<td class="greenBg fb" colspan="2">全区</td>
-												<td class="blueBg fb">5</td>
-												<td class="blueBg fb">0</td>
-											</tr>
+											
 										</tbody>
 									</table>
 								</div>
@@ -541,6 +544,11 @@
 											</tr>
 										</thead>
 										<tbody>
+											<tr>
+												<td class="greenBg fb" colspan="2">全区</td>
+												<td class="blueBg fb">22</td>
+												<td class="blueBg fb">239</td>
+											</tr>
 											<tr>
 												<td class="grayBg">1</td>
 												<td class="greenBg">石牌</td>
@@ -667,11 +675,7 @@
 												<td class="blueBg">0</td>
 												<td class="blueBg">0</td>
 											</tr>
-											<tr>
-												<td class="greenBg fb" colspan="2">全区</td>
-												<td class="blueBg fb">22</td>
-												<td class="blueBg fb">239</td>
-											</tr>
+											
 										</tbody>
 									</table>
 								</div>
@@ -689,6 +693,11 @@
 											</tr>
 										</thead>
 										<tbody>
+											<tr>
+												<td class="greenBg fb" colspan="2">全区</td>
+												<td class="blueBg fb">11</td>
+												<td class="blueBg fb">22</td>
+											</tr>
 											<tr>
 												<td class="grayBg">1</td>
 												<td class="greenBg">冼村</td>
@@ -815,11 +824,7 @@
 												<td class="blueBg">0</td>
 												<td class="blueBg">2</td>
 											</tr>
-											<tr>
-												<td class="greenBg fb" colspan="2">全区</td>
-												<td class="blueBg fb">11</td>
-												<td class="blueBg fb">22</td>
-											</tr>
+											
 										</tbody>
 									</table>
 								</div>
@@ -842,5 +847,21 @@
 		</div>
 	<script th:src="@{/js/mui.js}"></script>
 	<script th:src="@{/js/normal.js}"></script>
+	<script th:src="@{/js/jquery-2.1.0.js}"></script>
+	<script th:inline="javascript">
+		//控制不让点当前表格对应的标题
+	    var occurTitle='';
+	    var compareTitle = '行罚';
+	    $('#segmentedControl a').bind('tap',function(){
+	    	occurTitle = this.innerHTML;
+	    	if(occurTitle ==  compareTitle){
+	    		return;
+	    	}else{
+				$('.mui-control-content').removeClass('mui-active');
+	    		$('#' + this.name).addClass('mui-active');
+	    		compareTitle = occurTitle;
+	    	}
+	    })
+	</script>
 </body>
 </html>

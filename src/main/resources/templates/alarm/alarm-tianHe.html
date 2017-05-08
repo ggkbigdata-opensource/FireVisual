@@ -86,10 +86,10 @@
 							tr += '<td class="blueBg" id="' + data[0].data[j].month + '_1">' + data[0].data[j].value + '</td>';
 						}else if(data[l].type.substr(0,2) === '确认') {
 							totalNum[l] += data[1].data[j].value;
-							tr += '<td class="blueBg" id="' + data[1].data[j].month + '_3">' + data[1].data[j].value + '</td>';
+							tr += '<td class="blueBg" id="' + data[1].data[j].month + '_2">' + data[1].data[j].value + '</td>';
 						}else {
 							totalNum[l] += data[2].data[j].value;
-							tr += '<td class="blueBg" id="' + data[2].data[j].month + '_2">' + data[2].data[j].value + '</td>';
+							tr += '<td class="blueBg" id="' + data[2].data[j].month + '_3">' + data[2].data[j].value + '</td>';
 						}
 					}
 					tbodytr += '<tr><td class="greenBg">' + data[0].data[j].month + '</td>' + tr + '</tr>';
@@ -105,8 +105,9 @@
 				$('table thead').text('');
 				$('table tbody').text('');
 				$('table thead').append(theadtr);
-				$('table tbody').append(tbodytr);
 				$('table tbody').append(totalStr);
+				$('table tbody').append(tbodytr);
+				
 				setClick(data);
 			}
 		}, 'json');
@@ -115,7 +116,12 @@
 			for(var i=0;i<data.length;i++){
 				for(var j=0;j<data[i].data.length;j++){
 					$('#' + data[i].data[j].month + '_' + (i+1)).bind('tap',function(){
-						console.log(this);
+						var type = this.id.substr(this.id.indexOf('_')+1,this.id.length);
+	    				var time = this.id.substr(0,this.id.indexOf('_'));
+	    				return;
+	    				mui.openWindow({
+		    	    		url: [[@{/app/fireEvent/toRegionListPage?}]] + '&type=' + type + '&time=' + time
+		                });
 					});
 				}
 			}

@@ -1,40 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>凤凰街区消防安全详情</title>
-    <link href="../img/favicon.ico" rel="apple-touch-icon-precomposed">
-	<link href="../img/favicon.ico" sizes="114x114" rel="apple-touch-icon-precomposed">
-    <link href="../css/base.css" rel="stylesheet"/>
-    <link href="../css/mui.min.css" rel="stylesheet"/>
-    <link href="../common/iconfont/iconfont.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
+<head th:with="title=${'消防安全详情'}" th:include="/layouts/layout::head">
 </head>
 <body>
 	<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
 			<!--菜单部分-->
-			<aside id="offCanvasSide" class="mui-off-canvas-right">
-				<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<div class="menu-title">菜单</div>
-						<ul class="menu">
-							<li><a href="../regionalProfile/regionalProfile.html"><i class="iconfont icon-region"></i>区域概况</a></li>
-							<li><a href="../hiddenInvestigation/hiddenInvestigation.html"><i class="iconfont icon-hidden"></i>隐患排查</a></li>
-							<li><a href="../alarm/alarm-tianHe.html"><i class="iconfont icon-warn"></i>警情</a></li>
-							<li><a href="../lawEnforcement/lawEnforcement-tianHe.html"><i class="iconfont icon-police"></i>执法</a></li>
-							<li><a href="../statisticalData/statisticalData.html"><i class="iconfont icon-bar-chart"></i>数据统计</a></li>
-                            <li><a href="../keyUnit/keyUnit.html"><i class="iconfont icon-star"></i>重点单位信息</a></li>
-						</ul>
-					</div>
-				</div>
-			</aside>
+			<div th:replace="/layouts/layout::menu"></div>
 			<div class="mui-inner-wrap">
 				<header class="mui-bar mui-bar-nav">
 					<div class="logo">
-						<img src="../img/logo.png" />
+						<img th:src="@{/img/logo.png}" />
 					</div>
 					<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
 					<h1 class="mui-title">重点单位信息</h1>
@@ -57,6 +32,7 @@
 							        	<h2>建筑所在地地址</h2>
 							        	<p><a class="address mui-navigate-right" href="javascript:;"><i class="mui-icon mui-icon-location mr5 fl"></i>广州市天河区玉翠街14号</a></p>
 							        </div>
+							        <div id="container" style="width:100%;height:400px;border:1px solid red"></div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>设计单位</h2>
 							        	<p>广州市伟博置业发展有限公司</p>
@@ -176,8 +152,37 @@
 				<div class="mui-off-canvas-backdrop"></div>
 			</div>
 		</div>
-	<script src="../js/mui.js"></script>
-	<script src="../js/jquery-2.1.0.js"></script>
-	<script src="../js/normal.js"></script>
+	<script th:src="@{/js/mui.js}"></script>
+	<script th:src="@{/js/jquery-2.1.0.js}"></script>
+	<script th:src="@{/js/normal.js}"></script>
+	<script type="text/javascript" th:src="@{http://api.map.baidu.com/api?v=2.0&ak=LXtbxUBZfNBXjuwrAljAiHIo}"></script>
+	<script th:inline="javascript">
+		mui.init();
+		//var point = new BMap.Point(113.36083333333, 23.124444444444444446);
+		var pointx;
+		var pointy;
+        
+        var myGeo = new BMap.Geocoder();
+        //var addre = '广州市天河区体育东路体育西横街221号(广州市天河区体育西幼儿园)';
+        //var addre = '广州卫星通信局';
+        //var addre = '广州市天河区长福路167号';
+        //var addre = '天河区中学';
+        var addre = '广东省人民检察院';
+        myGeo.getPoint(addre,function(point){
+        	if (point) {
+	        	//经度
+	       	    pointx = point.lng;
+	       	    //纬度
+	       	    pointy = point.lat;
+	       	 var map = new BMap.Map("container");
+	         var point = new BMap.Point(pointx, pointy);
+	 		 map.centerAndZoom(point, 16);
+	         map.enableScrollWheelZoom(true);
+	         map.enableContinuousZoom(true);
+	         var marker = new BMap.Marker(point);
+	         map.addOverlay(marker);
+        	}
+       	},'广州');
+	</script>
 </body>
 </html>

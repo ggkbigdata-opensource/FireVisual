@@ -27,7 +27,7 @@
 						<div class="mui-content-padded" id="contentBox">
 							<!-- 内容区域 -->
 							<!-- <p th:text="${result}" ></p> -->
-							<div class="listBox mt15">
+							<div class="listBox mt15" id="thDiv">
 								<ul class="groupList recordList noTitle" id="ulData">
 									<li th:each="list,index:${result.list}">
 										<div class="mui-row">
@@ -41,6 +41,7 @@
 									    </div>
 									</li>
 								</ul>
+							
 								<div class="no-record tc" id="nosearch" style="display:none">
 									<div class="no-record-main oh no-record-sm">
 										<i class="mui-icon mui-icon-search fl"></i>
@@ -51,6 +52,50 @@
 									<div class="no-record-main oh no-record-sm">
 										<i class="mui-icon mui-icon-search fl"></i>
 										<div class="fl">无记录</div>
+									</div>
+								</div>
+							</div>
+							<div class="listBox mt15" id="notThDiv" style="display:none">
+								<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-red mt15">
+									<a class="mui-control-item mui-active" href="#smoke">冒烟类</a>
+									<a class="mui-control-item" href="#confirm">确认类</a>
+								</div>
+								<div class="tableBox mt10">
+									<div id="smoke" class="mui-control-content mui-active">
+										<ul class="groupList recordList noTitle">
+											<li>
+												<div class="mui-row">
+													<div class="mui-col-xs-8">
+											            <div class="tit">日期：2017/01/01 23:00</div>
+											            <div class="tit">种类：误报</div>
+											        </div>
+											        <div class="mui-col-xs-4">
+											             <a class="btn-detail fr" href="#">查看详情<i class="mui-icon mui-icon-arrowright"></i></a>
+											        </div>
+											    </div>
+											</li>
+										</ul>
+									</div>
+									<div id="confirm" class="mui-control-content">
+										<ul class="groupList recordList noTitle">
+											<li>
+												<div class="mui-row">
+													<div class="mui-col-xs-8">
+											            <div class="tit">日期：2017/02/02 23:00</div>
+											            <div class="tit">种类：误报</div>
+											        </div>
+											        <div class="mui-col-xs-4">
+											             <a class="btn-detail fr" href="#">查看详情<i class="mui-icon mui-icon-arrowright"></i></a>
+											        </div>
+											    </div>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="no-record tc">
+									<div class="no-record-main oh no-record-sm">
+										<i class="mui-icon mui-icon-search fl"></i>
+										<div class="fl">无搜索记录</div>
 									</div>
 								</div>
 							</div>
@@ -67,6 +112,7 @@
 	<script th:src="@{/js/normal.js}"></script>
 	<script th:inline="javascript">
 		mui.init();
+		var type,streetId,beginRange,endRange;
 		//获取参数
 		function getParam(paramName) {
 		    paramValue = "";
@@ -86,13 +132,19 @@
 		    }
 		    return paramValue;
 		}
-		var type = getParam('type');
-		var streetId = getParam('streetId');
-		var beginRange = getParam('beginTime');
-		var endRange = getParam('endTime');
-		$('#pageback').attr('href',[[@{/app/fireEvent/toBlockDataPage?streetId=}]] + streetId + '&type=' + type + '&beginRange=' + beginRange + '&endRange=' + endRange);
+		
 		function init(){
+			type = getParam('type');
+			streetId = getParam('streetId');
+			beginRange = getParam('beginTime');
+			endRange = getParam('endTime');
+			$('#pageback').attr('href',[[@{/app/fireEvent/toBlockDataPage?streetId=}]] + streetId + '&type=' + type + '&beginRange=' + beginRange + '&endRange=' + endRange);
 			console.log([[${result}]]);
+			if(type == 2){//冒烟和确认合并
+				$('#thDiv').css('display','none');
+				$('#notThDiv').css('display','block');
+				
+			}
 			if([[${result.list}]].length <= 0){
 				$('#norecord').css('display','block');
 			}

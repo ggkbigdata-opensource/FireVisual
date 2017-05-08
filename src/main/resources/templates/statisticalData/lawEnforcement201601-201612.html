@@ -26,10 +26,10 @@
 							<!-- 内容区域 -->
 							<div class="timeBox tc fb font-red">2016年1-12月天河区消防执法情况</div>
 							<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-red mt15">
-								<a class="mui-control-item mui-active" href="#item1">行政拘留</a>
-								<a class="mui-control-item" href="#item2">行政罚款</a>
-								<a class="mui-control-item" href="#item3">三停</a>
-								<a class="mui-control-item" href="#item4">临时查封</a>
+								<a class="mui-control-item mui-active" name="item1" href="#">行政拘留</a>
+								<a class="mui-control-item" name="item2" href="#">行政罚款</a>
+								<a class="mui-control-item" name="item3" href="#">三停</a>
+								<a class="mui-control-item" name="item4" href="#">临时查封</a>
 							</div>
 							<div class="tableBox mt10">
 								<div id="item1" class="mui-control-content mui-active">
@@ -46,6 +46,11 @@
 											</tr>
 										</thead>
 										<tbody>
+											<tr>
+												<td class="greenBg fb" colspan="2">全区</td>
+												<td class="blueBg fb">182</td>
+												<td class="blueBg fb">231</td>
+											</tr>
 											<tr>
 												<td class="grayBg">1</td>
 												<td class="greenBg">沙河</td>
@@ -172,11 +177,7 @@
 												<td class="blueBg">0</td>
 												<td class="blueBg">4</td>
 											</tr>
-											<tr>
-												<td class="greenBg fb" colspan="2">全区</td>
-												<td class="blueBg fb">182</td>
-												<td class="blueBg fb">231</td>
-											</tr>
+											
 										</tbody>
 									</table>
 
@@ -201,6 +202,13 @@
 											</tr>
 										</thead>
 										<tbody>
+											<tr>
+												<td class="greenBg fb" colspan="2">全区</td>
+												<td class="blueBg fb">227</td>
+												<td class="blueBg fb">4599300</td>
+												<td class="blueBg fb">403</td>
+												<td class="blueBg fb">4828000</td>
+											</tr>
 											<tr>
 												<td class="grayBg">1</td>
 												<td class="greenBg">石牌</td>
@@ -369,13 +377,7 @@
 												<td class="blueBg">9</td>
 												<td class="blueBg">140500</td>
 											</tr>
-											<tr>
-												<td class="greenBg fb" colspan="2">全区</td>
-												<td class="blueBg fb">227</td>
-												<td class="blueBg fb">4599300</td>
-												<td class="blueBg fb">403</td>
-												<td class="blueBg fb">4828000</td>
-											</tr>
+											
 										</tbody>
 									</table>
 								</div>
@@ -393,6 +395,11 @@
 											</tr>
 										</thead>
 										<tbody>
+											<tr>
+												<td class="greenBg fb" colspan="2">全区</td>
+												<td class="blueBg fb">64</td>
+												<td class="blueBg fb">69</td>
+											</tr>
 											<tr>
 												<td class="grayBg">1</td>
 												<td class="greenBg">石牌</td>
@@ -519,11 +526,7 @@
 												<td class="blueBg">0</td>
 												<td class="blueBg">1</td>
 											</tr>
-											<tr>
-												<td class="greenBg fb" colspan="2">全区</td>
-												<td class="blueBg fb">64</td>
-												<td class="blueBg fb">69</td>
-											</tr>
+											
 										</tbody>
 									</table>
 								</div>
@@ -541,6 +544,11 @@
 											</tr>
 										</thead>
 										<tbody>
+											<tr>
+												<td class="greenBg fb" colspan="2">全区</td>
+												<td class="blueBg fb">1332</td>
+												<td class="blueBg fb">1436</td>
+											</tr>
 											<tr>
 												<td class="grayBg">1</td>
 												<td class="greenBg">沙河</td>
@@ -667,11 +675,7 @@
 												<td class="blueBg">0</td>
 												<td class="blueBg">0</td>
 											</tr>
-											<tr>
-												<td class="greenBg fb" colspan="2">全区</td>
-												<td class="blueBg fb">1332</td>
-												<td class="blueBg fb">1436</td>
-											</tr>
+											
 										</tbody>
 									</table>
 								</div>
@@ -694,5 +698,21 @@
 		</div>
 	<script th:src="@{/js/mui.js}"></script>
 	<script th:src="@{/js/normal.js}"></script>
+	<script th:src="@{/js/jquery-2.1.0.js}"></script>
+	<script th:inline="javascript">
+		//控制不让点当前表格对应的标题
+	    var occurTitle='';
+	    var compareTitle = '行政拘留';
+	    $('#segmentedControl a').bind('tap',function(){
+	    	occurTitle = this.innerHTML;
+	    	if(occurTitle ==  compareTitle){
+	    		return;
+	    	}else{
+				$('.mui-control-content').removeClass('mui-active');
+	    		$('#' + this.name).addClass('mui-active');
+	    		compareTitle = occurTitle;
+	    	}
+	    })
+	</script>
 </body>
 </html>
