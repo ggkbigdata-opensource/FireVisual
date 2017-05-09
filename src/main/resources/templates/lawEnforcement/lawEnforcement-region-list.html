@@ -28,19 +28,7 @@
 							<!-- 内容区域 -->
 							<div class="timeBox tc fb font-red" name="currentTime"><span></span></div>
 							<div class="listBox mt15">
-								<ul class="groupList recordList noTitle" id="ulData">
-									<li>
-										<div class="mui-row">
-											<div class="mui-col-xs-8">
-									            <div class="tit">日期：<span ></span></div>
-									            <div class="tit" ></div>
-									        </div>
-									        <div class="mui-col-xs-4">
-									             <a href="#" class="btn-detail fr">查看详情<i class="mui-icon mui-icon-arrowright"></i></a>
-									        </div>
-									    </div>
-									</li>
-								</ul>
+								<ul class="groupList recordList noTitle" id="ulData"></ul>
 								<div class="no-record tc" id="norecord" style="display:none">
 									<div class="no-record-main oh no-record-sm">
 										<i class="mui-icon mui-icon-search fl"></i>
@@ -122,7 +110,7 @@
 				$('#' + data[i].id).bind('tap',function(){
 					var id = this.id;
 					mui.openWindow({
-						url: [[@{/app/punishment/event?id=}]] + id + '&type=' + type
+						url: [[@{/app/punishment/punish?id=}]] + id + '&type=' + type
 					})
 				});
 			}
