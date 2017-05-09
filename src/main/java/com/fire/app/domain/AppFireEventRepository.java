@@ -56,6 +56,9 @@ public interface AppFireEventRepository extends JpaRepository<AppFireEvent, Long
 
     @Query(value = "SELECT * FROM app_fire_event t where t.block_id = ?1 order by occur_time desc", nativeQuery = true)
     List<AppFireEvent> findByBlockId(Long blockId);
+    
+    @Query(value = "SELECT * FROM app_fire_event t where t.occur_time between ?1 and ?2 and t.block_id = ?3 and t.fire_type in ?4 order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findByBlockId(Date bTime, Date eTime, Long id, List<Object> types);
 
     @Query(value = "SELECT * FROM app_fire_event t where t.block_id = ?1 and t.fire_type = ?2 order by occur_time desc", nativeQuery = true)
     List<AppFireEvent> findByBlockIdAndFireType(Long blockId, String fireType);
@@ -83,7 +86,36 @@ public interface AppFireEventRepository extends JpaRepository<AppFireEvent, Long
 
     @Query(value = "SELECT * FROM app_fire_event t where t.occur_time between ?1 and ?2 and t.street_id = ?3 and t.dead_num is not null order by occur_time desc", nativeQuery = true)
     List<AppFireEvent> findByStreetIdAndDeadNumIsNotNull(Date bTime, Date eTime, Long streetId);
+    
+    @Query(value = "SELECT * FROM app_fire_event t where YEAR(t.occur_time)=?2 AND MONTH(t.occur_time)=?3 and t.street_id = ?1 order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findByStreetId(Long streetId, String year, String month);
 
+    @Query(value = "SELECT * FROM app_fire_event t where YEAR(t.occur_time)=?2 AND MONTH(t.occur_time)=?3 and t.street_id = ?1 and t.fire_type = ?4 order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findByStreetId(Long streetId, String year, String month, String fireType);
+
+    @Query(value = "SELECT * FROM app_fire_event t where YEAR(t.occur_time)=?1 AND MONTH(t.occur_time)=?2 and t.street_id = ?3 and t.loss is not null order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findByStreetIdAndLossIsNotNull(String year, String month, Long streetId);
+
+    @Query(value = "SELECT * FROM app_fire_event t where YEAR(t.occur_time)=?1 AND MONTH(t.occur_time)=?2 and t.street_id = ?3 and t.hurt_num is not null order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findByStreetIdAndHurtNumIsNotNull(String year, String month, Long streetId);
+
+    @Query(value = "SELECT * FROM app_fire_event t where YEAR(t.occur_time)=?1 AND MONTH(t.occur_time)=?2 and t.street_id = ?3 and t.dead_num is not null order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findByStreetIdAndDeadNumIsNotNull(String year, String month, Long streetId);
+
+    @Query(value = "SELECT * FROM app_fire_event t where YEAR(t.occur_time)=?1 AND MONTH(t.occur_time)=?2  order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findByTime(String year, String month);
+
+    @Query(value = "SELECT * FROM app_fire_event t where YEAR(t.occur_time)=?1 AND MONTH(t.occur_time)=?2 and t.fire_type = ?3  order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findByFireType(String year, String month, String fireType);
+
+    @Query(value = "SELECT * FROM app_fire_event t where YEAR(t.occur_time)=?1 AND MONTH(t.occur_time)=?2 and t.loss is not null order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findByFireTypeAndLossIsNotNull(String year, String month);
+    
+    @Query(value = "SELECT * FROM app_fire_event t where YEAR(t.occur_time)=?1 AND MONTH(t.occur_time)=?2 and t.hurt_num is not null order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findByFireTypeAndHurtNumIsNotNull(String year, String month);
+    
+    @Query(value = "SELECT * FROM app_fire_event t where YEAR(t.occur_time)=?1 AND MONTH(t.occur_time)=?2 and t.dead_num is not null order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findByFireTypeAndDeadNumIsNotNull(String year, String month);
 
 
 }

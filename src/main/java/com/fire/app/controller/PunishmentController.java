@@ -200,7 +200,7 @@ public class PunishmentController {
      * @description 点击街道警情趋势的街道内容，跳转页面
      */
     @RequestMapping(value = "/toLawEnforcementListPage")
-    private String toRegionListPage() {return "lawEnforcement-region/lawEnforcement-region-list";}
+    private String toRegionListPage() {return "lawEnforcement/lawEnforcement-region-list";}
     /**
      * @createDate 2017年3月29日上午10:14:53
      * @author wangzhiwang
@@ -213,20 +213,26 @@ public class PunishmentController {
             @RequestParam(required = true) Integer type
             ) {
 
-        // type 1--原始 2--冒烟 3--确认 4--损失 5--受伤 6--死亡
-        
-        Street street = streetService.findById(streetId);
-
-        if (street == null) {
-            throw new RuntimeException("没有找到对应的社区信息");
+        // type 1--行政罚款  2--行政拘留  3--刑事拘留  4--临时查封  5--三停
+        JSONObject obj = new JSONObject();
+        List<JSONObject> result = null;
+        if (streetId!=null&&!"".equals(streetId)) {
+            Street street = streetService.findById(streetId);
+            
+            if (street == null) {
+                throw new RuntimeException("没有找到对应的社区信息");
+            }
+            //查询街道的下的数据
+            result = punishmentService.getLawEnforcementList(streetId, time,type);
+            obj.put("streetId", streetId);
+            obj.put("streetName", street.getName());
+            
+        }else {
+            //查询全区下的数据
+            result = punishmentService.getLawEnforcementList(time,type);
         }
         
-        List<JSONObject> result = punishmentService.getLawEnforcementList(streetId, time,type);
         
-        JSONObject obj = new JSONObject();
-        
-        obj.put("streetId", streetId);
-        obj.put("streetName", street.getName());
         obj.put("list", result);
 
         return obj;

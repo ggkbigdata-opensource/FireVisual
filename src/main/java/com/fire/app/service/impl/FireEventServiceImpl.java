@@ -503,6 +503,12 @@ public class FireEventServiceImpl implements FireEventService {
                 }else {
                     nowValue = fireEventRepository.findByBlockIdAndDeadNumIsNotNull(bTime, eTime, block.getId());
                 }
+            }else if (type==0) {
+               List<Object> types = new ArrayList<>();
+               types.add("冒烟");
+               types.add("火灾");
+                nowValue = fireEventRepository.findByBlockId(bTime, eTime, block.getId(),types);
+                
             }
             
             for (AppFireEvent appFireEvent : nowValue) {
@@ -641,13 +647,13 @@ public class FireEventServiceImpl implements FireEventService {
         if (street == null) {
             throw new RuntimeException("没有找到对应的街道");
         }
-        Date bTime = DateUtil.parse(time + "-01");
-        Date eTime = DateUtil.parse(time + "-30");
+        String year = time.substring(0, 4);
+        String month = time.substring(4, 6);
       //type   1--原始   2--冒烟   3--确认   4--损失   5--受伤   6--死亡
         
         List<AppFireEvent> events = null;
         if (type==1) {//原始表示所有
-            events = fireEventRepository.findByStreetId(streetId,bTime,eTime);
+            events = fireEventRepository.findByStreetId(streetId,year,month);
         }else if(type==2||type==3) {  //火灾表示确认
             String fireType=null;
             if (type==2) {
@@ -655,15 +661,15 @@ public class FireEventServiceImpl implements FireEventService {
             }else {
                 fireType="火灾";
             }
-            events= fireEventRepository.findByStreetId(streetId, bTime, eTime,fireType);
+            events= fireEventRepository.findByStreetId(streetId, year, month,fireType);
             
         }else if(type==4||type==5||type==6) {
             if (type==4) {
-                events= fireEventRepository.findByStreetIdAndLossIsNotNull(bTime, eTime, streetId);
+                events= fireEventRepository.findByStreetIdAndLossIsNotNull(year, month, streetId);
             }else if (type==5){
-                events= fireEventRepository.findByStreetIdAndHurtNumIsNotNull(bTime, eTime, streetId);
+                events= fireEventRepository.findByStreetIdAndHurtNumIsNotNull(year, month, streetId);
             }else {
-                events= fireEventRepository.findByStreetIdAndDeadNumIsNotNull(bTime, eTime, streetId);
+                events= fireEventRepository.findByStreetIdAndDeadNumIsNotNull(year, month, streetId);
             }
         }
         
@@ -681,9 +687,9 @@ public class FireEventServiceImpl implements FireEventService {
             obj.put("id", event.getId());
 
             if (type == 2) {
-                obj.put("type_change", "损失：冒烟");
+                obj.put("type_change", "警情类型：冒烟");
             } else if (type == 3) {
-                obj.put("type_change", "损失：确认");
+                obj.put("type_change", "警情类型：确认");
             } else if (type == 4) {
                 obj.put("type_change", "损失：" + event.getLoss());
             } else if (type == 5) {
@@ -691,7 +697,68 @@ public class FireEventServiceImpl implements FireEventService {
             } else if (type == 6) {
                 obj.put("type_change", "死亡：" + event.getDeadNum());
             } else {
-                obj.put("type_change", "种类：原始");
+                obj.put("type_change", "警情类型：原始");
+            }
+
+            list.add(obj);
+        }
+        
+        return list;
+    }
+
+    @Override
+    public List<JSONObject> getRegionList(String time, Integer type) {
+        String year = time.substring(0, 4);
+        String month = time.substring(4, 6);
+      //type   1--原始   2--冒烟   3--确认   4--损失   5--受伤   6--死亡
+        
+        List<AppFireEvent> events = null;
+        if (type==1) {//原始表示所有
+            events = fireEventRepository.findByTime(year,month);
+        }else if(type==2||type==3) {  //火灾表示确认
+            String fireType=null;
+            if (type==2) {
+                fireType="冒烟";
+            }else {
+                fireType="火灾";
+            }
+            events= fireEventRepository.findByFireType( year, month,fireType);
+            
+        }else if(type==4||type==5||type==6) {
+            if (type==4) {
+                events= fireEventRepository.findByFireTypeAndLossIsNotNull(year, month);
+            }else if (type==5){
+                events= fireEventRepository.findByFireTypeAndHurtNumIsNotNull(year, month);
+            }else {
+                events= fireEventRepository.findByFireTypeAndDeadNumIsNotNull(year, month);
+            }
+        }
+        
+        
+        List<JSONObject> list = new ArrayList<JSONObject>();
+
+        for (AppFireEvent event : events) {
+            JSONObject obj = new JSONObject();
+
+            String time1 = null;
+            if (event.getOccurTime() != null) {
+                time1 = DateUtil.formatDate(event.getOccurTime(), "yyyy/MM/dd HH:mm");
+            }
+            obj.put("time", time1);
+            obj.put("id", event.getId());
+
+            if (type == 2) {
+                obj.put("type_change", "警情类型：冒烟");
+            } else if (type == 3) {
+                obj.put("type_change", "警情类型：确认");
+            } else if (type == 4) {
+                obj.put("type_change", "损失：" + event.getLoss());
+            } else if (type == 5) {
+                obj.put("type_change", "受伤：" + event.getHurtNum());
+            } else if (type == 6) {
+                obj.put("type_change", "死亡：" + event.getDeadNum());
+            } else {
+                obj.put("type_change", "警情类型：原始");
             }
 
             list.add(obj);

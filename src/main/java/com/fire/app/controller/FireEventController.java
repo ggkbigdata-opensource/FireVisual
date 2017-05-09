@@ -331,14 +331,22 @@ public class FireEventController {
 
         // type 1--原始 2--冒烟 3--确认 4--损失 5--受伤 6--死亡
         
-        List<JSONObject> result = fireEventServcie.getRegionList(streetId, time,type);
-        
-        Street street = streetService.findById(streetId);
-        
+        List<JSONObject> result = null;
         JSONObject obj = new JSONObject();
+        if (streetId!=null&&!"".equals(streetId)) {
+            //街道里的数据
+             result = fireEventServcie.getRegionList(streetId, time,type);
+             Street street = streetService.findById(streetId);
+             
+             obj.put("streetId", streetId);
+             obj.put("streetName", street.getName());
+        }else {
+            //全区的数据
+             result = fireEventServcie.getRegionList(time,type);
+            
+        }
         
-        obj.put("streetId", streetId);
-        obj.put("streetName", street.getName());
+        
         obj.put("list", result);
 
         return obj;

@@ -73,4 +73,14 @@ public interface PunishmentService {
      * @description 通过类型和月份时间，获取街道内的数据
      */
     List<JSONObject> getLawEnforcementList(Long streetId, String time, Integer type);
+
+    /**
+     * @createDate 2017年5月9日上午10:41:40 
+     * @author wangzhiwang
+     * @param time
+     * @param type
+     * @return 
+     * @description 通过类型和月份时间，获取全区内的数据
+     */
+    List<JSONObject> getLawEnforcementList(String time, Integer type);
 }

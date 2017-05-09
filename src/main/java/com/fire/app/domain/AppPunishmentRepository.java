@@ -58,13 +58,22 @@ public interface AppPunishmentRepository extends JpaRepository<AppPunishment, Lo
     @Query(value = "SELECT * FROM app_punishment t where t.block_id = ?1 and t.punish_method = ?2 and t.execute_time between ?3 and ?4 order by execute_time desc", nativeQuery = true)
     List<AppPunishment> findByBlockIdAndPunishMethod(Long bloclId, String punishMehtod, Date bTime, Date eTime);
 
-    @Query(value = "select * from app_punishment where t.street_id =?1 and year(execute_time) = ?2  and month(execute_time) = ?3 and t.punish_method =?4 order by execute_time desc", nativeQuery = true)
+    @Query(value = "select * from app_punishment t where t.street_id =?1 and year(execute_time) = ?2  and month(execute_time) = ?3 and t.punish_method =?4 order by execute_time desc", nativeQuery = true)
     List<AppPunishment> findBystreetId(Long streetId, String year, String mounth, String punishMehtod);
 
-    @Query(value = "select * from app_punishment where t.street_id =?1 and year(seal_up_time_begin) = ?2  and month(seal_up_time_begin) = ?3 and t.punish_method =?4 order by seal_up_time_begin desc", nativeQuery = true)
+    @Query(value = "select * from app_punishment t where t.street_id =?1 and year(seal_up_time_begin) = ?2  and month(seal_up_time_begin) = ?3 and t.punish_method =?4 order by seal_up_time_begin desc", nativeQuery = true)
     List<AppPunishment> findSealUpystreetId(Long streetId, String year, String mounth, String punishMehtod);
 
-    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and t.punish_method in ?2 order by execute_time desc", nativeQuery = true)
+    @Query(value = "SELECT * FROM app_punishment t where t.street_id = ?1 and year(execute_time) = ?2  and month(execute_time) = ?3 and t.punish_method in ?4 order by execute_time desc", nativeQuery = true)
     List<AppPunishment> findBystreetId(Long streetId, String year, String mounth, List<String> methods);
+
+    @Query(value = "select * from app_punishment t where year(execute_time) = ?1  and month(execute_time) = ?2 and t.punish_method =?3 order by execute_time desc", nativeQuery = true)
+    List<AppPunishment> findByPunishMehtod(String year, String mounth, String punishMehtod);
+
+    @Query(value = "select * from app_punishment t where year(seal_up_time_begin) = ?1  and month(seal_up_time_begin) = ?2 and t.punish_method =?3 order by seal_up_time_begin desc", nativeQuery = true)
+    List<AppPunishment> findSealUpByPunishMehtod(String year, String mounth, String punishMehtod);
+
+    @Query(value = "SELECT * FROM app_punishment t where year(execute_time) = ?1 and month(execute_time) = ?2 and t.punish_method in ?3 order by execute_time desc", nativeQuery = true)
+    List<AppPunishment> findByPunishMehtod(String year, String mounth, List<String> methods);
 
 }

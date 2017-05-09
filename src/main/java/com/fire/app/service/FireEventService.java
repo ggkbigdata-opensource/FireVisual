@@ -112,4 +112,14 @@ public interface FireEventService {
      */
     List<JSONObject> getRegionList(Long streetId, String time, Integer type);
 
+    /**
+     * @createDate 2017年5月9日上午10:21:52 
+     * @author wangzhiwang
+     * @param time
+     * @param type
+     * @return 
+     * @description 查看全区里类型不一样的数据
+     */
+    List<JSONObject> getRegionList(String time, Integer type);
+
 }
