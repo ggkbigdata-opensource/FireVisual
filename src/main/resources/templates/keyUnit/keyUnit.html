@@ -89,6 +89,14 @@
 					$('#getNone').css('display','block');
 				}else{//展现浏览记录
 					$('#recordBox').css('display','block');
+					for(var i=0;i<data.length;i++){
+						var liStr = '<li><h1>沙河小学<a class="btn-detail pa" href="detail-menu.html">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>';
+						liStr += '<div class="mui-row"><div class="mui-col-xs-6"><div class="tit fl">街道：</div><div class="oh">员村</div></div>';
+						liStr += '<div class="mui-col-xs-6"><div class="tit fl">安全隐患等级：</div><div class="oh fb num"><i class="iconfont icon-circle level1"><em>1</em></i></div></div>';
+						liStr += '<div class="mui-col-xs-6"><div class="tit fl">使用性质：</div><div class="oh">商业用地</div></div><div class="mui-col-xs-6">';
+						liStr += '<div class="tit fl">建筑类别：</div><div class="oh">超高层</div></div></div></li>';
+				            
+					}
 				}
 			});
 		}
@@ -104,6 +112,7 @@
 				}else{//搜索数据
 					$('#getNone').css('display','none');
 					$('#searchBox').css('display','block');
+					
 				}
 				$('#keyUnit').blur();
 			});

@@ -140,10 +140,9 @@
 			endRange = getParam('endTime');
 			$('#pageback').attr('href',[[@{/app/fireEvent/toBlockDataPage?streetId=}]] + streetId + '&type=' + type + '&beginRange=' + beginRange + '&endRange=' + endRange);
 			console.log([[${result}]]);
-			if(type == 2){//冒烟和确认合并
+			if(type == 0){//冒烟和确认合并
 				$('#thDiv').css('display','none');
 				$('#notThDiv').css('display','block');
-				
 			}
 			if([[${result.list}]].length <= 0){
 				$('#norecord').css('display','block');

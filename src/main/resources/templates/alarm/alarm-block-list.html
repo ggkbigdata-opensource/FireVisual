@@ -123,7 +123,7 @@
 										</tbody>
 									</table>
 								</div> -->
-								<div id="item3" class="mui-control-content">
+								<div id="item4" class="mui-control-content">
 									<table class="table fireDataTable">
 										<thead>
 											<tr>
@@ -135,7 +135,7 @@
 										<tbody id="tbody3"></tbody>
 									</table>
 								</div>
-								<div id="item4" class="mui-control-content">
+								<div id="item5" class="mui-control-content">
 									<table class="table fireDataTable">
 										<thead>
 											<tr>
@@ -147,7 +147,7 @@
 										<tbody id="tbody4"></tbody>
 									</table>
 								</div>
-								<div id="item5" class="mui-control-content">
+								<div id="item6" class="mui-control-content">
 									<table class="table fireDataTable">
 										<thead>
 											<tr>
@@ -205,7 +205,12 @@
 		}
 		var streetId = getParam('streetId');
 		var type = getParam('type');
-		$('#item' + type).css('display','block');
+		if(type == 0){
+			$('#item' + 2).css('display','block');
+		}else{
+			$('#item' + type).css('display','block');
+		}
+		
     	//初始化并获取当年数据
         var now = new Date();
     	var beginMon=13;
@@ -540,7 +545,11 @@
 	    	if(dataLength){
 	    		for(var i=0;i<dataLength;i++){
 	    			for(var j=0;j<arrTitle.length;j++){
-	    				$(arrTitle[j] + dataList[i].blockId).attr('name',j+1);
+	    				if(arrTitle[j] == '#smokingAffirm_'){
+	    					$(arrTitle[j] + dataList[i].blockId).attr('name',0);
+	    				}else{
+	    					$(arrTitle[j] + dataList[i].blockId).attr('name',j+1);
+	    				}
 	    				$(arrTitle[j] + dataList[i].blockId).bind('tap',function(){
 		    				var id = this.id.substr(this.id.indexOf('_')+1,this.id.length);
 		    				var type = this.attributes['name'].value;
