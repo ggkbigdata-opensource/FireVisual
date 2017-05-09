@@ -157,14 +157,9 @@
 	<script th:inline="javascript">
 		mui.init();
 		function toMap(){
-			var add = $('#toMap span').text();
-			mui.post([[@{/app/keyUnit/map}]],{
-	    		address: add
-	    	},function(data){
-	    		if(data){
-	    			console.log(data);
-	    		}
-	    	});
+			mui.openWindow({
+				url: [[@{/app/keyUnit/map?id=}]] + [[${info.id}]]
+			});
 		}
 		function init(){
 			console.log([[${info}]]);

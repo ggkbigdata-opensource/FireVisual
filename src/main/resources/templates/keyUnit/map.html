@@ -42,31 +42,12 @@
 	<script th:inline="javascript">
 		mui.init();
 		var add;
-		//获取参数
-		function getParam(paramName) {
-		    paramValue = "";
-		    isFound = false;
-		    if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
-		        arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&");
-		        i = 0;
-		        while (i < arrSource.length && !isFound) {
-		            if (arrSource[i].indexOf("=") > 0) {
-		                if (arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase()) {
-		                    paramValue = arrSource[i].split("=")[1];
-		                    isFound = true;
-		                }
-		            }
-		            i++;
-		        }
-		    }
-		    return paramValue;
-		}
 		$('#pageBack').bind('tap',function(){
             window.history.go(-1);
 		});
 		function init(){
 			console.log([[${address}]]);
-			add = getParam('add');
+			return;
 			//var point = new BMap.Point(113.36083333333, 23.124444444444444446);
 			var pointx;
 			var pointy;
