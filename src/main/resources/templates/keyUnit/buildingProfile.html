@@ -18,7 +18,7 @@
 					<div class="mui-scroll">
 						<div class="filterBox">
 							<h1>建筑物概况表</h1>
-							<a href="detail-menu.html" class="fl btn-filter" >
+							<a th:href="@{/app/keyUnit}" class="fl btn-filter" >
 								<i class="mui-icon mui-icon-arrowleft"></i>
 								返回
 							</a>
@@ -26,73 +26,73 @@
 						<div class="mui-content-padded" id="contentBox">
 							<!-- 内容区域 -->
 							<div class="profileBox">
-								<h1 class="profileTit">广州市天河区教育局</h1>
+								<h1 class="profileTit"><span th:text="${info.propertyCompanyName}"></span></h1>
 								<div class="mui-row ">
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>建筑所在地地址</h2>
-							        	<p><a class="address mui-navigate-right" href="javascript:;"><i class="mui-icon mui-icon-location mr5 fl"></i>广州市天河区玉翠街14号</a></p>
+							        	<p><a class="address mui-navigate-right" href="javascript:;" id="toMap"><i class="mui-icon mui-icon-location mr5 fl"></i><span th:text="${info.buildingAddress}"></span></a></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>设计单位</h2>
-							        	<p>广州市伟博置业发展有限公司</p>
+							        	<p th:text="${info.designCompany}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>建设单位</h2>
-							        	<p>广州市伟博置业发展有限公司</p>
+							        	<p th:text="${info.buildCompany}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>消防安全责任人</h2>
-							        	<p>谢灵</p>
+							        	<p th:text="${info.securityPersonLiable}"></p>
 							        </div>
 							        <div class="mui-col-xs-6 profile-items">
 							        	<h2>联系人姓名</h2>
-							        	<p>谢灵</p>
+							        	<p th:text="${info.linkmanName}"></p>
 							        </div>
 							        <div class="mui-col-xs-6 profile-items">
 							        	<h2>联系人电话</h2>
-							        	<p><a class="phone" href="tel:18151236498"><i class="mui-icon mui-icon-phone fl"></i>18151236498</a></p>
+							        	<p><a class="phone" href="tel:18151236498"><i class="mui-icon mui-icon-phone fl"></i><span th:text="${info.linkmanTel}"></span></a></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>上级主管单位名称</h2>
-							        	<p>广州市天河区教育局</p>
+							        	<p th:text="${info.superiorCompanyName}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>所属行业监管部门</h2>
-							        	<p>广州市天河区教育局</p>
+							        	<p th:text="${info.supervisionDepartment}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>建筑类别</h2>
-							        	<p>多层民用建筑</p>
+							        	<p th:text="${info.constructionCategory}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>建筑所属街道和社区居委会</h2>
-							        	<p>广州市天河区龙洞街道</p>
+							        	<p th:text="${info.streetAndCommittee}"></p>
 							        </div>
 							    </div>
 							    <div class="spaceline10"></div>
 							    <div class="mui-row ">
 							        <div class="mui-col-xs-6 profile-items">
 							        	<h2>建筑高度（m）</h2>
-							        	<p>12</p>
+							        	<p th:text="${info.constructionHeight}"></p>
 							        </div>
 							        <div class="mui-col-xs-6 profile-items">
 							        	<h2>占地面积（m2）</h2>
-							        	<p>1917</p>
+							        	<p th:text="${info.occupyArea}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2 class="sm-tit">建筑面积（m2）</h2>
 							        	<div class="mui-row">
 								        	<div class="mui-col-xs-12">
 									        	<h2>总面积</h2>
-									        	<p>1673.21</p>
+									        	<p th:text="${info.constructionAreaAll}"></p>
 									        </div>
 									        <div class="mui-col-xs-6">
 									        	<h2>地上</h2>
-									        	<p>1673.21</p>
+									        	<p th:text="${info.constructionAreaOverground}"></p>
 									        </div>
 									        <div class="mui-col-xs-6">
 									        	<h2>地下</h2>
-									        	<p>-</p>
+									        	<p th:text="${info.constructionAreaUnderground}"></p>
 									        </div>
 								        </div>
 							        </div>
@@ -101,11 +101,11 @@
 							        	<div class="mui-row">
 									        <div class="mui-col-xs-6">
 									        	<h2>经度</h2>
-									        	<p>E113°21’39”</p>
+									        	<p th:text="${info.constructionLongitude}"></p>
 									        </div>
 									        <div class="mui-col-xs-6">
 									        	<h2>纬度</h2>
-									        	<p>N23°7’28”</p>
+									        	<p th:text="${info.constructionLatitude}"></p>
 									        </div>
 								        </div>
 							        </div>
@@ -114,11 +114,11 @@
 							        	<div class="mui-row">
 									        <div class="mui-col-xs-6">
 									        	<h2>地上</h2>
-									        	<p>3层</p>
+									        	<p th:text="${info.pliesNumberOverground}"></p>
 									        </div>
 									        <div class="mui-col-xs-6">
 									        	<h2>地下</h2>
-									        	<p>-</p>
+									        	<p th:text="${info.pliesNumberUnderground}"></p>
 									        </div>
 								        </div>
 							        </div>
@@ -127,19 +127,19 @@
 							    <div class="mui-row ">
 							         <div class="mui-col-xs-12 profile-items">
 							        	<h2>土地使用性质</h2>
-							        	<p>国有土地使用权</p>
+							        	<p th:text="${info.constructionClass}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>建筑物投入使用时间</h2>
-							        	<p>2013年6月</p>
+							        	<p th:text="${info.useTime}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>建筑物是否有相关维保单位（单位名称、资质类型）</h2>
-							        	<p>无</p>
+							        	<p th:text="${info.maintenanceCompany}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>建筑物三年内是否有进行第三方消防设施检测</h2>
-							        	<p>无</p>
+							        	<p th:text="${info.thirdPartyFireDetection}"></p>
 							        </div>
 							    </div>
 						    </div>
@@ -158,6 +158,12 @@
 		mui.init();
 		function init(){
 			console.log([[${info}]]);
+			$('#toMap').bind('tap',function(){
+				var add = this.id;
+				mui.openWindow({
+					url: [[@{/app/keyUnit/map?add=}]] + add
+				});
+			});
 		}
 		init();
 	</script>
