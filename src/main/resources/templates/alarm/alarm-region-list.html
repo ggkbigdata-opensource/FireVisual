@@ -84,6 +84,11 @@
 		}
 		//获取数据
 		function getData(){
+			if(streetId == ''){
+				$('#pageback').attr('href',[[@{/app/fireEvent/toAreaPage}]]);
+			}else{
+				$('#pageback').attr('href',[[@{/app/fireEvent/}]]);
+			}
 			mui.post([[@{/app/fireEvent/getRegionList}]],{
 				streetId: streetId,
 				time: time,
@@ -91,12 +96,10 @@
 			},function(data){
 				if(data){
 					console.log(data);
-					if(streetId == undefined){
+					if(streetId == ''){
 						$('#placeName').css('display','none');
-						$('#pageback').attr('href',[[@{/app/fireEvent/toAreaPage}]]);
 					}else{
 						$('#placeName').text(data.streetName);
-						$('#pageback').attr('href',[[@{/app/fireEvent/}]]);
 					}
 					if(data.list.length>0){
 						for(var i=0;i<data.list.length;i++){
@@ -110,6 +113,7 @@
 						$('#norecord').css('display','block');
 					}
 				}
+				
 			});
 		}
 		//设置点击事件
