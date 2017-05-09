@@ -3,6 +3,7 @@ package com.fire.app.service;
 import java.util.List;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fire.app.domain.BsBuildingInfo;
 
 /**
  * @createDate 2017年3月28日下午4:08:47
@@ -29,6 +30,15 @@ public interface KeyUnitService {
      * @description
      */
     List<JSONObject> findUnitByName(String name);
+
+    /**
+     * @createDate 2017年5月9日下午5:51:10 
+     * @author wangzhiwang
+     * @param id
+     * @return 
+     * @description 通过id获取建筑主体详情
+     */
+    BsBuildingInfo findById(Long id);
 
 
 }

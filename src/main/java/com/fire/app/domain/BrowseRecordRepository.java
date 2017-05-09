@@ -22,7 +22,7 @@ public interface BrowseRecordRepository extends JpaRepository<BrowseRecord, Long
      * @return 
      * @description
      */
-    @Query(value = "select * from browse_record t where t.uid = ?1 order by t.browse_time ",nativeQuery = true)
+    @Query(value = "select * from browse_record t where t.uid = ?1 order by t.browse_time desc",nativeQuery = true)
     List<BrowseRecord> findByUid(Long uid);
    
 

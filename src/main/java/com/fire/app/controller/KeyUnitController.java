@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fire.app.common.App;
+import com.fire.app.domain.BsBuildingInfo;
 import com.fire.app.domain.User;
 import com.fire.app.service.KeyUnitService;
 import com.fire.app.util.ContextHolderUtils;
@@ -28,8 +29,18 @@ public class KeyUnitController {
     @Autowired
     private KeyUnitService keyUnitService;
 
-    
     @RequestMapping()
+    private String toKeyUnitPage() {
+        
+        if (!ContextHolderUtils.isLogin()) {
+            return "login/login";
+        }
+        
+        return "keyUnit/keyUnit";
+    }
+    
+    
+    @RequestMapping(value="/recent")
     private String toFireEvent(HttpServletRequest request) {
         
         if (!ContextHolderUtils.isLogin()) {
@@ -50,15 +61,34 @@ public class KeyUnitController {
         return "keyUnit/keyUnit";
     }
     
-    @RequestMapping(value = "/getUnit",method = RequestMethod.POST)
+    /**
+     * @createDate 2017年5月9日下午5:44:47 
+     * @author wangzhiwang
+     * @param name
+     * @return 
+     * @description 
+     */
+    @RequestMapping(value = "/search",method = RequestMethod.POST)
     @ResponseBody
     private List<JSONObject> getUnitByName(String name) {
         
-        /*  if (!ContextHolderUtils.isLogin()) {
-            return "login/login";
-        }*/
         List<JSONObject> result = keyUnitService.findUnitByName(name);
         
         return result;
+    }
+    
+    /**
+     * @createDate 2017年5月9日下午5:44:47 
+     * @author wangzhiwang
+     * @param name
+     * @return 
+     * @description 查看建筑主体详情
+     */
+    @RequestMapping(value = "/unit",method = RequestMethod.POST)
+    private void getUnit(HttpServletRequest request ,Long id) {
+        
+        BsBuildingInfo result = keyUnitService.findById(id);
+        
+        request.setAttribute("info", result);
     }
 }

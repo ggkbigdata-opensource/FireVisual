@@ -14,7 +14,7 @@ public class BrowseRecord  {
     private Long id;
     private Long uid;
     private Long buildingInfoId;
-    private Date browseT;
+    private Date browseTime;
     public Long getId() {
         return id;
     }
@@ -33,11 +33,12 @@ public class BrowseRecord  {
     public void setBuildingInfoId(Long buildingInfoId) {
         this.buildingInfoId = buildingInfoId;
     }
-    public Date getBrowseT() {
-        return browseT;
+    public Date getBrowseTime() {
+        return browseTime;
     }
-    public void setBrowseT(Date browseT) {
-        this.browseT = browseT;
+    public void setBrowseTime(Date browseTime) {
+        this.browseTime = browseTime;
     }
+   
     
 }

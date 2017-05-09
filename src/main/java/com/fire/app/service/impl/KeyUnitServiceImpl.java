@@ -1,12 +1,14 @@
 package com.fire.app.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fire.app.common.App;
 import com.fire.app.domain.BrowseRecord;
 import com.fire.app.domain.BrowseRecordRepository;
 import com.fire.app.domain.BsBuildingInfo;
@@ -15,7 +17,9 @@ import com.fire.app.domain.CrCheckReportInfo;
 import com.fire.app.domain.CrCheckReportInfoRepository;
 import com.fire.app.domain.Street;
 import com.fire.app.domain.StreetRepository;
+import com.fire.app.domain.User;
 import com.fire.app.service.KeyUnitService;
+import com.fire.app.util.ContextHolderUtils;
 
 /**
  * @createDate 2017年3月28日下午4:08:47
@@ -96,6 +100,34 @@ public class KeyUnitServiceImpl implements KeyUnitService{
         }
 
         return result;
+    }
+
+    @Override
+    public BsBuildingInfo findById(Long id) {
+        BsBuildingInfo buildingInfo = buildingInfoRepository.findOne(id);
+        
+        User user = (User)ContextHolderUtils.getSession().getAttribute(App.USER_SESSION_KEY);
+        
+        
+        if (user!=null) {
+            //删除最久远的数据
+            List<BrowseRecord> records = browseRecordRepository.findByUid(user.getUid());
+            
+            if (records.size()>3) {
+                BrowseRecord browseRecord = records.get(records.size()-1);
+                browseRecordRepository.delete(browseRecord.getId());
+            }
+            //添加刚点击的数据
+            BrowseRecord record = new BrowseRecord();
+            record.setBuildingInfoId(buildingInfo.getId());
+            record.setUid(user.getUid());
+            record.setBrowseTime(new Date());
+            browseRecordRepository.save(record);
+            
+            
+        }
+        return buildingInfo;
+        
     }
 
 }
