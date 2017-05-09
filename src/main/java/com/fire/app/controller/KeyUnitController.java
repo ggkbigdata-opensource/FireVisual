@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
@@ -39,12 +40,14 @@ public class KeyUnitController {
         return "keyUnit/keyUnit";
     }
     
-    @RequestMapping(value = "map")
-    private String toMap() {
+    @RequestMapping(value = "map",method=RequestMethod.POST)
+    private String toMap(HttpServletRequest request,@RequestParam(required=true)String address) {
         
         if (!ContextHolderUtils.isLogin()) {
             return "login/login";
         }
+        
+        request.setAttribute("address", address);
         
         return "keyUnit/map";
     }
