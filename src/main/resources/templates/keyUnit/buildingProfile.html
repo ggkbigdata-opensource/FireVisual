@@ -30,7 +30,7 @@
 								<div class="mui-row ">
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>建筑所在地地址</h2>
-							        	<p ><a class="address mui-navigate-right" href="javascript:;" id="toMap" ><i class="mui-icon mui-icon-location mr5 fl"></i><span th:text="${info.buildingAddress}"></span></a></p>
+							        	<p ><a class="address mui-navigate-right" th:href="@{'/app/keyUnit/map?id=' + ${info.id}}"><i class="mui-icon mui-icon-location mr5 fl"></i><span th:text="${info.buildingAddress}"></span></a></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>设计单位</h2>
@@ -156,16 +156,8 @@
 	<script th:src="@{/js/normal.js}"></script>
 	<script th:inline="javascript">
 		mui.init();
-		function toMap(){
-			mui.openWindow({
-				url: [[@{/app/keyUnit/map?id=}]] + [[${info.id}]]
-			});
-		}
 		function init(){
 			console.log([[${info}]]);
-			$('#toMap').bind('tap',function(){
-				toMap();
-			})
 		}
 		init();
 	</script>
