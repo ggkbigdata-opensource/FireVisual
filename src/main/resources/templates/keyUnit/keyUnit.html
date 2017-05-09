@@ -18,7 +18,6 @@
 					<div class="mui-scroll">
 						<div class="mui-content-padded" id="contentBox">
 							<!-- 内容区域 -->
-							<a th:href="@{/app/keyUnit/map?add=沙河小学}">点击跳转</a>
 							<div class="mui-input-row mui-search searchBox mb10">
 								<input type="search" id="keyUnit" class="mui-input-clear input-search" placeholder="输入重点单位名称">
 								<button type="button" onclick="getSearch()" class="button-search">搜索</button>
@@ -43,31 +42,7 @@
 							<!-- 有记录 -->
 							<div class="recordBox" id="recordBox" style="display:block">
 								<h2>最近浏览记录</h2>
-								<ul class="groupList recordList">
-									<li>
-										<h1>沙河小学<a class="btn-detail pa" href="detail-menu.html">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>
-										<div class="mui-row">
-											<div class="mui-col-xs-6">
-									            <div class="tit fl">街道：</div>
-									            <div class="oh">员村</div>
-									        </div>
-									        <div class="mui-col-xs-6">
-									            <div class="tit fl">安全隐患等级：</div>
-									            <div class="oh fb num">
-									            	<i class="iconfont icon-circle level1"><em>1</em></i>
-									            </div>
-									        </div>
-									        <div class="mui-col-xs-6">
-									            <div class="tit fl">使用性质：</div>
-									            <div class="oh">商业用地</div>
-									        </div>
-									        <div class="mui-col-xs-6">
-									            <div class="tit fl">建筑类别：</div>
-									            <div class="oh">超高层</div>
-									        </div>
-									    </div>
-									</li>
-								</ul>
+								<ul class="groupList recordList"></ul>
 							</div>
 							<!-- 内容区域 end -->
 						</div>
@@ -91,11 +66,19 @@
 				}else{//展现浏览记录
 					$('#recordBox').css('display','block');
 					for(var i=0;i<data.length;i++){
-						var liStr = '<li><h1>沙河小学<a class="btn-detail pa" href="detail-menu.html">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>';
-						liStr += '<div class="mui-row"><div class="mui-col-xs-6"><div class="tit fl">街道：</div><div class="oh">员村</div></div>';
-						liStr += '<div class="mui-col-xs-6"><div class="tit fl">安全隐患等级：</div><div class="oh fb num"><i class="iconfont icon-circle level1"><em>1</em></i></div></div>';
-						liStr += '<div class="mui-col-xs-6"><div class="tit fl">使用性质：</div><div class="oh">商业用地</div></div><div class="mui-col-xs-6">';
-						liStr += '<div class="tit fl">建筑类别：</div><div class="oh">超高层</div></div></div></li>';
+						var level = data[i].riskLevel.substring(data[i].riskLevel.length-1);
+						var liStr = '<li><h1>' + data[i].unitName + '<a class="btn-detail pa" href="#" id="' + data[i].id + '">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>';
+						liStr += '<div class="mui-row"><div class="mui-col-xs-6"><div class="tit fl">街道：</div><div class="oh">' + data[i].streetName + '</div></div>';
+						liStr += '<div class="mui-col-xs-6"><div class="tit fl">安全隐患等级：</div><div class="oh fb num"><i class="iconfont icon-circle level' + level + '"><em>' + level + '</em></i></div></div>';
+						liStr += '<div class="mui-col-xs-6"><div class="tit fl">使用性质：</div><div class="oh">' + data[i].constructionClass + '</div></div><div class="mui-col-xs-6">';
+						liStr += '<div class="tit fl">建筑类别：</div><div class="oh">' + data[i].constructionCategory + '</div></div></div></li>';
+						$('#recordBox ul').append(liStr);
+						$('#' + data[i].id).bind('tap',function(){
+							var id = this.id;
+							mui.openWindow({
+								url: [[@{/app/keyUnit/unit?id=}]] + id
+							});
+						});
 					}
 				}
 			});
