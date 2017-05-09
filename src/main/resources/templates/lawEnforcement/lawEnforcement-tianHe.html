@@ -114,7 +114,6 @@
 						var type = this.id.substr(this.id.indexOf('_')+1,this.id.length);
 	    				var time = this.id.substr(0,this.id.indexOf('_'));
 	    				console.log(type,time);
-	    				return;
 	    				mui.openWindow({
 		    	    		url: [[@{/app/punishment/toRegionListPage?}]] + '&type=' + type + '&time=' + time
 		                });
