@@ -26,7 +26,6 @@
 						</div>
 						<div class="mui-content-padded" id="contentBox">
 							<!-- 内容区域 -->
-							<!-- <p th:text="${result}" ></p> -->
 							<div class="listBox mt15" id="thDiv">
 								<ul class="groupList recordList noTitle" id="ulData">
 									<li th:each="list,index:${result.list}">
@@ -41,13 +40,6 @@
 									    </div>
 									</li>
 								</ul>
-							
-								<div class="no-record tc" id="nosearch" style="display:none">
-									<div class="no-record-main oh no-record-sm">
-										<i class="mui-icon mui-icon-search fl"></i>
-										<div class="fl">无搜索记录</div>
-									</div>
-								</div>
 								<div class="no-record tc" id="norecord" style="display:none">
 									<div class="no-record-main oh no-record-sm">
 										<i class="mui-icon mui-icon-search fl"></i>
@@ -63,39 +55,25 @@
 								<div class="tableBox mt10">
 									<div id="smoke" class="mui-control-content mui-active">
 										<ul class="groupList recordList noTitle">
-											<li>
-												<div class="mui-row">
-													<div class="mui-col-xs-8">
-											            <div class="tit">日期：2017/01/01 23:00</div>
-											            <div class="tit">种类：误报</div>
-											        </div>
-											        <div class="mui-col-xs-4">
-											             <a class="btn-detail fr" href="#">查看详情<i class="mui-icon mui-icon-arrowright"></i></a>
-											        </div>
-											    </div>
-											</li>
+											
 										</ul>
+										<div class="no-record tc" id="smokeNoRecord" style="display:none">
+											<div class="no-record-main oh no-record-sm">
+												<i class="mui-icon mui-icon-search fl"></i>
+												<div class="fl">无记录</div>
+											</div>
+										</div>
 									</div>
 									<div id="confirm" class="mui-control-content">
 										<ul class="groupList recordList noTitle">
-											<li>
-												<div class="mui-row">
-													<div class="mui-col-xs-8">
-											            <div class="tit">日期：2017/02/02 23:00</div>
-											            <div class="tit">种类：误报</div>
-											        </div>
-											        <div class="mui-col-xs-4">
-											             <a class="btn-detail fr" href="#">查看详情<i class="mui-icon mui-icon-arrowright"></i></a>
-											        </div>
-											    </div>
-											</li>
+											
 										</ul>
-									</div>
-								</div>
-								<div class="no-record tc">
-									<div class="no-record-main oh no-record-sm">
-										<i class="mui-icon mui-icon-search fl"></i>
-										<div class="fl">无搜索记录</div>
+										<div class="no-record tc" id="confirmNoRecord" style="display:none">
+											<div class="no-record-main oh no-record-sm">
+												<i class="mui-icon mui-icon-search fl"></i>
+												<div class="fl">无记录</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -135,18 +113,51 @@
 		
 		function init(){
 			type = getParam('type');
-			streetId = getParam('streetId');
-			beginRange = getParam('beginTime');
-			endRange = getParam('endTime');
-			$('#pageback').attr('href',[[@{/app/fireEvent/toBlockDataPage?streetId=}]] + streetId + '&type=' + type + '&beginRange=' + beginRange + '&endRange=' + endRange);
 			console.log([[${result}]]);
 			if(type == 0){//冒烟和确认合并
+				var notThData = [[${result.list}]];
 				$('#thDiv').css('display','none');
+				if(notThData.length == 0){//冒烟和确认都没有数据
+					$('#smokeNoRecord').css('display','block');
+					$('#confirmNoRecord').css('display','block');
+				}else{
+					var smokeNum = 0;
+					var confirmNum = 0;
+					for(var i=0;i<notThData.length;i++){
+						var liStr = '<li><div class="mui-row"><div class="mui-col-xs-8"><div class="tit">日期：' + notThData[i].time + '</div><div class="tit">' + notThData[i].type_change + '</div></div>';
+						liStr += '<div class="mui-col-xs-4"><a class="btn-detail fr" href="#" id="' + notThData[i].id + '">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></div></div></li>';
+						if(notThData[i].type_change.indexOf('冒烟') != -1){
+							$('#smoke ul').append(liStr);
+							smokeNum++;
+						}else{
+							$('#confirm ul').append(liStr);
+							confirmNum++;
+						}
+					}
+					if(smokeNum == 0){
+						$('#smokeNoRecord').css('display','block');
+					}
+					if(confirmNum == 0){
+						$('#confirmNoRecord').css('display','block');
+					}
+					for(var j=0;j<notThData.length;j++){
+						$('#' + notThData[j].id).bind('tap',function(){
+							var id = this.id;
+							mui.openWindow({
+								url: [[@{/app/fireEvent/event?id=}]] + id + '&type=' + type
+							});
+						});
+					}
+				}
 				$('#notThDiv').css('display','block');
 			}
 			if([[${result.list}]].length <= 0){
 				$('#norecord').css('display','block');
 			}
+			streetId = getParam('streetId');
+			beginRange = getParam('beginTime');
+			endRange = getParam('endTime');
+			$('#pageback').attr('href',[[@{/app/fireEvent/toBlockDataPage?streetId=}]] + streetId + '&type=' + type + '&beginRange=' + beginRange + '&endRange=' + endRange);
 		}
 		init();
 	</script>

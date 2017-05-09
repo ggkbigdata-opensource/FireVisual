@@ -19,7 +19,7 @@
 						<div class="mui-content-padded" id="contentBox">
 							<!-- 内容区域 -->
 							<a th:href="@{/app/keyUnit/unit?id=1327}">点击跳转</a>
-							<div class="mui-input-row mui-search searchBox">
+							<div class="mui-input-row mui-search searchBox mb10">
 								<input type="search" id="keyUnit" class="mui-input-clear input-search" placeholder="输入重点单位名称">
 								<button type="button" onclick="getSearch()" class="button-search">搜索</button>
 							</div>
@@ -41,7 +41,7 @@
 							<!-- 无记录end -->
 							
 							<!-- 有记录 -->
-							<div class="recordBox" id="recordBox" style="display:none">
+							<div class="recordBox" id="recordBox" style="display:block">
 								<h2>最近浏览记录</h2>
 								<ul class="groupList recordList">
 									<li>
@@ -85,7 +85,8 @@
 		//获取历史浏览记录
 		function getHistory(){
 			mui.get([[@{/app/keyUnit/recent}]],'',function(data){
-				if(data){//首次进入没有浏览记录
+				console.log(data);
+				if(data.length == 0){//首次进入没有浏览记录
 					$('#getNone').css('display','block');
 				}else{//展现浏览记录
 					$('#recordBox').css('display','block');
@@ -95,7 +96,6 @@
 						liStr += '<div class="mui-col-xs-6"><div class="tit fl">安全隐患等级：</div><div class="oh fb num"><i class="iconfont icon-circle level1"><em>1</em></i></div></div>';
 						liStr += '<div class="mui-col-xs-6"><div class="tit fl">使用性质：</div><div class="oh">商业用地</div></div><div class="mui-col-xs-6">';
 						liStr += '<div class="tit fl">建筑类别：</div><div class="oh">超高层</div></div></div></li>';
-				            
 					}
 				}
 			});
@@ -108,12 +108,26 @@
 				name: $('#keyUnit').val()
 			},function(data){
 				console.log(data);
-				if(data){//无搜索记录
+				if(data.length == 0){//无搜索记录
 					$('#getNone').css('display','block');
 				}else{//搜索数据
 					$('#getNone').css('display','none');
+					for(var i=0;i<data.length;i++){
+						var level = data[i].riskLevel.substring(data[i].riskLevel.length-1);
+						var liStr = '<li><h1>' + data[i].unitName + '<a class="btn-detail pa" href="#" id="' + data[i].id + '">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>';
+						liStr += '<div class="mui-row"><div class="mui-col-xs-6"><div class="tit fl">街道：</div><div class="oh">' + data[i].streetName + '</div></div>';
+						liStr += '<div class="mui-col-xs-6"><div class="tit fl">安全隐患等级：</div><div class="oh fb num"><i class="iconfont icon-circle level' + level + '"><em>' + level + '</em></i></div></div>';
+						liStr += '<div class="mui-col-xs-6"><div class="tit fl">使用性质：</div><div class="oh">' + data[i].constructionClass + '</div></div><div class="mui-col-xs-6">';
+						liStr += '<div class="tit fl">建筑类别：</div><div class="oh">' + data[i].constructionCategory + '</div></div></div></li>';
+						$('#searchBox ul').append(liStr);
+						$('#' + data[i].id).bind('tap',function(){
+							var id = this.id;
+							mui.openWindow({
+								url: [[@{/app/keyUnit/unit?id=}]] + id
+							});
+						});
+					}
 					$('#searchBox').css('display','block');
-					
 				}
 				$('#keyUnit').blur();
 			});
