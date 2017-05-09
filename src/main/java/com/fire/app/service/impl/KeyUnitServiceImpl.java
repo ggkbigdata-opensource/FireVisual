@@ -46,8 +46,8 @@ public class KeyUnitServiceImpl implements KeyUnitService{
 
         int i = 0;
         for (BrowseRecord browseRecord : records) {
-            arr[i] = browseRecord.getBuildingInfoId();
             if (i < 3) {
+                arr[i] = browseRecord.getBuildingInfoId();
                 i++;
             } else {
                 break;

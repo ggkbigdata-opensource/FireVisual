@@ -84,11 +84,13 @@ public class KeyUnitController {
      * @return 
      * @description 查看建筑主体详情
      */
-    @RequestMapping(value = "/unit",method = RequestMethod.POST)
-    private void getUnit(HttpServletRequest request ,Long id) {
+    @RequestMapping(value = "/unit",method = RequestMethod.GET)
+    private String getUnit(HttpServletRequest request ,Long id) {
         
         BsBuildingInfo result = keyUnitService.findById(id);
         
         request.setAttribute("info", result);
+        
+        return "keyUnit/buildingProfile";
     }
 }
