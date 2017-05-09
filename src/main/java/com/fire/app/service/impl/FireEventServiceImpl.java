@@ -600,6 +600,11 @@ public class FireEventServiceImpl implements FireEventService {
             }else {
                 events= fireEventRepository.findByBlockIdAndDeadNumIsNotNull(bTime, eTime, blockId);
             }
+        }else if (type==0) {
+            List<Object> types = new ArrayList<>();
+            types.add("冒烟");
+            types.add("火灾");
+            events= fireEventRepository.findByBlockId(bTime, eTime, blockId, types);
         }
         
         JSONObject result = new JSONObject();
@@ -620,17 +625,23 @@ public class FireEventServiceImpl implements FireEventService {
             obj.put("id", event.getId());
 
             if (type == 2) {
-                obj.put("type_change", "损失：冒烟");
+                obj.put("type_change", "警情类型：冒烟");
             } else if (type == 3) {
-                obj.put("type_change", "损失：确认");
+                obj.put("type_change", "警情类型：确认");
             } else if (type == 4) {
                 obj.put("type_change", "损失：" + event.getLoss());
             } else if (type == 5) {
                 obj.put("type_change", "受伤：" + event.getHurtNum());
             } else if (type == 6) {
                 obj.put("type_change", "死亡：" + event.getDeadNum());
+            } else if (type == 0) {
+                if ("冒烟".equals(event.getFireType())) {
+                    obj.put("type_change", "警情类型：冒烟");
+                }else{
+                    obj.put("type_change", "警情类型：确认");
+                }
             } else {
-                obj.put("type_change", "种类：原始");
+                obj.put("type_change", "警情类型：原始");
             }
 
             list.add(obj);
