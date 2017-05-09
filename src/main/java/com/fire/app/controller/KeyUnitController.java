@@ -1,5 +1,7 @@
 package com.fire.app.controller;
 
+import static org.hamcrest.CoreMatchers.nullValue;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +19,7 @@ import com.fire.app.domain.BsBuildingInfo;
 import com.fire.app.domain.User;
 import com.fire.app.service.KeyUnitService;
 import com.fire.app.util.ContextHolderUtils;
+
 
 /**
  * @createDate 2017年3月28日下午3:57:31
@@ -41,13 +44,21 @@ public class KeyUnitController {
     }
     
     @RequestMapping(value = "map",method=RequestMethod.POST)
-    private String toMap(HttpServletRequest request,@RequestParam(required=true)String address) {
+    private String toMap(HttpServletRequest request,@RequestParam(required=true)Long id) {
         
         if (!ContextHolderUtils.isLogin()) {
             return "login/login";
         }
         
-        request.setAttribute("address", address);
+        BsBuildingInfo info = keyUnitService.findBuildingInfoById(id);
+        
+        if (info!=null&&!"".equals(info)) {
+            
+            request.setAttribute("address", info.getBuildingAddress());
+        }else{
+            
+            request.setAttribute("address", null);
+        }
         
         return "keyUnit/map";
     }

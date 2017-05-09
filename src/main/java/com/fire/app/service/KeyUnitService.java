@@ -40,5 +40,14 @@ public interface KeyUnitService {
      */
     BsBuildingInfo findById(Long id);
 
+    /**
+     * @createDate 2017年5月9日下午10:18:16 
+     * @author wangzhiwang
+     * @param id
+     * @return 
+     * @description 通过建筑主体ID获取数据
+     */
+    BsBuildingInfo findBuildingInfoById(Long id);
+
 
 }

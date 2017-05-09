@@ -132,4 +132,12 @@ public class KeyUnitServiceImpl implements KeyUnitService{
         
     }
 
+    @Override
+    public BsBuildingInfo findBuildingInfoById(Long id) {
+
+        BsBuildingInfo info = buildingInfoRepository.findOne(id);
+        
+        return info;
+    }
+
 }
