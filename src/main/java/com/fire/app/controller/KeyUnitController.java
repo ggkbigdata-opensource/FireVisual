@@ -43,7 +43,7 @@ public class KeyUnitController {
         return "keyUnit/keyUnit";
     }
     
-    @RequestMapping(value = "map",method=RequestMethod.POST)
+    @RequestMapping(value = "map",method=RequestMethod.GET)
     private String toMap(HttpServletRequest request,@RequestParam(required=true)Long id) {
         
         if (!ContextHolderUtils.isLogin()) {
