@@ -39,6 +39,16 @@ public class KeyUnitController {
         return "keyUnit/keyUnit";
     }
     
+    @RequestMapping(value = "map")
+    private String toMap() {
+        
+        if (!ContextHolderUtils.isLogin()) {
+            return "login/login";
+        }
+        
+        return "keyUnit/map";
+    }
+    
     
     @RequestMapping(value="/recent")
     @ResponseBody
