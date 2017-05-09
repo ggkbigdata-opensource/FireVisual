@@ -18,15 +18,14 @@
 					<div class="mui-scroll">
 						<div class="mui-content-padded" id="contentBox">
 							<!-- 内容区域 -->
+							<a th:href="@{/app/keyUnit/unit?id=1327}">点击跳转</a>
 							<div class="mui-input-row mui-search searchBox">
 								<input type="search" id="keyUnit" class="mui-input-clear input-search" placeholder="输入重点单位名称">
 								<button type="button" onclick="getSearch()" class="button-search">搜索</button>
 							</div>
 							<!-- 搜索记录 -->
 							<div class="recordBox" id="searchBox" style="display:none">
-								<ul class="groupList recordList">
-									
-								</ul>
+								<ul class="groupList recordList"></ul>
 							</div>
 							<!-- 搜索记录end -->
 							<!-- 无记录 -->
@@ -85,11 +84,10 @@
 		mui.init();
 		//获取历史浏览记录
 		function getHistory(){
-			mui.get([[@{}]],'',function(data){
+			mui.get([[@{/app/keyUnit/recent}]],'',function(data){
 				if(data){//首次进入没有浏览记录
 					$('#getNone').css('display','block');
 				}else{//展现浏览记录
-					
 					$('#recordBox').css('display','block');
 				}
 			});
@@ -98,13 +96,12 @@
 		function getSearch(){
 			$('#searchBox ul').text('');
 			$('#recordBox').css('display','none');
-			mui.post([[@{}]],{
-				search: search
+			mui.post([[@{/app/keyUnit/search}]],{
+				name: search
 			},function(data){
 				if(data){//无搜索记录
 					$('#getNone').css('display','block');
 				}else{//搜索数据
-					
 					$('#getNone').css('display','none');
 					$('#searchBox').css('display','block');
 				}
@@ -112,7 +109,7 @@
 			});
 		}
 		function init(){
-			//getHistory();
+			getHistory();
 		}
 		init();
 	</script>

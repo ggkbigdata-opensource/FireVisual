@@ -672,7 +672,7 @@
 	    	if(dataLength){
 	    		for(var i=0;i<dataLength;i++){
 	    			for(var j=0;j<arrTitle.length;j++){
-	    				if(arrTitle[j] == '#smokingAffirm_'){
+	    				if(arrTitle[j] == '#smokingAffirm_'){ //成灾type为0
 	    					$(arrTitle[j] + dataList[i].id).attr('name',0);
 	    				}else{
 	    					$(arrTitle[j] + dataList[i].id).attr('name',j+1);
