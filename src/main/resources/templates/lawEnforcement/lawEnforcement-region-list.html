@@ -62,16 +62,6 @@
 	<script th:src="@{/js/normal.js}"></script>
 	<script th:inline="javascript">
 		mui.init();
-		var dataList = {
-			list:[
-			      {type_change:'种类：原始',time:'2017/05/02 11:21',id:5797},
-			      {type_change:'种类：原始',time:'2017/05/02 11:21',id:'256'},
-			      {type_change:'种类：原始',time:'2017/05/02 11:21',id:'259'},
-			      {type_change:'种类：原始',time:'2017/05/02 11:21',id:'270'}
-			      ],
-			streetName:'天河南',
-			id:'2'
-		}
 		var type,streetId,time,timeStr;
 		//获取参数
 		function getParam(paramName) {
@@ -94,6 +84,11 @@
 		}
 		//获取数据
 		function getData(){
+			if(streetId == ''){
+				$('#pageback').attr('href',[[@{/app/punishment/}]]);
+			}else{
+				$('#pageback').attr('href',[[@{/app/punishment/toAreaPage}]]);
+			}
 			mui.post([[@{/app/punishment/getRegionList}]],{
 				streetId: streetId,
 				time: time,
@@ -101,7 +96,12 @@
 			},function(data){
 				if(data){
 					console.log(data);
-					$('#placeName').text(data.streetName);
+					if(streetId == ''){
+						$('#placeName').css('display','none');
+					}else{
+						$('#placeName').text(data.streetName);
+					}
+					
 					if(data.list.length>0){
 						for(var i=0;i<data.list.length;i++){
 							var timeStr = '<div class="mui-col-xs-8"><div class="tit">日期：<span >' + data.list[i].time + '</span></div><div class="tit" >' + data.list[i].type_change + '</div></div>';
@@ -134,22 +134,9 @@
 			timeStr = time.substr(0,4) + '年' + time.substr(4,2) + '月';
 			$('div[name="currentTime"] span').text(timeStr);
 			$('#pageback').attr('href',[[@{/app/punishment/toAreaPage}]]);
-			getData1();
+			getData();
 		}
 		init();
-		function getData1(){
-			$('#placeName').text(dataList.streetName);
-			if(dataList.list.length>0){
-				for(var i=0;i<dataList.list.length;i++){
-					var timeStr = '<div class="mui-col-xs-8"><div class="tit">日期：<span >' + dataList.list[i].time + '</span></div><div class="tit" >' + dataList.list[i].type_change + '</div></div>';
-					var detailStr = '<div class="mui-col-xs-4"><a href="#" class="btn-detail fr" id="' + dataList.list[i].id + '">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></div>';
-					var liStr = '<li><div class="mui-row">' + timeStr + detailStr + '</div></li>';
-					$('#ulData').append(liStr);
-				}
-			}
-			setClick(dataList.list);
-		}
-
 	</script>
 </body>
 </html>
