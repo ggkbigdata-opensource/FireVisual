@@ -41,11 +41,8 @@ public class KeyUnitController {
     
     
     @RequestMapping(value="/recent")
-    private String toFireEvent(HttpServletRequest request) {
-        
-        if (!ContextHolderUtils.isLogin()) {
-            return "login/login";
-        }
+    @ResponseBody
+    private List<JSONObject> toFireEvent(HttpServletRequest request) {
         
         User user = (User)ContextHolderUtils.getSession().getAttribute(App.USER_SESSION_KEY);
         
@@ -58,7 +55,7 @@ public class KeyUnitController {
         request.setAttribute("result", result);
         
         
-        return "keyUnit/keyUnit";
+        return result;
     }
     
     /**
