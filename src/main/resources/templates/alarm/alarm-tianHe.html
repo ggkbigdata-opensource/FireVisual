@@ -29,7 +29,17 @@
 							<div id="alarmTendency" style="height: 225px;"></div>
 						</div>
 						<table class="table fireDataTable">
-							<thead></thead>
+							<thead>
+								<tr>
+									<th width="80" rowspan="2">年月</th>
+									<th rowspan="2">原始</th>
+									<th colspan="2">成灾警情</th>
+								</tr>
+								<tr>
+									<th>确认</th>
+									<th>冒烟</th>
+								</tr>
+							</thead>
 							<tbody></tbody>
 						</table>
 						<!-- 内容区域 end -->
@@ -63,7 +73,6 @@
 				var totalTh = '';
 				unit = data[0].unit;
 				for (var i = 0; i < data.length; i++) {
-					//legend.push(data[i].type.substr(0,2));
 					var da = [];
 					for (var k = 0; k < data[i].data.length; k++) {
 						da.unshift(data[i].data[k].value);
@@ -96,18 +105,14 @@
 				}
 				echartLine('alarmTendency',legend,item,datas,unit);
 				var th = '';
+				//debugger;
 				for(var k=0;k<legend.length;k++){
-					th += '<th class="blueBg">' + legend[k] + '</th>';
 					totalTh += '<td class="blueBg fb">' + totalNum[k] + '</td>';
 				}
-				var theadtr = '<tr><th width="80" class="greenBg">年月</th>' + th + '</tr>';
 				var totalStr = '<tr><td class="greenBg fb">合计</td>' + totalTh + '</tr>';
-				$('table thead').text('');
 				$('table tbody').text('');
-				$('table thead').append(theadtr);
 				$('table tbody').append(totalStr);
 				$('table tbody').append(tbodytr);
-				
 				setClick(data);
 			}
 		}, 'json');

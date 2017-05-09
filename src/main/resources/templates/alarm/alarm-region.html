@@ -32,7 +32,17 @@
                             <div id="regionTendency" style="height: 225px;"></div>
                         </div>
                         <table class="table fireDataTable">
-							<thead></thead>
+							<thead>
+								<tr>
+									<th width="80" rowspan="2">年月</th>
+									<th rowspan="2">原始</th>
+									<th colspan="2">成灾警情</th>
+								</tr>
+								<tr>
+									<th>确认</th>
+									<th>冒烟</th>
+								</tr>
+							</thead>
 							<tbody></tbody>
 						</table>
                         <!-- 内容区域 end -->
@@ -160,14 +170,10 @@
     				echartLine('regionTendency',legend,item,datas,unit);
     				var th = '';
     				for(var k=0;k<legend.length;k++){
-    					th += '<th class="blueBg">' + legend[k] + '</th>';
     					totalTh += '<td class="blueBg fb">' + totalNum[k] + '</td>';
     				}
-    				var theadtr = '<tr><th width="45" class="greenBg">年月</th>' + th + '</tr>';
     				var totalStr = '<tr><td class="greenBg fb">合计</td>' + totalTh + '</tr>';
-    				$('table thead').text('');
     				$('table tbody').text('');
-    				$('table thead').append(theadtr);
     				$('table tbody').append(totalStr);
     				$('table tbody').append(tbodytr);
     		        setClick(data,id);

@@ -473,6 +473,8 @@
 	    //展示表格数据
 	    var dataLength;
 	    var dataList = [];
+	    var intNum = 1;
+	    var sortsNum = [1];
 	    function showData (data) {
 	    	dataLength = data.length;
 	    	dataList = data;
@@ -505,8 +507,16 @@
 	    			data[i].primitiveYearBefore = (data[i].primitiveYearBefore*100).toFixed(2) + '%';
 	    		}
 	    		str1 = '<td class="greenBg">' + data[i].streetName + '</td><td class="blueBg">' + data[i].primitiveNow + '</td><td class="blueBg">' + data[i].primitiveBefore + '</td><td class="blueBg">' + data[i].primitiveYearBefore + '</td>';
-	    		tr1 = '<tr id="primitive_' + data[i].id + '"><td class="grayBg">' + (i+1) + '</td>' + str1 + '</tr>';
+	    		tr1 = '<tr id="primitive_' + data[i].id + '"><td class="grayBg">' + sortsNum[i] + '</td>' + str1 + '</tr>';
 	    		arrStr[0] += tr1;
+	    		if(i+1 != data.length){
+		    		if(data[i].primitiveNow == data[i+1].primitiveNow){
+		    			sortsNum[i+1] = intNum;
+					}else{
+						sortsNum[i+1] = i+2;
+						intNum = i+2;
+					}
+	    		}
 	    	}
 	    	if(totalPriBefore != 0){
 	    		totalPriYearBefore = ((totalPriNow - totalPriBefore)/totalPriBefore*100).toFixed(2) + '%';
@@ -520,6 +530,8 @@
 	    	var totalAffNow = 0;
 	    	var totalAffBefore = 0;
 	    	var totalAffYearBefore = '-';
+	    	intNum = 1;
+	    	sortsNum = [1];
 	    	for(var j=0;j<data.length;j++){
 	    		var tr2 = '';
 	    		var str2 = '';
@@ -536,8 +548,16 @@
 	    			data[j].affirmYearBefore = (data[j].affirmYearBefore*100).toFixed(2) + '%';
 	    		}
 	    		str2 = '<td>' + data[j].streetName + '</td><td>' + data[j].smokingNow + '</td><td>' + data[j].smokingBefore + '</td><td>' + data[j].smokingYearBefore + '</td><td>' + data[j].affirmNow + '</td><td>' + data[j].affirmBefore + '</td><td>' + data[j].affirmYearBefore + '</td>';
-	    		tr2 = '<tr id="smokingAffirm_' + data[j].id + '"><td>' + (j+1) + '</td>' + str2 + '</tr>';
+	    		tr2 = '<tr id="smokingAffirm_' + data[j].id + '"><td>' + sortsNum[j] + '</td>' + str2 + '</tr>';
 	    		arrStr[1]+=tr2;
+	    		if(j+1 != data.length){
+		    		if(data[j].smokingNow == data[j+1].smokingNow){
+		    			sortsNum[j+1] = intNum;
+					}else{
+						sortsNum[j+1] = j+2;
+						intNum = j+2;
+					}
+	    		}
 	    	}
 	    	if(totalSmoBefore != 0){
 	    		totalSmoYearBefore = ((totalSmoNow - totalSmoBefore)/totalSmoBefore*100).toFixed(2) + '%';
@@ -551,6 +571,8 @@
 	    	var totalLosNow = 0;
 	    	var totalLosBefore = 0;
 	    	var totalLosYearBefore = '-';
+	    	intNum = 1;
+	    	sortsNum = [1];
 	    	for(var l=0;l<data.length;l++){
 	    		var tr4 = '';
 	    		var str4 = '';
@@ -560,8 +582,16 @@
 	    			data[l].lossYearBefore = (data[l].lossYearBefore*100).toFixed(2) + '%';
 	    		}
 	    		str4 = '<td class="greenBg">' + data[l].streetName + '</td><td class="blueBg">' + data[l].lossNow + '</td><td class="blueBg">' + data[l].lossBefore + '</td><td class="blueBg">' + data[l].lossYearBefore + '</td>';
-	    		tr4 = '<tr id="loss_' + data[l].id + '"><td class="grayBg">' + (l+1) + '</td>' + str4 + '</tr>';
+	    		tr4 = '<tr id="loss_' + data[l].id + '"><td class="grayBg">' + sortsNum[l] + '</td>' + str4 + '</tr>';
 	    		arrStr[2]+=tr4;
+	    		if(l+1 != data.length){
+		    		if(data[l].lossNow == data[l+1].lossNow){
+		    			sortsNum[l+1] = intNum;
+					}else{
+						sortsNum[l+1] = l+2;
+						intNum = l+2;
+					}
+	    		}
 	    	}
 	    	if(totalLosBefore != 0){
 	    		totalLosYearBefore = ((totalLosNow - totalLosBefore)/totalLosBefore*100).toFixed(2) + '%';
@@ -572,6 +602,8 @@
 	    	var totalHurNow = 0;
 	    	var totalHurBefore = 0;
 	    	var totalHurYearBefore = '-';
+	    	intNum = 1;
+	    	sortsNum = [1];
 	    	for(var m=0;m<data.length;m++){
 	    		var tr5 = '';
 	    		var str5 = '';
@@ -581,8 +613,16 @@
 	    			data[m].hurtYearBefore = (data[m].hurtYearBefore*100).toFixed(2) + '%';
 	    		}
 	    		str5 = '<td class="greenBg">' + data[m].streetName + '</td><td class="blueBg">' + data[m].hurtNow + '</td><td class="blueBg">' + data[m].hurtBefore + '</td><td class="blueBg">' + data[m].hurtYearBefore + '</td>';
-	    		tr5 = '<tr id="hurt_' + data[m].id + '"><td class="grayBg">' + (m+1) + '</td>' + str5 + '</tr>';
+	    		tr5 = '<tr id="hurt_' + data[m].id + '"><td class="grayBg">' + sortsNum[m] + '</td>' + str5 + '</tr>';
 	    		arrStr[3]+=tr5;
+	    		if(m+1 != data.length){
+		    		if(data[m].hurtNow == data[m+1].hurtNow){
+		    			sortsNum[m+1] = intNum;
+					}else{
+						sortsNum[m+1] = m+2;
+						intNum = m+2;
+					}
+	    		}
 	    	}
 	    	if(totalHurBefore != 0){
 	    		totalHurYearBefore = ((totalHurNow - totalHurBefore)/totalHurBefore*100).toFixed(2) + '%';
@@ -593,6 +633,8 @@
 	    	var totalDeaNow = 0;
 	    	var totalDeaBefore = 0;
 	    	var totalDeaYearBefore = '-';
+	    	intNum = 1;
+	    	sortsNum = [1];
 	    	for(var o=0;o<data.length;o++){
 	    		var tr6 = '';
 	    		var str6 = '';
@@ -602,8 +644,16 @@
 	    			data[o].deadYearBefore = (data[o].deadYearBefore*100).toFixed(2) + '%';
 	    		}
 	    		str6 = '<td class="greenBg">' + data[o].streetName + '</td><td class="blueBg">' + data[o].deadNow + '</td><td class="blueBg">' + data[o].deadBefore + '</td><td class="blueBg">' + data[o].deadYearBefore + '</td>';
-	    		tr6 = '<tr id="dead_' + data[o].id + '"><td class="grayBg">' + (o+1) + '</td>' + str6 + '</tr>';
+	    		tr6 = '<tr id="dead_' + data[o].id + '"><td class="grayBg">' + sortsNum[o] + '</td>' + str6 + '</tr>';
 	    		arrStr[4]+=tr6;
+	    		if(o+1 != data.length){
+		    		if(data[o].deadNow == data[o+1].deadNow){
+		    			sortsNum[o+1] = intNum;
+					}else{
+						sortsNum[o+1] = o+2;
+						intNum = o+2;
+					}
+	    		}
 	    	}
 	    	if(totalDeaBefore != 0){
 	    		totalDeaYearBefore = ((totalDeaNow - totalDeaBefore)/totalDeaBefore*100).toFixed(2) + '%';
@@ -622,7 +672,11 @@
 	    	if(dataLength){
 	    		for(var i=0;i<dataLength;i++){
 	    			for(var j=0;j<arrTitle.length;j++){
-	    				$(arrTitle[j] + dataList[i].id).attr('name',j+1);
+	    				if(arrTitle[j] == '#smokingAffirm_'){
+	    					$(arrTitle[j] + dataList[i].id).attr('name',0);
+	    				}else{
+	    					$(arrTitle[j] + dataList[i].id).attr('name',j+1);
+	    				}
 	    				$(arrTitle[j] + dataList[i].id).bind('tap',function(){
 		    				var id = this.id.substr(this.id.indexOf('_')+1,this.id.length);
 		    				var type = this.attributes['name'].value;

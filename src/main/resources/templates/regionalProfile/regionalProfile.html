@@ -4110,22 +4110,31 @@
     		var totalPun = 0;
     		var totalBui = 0;
     		var totalStr = '';
+    		var sortsNum = [1];
+    		var intNum = 1;
     		regionData.sort(compare(sort));
 	    	for(var j=0;j<regionData.length;j++){
 	    		var tr1 = '';
 	    		var str1 = '';
 	    		str1 = '<td class="greenBg">' + regionData[j].streetName + '</td><td class="blueBg">' + regionData[j].eventNum + '</td><td class="blueBg">' + regionData[j].punishNum + '</td><td class="blueBg">' + regionData[j].buildingInfoNum + '</td>';
-	    		tr1 = '<tr><td class="grayBg">' + (j+1) + '</td>' + str1 + '</tr>';
+	    		tr1 = '<tr><td class="grayBg">' + sortsNum[j] + '</td>' + str1 + '</tr>';
 	    		arrStr += tr1;
 	    		heatMap(regionData[j].streetId,regionData[j].version+'');
 	    		totalEve += regionData[j].eventNum;
 	    		totalPun += regionData[j].punishNum;
 	    		totalBui += regionData[j].buildingInfoNum;
+	    		if(j+1 != regionData.length){
+		    		if(regionData[j].eventNum == regionData[j+1].eventNum){
+		    			sortsNum[j+1] = intNum;
+					}else{
+						sortsNum[j+1] = j+2;
+						intNum = j+2;
+					}
+	    		}
 	    	}
 	    	totalStr = '<tr><td class="greenBg fb" colspan="2">全区</td><td class="blueBg fb">' + totalEve + '</td><td class="blueBg fb">' + totalPun + '</td><td class="blueBg fb">' + totalBui + '</td></tr>';
 	    	$('#tbody1').append(totalStr);
 	    	$('#tbody1').append(arrStr);
-	    	
     	}
     	//点击排序，目前先不注释
     	$('.sortBy').bind('tap',function () {

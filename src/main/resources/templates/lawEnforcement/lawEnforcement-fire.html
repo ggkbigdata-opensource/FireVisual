@@ -421,6 +421,8 @@
 	    //数据展示
 	    var dataLength;
 	    var dataList = [];
+	    var intNum = 1;
+	    var sortsNum = [1];
 	    function showData(data){
 	    	dataLength = data.length;
 	    	dataList = data;
@@ -453,64 +455,112 @@
     			totalFineNumBef += data[i].fineNumBefore;
     			totalFinePriBef += data[i].finePriceBefore;
 	    		str1 = '<td class="greenBg">' + data[i].streetName + '</td><td class="blueBg">' + data[i].fineNumNow + '</td><td class="blueBg">' + data[i].finePriceNow + '</td><td class="blueBg">' + data[i].fineNumBefore + '</td><td class="blueBg">' + data[i].finePriceBefore + '</td>';
-	    		tr1 = '<tr id="fineNum_' + data[i].streetId + '"><td class="grayBg">' + (i+1) + '</td>' + str1 + '</tr>';
+	    		tr1 = '<tr id="fineNum_' + data[i].streetId + '"><td class="grayBg">' + sortsNum[i] + '</td>' + str1 + '</tr>';
 	    		arrStr[0]+=tr1;
+	    		if(i+1 != data.length){
+		    		if(data[i].fineNumNow == data[i+1].fineNumNow){
+		    			sortsNum[i+1] = intNum;
+					}else{
+						sortsNum[i+1] = i+2;
+						intNum = i+2;
+					}
+	    		}
 	    	}
 	    	totalStr[0] = '<tr><td class="greenBg fb" colspan="2">全区</td><td class="blueBg fb">' + totalFineNumNow + '</td><td class="blueBg fb">' + totalFinePriNow + '</td><td class="blueBg fb">' + totalFineNumBef + '</td><td class="blueBg fb">' + totalFinePriBef + '</td></tr>';
 	    	//行拘
 	    	data.sort(compare('admiDetNow'));
 	    	var totalAdmNow = 0;
 	    	var totalAdmBef = 0;
+	    	intNum = 1;
+	    	sortsNum = [1];
 	    	for(var j=0;j<data.length;j++){
 	    		var tr2 = '';
 	    		var str2 = '';
 	    		totalAdmNow += data[j].admiDetNow;
 	    		totalAdmBef += data[j].admiDetBefore;
 	    		str2 = '<td class="greenBg">' + data[j].streetName + '</td><td class="blueBg">' + data[j].admiDetNow + '</td><td class="blueBg">' + data[j].admiDetBefore + '</td>';
-	    		tr2 = '<tr id="admiDet_' + data[j].streetId + '"><td class="grayBg">' + (j+1) + '</td>' + str2 + '</tr>';
+	    		tr2 = '<tr id="admiDet_' + data[j].streetId + '"><td class="grayBg">' + sortsNum[j] + '</td>' + str2 + '</tr>';
 	    		arrStr[1]+=tr2;
+	    		if(j+1 != data.length){
+		    		if(data[j].admiDetNow == data[j+1].admiDetNow){
+		    			sortsNum[j+1] = intNum;
+					}else{
+						sortsNum[j+1] = j+2;
+						intNum = j+2;
+					}
+	    		}
 	    	}
 	    	totalStr[1] = '<tr><td class="greenBg fb" colspan="2">全区</td><td class="blueBg fb">' + totalAdmNow + '</td><td class="blueBg fb">' + totalAdmBef + '</td></tr>';
 	    	//刑拘
 	    	data.sort(compare('crimDetNow'));
 	    	var totalCriNow = 0;
 	    	var totalCriBef = 0;
+	    	intNum = 1;
+	    	sortsNum = [1];
 	    	for(var k=0;k<data.length;k++){
 	    		var tr3 = '';
 	    		var str3 = '';
 	    		totalCriNow += data[k].crimDetNow;
 	    		totalCriBef += data[k].crimDetBefore;
 	    		str3 = '<td class="greenBg">' + data[k].streetName + '</td><td class="blueBg">' + data[k].crimDetNow + '</td><td class="blueBg">' + data[k].crimDetBefore + '</td>';
-	    		tr3 = '<tr id="crimDet_' + data[k].streetId + '"><td class="grayBg">' + (k+1) + '</td>' + str3 + '</tr>';
+	    		tr3 = '<tr id="crimDet_' + data[k].streetId + '"><td class="grayBg">' + sortsNum[k] + '</td>' + str3 + '</tr>';
 	    		arrStr[2]+=tr3;
+	    		if(k+1 != data.length){
+		    		if(data[k].crimDetNow == data[k+1].crimDetNow){
+		    			sortsNum[k+1] = intNum;
+					}else{
+						sortsNum[k+1] = k+2;
+						intNum = k+2;
+					}
+	    		}
 	    	}
 	    	totalStr[2] = '<tr><td class="greenBg fb" colspan="2">全区</td><td class="blueBg fb">' + totalCriNow + '</td><td class="blueBg fb">' + totalCriBef + '</td></tr>';
 	    	//临封
 	    	data.sort(compare('sealUpNow'));
 	    	var totalSeaNow = 0;
 	    	var totalSeaBef = 0;
+	    	intNum=1;
+	    	sortsNum=[1];
 	    	for(var l=0;l<data.length;l++){
 	    		var tr4 = '';
 	    		var str4 = '';
 	    		totalSeaNow += data[l].sealUpNow;
 	    		totalSeaBef += data[l].sealUpBefore;
 	    		str4 = '<td class="greenBg">' + data[l].streetName + '</td><td class="blueBg">' + data[l].sealUpNow + '</td><td class="blueBg">' + data[l].sealUpBefore + '</td>';
-	    		tr4 = '<tr id="sealUp_' + data[l].streetId + '"><td class="grayBg">' + (l+1) + '</td>' + str4 + '</tr>';
+	    		tr4 = '<tr id="sealUp_' + data[l].streetId + '"><td class="grayBg">' + sortsNum[l] + '</td>' + str4 + '</tr>';
 	    		arrStr[3]+=tr4;
+	    		if(l+1 != data.length){
+		    		if(data[l].sealUpNow == data[l+1].sealUpNow){
+		    			sortsNum[l+1] = intNum;
+					}else{
+						sortsNum[l+1] = l+2;
+						intNum = l+2;
+					}
+	    		}
 	    	}
 	    	totalStr[3] = '<tr><td class="greenBg fb" colspan="2">全区</td><td class="blueBg fb">' + totalSeaNow + '</td><td class="blueBg fb">' + totalSeaBef + '</td></tr>';
 	    	//三停
 	    	data.sort(compare('ThreeStopNow'));
 	    	var totalThrNow = 0;
 	    	var totalThrBef = 0;
+	    	intNum=1;
+	    	sortsNum=[1];
 	    	for(var m=0;m<data.length;m++){
 	    		var tr5 = '';
 	    		var str5 = '';
 	    		totalThrNow += data[m].ThreeStopNow;
 	    		totalThrBef += data[m].ThreeStopBefore;
 	    		str5 = '<td class="greenBg">' + data[m].streetName + '</td><td class="blueBg">' + data[m].ThreeStopNow + '</td><td class="blueBg">' + data[m].ThreeStopBefore + '</td>';
-	    		tr5 = '<tr id="ThreeStop_' + data[m].streetId + '"><td class="grayBg">' + (m+1) + '</td>' + str5 + '</tr>';
+	    		tr5 = '<tr id="ThreeStop_' + data[m].streetId + '"><td class="grayBg">' + sortsNum[m] + '</td>' + str5 + '</tr>';
 	    		arrStr[4]+=tr5;
+	    		if(m+1 != data.length){
+		    		if(data[m].ThreeStopNow == data[m+1].ThreeStopNow){
+		    			sortsNum[m+1] = intNum;
+					}else{
+						sortsNum[m+1] = m+2;
+						intNum = m+2;
+					}
+	    		}
 	    	}
 	    	totalStr[4] = '<tr><td class="greenBg fb" colspan="2">全区</td><td class="blueBg fb">' + totalThrNow + '</td><td class="blueBg fb">' + totalThrBef + '</td></tr>';
 	    	for(var m=1;m<6;m++){
