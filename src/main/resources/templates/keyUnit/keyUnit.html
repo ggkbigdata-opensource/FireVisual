@@ -105,8 +105,9 @@
 			$('#searchBox ul').text('');
 			$('#recordBox').css('display','none');
 			mui.post([[@{/app/keyUnit/search}]],{
-				name: search
+				name: $('#keyUnit').val()
 			},function(data){
+				console.log(data);
 				if(data){//无搜索记录
 					$('#getNone').css('display','block');
 				}else{//搜索数据
