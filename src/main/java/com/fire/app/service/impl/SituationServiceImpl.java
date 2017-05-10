@@ -200,9 +200,75 @@ public class SituationServiceImpl implements SituationService {
         List<AppPunishment> sealUp = punishmentRepository.findSealUpStreetData(bTime, eTime, streetId);
         List<AppPunishment> notSealUp = punishmentRepository.findStreetData(bTime, eTime, streetId);
         
+        List<JSONObject> list = new ArrayList<JSONObject>();
         
         
-        return null;
+        for (AppPunishment punishment : sealUp) {
+            JSONObject obj = new JSONObject();
+            obj.put("id", punishment.getId());
+
+            if ("行政罚款".equals(punishment.getPunishMethod())) {
+                obj.put("type_change", "行罚");
+            } else if ("行政拘留".equals(punishment.getPunishMethod())) {
+                obj.put("type_change", "行拘");
+            } else if ("刑事拘留".equals(punishment.getPunishMethod())){
+                obj.put("type_change", "刑拘");
+            } else if ("临时查封".equals(punishment.getPunishMethod())){
+                obj.put("type_change", "临封");
+            } else {
+                obj.put("type_change", "三停");
+            }
+
+            Date time = null;
+            if ("临时查封".equals(punishment.getPunishMethod())) {
+                time = punishment.getSealUpTimeBegin();
+            } else {
+                time = punishment.getExecuteTime();
+            }
+            
+            obj.put("id", punishment.getId());
+
+            obj.put("time", DateUtil.formatDate(time, "yyyy/MM/dd HH:mm"));
+
+            obj.put("dutyPerson", punishment.getDutyPersonName());
+            // 传上来的参数
+
+            list.add(obj);
+        }
+        for (AppPunishment punishment : notSealUp) {
+            JSONObject obj = new JSONObject();
+            obj.put("id", punishment.getId());
+
+            if ("行政罚款".equals(punishment.getPunishMethod())) {
+                obj.put("type_change", "行罚");
+            } else if ("行政拘留".equals(punishment.getPunishMethod())) {
+                obj.put("type_change", "行拘");
+            } else if ("刑事拘留".equals(punishment.getPunishMethod())){
+                obj.put("type_change", "刑拘");
+            } else if ("临时查封".equals(punishment.getPunishMethod())){
+                obj.put("type_change", "临封");
+            } else {
+                obj.put("type_change", "三停");
+            }
+
+            obj.put("id", punishment.getId());
+
+            Date time = null;
+            if ("临时查封".equals(punishment.getPunishMethod())) {
+                time = punishment.getSealUpTimeBegin();
+            } else {
+                time = punishment.getExecuteTime();
+            }
+            
+            obj.put("time", DateUtil.formatDate(time, "yyyy/MM/dd HH:mm"));
+
+            obj.put("dutyPerson", punishment.getDutyPersonName());
+            // 传上来的参数
+
+            list.add(obj);
+        }
+        
+        return list;
     }
 
 }
