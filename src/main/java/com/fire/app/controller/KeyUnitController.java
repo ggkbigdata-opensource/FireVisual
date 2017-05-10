@@ -24,7 +24,7 @@ import com.fire.app.util.ContextHolderUtils;
 /**
  * @createDate 2017年3月28日下午3:57:31
  * @author wangzhiwang
- * @description
+ * @description  重点单位信息
  */
 @RequestMapping(value = "/app/keyUnit")
 @Controller

@@ -24,6 +24,16 @@ public interface BrowseRecordRepository extends JpaRepository<BrowseRecord, Long
      */
     @Query(value = "select * from browse_record t where t.uid = ?1 order by t.browse_time desc",nativeQuery = true)
     List<BrowseRecord> findByUid(Long uid);
+
+    /**
+     * @createDate 2017年5月10日下午2:45:39 
+     * @author wangzhiwang
+     * @param id
+     * @return 
+     * @description
+     */
+    @Query(value = "select * from browse_record t where t.building_info_id = ?1 order by t.browse_time desc limit 0,1",nativeQuery = true)
+    BrowseRecord findByBuildingInfoId(Long id);
    
 
 }

@@ -41,22 +41,18 @@ public class KeyUnitServiceImpl implements KeyUnitService{
     @Override
     public List<JSONObject> findByUid(Long uid) {
         List<BrowseRecord> records = browseRecordRepository.findByUid(uid);
-
-        List<BsBuildingInfo> buildings =new ArrayList<BsBuildingInfo>();
+        
+        List<JSONObject> result = new ArrayList<JSONObject>();
+        
         int i = 0;
         for (BrowseRecord browseRecord : records) {
             if (i < 3) {
-                BsBuildingInfo info = buildingInfoRepository.findOne(browseRecord.getBuildingInfoId());
-                buildings.add(info);
                 i++;
             } else {
                 break;
             }
-        }
-
-        List<JSONObject> result = new ArrayList<JSONObject>();
-
-        for (BsBuildingInfo buildingInfo : buildings) {
+            
+            BsBuildingInfo buildingInfo = buildingInfoRepository.findOne(browseRecord.getBuildingInfoId());
             JSONObject obj = new JSONObject();
             // 查询隐患等级
             CrCheckReportInfo info = reportInfoRepository.findByReportNum(buildingInfo.getItemNumber());
@@ -70,6 +66,7 @@ public class KeyUnitServiceImpl implements KeyUnitService{
             obj.put("constructionCategory", buildingInfo.getConstructionCategory());
 
             result.add(obj);
+            
         }
         return result;
     }
@@ -108,21 +105,28 @@ public class KeyUnitServiceImpl implements KeyUnitService{
         
         User user = (User)ContextHolderUtils.getSession().getAttribute(App.USER_SESSION_KEY);
         
-        
         if (user!=null) {
-            //删除最久远的数据
-            List<BrowseRecord> records = browseRecordRepository.findByUid(user.getUid());
             
-            if (records.size()>3) {
-                BrowseRecord browseRecord = records.get(records.size()-1);
-                browseRecordRepository.delete(browseRecord.getId());
+            //判断是否已经存在 的信息
+            BrowseRecord record = browseRecordRepository.findByBuildingInfoId(id);
+            if (record!=null&&!"".equals(record)) {
+                record.setBrowseTime(new Date());
+                browseRecordRepository.save(record);
+            }else {
+              //删除最久远的数据
+                List<BrowseRecord> records = browseRecordRepository.findByUid(user.getUid());
+                
+                if (records.size()>3) {
+                    BrowseRecord browseRecord = records.get(records.size()-1);
+                    browseRecordRepository.delete(browseRecord.getId());
+                }
+                //添加刚点击的数据
+                BrowseRecord record1 = new BrowseRecord();
+                record1.setBuildingInfoId(buildingInfo.getId());
+                record1.setUid(user.getUid());
+                record1.setBrowseTime(new Date());
+                browseRecordRepository.save(record1);
             }
-            //添加刚点击的数据
-            BrowseRecord record = new BrowseRecord();
-            record.setBuildingInfoId(buildingInfo.getId());
-            record.setUid(user.getUid());
-            record.setBrowseTime(new Date());
-            browseRecordRepository.save(record);
             
             
         }
