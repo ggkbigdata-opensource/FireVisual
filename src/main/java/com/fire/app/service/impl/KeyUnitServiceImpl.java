@@ -42,12 +42,12 @@ public class KeyUnitServiceImpl implements KeyUnitService{
     public List<JSONObject> findByUid(Long uid) {
         List<BrowseRecord> records = browseRecordRepository.findByUid(uid);
 
-        long[] arr = new long[3];
-
+        List<BsBuildingInfo> buildings =new ArrayList<BsBuildingInfo>();
         int i = 0;
         for (BrowseRecord browseRecord : records) {
             if (i < 3) {
-                arr[i] = browseRecord.getBuildingInfoId();
+                BsBuildingInfo info = buildingInfoRepository.findOne(browseRecord.getBuildingInfoId());
+                buildings.add(info);
                 i++;
             } else {
                 break;
@@ -55,8 +55,6 @@ public class KeyUnitServiceImpl implements KeyUnitService{
         }
 
         List<JSONObject> result = new ArrayList<JSONObject>();
-
-        List<BsBuildingInfo> buildings = buildingInfoRepository.findByIds(arr);
 
         for (BsBuildingInfo buildingInfo : buildings) {
             JSONObject obj = new JSONObject();

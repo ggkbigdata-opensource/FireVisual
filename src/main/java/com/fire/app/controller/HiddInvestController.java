@@ -108,10 +108,6 @@ public class HiddInvestController {
         
     }
     
-    
-    
-    
-    
     /**
      * @createDate 2017年3月31日下午5:27:49 
      * @author wangzhiwang
@@ -127,5 +123,8 @@ public class HiddInvestController {
         return result;
         
     }
+    
+    @RequestMapping(value = "/toBuildingProfilePage")
+    private String toBuildingProfilePage() {return "hiddenInvestigation/buildingProfile";}
     
 }
