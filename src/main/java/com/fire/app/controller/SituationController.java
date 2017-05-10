@@ -30,14 +30,14 @@ public class SituationController {
 
     @RequestMapping("")
     private String toFireEvent() {
-        
+
         if (!ContextHolderUtils.isLogin()) {
             return "login/login";
         }
-        
+
         return "regionalProfile/regionalProfile";
     }
-    
+
     @RequestMapping(value = "/getAllStreetSituation")
     @ResponseBody
     public List<JSONObject> getAllStreetSituation() {
@@ -47,49 +47,55 @@ public class SituationController {
         return result;
 
     }
-    
+
     @RequestMapping(value = "/event")
     private String toEvent() {
-        
+
         return "regionalProfile/event";
     }
-    
+
     /**
-     * @createDate 2017年5月10日下午2:03:57 
+     * @createDate 2017年5月10日下午2:03:57
      * @author wangzhiwang
-     * @return 
+     * @return
      * @description 通过街道，获取街道下对应的所有警情事件---这里警情只是冒烟，火灾
      */
     @RequestMapping(value = "/streetEvent")
     @ResponseBody
-    public List<JSONObject> getStreetEvent(@RequestParam(required=true)Long streetId) {
+    public JSONObject getStreetEvent(@RequestParam(required = true) Long streetId) {
 
-        List<JSONObject> result = situationService.getStreetEvent(streetId);
+        Street street = streetService.findById(streetId);
 
+        JSONObject result = new JSONObject();
+        List<JSONObject> list = situationService.getStreetEvent(streetId);
+
+        result.put("list", list);
+        result.put("street", street.getName());
+        result.put("streetId", street.getId());
         return result;
 
     }
-    
+
     @RequestMapping(value = "/punish")
     private String toPunish() {
-        
+
         return "regionalProfile/punish";
     }
-    
+
     /**
-     * @createDate 2017年5月10日下午2:03:57 
+     * @createDate 2017年5月10日下午2:03:57
      * @author wangzhiwang
-     * @return 
+     * @return
      * @description 通过街道，获取街道下对应的所有执法数据
      */
     @RequestMapping(value = "/streetPunish")
     @ResponseBody
-    public JSONObject getStreetPunish(@RequestParam(required=true)Long streetId) {
+    public JSONObject getStreetPunish(@RequestParam(required = true) Long streetId) {
 
         Street street = streetService.findById(streetId);
-        
+
         JSONObject result = new JSONObject();
-        
+
         List<JSONObject> list = situationService.getStreetPunish(streetId);
 
         result.put("list", list);
@@ -98,17 +104,17 @@ public class SituationController {
         return result;
 
     }
-    
+
     @RequestMapping(value = "/check")
     private String toCheck() {
-        
+
         return "regionalProfile/check";
     }
-    
+
     /**
-     * @createDate 2017年5月10日下午2:03:57 
+     * @createDate 2017年5月10日下午2:03:57
      * @author wangzhiwang
-     * @return 
+     * @return
      * @description 通过街道，获取街道下对应的所有检测报告
      */
     @RequestMapping(value = "/streetCheck")
@@ -120,5 +126,5 @@ public class SituationController {
         return result;
 
     }
-    
+
 }
