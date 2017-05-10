@@ -3,6 +3,7 @@ package com.fire.app.service;
 import java.util.List;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fire.app.domain.BsBuildingInfo;
 
 /**
  * @createDate 2017年3月31日下午5:31:12
@@ -37,5 +38,14 @@ public interface HiddInvestService {
      * @description
      */
     List<JSONObject> getDetailDate(Long streetId, String name);
+
+    /**
+     * @createDate 2017年5月10日下午4:12:04 
+     * @author wangzhiwang
+     * @param string
+     * @return 
+     * @description 通过项目编号获取建筑概况表数据
+     */
+    BsBuildingInfo findBuildingInfoByRepurtNum(String string);
 
 }

@@ -53,32 +53,27 @@ public class HiddInvestServiceImpl implements HiddInvestService {
             String reportNum = null;
 
             JSONObject obj = new JSONObject();
-            List<BsBuildingInfo> infos = buildingInfoRepository.findByStreetId(street.getId());
-            if (infos != null && infos.size() > 0) {
-                for (BsBuildingInfo bsBuildingInfo : infos) {
-                    obj.put("buildingInfoNum", infos.size());
-                    reportNum = bsBuildingInfo.getItemNumber();
-                    CrCheckReportInfo checkReportInfos = checkReportInfoRepository.findByReportNum(reportNum.replace("天消", "").trim());
-                    if (checkReportInfos != null & !"".equals(checkReportInfos)) {
-                        String riskLevel = checkReportInfos.getRiskLevel();
-                        if (StringUtils.isNotEmpty(riskLevel)) {
-                            if (riskLevel.contains("1")) {// 隐患等级1
-                                versionOne++;
-                            }
-                            if (riskLevel.contains("2")) {// 隐患等级2
-                                versionTwo++;
-                            }
-                            if (riskLevel.contains("3")) {// 隐患等级3
-                                versionThree++;
-                            }
-                            if (riskLevel.contains("4")) {// 隐患等级4
-                                versionFour++;
-                            }
-                        }
+            // List<BsBuildingInfo> infos =
+            // buildingInfoRepository.findByStreetId(street.getId());
+            List<CrCheckReportInfo> infos = checkReportInfoRepository.findByStreetId(street.getId());
+            obj.put("checkInfoNum", 0);
+            for (CrCheckReportInfo info : infos) {
+                obj.put("checkInfoNum", infos.size());
+                String riskLevel = info.getRiskLevel();
+                if (StringUtils.isNotEmpty(riskLevel)) {
+                    if (riskLevel.contains("1")) {// 隐患等级1
+                        versionOne++;
+                    }
+                    if (riskLevel.contains("2")) {// 隐患等级2
+                        versionTwo++;
+                    }
+                    if (riskLevel.contains("3")) {// 隐患等级3
+                        versionThree++;
+                    }
+                    if (riskLevel.contains("4")) {// 隐患等级4
+                        versionFour++;
                     }
                 }
-            } else {
-                obj.put("buildingInfoNum", 0);
             }
 
             obj.put("versionOne", versionOne);
@@ -95,40 +90,27 @@ public class HiddInvestServiceImpl implements HiddInvestService {
     }
 
     @Override
-    public List<JSONObject> getDetailDate(Long streetId,String name) {
+    public List<JSONObject> getDetailDate(Long streetId, String name) {
 
         ArrayList<JSONObject> result = new ArrayList<JSONObject>();
-        List<BsBuildingInfo> infos=null;
-        if (StringUtils.isEmpty(name)) {
-            infos = buildingInfoRepository.findByStreetId(streetId);
-        }else{
-            infos = buildingInfoRepository.findByStreetIdAndName(streetId,name);
-        }
-        for (BsBuildingInfo info : infos) {
-            JSONObject obj = new JSONObject();
-            
-            String itemNumber = info.getItemNumber();
-            if (StringUtils.isNotEmpty(itemNumber)) {
-                itemNumber = info.getItemNumber().replace("天消", "");
-            }
-            CrCheckReportInfo checkReportInfos = checkReportInfoRepository.findByReportNum(itemNumber);
-            if (checkReportInfos != null && !"".equals(checkReportInfos)) {
-                obj.put("riskLevel", checkReportInfos.getRiskLevel());
-            } else {
-                obj.put("riskLevel", null);
-            }
 
-            List<CrCheckReportResultStat> stats = checkReportResultStatRepository.findByReportNum(info.getItemNumber());
+        List<CrCheckReportInfo> infos = checkReportInfoRepository.findByStreetId(streetId);
+        for (CrCheckReportInfo info : infos) {
+            JSONObject obj = new JSONObject();
+            obj.put("riskLevel", info.getRiskLevel());
+
+            List<CrCheckReportResultStat> stats = checkReportResultStatRepository.findByReportNum(info.getReportNum());
             int unqualifiedNum = 0;// 不合格项
             for (CrCheckReportResultStat stat : stats) {
                 unqualifiedNum = unqualifiedNum + stat.getUnqualifiedNum();
             }
             obj.put("unqualifiedNum", unqualifiedNum);
-            obj.put("id", info.getId());
-            obj.put("ropertyCompanyName", info.getPropertyCompanyName());
+            obj.put("reportNum", info.getReportNum());
+            obj.put("projectName", info.getProjectName());
 
             result.add(obj);
         }
+
         return result;
     }
 
@@ -152,13 +134,20 @@ public class HiddInvestServiceImpl implements HiddInvestService {
             obj.put("itemCode", data[2]);
             obj.put("itemName", data[3]);
             obj.put("qualifiedPercent", df.format((float) qualifiedNum / Integer.parseInt(data[0])));
-            
 
             result.add(obj);
 
         }
 
         return result;
+    }
+
+    @Override
+    public BsBuildingInfo findBuildingInfoByRepurtNum(String itemNumber) {
+
+        BsBuildingInfo info =buildingInfoRepository.findByItemNumber(itemNumber);
+        
+        return info;
     }
 
 }

@@ -58,4 +58,13 @@ public interface BsBuildingInfoRepository extends JpaRepository<BsBuildingInfo, 
     @Query(value = "SELECT * FROM bs_building_info t where  t.id in ?1", nativeQuery = true)
     List<BsBuildingInfo> findByIds(long[] arr);
 
+    /**
+     * @createDate 2017年5月10日下午4:13:44 
+     * @author wangzhiwang
+     * @param itemNumber
+     * @return 
+     * @description
+     */
+    BsBuildingInfo findByItemNumber(String itemNumber);
+
 }

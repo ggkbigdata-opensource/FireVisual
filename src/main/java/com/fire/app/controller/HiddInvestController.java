@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fire.app.domain.BsBuildingInfo;
 import com.fire.app.service.HiddInvestService;
 import com.fire.app.util.ContextHolderUtils;
 
@@ -126,5 +127,16 @@ public class HiddInvestController {
     
     @RequestMapping(value = "/toBuildingProfilePage")
     private String toBuildingProfilePage() {return "hiddenInvestigation/buildingProfile";}
+    
+    
+    @RequestMapping(value = "/toUnitPage")
+    private String toUnitPage(HttpServletRequest request,String reportNum) {
+        
+        BsBuildingInfo info = hiddInvestService.findBuildingInfoByRepurtNum("天消"+reportNum);
+        
+        request.setAttribute("info", info);
+        
+        return "keyUnit/buildingProfile";
+    }
     
 }
