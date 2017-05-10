@@ -107,11 +107,15 @@ public class KeyUnitController {
      * @description 查看建筑主体详情
      */
     @RequestMapping(value = "/unit",method = RequestMethod.GET)
-    private String getUnit(HttpServletRequest request ,Long id) {
+    private String getUnit(HttpServletRequest request ,String reportNum) {
         
-        BsBuildingInfo result = keyUnitService.findById(id);
-        
-        request.setAttribute("info", result);
+        //BsBuildingInfo result = keyUnitService.findById(id);
+        BsBuildingInfo result = keyUnitService.findByReportNum(reportNum);
+        if (result==null||"".equals(result)) {
+            request.setAttribute("info", new BsBuildingInfo());
+        }else{
+            request.setAttribute("info", result);
+        }
         
         return "keyUnit/buildingProfile";
     }

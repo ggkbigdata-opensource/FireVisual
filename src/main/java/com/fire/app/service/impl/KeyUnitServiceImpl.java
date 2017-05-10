@@ -27,7 +27,7 @@ import com.fire.app.util.ContextHolderUtils;
  * @description
  */
 @Service
-public class KeyUnitServiceImpl implements KeyUnitService{
+public class KeyUnitServiceImpl implements KeyUnitService {
 
     @Autowired
     private BrowseRecordRepository browseRecordRepository;
@@ -37,13 +37,13 @@ public class KeyUnitServiceImpl implements KeyUnitService{
     private CrCheckReportInfoRepository reportInfoRepository;
     @Autowired
     private StreetRepository streetRepository;
-    
+
     @Override
     public List<JSONObject> findByUid(Long uid) {
         List<BrowseRecord> records = browseRecordRepository.findByUid(uid);
-        
+
         List<JSONObject> result = new ArrayList<JSONObject>();
-        
+
         int i = 0;
         for (BrowseRecord browseRecord : records) {
             if (i < 3) {
@@ -51,7 +51,6 @@ public class KeyUnitServiceImpl implements KeyUnitService{
             } else {
                 break;
             }
-            
 
             CrCheckReportInfo checkInfo = reportInfoRepository.findByReportNum(browseRecord.getReportNum());
             JSONObject obj = new JSONObject();
@@ -65,26 +64,29 @@ public class KeyUnitServiceImpl implements KeyUnitService{
             BsBuildingInfo buildingInfo = buildingInfoRepository.findByItemNumber(browseRecord.getReportNum());
             obj.put("constructionClass", "");
             obj.put("constructionCategory", "");
-            if (buildingInfo!=null) {
+            if (buildingInfo != null) {
                 obj.put("constructionClass", buildingInfo.getConstructionClass());
                 obj.put("constructionCategory", buildingInfo.getConstructionCategory());
             }
             /*
-            BsBuildingInfo buildingInfo = buildingInfoRepository.findOne(browseRecord.getBuildingInfoId());
-            JSONObject obj = new JSONObject();
-            // 查询隐患等级
-            CrCheckReportInfo info = reportInfoRepository.findByReportNum(buildingInfo.getItemNumber());
-            obj.put("id", buildingInfo.getId());
-            obj.put("unitName", buildingInfo.getPropertyCompanyName());
-            Street street = streetRepository.getOne(buildingInfo.getStreetId());
-            obj.put("streetName", street.getName());
-            obj.put("streetId", street.getId());
-            obj.put("riskLevel", info.getRiskLevel());
-            obj.put("constructionClass", buildingInfo.getConstructionClass());
-            obj.put("constructionCategory", buildingInfo.getConstructionCategory());*/
+             * BsBuildingInfo buildingInfo =
+             * buildingInfoRepository.findOne(browseRecord.getBuildingInfoId());
+             * JSONObject obj = new JSONObject(); // 查询隐患等级 CrCheckReportInfo
+             * info =
+             * reportInfoRepository.findByReportNum(buildingInfo.getItemNumber()
+             * ); obj.put("id", buildingInfo.getId()); obj.put("unitName",
+             * buildingInfo.getPropertyCompanyName()); Street street =
+             * streetRepository.getOne(buildingInfo.getStreetId());
+             * obj.put("streetName", street.getName()); obj.put("streetId",
+             * street.getId()); obj.put("riskLevel", info.getRiskLevel());
+             * obj.put("constructionClass",
+             * buildingInfo.getConstructionClass());
+             * obj.put("constructionCategory",
+             * buildingInfo.getConstructionCategory());
+             */
 
             result.add(obj);
-            
+
         }
         return result;
     }
@@ -92,15 +94,40 @@ public class KeyUnitServiceImpl implements KeyUnitService{
     @Override
     public List<JSONObject> findUnitByName(String name) {
 
-        List<BsBuildingInfo> buildings = buildingInfoRepository.findByPropertyCompanyName(name);
-
+        List<CrCheckReportInfo> infos  = reportInfoRepository.findByProjectName(name);
         List<JSONObject> result = new ArrayList<JSONObject>();
 
+        for (CrCheckReportInfo info : infos) {
+            JSONObject obj = new JSONObject();
+            // 查询隐患等级
+            if (info != null) {
+                obj.put("reportNum", info.getReportNum());
+                obj.put("unitName", info.getProjectName());
+                Street street = streetRepository.findByReportNum(info.getReportNum());
+                obj.put("streetName", street.getName());
+                obj.put("streetId", street.getId());
+                obj.put("riskLevel", info.getRiskLevel());
+                BsBuildingInfo buildingInfo = buildingInfoRepository.findByItemNumber(info.getReportNum().replace("天消", ""));
+                if (buildingInfo==null) {
+                    obj.put("constructionClass", "");
+                    obj.put("constructionCategory", "");
+                }else{
+                    obj.put("constructionClass", buildingInfo.getConstructionClass());
+                    obj.put("constructionCategory", buildingInfo.getConstructionCategory());
+                }
+
+                result.add(obj);
+            }
+        }
+/*        List<BsBuildingInfo> buildings = buildingInfoRepository.findByPropertyCompanyName(name);
+        
+        List<JSONObject> result = new ArrayList<JSONObject>();
+        
         for (BsBuildingInfo buildingInfo : buildings) {
             JSONObject obj = new JSONObject();
             // 查询隐患等级
             CrCheckReportInfo info = reportInfoRepository.findByReportNum(buildingInfo.getItemNumber());
-            if (info!=null) {
+            if (info != null) {
                 obj.put("id", buildingInfo.getId());
                 obj.put("unitName", buildingInfo.getPropertyCompanyName());
                 Street street = streetRepository.getOne(buildingInfo.getStreetId());
@@ -109,55 +136,90 @@ public class KeyUnitServiceImpl implements KeyUnitService{
                 obj.put("riskLevel", info.getRiskLevel());
                 obj.put("constructionClass", buildingInfo.getConstructionClass());
                 obj.put("constructionCategory", buildingInfo.getConstructionCategory());
-
+                
                 result.add(obj);
             }
         }
-
+*/
         return result;
     }
 
     @Override
     public BsBuildingInfo findById(Long id) {
         BsBuildingInfo buildingInfo = buildingInfoRepository.findOne(id);
-        
-        User user = (User)ContextHolderUtils.getSession().getAttribute(App.USER_SESSION_KEY);
-        
-        if (user!=null) {
-            
-            //判断是否已经存在 的信息
+        User user = (User) ContextHolderUtils.getSession().getAttribute(App.USER_SESSION_KEY);
+
+        if (user != null) {
+
+            // 判断是否已经存在 的信息
             BrowseRecord record = browseRecordRepository.findByBuildingInfoId(id);
-            if (record!=null&&!"".equals(record)) {
+            if (record != null && !"".equals(record)) {
                 record.setBrowseTime(new Date());
                 browseRecordRepository.save(record);
-            }else {
-              //删除最久远的数据
+            } else {
+                // 删除最久远的数据
                 List<BrowseRecord> records = browseRecordRepository.findByUid(user.getUid());
-                
-                if (records.size()>3) {
-                    BrowseRecord browseRecord = records.get(records.size()-1);
+
+                if (records.size() > 3) {
+                    BrowseRecord browseRecord = records.get(records.size() - 1);
                     browseRecordRepository.delete(browseRecord.getId());
                 }
-                //添加刚点击的数据
+                // 添加刚点击的数据
                 BrowseRecord record1 = new BrowseRecord();
                 record1.setBuildingInfoId(buildingInfo.getId());
                 record1.setUid(user.getUid());
                 record1.setBrowseTime(new Date());
                 browseRecordRepository.save(record1);
             }
-            
-            
+
         }
         return buildingInfo;
-        
+
     }
 
     @Override
     public BsBuildingInfo findBuildingInfoById(Long id) {
 
         BsBuildingInfo info = buildingInfoRepository.findOne(id);
-        
+
         return info;
+    }
+
+    @Override
+    public BsBuildingInfo findByReportNum(String reportNum) {
+
+        CrCheckReportInfo info = reportInfoRepository.findByReportNum("天消" + reportNum);
+
+        BsBuildingInfo buildingInfo = buildingInfoRepository.findByItemNumber(reportNum);
+
+        User user = (User) ContextHolderUtils.getSession().getAttribute(App.USER_SESSION_KEY);
+
+        if (user != null) {
+
+            // 判断是否已经存在 的信息
+            BrowseRecord record = browseRecordRepository.findByReportNum(info.getReportNum());
+            if (record != null && !"".equals(record)) {
+                record.setBrowseTime(new Date());
+                browseRecordRepository.save(record);
+            } else {
+                // 删除最久远的数据
+                List<BrowseRecord> records = browseRecordRepository.findByUid(user.getUid());
+
+                if (records.size() > 3) {
+                    BrowseRecord browseRecord = records.get(records.size() - 1);
+                    browseRecordRepository.delete(browseRecord.getId());
+                }
+                // 添加刚点击的数据
+                BrowseRecord record1 = new BrowseRecord();
+                String reportNum2 = info.getReportNum();
+                record1.setReportNum(reportNum2);
+                record1.setUid(user.getUid());
+                record1.setBrowseTime(new Date());
+                browseRecordRepository.save(record1);
+            }
+
+        }
+        return buildingInfo;
     }
 
 }

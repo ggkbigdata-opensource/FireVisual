@@ -35,6 +35,16 @@ public interface CrCheckReportInfoRepository extends JpaRepository<CrCheckReport
     @Query(value = "SELECT t.* from cr_check_report_info t,(select cr.report_num from cr_check_report cr where cr.street_id = ?1) o where t.report_num=o.report_num;" , nativeQuery = true)
     List<CrCheckReportInfo> findByStreetId(Long streetId);
 
+    /**
+     * @createDate 2017年5月10日下午7:19:50 
+     * @author wangzhiwang
+     * @param name
+     * @return 
+     * @description
+     */
+    @Query(value = "SELECT * FROM cr_check_report_info t where t.project_name  like %?1% " , nativeQuery = true)
+    List<CrCheckReportInfo> findByProjectName(String name);
+
    
 
 }
