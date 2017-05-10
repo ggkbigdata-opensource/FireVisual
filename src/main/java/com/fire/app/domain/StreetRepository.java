@@ -1,6 +1,7 @@
 package com.fire.app.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  * @fileName BsMainFunctionRepository.java
@@ -29,5 +30,15 @@ public interface StreetRepository extends JpaRepository<Street, Long> {
      * @description
      */
     Street findById(Long streetId);
+
+    /**
+     * @createDate 2017年5月10日下午6:54:12 
+     * @author wangzhiwang
+     * @param reportNum
+     * @return 
+     * @description
+     */
+    @Query(value="select * from street s,(select t.street_id from cr_check_report t where t.report_num = ?1) o where o.street_id=s.id", nativeQuery = true)
+    Street findByReportNum(String reportNum);
 
 }

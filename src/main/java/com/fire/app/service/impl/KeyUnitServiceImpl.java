@@ -52,6 +52,24 @@ public class KeyUnitServiceImpl implements KeyUnitService{
                 break;
             }
             
+
+            CrCheckReportInfo checkInfo = reportInfoRepository.findByReportNum(browseRecord.getReportNum());
+            JSONObject obj = new JSONObject();
+            // 查询隐患等级
+            obj.put("reportNum", checkInfo.getReportNum());
+            obj.put("unitName", checkInfo.getProjectName());
+            Street street = streetRepository.findByReportNum(browseRecord.getReportNum());
+            obj.put("streetName", street.getName());
+            obj.put("streetId", street.getId());
+            obj.put("riskLevel", checkInfo.getRiskLevel());
+            BsBuildingInfo buildingInfo = buildingInfoRepository.findByItemNumber(browseRecord.getReportNum());
+            obj.put("constructionClass", "");
+            obj.put("constructionCategory", "");
+            if (buildingInfo!=null) {
+                obj.put("constructionClass", buildingInfo.getConstructionClass());
+                obj.put("constructionCategory", buildingInfo.getConstructionCategory());
+            }
+            /*
             BsBuildingInfo buildingInfo = buildingInfoRepository.findOne(browseRecord.getBuildingInfoId());
             JSONObject obj = new JSONObject();
             // 查询隐患等级
@@ -63,7 +81,7 @@ public class KeyUnitServiceImpl implements KeyUnitService{
             obj.put("streetId", street.getId());
             obj.put("riskLevel", info.getRiskLevel());
             obj.put("constructionClass", buildingInfo.getConstructionClass());
-            obj.put("constructionCategory", buildingInfo.getConstructionCategory());
+            obj.put("constructionCategory", buildingInfo.getConstructionCategory());*/
 
             result.add(obj);
             
