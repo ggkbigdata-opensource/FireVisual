@@ -25,9 +25,14 @@
 						</div>
 						<div class="mui-content-padded" id="contentBox">
 							<!-- 内容区域 -->
+							
 							<div class="profileBox">
-								<h1 class="profileTit"><span th:text="${info.propertyCompanyName}"></span></h1>
-								<div class="mui-row ">
+								<h1 class="profileTit"><span id="projectName"></span></h1>
+								<div class="mui-row" name="isNull">
+									<div class="mui-col-xs-12 profile-items">
+							        	<h2>产权单位名称</h2>
+							        	<p th:text="${info.propertyCompanyName}"></p>
+							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>建筑所在地地址</h2>
 							        	<p ><a class="address mui-navigate-right" th:href="@{'/app/keyUnit/map?id=' + ${info.id}}" id="hrefHidden"><i class="mui-icon mui-icon-location mr5 fl"></i><span th:text="${info.buildingAddress}"></span></a></p>
@@ -69,8 +74,8 @@
 							        	<p th:text="${info.streetAndCommittee}"></p>
 							        </div>
 							    </div>
-							    <div class="spaceline10"></div>
-							    <div class="mui-row ">
+							    <div class="spaceline10" name="isNull"></div>
+							    <div class="mui-row" name="isNull">
 							        <div class="mui-col-xs-6 profile-items">
 							        	<h2>建筑高度（m）</h2>
 							        	<p th:text="${info.constructionHeight}"></p>
@@ -123,8 +128,8 @@
 								        </div>
 							        </div>
 							    </div>
-							    <div class="spaceline10"></div>
-							    <div class="mui-row ">
+							    <div class="spaceline10" name="isNull"></div>
+							    <div class="mui-row" name="isNull">
 							         <div class="mui-col-xs-12 profile-items">
 							        	<h2>土地使用性质</h2>
 							        	<p th:text="${info.constructionClass}"></p>
@@ -143,6 +148,12 @@
 							        </div>
 							    </div>
 						    </div>
+						    <div class="no-record tc" id="noRecord" style="display:none">
+								<div class="no-record-main oh no-record-sm">
+									<i class="mui-icon mui-icon-search fl"></i>
+									<div class="fl">无数据</div>
+								</div>
+							</div>
 							<!-- 内容区域 end -->
 						</div>
 					</div>
@@ -175,15 +186,38 @@
 		    }
 		    return paramValue;
 		}
+		function getCompanyName(reportNum){
+			mui.get([[@{/app/hiddInvest/getCheckInfo}]],{
+				reportNum:reportNum
+			},function(data){
+        		if(data){
+        			$('#projectName').text(data.projectName);
+        			console.log(data);
+        		}
+        	},'json');
+		}
 		function init(){
+			if([[${info.id}]] == null){//没有项目概况表数据
+				$('div[name="isNull"]').css('display','none');
+				$('#noRecord').css('display','block');
+			}
 			var streetId = getParam('streetId');
+			var reportNum = getParam('reportNum');
+			var hidden = getParam('hidden');
 			if(streetId == ''){
 				$('#mainTitle').text('重点单位信息');
 				$('#pageBack').attr('href',[[@{/app/keyUnit}]]);
 			}else{
-				$('#mainTitle').text('隐患排查');
-				$('#pageBack').attr('href',[[@{/app/hiddInvest/detail?streetId=}]] + streetId);
-				$('#hrefHidden').attr('href',[[@{/app/keyUnit/map?streetId=}]] + streetId + '&id=' + [[${info.id}]]);
+				if(hidden == 1){
+					$('#mainTitle').text('隐患排查');
+					$('#pageBack').attr('href',[[@{/app/hiddInvest/detail?streetId=}]] + streetId);
+					$('#hrefHidden').attr('href',[[@{/app/keyUnit/map?streetId=}]] + streetId + '&id=' + [[${info.id}]] + '&hidden=1&reportNum=' + reportNum);
+				}else if(hidden == 0){
+					$('#mainTitle').text('重点单位');
+					$('#pageBack').attr('href',[[@{/app/situation/check?streetId=}]] + streetId);
+					$('#hrefHidden').attr('href',[[@{/app/keyUnit/map?streetId=}]] + streetId + '&id=' + [[${info.id}]]  + '&hidden=0&reportNum=' + reportNum);
+				}
+				getCompanyName(reportNum);//获取项目单位名称
 			}
 			console.log([[${info}]]);
 		}

@@ -68,16 +68,16 @@
 					$('#recordBox').css('display','block');
 					for(var i=0;i<data.length;i++){
 						var level = data[i].riskLevel.substring(data[i].riskLevel.length-1);
-						var liStr = '<li><h1>' + data[i].unitName + '<a class="btn-detail pa" href="#" id="' + data[i].id + '">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>';
+						var liStr = '<li><h1>' + data[i].unitName + '<a class="btn-detail pa" href="#" id="' + data[i].reportNum + '">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>';
 						liStr += '<div class="mui-row"><div class="mui-col-xs-6"><div class="tit fl">街道：</div><div class="oh">' + data[i].streetName + '</div></div>';
 						liStr += '<div class="mui-col-xs-6"><div class="tit fl">安全隐患等级：</div><div class="oh fb num"><i class="iconfont icon-circle level' + level + '"><em>' + level + '</em></i></div></div>';
 						liStr += '<div class="mui-col-xs-6"><div class="tit fl">使用性质：</div><div class="oh">' + data[i].constructionClass + '</div></div><div class="mui-col-xs-6">';
 						liStr += '<div class="tit fl">建筑类别：</div><div class="oh">' + data[i].constructionCategory + '</div></div></div></li>';
 						$('#recordBox ul').append(liStr);
-						$('#' + data[i].id).bind('tap',function(){
+						$('#' + data[i].reportNum).bind('tap',function(){
 							var id = this.id;
 							mui.openWindow({
-								url: [[@{/app/keyUnit/unit?id=}]] + id
+								url: [[@{/app/keyUnit/unit?reportNum=}]] + id
 							});
 						});
 					}
@@ -98,16 +98,16 @@
 					$('#getNone').css('display','none');
 					for(var i=0;i<data.length;i++){
 						var level = data[i].riskLevel.substring(data[i].riskLevel.length-1);
-						var liStr = '<li><h1>' + data[i].unitName + '<a class="btn-detail pa" href="#" id="' + data[i].id + '">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>';
+						var liStr = '<li><h1>' + data[i].unitName + '<a class="btn-detail pa" href="#" id="' + data[i].reportNum + '">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>';
 						liStr += '<div class="mui-row"><div class="mui-col-xs-6"><div class="tit fl">街道：</div><div class="oh">' + data[i].streetName + '</div></div>';
 						liStr += '<div class="mui-col-xs-6"><div class="tit fl">安全隐患等级：</div><div class="oh fb num"><i class="iconfont icon-circle level' + level + '"><em>' + level + '</em></i></div></div>';
 						liStr += '<div class="mui-col-xs-6"><div class="tit fl">使用性质：</div><div class="oh">' + data[i].constructionClass + '</div></div><div class="mui-col-xs-6">';
 						liStr += '<div class="tit fl">建筑类别：</div><div class="oh">' + data[i].constructionCategory + '</div></div></div></li>';
 						$('#searchBox ul').append(liStr);
-						$('#' + data[i].id).bind('tap',function(){
+						$('#' + data[i].reportNum).bind('tap',function(){
 							var id = this.id;
 							mui.openWindow({
-								url: [[@{/app/keyUnit/unit?id=}]] + id
+								url: [[@{/app/keyUnit/unit?reportNum=}]] + id
 							});
 						});
 					}

@@ -66,15 +66,31 @@
 		function init(){
 			var streetId = getParam('streetId');
 			var id = getParam('id');
-			$('#pageBack').bind('tap',function(){
-				mui.openWindow({
-					url: [[@{/app/keyUnit/unit?id=}]] + id + '&streetId=' + streetId
-				});
-			});
-			if(streetId != ''){
-				$('#mainTitle').text('隐患排查');
-			}else{
+			var hidden = getParam('hidden');
+			var reportNum = getParam('reportNum')
+			if(streetId == ''){
 				$('#mainTitle').text('重点单位信息');
+				$('#pageBack').bind('tap',function(){
+					mui.openWindow({
+						url: [[@{/app/keyUnit/unit?id=}]] + id + '&streetId=' + streetId
+					});
+				});
+			}else{
+				if(hidden == 1){
+					$('#mainTitle').text('隐患排查');
+					$('#pageBack').bind('tap',function(){
+						mui.openWindow({
+							url: [[@{/app/hiddInvest/toUnitPage?reportNum=}]] + reportNum + '&hidden=1&streetId=' + streetId
+						});
+					});
+				}else if(hidden == 0){
+					$('#mainTitle').text('重点单位');
+					$('#pageBack').bind('tap',function(){
+						mui.openWindow({
+							url: [[@{/app/hiddInvest/toUnitPage?reportNum=}]] + reportNum + '&hidden=0&streetId=' + streetId
+						});
+					});
+				}
 			}
 			console.log([[${address}]]);
 			//var point = new BMap.Point(113.36083333333, 23.124444444444444446);
