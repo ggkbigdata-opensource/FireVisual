@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fire.app.domain.Street;
 import com.fire.app.service.SituationService;
+import com.fire.app.service.StreetService;
 import com.fire.app.util.ContextHolderUtils;
 
 /**
@@ -23,6 +25,8 @@ public class SituationController {
 
     @Autowired
     private SituationService situationService;
+    @Autowired
+    private StreetService streetService;
 
     @RequestMapping("")
     private String toFireEvent() {
@@ -70,6 +74,29 @@ public class SituationController {
     private String toPunish() {
         
         return "regionalProfile/punish";
+    }
+    
+    /**
+     * @createDate 2017年5月10日下午2:03:57 
+     * @author wangzhiwang
+     * @return 
+     * @description 通过街道，获取街道下对应的所有执法数据
+     */
+    @RequestMapping(value = "/streetPunish")
+    @ResponseBody
+    public JSONObject getStreetPunish(@RequestParam(required=true)Long streetId) {
+
+        Street street = streetService.findById(streetId);
+        
+        JSONObject result = new JSONObject();
+        
+        List<JSONObject> list = situationService.getStreetPunish(streetId);
+
+        result.put("list", list);
+        result.put("street", street.getName());
+        result.put("streetId", street.getId());
+        return result;
+
     }
     
     @RequestMapping(value = "/check")

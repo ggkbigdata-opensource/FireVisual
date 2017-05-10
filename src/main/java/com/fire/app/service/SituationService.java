@@ -28,4 +28,13 @@ public interface SituationService {
      */
     List<JSONObject> getStreetEvent(Long streetId);
 
+    /**
+     * @createDate 2017年5月10日下午3:27:55 
+     * @author wangzhiwang
+     * @param streetId
+     * @return 
+     * @description 通过街道id获取街道下的所有执法
+     */
+    List<JSONObject> getStreetPunish(Long streetId);
+
 }

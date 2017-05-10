@@ -283,7 +283,7 @@ public class PunishmentServiceImpl implements PunishmentService {
             for (Street street : streets) {
 
                 Date bTime = DateUtil.parse(beginTime + "-01");
-                Date eTime = DateUtil.parse(endTime + "-30");
+                Date eTime = DateUtil.parse(endTime + "-31");
 
                 int fineNumNow = 0;// 行政处罚宗数
                 double finePriceNow = 0;// 行政处罚
@@ -427,7 +427,7 @@ public class PunishmentServiceImpl implements PunishmentService {
 
         for (Block block : blocks) {
             Date bTime = DateUtil.parse(beginTime + "-01");
-            Date eTime = DateUtil.parse(endTime + "-30");
+            Date eTime = DateUtil.parse(endTime + "-31");
 
             int fineNumNow = 0;// 行政处罚宗数
             double finePriceNow = 0;// 行政处罚

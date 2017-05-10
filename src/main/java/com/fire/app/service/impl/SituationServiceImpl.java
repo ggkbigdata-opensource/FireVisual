@@ -179,4 +179,30 @@ public class SituationServiceImpl implements SituationService {
         return result;
     }
 
+    @Override
+    public List<JSONObject> getStreetPunish(Long streetId) {
+        
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date()); // 设置为当前时间
+        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 3); // 设置为上一个月
+        Date beginTime = calendar.getTime();
+        calendar.setTime(new Date()); // 设置为当前时间
+        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1); // 设置前3个月
+        Date endTime = calendar.getTime();
+
+        String time1 = DateUtil.formatDate(beginTime, "yyyy-MM") + "-01";
+        String time2 = DateUtil.formatDate(endTime, "yyyy-MM") + "-31";
+
+        Date bTime = DateUtil.parseDate(time1);
+        Date eTime = DateUtil.parseDate(time2);
+        
+        // 查询执法数据
+        List<AppPunishment> sealUp = punishmentRepository.findSealUpStreetData(bTime, eTime, streetId);
+        List<AppPunishment> notSealUp = punishmentRepository.findStreetData(bTime, eTime, streetId);
+        
+        
+        
+        return null;
+    }
+
 }
