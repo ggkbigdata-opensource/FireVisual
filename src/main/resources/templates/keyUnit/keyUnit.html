@@ -62,6 +62,7 @@
 			mui.get([[@{/app/keyUnit/recent}]],'',function(data){
 				console.log(data);
 				if(data.length == 0){//首次进入没有浏览记录
+					$('#recordBox').css('display','none');
 					$('#getNone').css('display','block');
 				}else{//展现浏览记录
 					$('#recordBox').css('display','block');

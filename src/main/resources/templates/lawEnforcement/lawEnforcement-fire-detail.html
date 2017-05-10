@@ -18,7 +18,7 @@
 					<div class="mui-scroll">
 						<div class="filterBox">
 							<h1><span th:text="${punishment.streetName}"></span>执法</h1>
-							<a id="pageBack" href="#" class="fl btn-filter" >
+							<a id="pageBack" href="javascript:history.go(-1)" class="fl btn-filter" >
 								<i class="mui-icon mui-icon-arrowleft"></i>
 								返回
 							</a>
@@ -242,9 +242,9 @@
 			$('#tempEnd').text(reTime(tempEnd,0));
 			//返回按钮地址
 			var streetId = [[${punishment.streetId}]];
-			$('#pageBack').bind('tap',function(){
+			/* $('#pageBack').bind('tap',function(){
                 window.history.go(-1);
-  			});
+  			}); */
 		}
 		init();
 	</script>

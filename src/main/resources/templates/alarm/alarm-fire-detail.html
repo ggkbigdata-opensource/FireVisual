@@ -18,7 +18,7 @@
 					<div class="mui-scroll">
 						<div class="filterBox">
 							<h1><span th:text="${event.streetName}"></span>警情</h1>
-							<a href="#" class="fl btn-filter" id="pageBack">
+							<a href="javascript:history.go(-1)" class="fl btn-filter" id="pageBack">
 								<i class="mui-icon mui-icon-arrowleft"></i>
 								返回
 							</a>
@@ -61,16 +61,16 @@
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>地理位置</h2>
-							        	<p th:text="${event.placePositionType}">-</p>
+							        	<p th:text="${event.placePositionType}"></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items mui-row">
 							        	<div class="mui-col-xs-6">
 								        	<h2>使用性质</h2>
-								        	<p th:text="${event.placeUseType}">-</p>
+								        	<p th:text="${event.placeUseType}"></p>
 								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>工程性质</h2>
-								        	<p th:text="${event.constructionType}">-</p>
+								        	<p th:text="${event.constructionType}"></p>
 
 								        </div>
 							        </div>
@@ -81,7 +81,7 @@
 								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>值班组</h2>
-								        	<p th:text="${event.dutyPart}">xxx</p>
+								        	<p th:text="${event.dutyPart}"></p>
 
 								        </div>
 							        </div>
@@ -100,22 +100,22 @@
 							        <div class="mui-col-xs-12 profile-items mui-row">
 							        	<div class="mui-col-xs-6">
 							        		<h2>起火位置</h2>
-							        		<p th:text="${event.firePosition}">-</p>
+							        		<p th:text="${event.firePosition}"></p>
 								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>起火物</h2>
-								        	<p th:text="${event.fireObject}">-</p>
+								        	<p th:text="${event.fireObject}"></p>
 								        	
 								        </div>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items mui-row">
 							        	<div class="mui-col-xs-6">
 							        		<h2>起火原因分类</h2>
-							        		<p th:text="${event.fireReasonType}">-</p>
+							        		<p th:text="${event.fireReasonType}"></p>
 								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>起火原因</h2>
-								        	<p th:text="${event.fireReason}">-</p>
+								        	<p th:text="${event.fireReason}"></p>
 
 								        </div>
 							        </div>
@@ -125,22 +125,22 @@
 							        <div class="mui-col-xs-12 profile-items mui-row">
 							        	<div class="mui-col-xs-6">
 							        		<h2>企业性质</h2>
-								        	<p th:text="${event.enterpriseNature}">-</p>
+								        	<p th:text="${event.enterpriseNature}"></p>
 								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>经济损失（元）</h2>
-							        		<p th:text="${event.loss}">10000</p>
+							        		<p th:text="${event.loss}"></p>
 
 								        </div>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items mui-row">
 							        	<div class="mui-col-xs-6">
 							        		<h2>受伤人数</h2>
-							        		<p th:text="${event.hurtNum}">1</p>
+							        		<p th:text="${event.hurtNum}"></p>
 								        </div>
 							        	<div class="mui-col-xs-6">
 								        	<h2>死亡人数</h2>
-								        	<p th:text="${event.deadNum}">1</p>
+								        	<p th:text="${event.deadNum}"></p>
 
 								        </div>
 							        </div>
@@ -265,9 +265,9 @@
 			$('#modDates').text(reTime(modDate,0));
 			//返回按钮地址
 			var streetId = [[${event.streetId}]];
-			$('#pageBack').bind('tap',function(){
+/* 			$('#pageBack').bind('tap',function(){
                   window.history.go(-1);
-    		});
+    		}); */
 		}
 		init();
 	</script>

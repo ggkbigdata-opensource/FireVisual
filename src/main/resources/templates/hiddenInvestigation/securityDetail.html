@@ -31,6 +31,12 @@
 							</div>
 							<div class="spaceline15"></div> -->
 							<ul class="groupList" id="hiddenDetail"></ul>
+							<div class="no-record tc" id="noRecord" style="display:none">
+								<div class="no-record-main oh no-record-sm">
+									<i class="mui-icon mui-icon-search fl"></i>
+									<div class="fl">无记录</div>
+								</div>
+							</div>
 							<!-- 内容区域 end -->
 						</div>
 					</div>
@@ -49,7 +55,7 @@
 			mui.post([[@{/app/hiddInvest/getDetail}]],{
 				streetId: streetId
 			},function(data){
-	    		if(data){
+	    		if(data.length>0){
 	    			console.log(data);
 	    			getRegion();
 	    			$('#hiddenDetail').text('');
@@ -67,10 +73,18 @@
 	    				}
 	    				var levelStr = '<div class="mui-col-xs-6"><div class="tit fl">安全隐患等级</div><div class="oh fb num"><i class="iconfont icon-circle mr5 level' + leveln + '"><em>' + leveln + '</em></i></div></div>';
 	    				var unqStr = '<div class="mui-col-xs-6"> <div class="tit fl">不合格项目</div><div class="oh fb num font-red">' + data[i].unqualifiedNum + '</div></div>';
-	    				str = '<li><h1>' + data[i].ropertyCompanyName + '</h1><div class="mui-row">' + levelStr + unqStr + '</div></li>';
+	    				str = '<li><h1>' + data[i].ropertyCompanyName + '<a class="btn-detail pa" href="#" id="' + data[i].id + '" name="' + streetId + '">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1><div class="mui-row">' + levelStr + unqStr + '</div></li>';
 	    				$('#hiddenDetail').append(str);
+	    				$('#' + data[i].id).bind('tap',function(){
+	    					var id = this.id;
+	    					var streetId = this.name;
+							mui.openWindow({
+								url: [[@{/app/keyUnit/unit?id=}]] + id + '&hidden=1&streetId=' + streetId
+							});
+	    				});
 	    			}
 	    		}else{
+	    			$('#noRecord').css('display','block');
 	    			getRegion();
 	    		}
 	    	});

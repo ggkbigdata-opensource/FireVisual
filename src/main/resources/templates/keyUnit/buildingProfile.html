@@ -12,13 +12,13 @@
 						<img th:src="@{/img/logo.png}" />
 					</div>
 					<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
-					<h1 class="mui-title">重点单位信息</h1>
+					<h1 class="mui-title" id="mainTitle"></h1>
 				</header>
 				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
 					<div class="mui-scroll">
 						<div class="filterBox">
 							<h1>建筑物概况表</h1>
-							<a th:href="@{/app/keyUnit}" class="fl btn-filter" >
+							<a href="#" id="pageBack" class="fl btn-filter" >
 								<i class="mui-icon mui-icon-arrowleft"></i>
 								返回
 							</a>
@@ -30,7 +30,7 @@
 								<div class="mui-row ">
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>建筑所在地地址</h2>
-							        	<p ><a class="address mui-navigate-right" th:href="@{'/app/keyUnit/map?id=' + ${info.id}}"><i class="mui-icon mui-icon-location mr5 fl"></i><span th:text="${info.buildingAddress}"></span></a></p>
+							        	<p ><a class="address mui-navigate-right" th:href="@{'/app/keyUnit/map?id=' + ${info.id}}" id="hrefHidden"><i class="mui-icon mui-icon-location mr5 fl"></i><span th:text="${info.buildingAddress}"></span></a></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>设计单位</h2>
@@ -156,7 +156,35 @@
 	<script th:src="@{/js/normal.js}"></script>
 	<script th:inline="javascript">
 		mui.init();
+		//获取参数
+		function getParam(paramName) {
+		    paramValue = "";
+		    isFound = false;
+		    if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+		        arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&");
+		        i = 0;
+		        while (i < arrSource.length && !isFound) {
+		            if (arrSource[i].indexOf("=") > 0) {
+		                if (arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase()) {
+		                    paramValue = arrSource[i].split("=")[1];
+		                    isFound = true;
+		                }
+		            }
+		            i++;
+		        }
+		    }
+		    return paramValue;
+		}
 		function init(){
+			var streetId = getParam('streetId');
+			if(streetId == ''){
+				$('#mainTitle').text('重点单位信息');
+				$('#pageBack').attr('href',[[@{/app/keyUnit}]]);
+			}else{
+				$('#mainTitle').text('隐患排查');
+				$('#pageBack').attr('href',[[@{/app/hiddInvest/detail?streetId=}]] + streetId);
+				$('#hrefHidden').attr('href',[[@{/app/keyUnit/map?streetId=}]] + streetId + '&id=' + [[${info.id}]]);
+			}
 			console.log([[${info}]]);
 		}
 		init();
