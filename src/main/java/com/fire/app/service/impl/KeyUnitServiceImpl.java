@@ -190,7 +190,7 @@ public class KeyUnitServiceImpl implements KeyUnitService {
 
         CrCheckReportInfo info = reportInfoRepository.findByReportNum("天消" + reportNum);
 
-        BsBuildingInfo buildingInfo = buildingInfoRepository.findByItemNumber(reportNum);
+        BsBuildingInfo buildingInfo = buildingInfoRepository.findByItemNumber("天消" +reportNum);
 
         User user = (User) ContextHolderUtils.getSession().getAttribute(App.USER_SESSION_KEY);
 
