@@ -208,15 +208,15 @@ public class SituationServiceImpl implements SituationService {
             obj.put("id", punishment.getId());
 
             if ("行政罚款".equals(punishment.getPunishMethod())) {
-                obj.put("type_change", "行罚");
+                obj.put("type_change", "执法类型：行政罚款");
             } else if ("行政拘留".equals(punishment.getPunishMethod())) {
-                obj.put("type_change", "行拘");
+                obj.put("type_change", "执法类型：行政拘留");
             } else if ("刑事拘留".equals(punishment.getPunishMethod())){
-                obj.put("type_change", "刑拘");
+                obj.put("type_change", "执法类型：刑事拘留");
             } else if ("临时查封".equals(punishment.getPunishMethod())){
-                obj.put("type_change", "临封");
+                obj.put("type_change", "执法类型：临时查封");
             } else {
-                obj.put("type_change", "三停");
+                obj.put("type_change", "执法类型：三停");
             }
 
             Date time = null;
