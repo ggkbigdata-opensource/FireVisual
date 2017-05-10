@@ -85,7 +85,8 @@
 				if(data){
 					console.log(data);
 					if(streetId == ''){
-						$('#placeName').css('display','none');
+						$('#placeName').text('');
+						$('#placeName').text('天河区');
 					}else{
 						$('#placeName').text(data.streetName);
 					}

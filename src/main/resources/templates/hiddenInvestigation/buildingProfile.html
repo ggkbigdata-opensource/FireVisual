@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head th:with="title=${'消防安全详情'}" th:include="/layouts/layout::head">
+</head>
+<body>
+	<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+			<!--菜单部分-->
+			<div th:replace="/layouts/layout::menu"></div>
+			<div class="mui-inner-wrap">
+				<header class="mui-bar mui-bar-nav">
+					<div class="logo">
+						<img th:src="@{/img/logo.png}" />
+					</div>
+					<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
+					<h1 class="mui-title">隐患排查</h1>
+				</header>
+				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="filterBox">
+							<h1>建筑物概况表</h1>
+							<a href="#" id="pageBack" class="fl btn-filter" >
+								<i class="mui-icon mui-icon-arrowleft"></i>
+								返回
+							</a>
+						</div>
+						<div class="mui-content-padded" id="contentBox">
+							<!-- 内容区域 -->
+							<div class="profileBox">
+								<h1 class="profileTit"><span th:text="${info.propertyCompanyName}"></span></h1>
+								<div class="mui-row ">
+							        <div class="mui-col-xs-12 profile-items">
+							        	<h2>建筑所在地地址</h2>
+							        	<p ><a class="address mui-navigate-right" th:href="@{'/app/keyUnit/map?id=' + ${info.id}}"><i class="mui-icon mui-icon-location mr5 fl"></i><span th:text="${info.buildingAddress}"></span></a></p>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items">
+							        	<h2>设计单位</h2>
+							        	<p th:text="${info.designCompany}"></p>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items">
+							        	<h2>建设单位</h2>
+							        	<p th:text="${info.buildCompany}"></p>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items">
+							        	<h2>消防安全责任人</h2>
+							        	<p th:text="${info.securityPersonLiable}"></p>
+							        </div>
+							        <div class="mui-col-xs-6 profile-items">
+							        	<h2>联系人姓名</h2>
+							        	<p th:text="${info.linkmanName}"></p>
+							        </div>
+							        <div class="mui-col-xs-6 profile-items">
+							        	<h2>联系人电话</h2>
+							        	<p><a class="phone" href="tel:18151236498"><i class="mui-icon mui-icon-phone fl"></i><span th:text="${info.linkmanTel}"></span></a></p>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items">
+							        	<h2>上级主管单位名称</h2>
+							        	<p th:text="${info.superiorCompanyName}"></p>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items">
+							        	<h2>所属行业监管部门</h2>
+							        	<p th:text="${info.supervisionDepartment}"></p>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items">
+							        	<h2>建筑类别</h2>
+							        	<p th:text="${info.constructionCategory}"></p>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items">
+							        	<h2>建筑所属街道和社区居委会</h2>
+							        	<p th:text="${info.streetAndCommittee}"></p>
+							        </div>
+							    </div>
+							    <div class="spaceline10"></div>
+							    <div class="mui-row ">
+							        <div class="mui-col-xs-6 profile-items">
+							        	<h2>建筑高度（m）</h2>
+							        	<p th:text="${info.constructionHeight}"></p>
+							        </div>
+							        <div class="mui-col-xs-6 profile-items">
+							        	<h2>占地面积（m2）</h2>
+							        	<p th:text="${info.occupyArea}"></p>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items">
+							        	<h2 class="sm-tit">建筑面积（m2）</h2>
+							        	<div class="mui-row">
+								        	<div class="mui-col-xs-12">
+									        	<h2>总面积</h2>
+									        	<p th:text="${info.constructionAreaAll}"></p>
+									        </div>
+									        <div class="mui-col-xs-6">
+									        	<h2>地上</h2>
+									        	<p th:text="${info.constructionAreaOverground}"></p>
+									        </div>
+									        <div class="mui-col-xs-6">
+									        	<h2>地下</h2>
+									        	<p th:text="${info.constructionAreaUnderground}"></p>
+									        </div>
+								        </div>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items">
+							        	<h2 class="sm-tit">建筑所在地经纬度</h2>
+							        	<div class="mui-row">
+									        <div class="mui-col-xs-6">
+									        	<h2>经度</h2>
+									        	<p th:text="${info.constructionLongitude}"></p>
+									        </div>
+									        <div class="mui-col-xs-6">
+									        	<h2>纬度</h2>
+									        	<p th:text="${info.constructionLatitude}"></p>
+									        </div>
+								        </div>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items">
+							        	<h2 class="sm-tit">建筑层数（层）</h2>
+							        	<div class="mui-row">
+									        <div class="mui-col-xs-6">
+									        	<h2>地上</h2>
+									        	<p th:text="${info.pliesNumberOverground}"></p>
+									        </div>
+									        <div class="mui-col-xs-6">
+									        	<h2>地下</h2>
+									        	<p th:text="${info.pliesNumberUnderground}"></p>
+									        </div>
+								        </div>
+							        </div>
+							    </div>
+							    <div class="spaceline10"></div>
+							    <div class="mui-row ">
+							         <div class="mui-col-xs-12 profile-items">
+							        	<h2>土地使用性质</h2>
+							        	<p th:text="${info.constructionClass}"></p>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items">
+							        	<h2>建筑物投入使用时间</h2>
+							        	<p th:text="${info.useTime}"></p>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items">
+							        	<h2>建筑物是否有相关维保单位（单位名称、资质类型）</h2>
+							        	<p th:text="${info.maintenanceCompany}"></p>
+							        </div>
+							        <div class="mui-col-xs-12 profile-items">
+							        	<h2>建筑物三年内是否有进行第三方消防设施检测</h2>
+							        	<p th:text="${info.thirdPartyFireDetection}"></p>
+							        </div>
+							    </div>
+						    </div>
+							<!-- 内容区域 end -->
+						</div>
+					</div>
+				</div>
+				<!-- off-canvas backdrop -->
+				<div class="mui-off-canvas-backdrop"></div>
+			</div>
+		</div>
+	<script th:src="@{/js/mui.js}"></script>
+	<script th:src="@{/js/jquery-2.1.0.js}"></script>
+	<script th:src="@{/js/normal.js}"></script>
+	<script th:inline="javascript">
+		mui.init();
+		//获取参数
+		function getParam(paramName) {
+		    paramValue = "";
+		    isFound = false;
+		    if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+		        arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&");
+		        i = 0;
+		        while (i < arrSource.length && !isFound) {
+		            if (arrSource[i].indexOf("=") > 0) {
+		                if (arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase()) {
+		                    paramValue = arrSource[i].split("=")[1];
+		                    isFound = true;
+		                }
+		            }
+		            i++;
+		        }
+		    }
+		    return paramValue;
+		}
+		function init(){
+			var isHidden =  getParam('hidden');
+			var streetId = getParam('streetId');
+			$('#pageBack').attr('href',[[@{/app/hiddInvest/detail?streetId=}]] + streetId);
+			console.log([[${info}]]);
+		}
+		init();
+	</script>
+</body>
+</html>
