@@ -55,23 +55,25 @@ public class HiddInvestServiceImpl implements HiddInvestService {
             JSONObject obj = new JSONObject();
             List<BsBuildingInfo> infos = buildingInfoRepository.findByStreetId(street.getId());
             if (infos != null && infos.size() > 0) {
-                obj.put("buildingInfoNum", infos.size());
-                reportNum = infos.get(0).getItemNumber();
-                CrCheckReportInfo checkReportInfos = checkReportInfoRepository.findByReportNum(reportNum.replace("天消", "").trim());
-                if (checkReportInfos != null & !"".equals(checkReportInfos)) {
-                    String riskLevel = checkReportInfos.getRiskLevel();
-                    if (StringUtils.isNotEmpty(riskLevel)) {
-                        if (riskLevel.contains("1")) {// 隐患等级1
-                            versionOne++;
-                        }
-                        if (riskLevel.contains("2")) {// 隐患等级2
-                            versionTwo++;
-                        }
-                        if (riskLevel.contains("3")) {// 隐患等级3
-                            versionThree++;
-                        }
-                        if (riskLevel.contains("4")) {// 隐患等级4
-                            versionFour++;
+                for (BsBuildingInfo bsBuildingInfo : infos) {
+                    obj.put("buildingInfoNum", infos.size());
+                    reportNum = bsBuildingInfo.getItemNumber();
+                    CrCheckReportInfo checkReportInfos = checkReportInfoRepository.findByReportNum(reportNum.replace("天消", "").trim());
+                    if (checkReportInfos != null & !"".equals(checkReportInfos)) {
+                        String riskLevel = checkReportInfos.getRiskLevel();
+                        if (StringUtils.isNotEmpty(riskLevel)) {
+                            if (riskLevel.contains("1")) {// 隐患等级1
+                                versionOne++;
+                            }
+                            if (riskLevel.contains("2")) {// 隐患等级2
+                                versionTwo++;
+                            }
+                            if (riskLevel.contains("3")) {// 隐患等级3
+                                versionThree++;
+                            }
+                            if (riskLevel.contains("4")) {// 隐患等级4
+                                versionFour++;
+                            }
                         }
                     }
                 }
@@ -122,6 +124,7 @@ public class HiddInvestServiceImpl implements HiddInvestService {
                 unqualifiedNum = unqualifiedNum + stat.getUnqualifiedNum();
             }
             obj.put("unqualifiedNum", unqualifiedNum);
+            obj.put("id", info.getId());
             obj.put("ropertyCompanyName", info.getPropertyCompanyName());
 
             result.add(obj);
