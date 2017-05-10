@@ -533,15 +533,15 @@ public class PunishmentServiceImpl implements PunishmentService {
             obj.put("blockName", punishment.getBlockName());
 
             if (type == 1) {
-                obj.put("type_change", "行罚");
+                obj.put("type_change", "执法类型：行政罚款");
             } else if (type == 2) {
-                obj.put("type_change", "行拘");
+                obj.put("type_change", "执法类型：行政拘留");
             } else if (type == 3) {
-                obj.put("type_change", "刑拘");
+                obj.put("type_change", "执法类型：刑事拘留");
             } else if (type == 4) {
-                obj.put("type_change", "临封");
+                obj.put("type_change", "执法类型：临时查封");
             } else {
-                obj.put("type_change", "三停");
+                obj.put("type_change", "执法类型：三停");
             }
 
             obj.put("unitName", punishment.getPunishmentUnitName());
