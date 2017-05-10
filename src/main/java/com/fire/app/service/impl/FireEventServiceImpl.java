@@ -504,7 +504,7 @@ public class FireEventServiceImpl implements FireEventService {
                     nowValue = fireEventRepository.findByBlockIdAndDeadNumIsNotNull(bTime, eTime, block.getId());
                 }
             }else if (type==0) {
-               List<Object> types = new ArrayList<>();
+               List<String> types = new ArrayList<>();
                types.add("冒烟");
                types.add("火灾");
                 nowValue = fireEventRepository.findByBlockId(bTime, eTime, block.getId(),types);
@@ -601,7 +601,7 @@ public class FireEventServiceImpl implements FireEventService {
                 events= fireEventRepository.findByBlockIdAndDeadNumIsNotNull(bTime, eTime, blockId);
             }
         }else if (type==0) {
-            List<Object> types = new ArrayList<>();
+            List<String> types = new ArrayList<>();
             types.add("冒烟");
             types.add("火灾");
             events= fireEventRepository.findByBlockId(bTime, eTime, blockId, types);

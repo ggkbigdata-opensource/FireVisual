@@ -42,4 +42,39 @@ public class SituationController {
         return result;
 
     }
+    
+    @RequestMapping(value = "/event")
+    private String toEvent() {
+        
+        return "regionalProfile/event";
+    }
+    
+    @RequestMapping(value = "/punish")
+    private String toPunish() {
+        
+        return "regionalProfile/punish";
+    }
+    
+    @RequestMapping(value = "/check")
+    private String toCheck() {
+        
+        return "regionalProfile/check";
+    }
+    
+    /**
+     * @createDate 2017年5月10日下午2:03:57 
+     * @author wangzhiwang
+     * @return 
+     * @description 通过街道，获取街道下对应的所有检测报告
+     */
+    @RequestMapping(value = "/street/situation")
+    @ResponseBody
+    public List<JSONObject> getAllStreetCheck() {
+
+        List<JSONObject> result = situationService.getAllStreetSituation();
+
+        return result;
+
+    }
+    
 }

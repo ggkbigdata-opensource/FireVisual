@@ -58,7 +58,7 @@ public interface AppFireEventRepository extends JpaRepository<AppFireEvent, Long
     List<AppFireEvent> findByBlockId(Long blockId);
     
     @Query(value = "SELECT * FROM app_fire_event t where t.occur_time between ?1 and ?2 and t.block_id = ?3 and t.fire_type in ?4 order by occur_time desc", nativeQuery = true)
-    List<AppFireEvent> findByBlockId(Date bTime, Date eTime, Long id, List<Object> types);
+    List<AppFireEvent> findByBlockId(Date bTime, Date eTime, Long id, List<String> types);
 
     @Query(value = "SELECT * FROM app_fire_event t where t.block_id = ?1 and t.fire_type = ?2 order by occur_time desc", nativeQuery = true)
     List<AppFireEvent> findByBlockIdAndFireType(Long blockId, String fireType);
@@ -116,6 +116,9 @@ public interface AppFireEventRepository extends JpaRepository<AppFireEvent, Long
     
     @Query(value = "SELECT * FROM app_fire_event t where YEAR(t.occur_time)=?1 AND MONTH(t.occur_time)=?2 and t.dead_num is not null order by occur_time desc", nativeQuery = true)
     List<AppFireEvent> findByFireTypeAndDeadNumIsNotNull(String year, String month);
+
+    @Query(value = "SELECT * FROM app_fire_event t where t.occur_time between ?2 and ?3 and t.street_id = ?1 and t.fire_type in ?4 order by occur_time desc", nativeQuery = true)
+    List<AppFireEvent> findByStreetId(Long id, Date bTime, Date eTime, List<String> types);
 
 
 }

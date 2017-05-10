@@ -14,7 +14,6 @@ import com.fire.app.domain.AppFireEvent;
 import com.fire.app.domain.AppFireEventRepository;
 import com.fire.app.domain.AppPunishment;
 import com.fire.app.domain.AppPunishmentRepository;
-import com.fire.app.domain.BsBuildingInfo;
 import com.fire.app.domain.BsBuildingInfoRepository;
 import com.fire.app.domain.CrCheckReportInfo;
 import com.fire.app.domain.CrCheckReportInfoRepository;
@@ -58,30 +57,31 @@ public class SituationServiceImpl implements SituationService {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date()); // 设置为当前时间
         calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 3); // 设置为上一个月
-        Date before = calendar.getTime();
+        Date beginTime = calendar.getTime();
         calendar.setTime(new Date()); // 设置为当前时间
         calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1); // 设置前3个月
-        Date now = calendar.getTime();
+        Date endTime = calendar.getTime();
 
-        String time1 = DateUtil.formatDate(before, "yyyy-MM") + "-01";
-        String time2 = DateUtil.formatDate(now, "yyyy-MM") + "-30";
+        String time1 = DateUtil.formatDate(beginTime, "yyyy-MM") + "-01";
+        String time2 = DateUtil.formatDate(endTime, "yyyy-MM") + "-31";
 
-        Date newYear = DateUtil.parseDate(time1);
-        Date nowTime = DateUtil.parseDate(time2);
+        Date bTime = DateUtil.parseDate(time1);
+        Date eTime = DateUtil.parseDate(time2);
 
         List<Street> streets = streetRepository.findAll();
         List<JSONObject> result = new ArrayList<JSONObject>();
         for (Street street : streets) {
             JSONObject obj = new JSONObject();
             int version = 1; // 等级，，，即不合格数
-            // 查询警情数据
-            //List<AppFireEvent> events = fireEventRepository.findStreetData(newYear, nowTime, street.getName());
-            List<AppFireEvent> events = fireEventRepository.findStreetData(newYear, nowTime, street.getId());
+            // 查询警情数据----这里只需要冒烟，确认两个类型，   确认就是火灾
+            //List<AppFireEvent> events = fireEventRepository.findStreetData(newYear, nowTime, street.getId());
+            List<String> types = new ArrayList<String>();
+            types.add("火灾");
+            types.add("冒烟");
+            List<AppFireEvent> events = fireEventRepository.findByStreetId(street.getId(), bTime, eTime, types);
             // 查询执法数据
-            //List<AppPunishment> sealUp = punishmentRepository.findSealUpStreetData(newYear, nowTime, street.getName());
-            //List<AppPunishment> notSealUp = punishmentRepository.findStreetData(newYear, nowTime, street.getName());
-            List<AppPunishment> sealUp = punishmentRepository.findSealUpStreetData(newYear, nowTime, street.getId());
-            List<AppPunishment> notSealUp = punishmentRepository.findStreetData(newYear, nowTime, street.getId());
+            List<AppPunishment> sealUp = punishmentRepository.findSealUpStreetData(bTime, eTime, street.getId());
+            List<AppPunishment> notSealUp = punishmentRepository.findStreetData(bTime, eTime, street.getId());
 
             if (streets != null && streets.size() > 0) {
                 obj.put("eventNum", events.size());
@@ -100,12 +100,13 @@ public class SituationServiceImpl implements SituationService {
             }
             obj.put("punishNum", punishNum);
 
-            // 获取街道的重要单位
-            List<BsBuildingInfo> infos = buildingInfoRepository.findByStreetId(street.getId());
-            if (infos != null && infos.size() > 0) {
-                obj.put("buildingInfoNum", infos.size());
+            // 获取街道的重要单位---检测报告数据
+            //List<BsBuildingInfo> infos = buildingInfoRepository.findByStreetId(street.getId());
+            obj.put("checkInfoNum", 0);
+            List<CrCheckReportInfo> infos = checkReportInfoRepository.findByStreetId(street.getId());
+            for (CrCheckReportInfo reportInfo : infos) {
+                obj.put("checkInfoNum", infos.size());
                 // 获取检测报告的数据
-                CrCheckReportInfo reportInfo = checkReportInfoRepository.findByReportNum(infos.get(0).getItemNumber());
                 int num = 0;// 危险等级超过4的数量
                 if (reportInfo != null&&reportInfo.getRiskLevel()!=null) {
                     if (reportInfo.getRiskLevel().contains("4")) {
@@ -116,10 +117,8 @@ public class SituationServiceImpl implements SituationService {
                 if (num > checkValue) {
                     version++;
                 }
-            } else {
-                obj.put("buildingInfoNum", 0);
             }
-
+                
             if (punishNum > punishmentValue) {
                 version++;
             }
