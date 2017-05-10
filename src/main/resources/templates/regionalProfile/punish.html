@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head th:with="title=${'执法'}" th:include="/layouts/layout::head">
+</head>
+<body>
+	<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+			<!--菜单部分-->
+			<div th:replace="/layouts/layout::menu"></div>
+			<div class="mui-inner-wrap">
+				<header class="mui-bar mui-bar-nav">
+					<div class="logo">
+						<img th:src="@{/img/logo.png}" />
+					</div>
+					<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
+					<h1 class="mui-title">执法</h1>
+				</header>
+				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="filterBox">
+							<h1><span id="placeName"></span></h1>
+							<a href="#" id="pageback" class="fl btn-filter" >
+								<i class="mui-icon mui-icon-arrowleft"></i>
+								返回
+							</a>
+						</div>
+						<div class="mui-content-padded" id="contentBox">
+							<!-- 内容区域 -->
+							<div class="listBox mt15">
+								<ul class="groupList recordList" id="ulData"></ul>
+								<div class="no-record tc" id="norecord" style="display:none">
+									<div class="no-record-main oh no-record-sm">
+										<i class="mui-icon mui-icon-search fl"></i>
+										<div class="fl">无记录</div>
+									</div>
+								</div>
+							</div>
+							<!-- 内容区域 end -->
+						</div>
+					</div>
+				</div>
+				<!-- off-canvas backdrop -->
+				<div class="mui-off-canvas-backdrop"></div>
+			</div>
+		</div>
+	<script th:src="@{/js/mui.js}"></script>
+	<script th:src="@{/js/jquery-2.1.0.js}"></script>
+	<script th:src="@{/js/normal.js}"></script>
+	<script th:inline="javascript">
+		mui.init();
+		var streetId;
+		//获取参数
+		function getParam(paramName) {
+		    paramValue = "";
+		    isFound = false;
+		    if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+		        arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&");
+		        i = 0;
+		        while (i < arrSource.length && !isFound) {
+		            if (arrSource[i].indexOf("=") > 0) {
+		                if (arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase()) {
+		                    paramValue = arrSource[i].split("=")[1];
+		                    isFound = true;
+		                }
+		            }
+		            i++;
+		        }
+		    }
+		    return paramValue;
+		}
+		//获取数据
+		function getData(){
+			mui.post([[@{/app/situation/streetPunish}]],{
+				streetId: streetId
+			},function(data){
+				console.log(data);
+				var dataList = data.list;
+				$('#placeName').text(data.street);
+				if(dataList.length ==0 ){		//没有数据
+					$('#norecord').css('display','block');
+				}else{					//有数据
+					var smokeNum = 0;
+					var confirmNum = 0;
+					for(var i=0;i<dataList.length;i++){
+						var type;//执法类型
+						if(dataList[i].type_change.indexOf('行政罚款') != -1){
+							type = 1;
+						}else if(dataList[i].type_change.indexOf('行政拘留') != -1){
+							type = 2;
+						}else if(dataList[i].type_change.indexOf('刑事拘留') != -1){
+							type = 3;
+						}else if(dataList[i].type_change.indexOf('临时查封') != -1){
+							type = 4;
+						}else{
+							type = 5;
+						}
+						var timeStr = '<div class="mui-col-xs-8"><div class="tit">日期：<span >' + dataList[i].time + '</span></div><div class="tit" >' + dataList[i].type_change + '</div></div>';
+						var detailStr = '<div class="mui-col-xs-4"><a href="#" class="btn-detail fr" id="' + dataList[i].id + '" name="' + type + '">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></div>';
+						var liStr = '<li><div class="mui-row">' + timeStr + detailStr + '</div></li>';
+						$('#ulData').append(liStr);
+						$('#' + dataList[i].id).bind('tap',function(){
+							var id = this.id;
+							var punishType = this.name;
+							mui.openWindow({
+								url: [[@{/app/punishment/punish?id=}]] + id + '&type=' + punishType
+							})
+						});
+					}
+				}
+			});
+		}
+		
+		function init(){
+			$('#pageback').attr('href',[[@{/app/situation}]]);
+			streetId = getParam('streetId');
+			getData();
+		}
+		init();
+	</script>
+</body>
+</html>

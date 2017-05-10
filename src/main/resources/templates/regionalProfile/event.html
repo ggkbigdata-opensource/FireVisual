@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head th:with="title=${'警情'}" th:include="/layouts/layout::head">
+</head>
+<body>
+	
+	<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+			<!--菜单部分-->
+			<div th:replace="/layouts/layout::menu"></div>
+			<div class="mui-inner-wrap">
+				<header class="mui-bar mui-bar-nav">
+					<div class="logo">
+						<img th:src="@{/img/logo.png}" />
+					</div>
+					<a id="offCanvasBtn" href="#offCanvasSide" class="iconfont icon-menu mui-action-menu mui-pull-right"></a>
+					<h1 class="mui-title">警情</h1>
+				</header>
+				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="filterBox">
+							<h1><span id="placeName"></span></h1>
+							<a href="#" id="pageback"  class="fl btn-filter" >
+								<i class="mui-icon mui-icon-arrowleft"></i>
+								返回
+							</a>
+						</div>
+						<div class="mui-content-padded" id="contentBox">
+							<!-- 内容区域 -->
+							<div class="listBox mt15" id="notThDiv">
+								<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-red mt15">
+									<a class="mui-control-item mui-active" href="#smoke">冒烟类</a>
+									<a class="mui-control-item" href="#confirm">确认类</a>
+								</div>
+								<div class="tableBox mt10">
+									<div id="smoke" class="mui-control-content mui-active">
+										<ul class="groupList recordList noTitle">
+											
+										</ul>
+										<div class="no-record tc" id="smokeNoRecord" style="display:none">
+											<div class="no-record-main oh no-record-sm">
+												<i class="mui-icon mui-icon-search fl"></i>
+												<div class="fl">无记录</div>
+											</div>
+										</div>
+									</div>
+									<div id="confirm" class="mui-control-content">
+										<ul class="groupList recordList noTitle">
+											
+										</ul>
+										<div class="no-record tc" id="confirmNoRecord" style="display:none">
+											<div class="no-record-main oh no-record-sm">
+												<i class="mui-icon mui-icon-search fl"></i>
+												<div class="fl">无记录</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- 内容区域 end -->
+						</div>
+					</div>
+				</div>
+				<!-- off-canvas backdrop -->
+				<div class="mui-off-canvas-backdrop"></div>
+			</div>
+		</div>
+	<script th:src="@{/js/mui.js}"></script>
+	<script th:src="@{/js/jquery-2.1.0.js}"></script>
+	<script th:src="@{/js/normal.js}"></script>
+	<script th:inline="javascript">
+		mui.init();
+		var id;//接收页面传过来的id
+		//获取参数
+		function getParam(paramName) {
+		    paramValue = "";
+		    isFound = false;
+		    if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+		        arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&");
+		        i = 0;
+		        while (i < arrSource.length && !isFound) {
+		            if (arrSource[i].indexOf("=") > 0) {
+		                if (arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase()) {
+		                    paramValue = arrSource[i].split("=")[1];
+		                    isFound = true;
+		                }
+		            }
+		            i++;
+		        }
+		    }
+		    return paramValue;
+		}
+		//获取数据
+		function getData(){
+			mui.post([[@{/app/situation/streetEvent}]],{
+				streetId: streetId
+			},function(data){
+				console.log(data);
+				var notThData = data.list;
+				$('#placeName').text(data.street);
+				if(data.list.length ==0 ){		//没有数据
+					$('#smokeNoRecord').css('display','block');
+					$('#confirmNoRecord').css('display','block');
+				}else{					//有数据
+					var smokeNum = 0;
+					var confirmNum = 0;
+					for(var i=0;i<notThData.length;i++){
+						var type;//判断警情类型
+						if(notThData[i].type_change.indexOf('冒烟') != -1){
+							type = 2;
+						}else{
+							type = 3;
+						}
+						var liStr = '<li><div class="mui-row"><div class="mui-col-xs-8"><div class="tit">日期：' + notThData[i].time + '</div><div class="tit">' + notThData[i].type_change + '</div></div>';
+						liStr += '<div class="mui-col-xs-4"><a class="btn-detail fr" href="#" id="' + notThData[i].id + '" name="' + type + '">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></div></div></li>';
+						if(notThData[i].type_change.indexOf('冒烟') != -1){
+							$('#smoke ul').append(liStr);
+							smokeNum++;
+						}else{
+							$('#confirm ul').append(liStr);
+							confirmNum++;
+						}
+					}
+					if(smokeNum == 0){
+						$('#smokeNoRecord').css('display','block');
+					}
+					if(confirmNum == 0){
+						$('#confirmNoRecord').css('display','block');
+					}
+					for(var j=0;j<notThData.length;j++){
+						$('#' + notThData[j].id).bind('tap',function(){
+							var id = this.id;
+							var fireType = this.name;
+							mui.openWindow({
+								url: [[@{/app/fireEvent/event?id=}]] + id + '&type=' + fireType
+							});
+						});
+					}
+				}
+			});
+		}
+		//设置点击事件
+		function setClick(data){
+			for(var i=0;i<data.length;i++){
+				$('#' + data[i].id).bind('tap',function(){
+					var id = this.id;
+					mui.openWindow({
+						url: [[@{/app/fireEvent/event?id=}]] + id + '&type=' + type
+					})
+				});
+			}
+		}
+		function init(){
+			$('#pageback').attr('href',[[@{/app/situation}]]);
+			streetId = getParam('streetId');
+			getData();
+		}
+		init();
+	</script>
+</body>
+</html>

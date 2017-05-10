@@ -4060,14 +4060,14 @@
 								<table class="table fireDataTable">
 									<thead>
 										<tr>
-											<th width="45" class="grayBg">排序</th>
-											<th width="60" class="greenBg">街道</th>
+											<th width="45" class="grayBg" rowspan="2">排序</th>
+											<th width="60" class="greenBg" rowspan="2">街道</th>
+											<th colspan="2">近3月</th>
+											<th class="blueBg sortBy" name="buildingInfoNum" rowspan="2">重要单位</th>
+										</tr>
+										<tr>
 											<th class="blueBg sortBy" name="eventNum">警情</th>
 											<th class="blueBg sortBy" name="punishNum">执法</th>
-											<th class="blueBg sortBy" name="buildingInfoNum">重要单位</th>
-<!-- 											<th class="blueBg"><button onclick="sortData('eventNum')">警情</button></th>
-											<th class="blueBg"><button onclick="sortData('punishNum')">执法</button></th>
-											<th class="blueBg"><button onclick="sortData('buildingInfoNum')">重要单位</button></th> -->
 										</tr>
 									</thead>
 									<tbody id="tbody1"></tbody>
@@ -4104,26 +4104,28 @@
         	},'json');
     	}
     	function sortData (sort) {
+    		
     		var arrStr = '';
     		$('#tbody1').text('');
-    		var totalEve = 0;
-    		var totalPun = 0;
-    		var totalBui = 0;
+    		var totalEve = 0;//警情总和
+    		var totalPun = 0;//执法总和
+    		var totalBui = 0;//重点单位总和
     		var totalStr = '';
     		var sortsNum = [1];
     		var intNum = 1;
     		regionData.sort(compare(sort));
+    		console.log(regionData);
 	    	for(var j=0;j<regionData.length;j++){
 	    		var tr1 = '';
 	    		var str1 = '';
-	    		str1 = '<td class="greenBg">' + regionData[j].streetName + '</td><td class="blueBg">' + regionData[j].eventNum + '</td><td class="blueBg">' + regionData[j].punishNum + '</td><td class="blueBg">' + regionData[j].buildingInfoNum + '</td>';
+	    		str1 = '<td class="greenBg">' + regionData[j].streetName + '</td><td class="blueBg" id="' + regionData[j].streetId + '_1">' + regionData[j].eventNum + '</td><td class="blueBg" id="' + regionData[j].streetId + '_2">' + regionData[j].punishNum + '</td><td class="blueBg" id="' + regionData[j].streetId + '_3">' + regionData[j].checkInfoNum + '</td>';
 	    		tr1 = '<tr><td class="grayBg">' + sortsNum[j] + '</td>' + str1 + '</tr>';
 	    		arrStr += tr1;
 	    		heatMap(regionData[j].streetId,regionData[j].version+'');
 	    		totalEve += regionData[j].eventNum;
 	    		totalPun += regionData[j].punishNum;
-	    		totalBui += regionData[j].buildingInfoNum;
-	    		if(j+1 != regionData.length){
+	    		totalBui += regionData[j].checkInfoNum;
+	    		if(j+1 != regionData.length){//排序
 		    		if(regionData[j].eventNum == regionData[j+1].eventNum){
 		    			sortsNum[j+1] = intNum;
 					}else{
@@ -4131,10 +4133,32 @@
 						intNum = j+2;
 					}
 	    		}
+	    		
 	    	}
 	    	totalStr = '<tr><td class="greenBg fb" colspan="2">全区</td><td class="blueBg fb">' + totalEve + '</td><td class="blueBg fb">' + totalPun + '</td><td class="blueBg fb">' + totalBui + '</td></tr>';
 	    	$('#tbody1').append(totalStr);
 	    	$('#tbody1').append(arrStr);
+	    	for(var k=0;k<regionData.length;k++){
+	    		$('#' + regionData[k].streetId + '_1').bind('tap',function(){//警情跳转
+	    			var streetId = this.id.substring(0,this.id.indexOf('_'));
+	    			mui.openWindow({
+	    				url:[[@{/app/situation/event?streetId=}]] + streetId
+	    			});
+	    		});
+				$('#' + regionData[k].streetId + '_2').bind('tap',function(){//执法跳转
+					var streetId = this.id.substring(0,this.id.indexOf('_'));
+	    			mui.openWindow({
+	    				url:[[@{/app/situation/punish?streetId=}]] + streetId
+	    			});
+	    		});
+				$('#' + regionData[k].streetId + '_3').bind('tap',function(){//单位跳转
+					console.log(this.id);
+					var streetId = this.id.substring(0,this.id.indexOf('_'));
+	    			mui.openWindow({
+	    				url:[[@{/app/situation/check?streetId=}]] + streetId
+	    			});
+				});
+	    	}
     	}
     	//点击排序，目前先不注释
     	$('.sortBy').bind('tap',function () {

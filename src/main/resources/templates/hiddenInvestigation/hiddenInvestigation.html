@@ -89,7 +89,7 @@
 	    				var str2 = '<div class="mui-col-xs-3"><i class="iconfont icon-circle mr5 level2"></i>' + data[i].versionTwo + '</div>';
 	    				var str3 = '<div class="mui-col-xs-3"><i class="iconfont icon-circle mr5 level3"></i>' + data[i].versionThree + '</div>';
 	    				var str4 = '<div class="mui-col-xs-3"><i class="iconfont icon-circle mr5 level4"></i>' + data[i].versionFour + '</div>';
-	    				var firstLine = '<div class="type-item"><div class="tit fl">重点单位</div><div class="oh"><b class="font-red">' + data[i].buildingInfoNum + '</b><button onclick="hrefDetail(' + (data[i].streetId + '') + ')" class="btn-detail fr"}">查看详情<i class="mui-icon mui-icon-arrowright"></i></button></div></div>';
+	    				var firstLine = '<div class="type-item"><div class="tit fl">重点单位</div><div class="oh"><b class="font-red">' + data[i].checkInfoNum + '</b><button onclick="hrefDetail(' + (data[i].streetId + '') + ')" class="btn-detail fr"}">查看详情<i class="mui-icon mui-icon-arrowright"></i></button></div></div>';
 	    				var secondLine = '<div class="type-item"><div class="tit fl">隐患等级</div><div class="oh"><div class="mui-row">' + str1 + str2 + str3 + str4 + '</div></div></div>';
 	    				str = '<li><div class="group-item"><div class="streetName fl mr10">' + data[i].streetName +'</div><div class="oh">' + firstLine + secondLine + '</div></div></li>';
 	    				$('#hiddenGrade').append(str);
