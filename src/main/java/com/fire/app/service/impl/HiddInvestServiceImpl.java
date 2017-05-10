@@ -146,7 +146,21 @@ public class HiddInvestServiceImpl implements HiddInvestService {
     public BsBuildingInfo findBuildingInfoByRepurtNum(String itemNumber) {
 
         BsBuildingInfo info =buildingInfoRepository.findByItemNumber(itemNumber);
+        if (info==null) {
+
+            BsBuildingInfo buildingInfo =  new BsBuildingInfo();
+            return buildingInfo;
+        }else{
+            
+            return info;
+        }
         
+    }
+
+    @Override
+    public CrCheckReportInfo findCheckInfoByRepurtNum(String reportNum) {
+
+        CrCheckReportInfo info = checkReportInfoRepository.findByReportNum(reportNum);
         return info;
     }
 

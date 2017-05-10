@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fire.app.domain.BsBuildingInfo;
+import com.fire.app.domain.CrCheckReportInfo;
 
 /**
  * @createDate 2017年3月31日下午5:31:12
@@ -47,5 +48,14 @@ public interface HiddInvestService {
      * @description 通过项目编号获取建筑概况表数据
      */
     BsBuildingInfo findBuildingInfoByRepurtNum(String string);
+
+    /**
+     * @createDate 2017年5月10日下午5:58:42 
+     * @author wangzhiwang
+     * @param string
+     * @return 
+     * @description
+     */
+    CrCheckReportInfo findCheckInfoByRepurtNum(String string);
 
 }

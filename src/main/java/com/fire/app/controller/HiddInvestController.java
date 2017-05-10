@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fire.app.domain.BsBuildingInfo;
+import com.fire.app.domain.CrCheckReportInfo;
 import com.fire.app.service.HiddInvestService;
 import com.fire.app.util.ContextHolderUtils;
 
@@ -137,6 +138,16 @@ public class HiddInvestController {
         request.setAttribute("info", info);
         
         return "keyUnit/buildingProfile";
+    }
+    
+    @RequestMapping(value = "/getCheckInfo")
+    @ResponseBody
+    private CrCheckReportInfo getCheckInfo(HttpServletRequest request,String reportNum) {
+        
+        CrCheckReportInfo info = hiddInvestService.findCheckInfoByRepurtNum("天消"+reportNum);
+        
+        
+        return info;
     }
     
 }

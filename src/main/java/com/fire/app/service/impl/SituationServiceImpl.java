@@ -226,8 +226,6 @@ public class SituationServiceImpl implements SituationService {
                 time = punishment.getExecuteTime();
             }
             
-            obj.put("id", punishment.getId());
-
             obj.put("time", DateUtil.formatDate(time, "yyyy/MM/dd HH:mm"));
 
             obj.put("dutyPerson", punishment.getDutyPersonName());
@@ -250,8 +248,6 @@ public class SituationServiceImpl implements SituationService {
             } else {
                 obj.put("type_change", "执法类型：三停");
             }
-
-            obj.put("id", punishment.getId());
 
             Date time = null;
             if ("临时查封".equals(punishment.getPunishMethod())) {
