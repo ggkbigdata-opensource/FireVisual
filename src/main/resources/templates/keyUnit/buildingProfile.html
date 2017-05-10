@@ -217,8 +217,9 @@
 					$('#pageBack').attr('href',[[@{/app/situation/check?streetId=}]] + streetId);
 					$('#hrefHidden').attr('href',[[@{/app/keyUnit/map?streetId=}]] + streetId + '&id=' + [[${info.id}]]  + '&hidden=0&reportNum=' + reportNum);
 				}
-				getCompanyName(reportNum);//获取项目单位名称
+				
 			}
+			getCompanyName(reportNum);//获取项目单位名称
 			console.log([[${info}]]);
 		}
 		init();
