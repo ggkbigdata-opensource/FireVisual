@@ -133,4 +133,50 @@ public class SituationServiceImpl implements SituationService {
         return result;
     }
 
+    @Override
+    public List<JSONObject> getStreetEvent(Long streetId) {
+        
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date()); // 设置为当前时间
+        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 3); // 设置为上一个月
+        Date beginTime = calendar.getTime();
+        calendar.setTime(new Date()); // 设置为当前时间
+        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1); // 设置前3个月
+        Date endTime = calendar.getTime();
+
+        String time1 = DateUtil.formatDate(beginTime, "yyyy-MM") + "-01";
+        String time2 = DateUtil.formatDate(endTime, "yyyy-MM") + "-31";
+
+        Date bTime = DateUtil.parseDate(time1);
+        Date eTime = DateUtil.parseDate(time2);
+        
+        List<String> types = new ArrayList<String>();
+        types.add("火灾");
+        types.add("冒烟");
+        List<AppFireEvent> events = fireEventRepository.findByStreetId(streetId, bTime, eTime, types);
+        
+        List<JSONObject> result = new ArrayList<JSONObject>();
+        
+        for (AppFireEvent event : events) {
+            JSONObject obj = new JSONObject();
+
+            String time = null;
+            if (event.getOccurTime() != null) {
+                time = DateUtil.formatDate(event.getOccurTime(), "yyyy/MM/dd HH:mm");
+            }
+            obj.put("time", time);
+            obj.put("id", event.getId());
+
+            if ("冒烟".equals(event.getFireType())) {
+                obj.put("type_change", "警情类型：冒烟");
+            }else{
+                obj.put("type_change", "警情类型：确认");
+            }
+
+            result.add(obj);
+        }
+        
+        return result;
+    }
+
 }

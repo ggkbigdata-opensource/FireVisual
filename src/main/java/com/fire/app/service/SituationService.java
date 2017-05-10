@@ -19,4 +19,13 @@ public interface SituationService {
      */
     List<JSONObject> getAllStreetSituation();
 
+    /**
+     * @createDate 2017年5月10日下午3:18:29 
+     * @author wangzhiwang
+     * @param streetId
+     * @return 
+     * @description 通过街道id获取街道下的所有火灾冒烟数据
+     */
+    List<JSONObject> getStreetEvent(Long streetId);
+
 }

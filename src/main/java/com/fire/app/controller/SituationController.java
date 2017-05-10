@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
@@ -49,6 +50,22 @@ public class SituationController {
         return "regionalProfile/event";
     }
     
+    /**
+     * @createDate 2017年5月10日下午2:03:57 
+     * @author wangzhiwang
+     * @return 
+     * @description 通过街道，获取街道下对应的所有警情事件---这里警情只是冒烟，火灾
+     */
+    @RequestMapping(value = "/streetEvent")
+    @ResponseBody
+    public List<JSONObject> getStreetEvent(@RequestParam(required=true)Long streetId) {
+
+        List<JSONObject> result = situationService.getStreetEvent(streetId);
+
+        return result;
+
+    }
+    
     @RequestMapping(value = "/punish")
     private String toPunish() {
         
@@ -67,9 +84,9 @@ public class SituationController {
      * @return 
      * @description 通过街道，获取街道下对应的所有检测报告
      */
-    @RequestMapping(value = "/street/situation")
+    @RequestMapping(value = "/streetCheck")
     @ResponseBody
-    public List<JSONObject> getAllStreetCheck() {
+    public List<JSONObject> getAllStreetCheck(String streetId) {
 
         List<JSONObject> result = situationService.getAllStreetSituation();
 

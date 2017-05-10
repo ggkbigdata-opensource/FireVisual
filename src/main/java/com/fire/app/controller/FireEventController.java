@@ -156,9 +156,9 @@ public class FireEventController {
             obj.put("name", name);
 
             if (type == 2) {
-                obj.put("type_change", "损失：冒烟");
+                obj.put("type_change", "警情类型：冒烟");
             } else if (type == 3) {
-                obj.put("type_change", "损失：确认");
+                obj.put("type_change", "警情类型：确认");
             } else if (type == 4) {
                 obj.put("type_change", "损失：" + event.getLoss());
             } else if (type == 5) {
@@ -166,7 +166,7 @@ public class FireEventController {
             } else if (type == 6) {
                 obj.put("type_change", "死亡：" + event.getDeadNum());
             } else {
-                obj.put("type_change", "种类：原始");
+                obj.put("type_change", "警情类型：原始");
             }
 
             list.add(obj);

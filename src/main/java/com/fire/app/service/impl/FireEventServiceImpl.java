@@ -472,7 +472,7 @@ public class FireEventServiceImpl implements FireEventService {
         
         for (Block block : blocks) {
             Date bTime = DateUtil.parse(beginTime + "-01");
-            Date eTime = DateUtil.parse(endTime + "-30");
+            Date eTime = DateUtil.parse(endTime + "-31");
 
             int primitiveNow = 0;
             int smokingNow = 0;
