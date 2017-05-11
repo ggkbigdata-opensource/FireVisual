@@ -217,7 +217,6 @@ public class KeyUnitServiceImpl implements KeyUnitService {
                 record1.setBrowseTime(new Date());
                 browseRecordRepository.save(record1);
             }
-
         }
         return buildingInfo;
     }
