@@ -26,13 +26,13 @@
 						<div class="mui-content-padded" id="contentBox">
 							<!-- 内容区域 -->
 							<div class="profileBox">
-								<h1 class="profileTit" th:text="${punishment.punishmentUnitName}"></h1>
+								<h1 id="punishmentUnitName_isNull" class="profileTit" th:text="${punishment.punishmentUnitName}"></h1>
 								<div class="mui-row ">
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="occurTimes_isNull">
 							        	<h2>执法时间</h2>
 							        	<p id="occurTimes"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items mui-row">
+							        <div class="mui-col-xs-12 profile-items mui-row" id="streetNameblockName_isNull">
 							        	<div class="mui-col-xs-6">
 							        		<h2>街道</h2>
 							        		<p th:text="${punishment.streetName}"></p>
@@ -42,11 +42,11 @@
 								        	<p th:text="${punishment.blockName}"></p>
 								        </div>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="punishmentUnitAddr_isNull">
 							        	<h2>违法单位地址</h2>
 							        	<p th:text="${punishment.punishmentUnitAddr}"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items mui-row">
+							        <div class="mui-col-xs-12 profile-items mui-row" id="punishMethodbuildingName_isNull">
 							        	<div class="mui-col-xs-6">
 							        		<h2>处罚方式</h2>
 								        	<p th:text="${punishment.punishMethod} == 1? '行政罚款':(${punishment.punishMethod}==2?'行政拘留':(${punishment.punishMethod}==3?'刑事拘留':(${punishment.punishMethod}==4?'临时查封':'三停')))"></p>
@@ -56,30 +56,30 @@
 								        	<p th:text="${punishment.buildingName}"></p>
 								        </div>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="punishmentDocNumber_isNull">
 							        	<h2>行政处罚决定书文号</h2>
 							        	<p th:text="${punishment.punishmentDocNumber}"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="punishmentReason_isNull">
 							        	<h2>现场情况</h2>
 							        	<p th:text="${punishment.punishmentReason}"></p>
 							        </div>
 							    </div>
 							    <div class="spaceline10"></div>
-							    <div class="mui-row ">
-							        <div class="mui-col-xs-12 profile-items">
+							    <div class="mui-row">
+							        <div class="mui-col-xs-12 profile-items" id="punishmentEvidence_isNull">
 							        	<h2>处罚证据</h2>
 							        	<p th:text="${punishment.punishmentEvidence}"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="punishmentBasis_isNull">
 							        	<h2>行政处罚依据</h2>
 							        	<p th:text="${punishment.punishmentBasis}"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="punishPublicTime_isNull">
 							        	<h2>发布决定书时间</h2>
 							        	<p id="punishPublicTime"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items mui-row">
+							        <div class="mui-col-xs-12 profile-items mui-row" id="fineAmountdutyPersonName_isNull">
 							        	<div class="mui-col-xs-6">
 							        		<h2>处罚金额（元）</h2>
 								        	<p th:text="${punishment.fineAmount}"></p>
@@ -89,98 +89,98 @@
 								        	<p th:text="${punishment.dutyPersonName}"></p>
 								        </div>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="dutyPersonId_isNull">
 							        	<h2>责任人身份证号</h2>
 							        	<p th:text="${punishment.dutyPersonId}"></p>
 							        </div>
 							    </div>
 							    <div class="spaceline10"></div>
 							    <div class="mui-row ">
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="sealUpDocNumber_isNull">
 							        	<h2>查封决定书文号</h2>
 							        	<p th:text="${punishment.sealUpDocNumber}"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="sealUpPosition_isNull">
 							        	<h2>查封部位</h2>
 							        	<p th:text="${punishment.sealUpPosition}"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="sealUpBasis_isNull">
 							        	<h2>查封依据</h2>
 							        	<p th:text="${punishment.sealUpBasis}"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="sealUpBegin_isNull">
 							        	<h2>查封开始时间</h2>
 							        	<p id="sealUpBegin"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="sealUpEnd_isNull">
 							        	<h2>查封结束时间</h2>
 							        	<p id="sealUpEnd"></p>
 							        </div>
 							    </div>
 							    <div class="spaceline10"></div>
 							    <div class="mui-row ">
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="unsealDocNumber_isNull">
 							        	<h2>解除查封决定书文号</h2>
 							        	<p th:text="${punishment.unsealDocNumber}"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="unsealBasis_isNull">
 							        	<h2>解除依据</h2>
 							        	<p th:text="${punishment.unsealBasis}"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="unSealTime_isNull">
 							        	<h2>解除时间</h2>
 							        	<p id="unSealTime"></p>
 							        </div>
 							    </div>
 							    <div class="spaceline10"></div>
 							    <div class="mui-row ">
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="tempEntranceDocNumber_isNull">
 							        	<h2>临时进入决定书文号</h2>
 							        	<p th:text="${punishment.tempEntranceDocNumber}"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="tempBegin_isNull">
 							        	<h2>临时进入时间开始</h2>
 							        	<p id="tempBegin"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="tempEnd_isNull">
 							        	<h2>临时进入时间结束</h2>
 							        	<p id="tempEnd"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="tempEntranceBasis_isNull">
 							        	<h2>临时进入依据</h2>
 							        	<p th:text="${punishment.tempEntranceBasis}"></p>
 							        </div>
 							    </div>
 							    <div class="spaceline10"></div>
 							    <div class="mui-row ">
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="punishmentDescription_isNull">
 							        	<h2>处罚说明</h2>
 							        	<p th:text="${punishment.punishmentDescription}"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="executorName_isNull">
 							        	<h2>执法人名称</h2>
 							        	<p th:text="${punishment.executorName}"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="reconsiderationUnit_isNull">
 							        	<h2>复议单位</h2>
 							        	<p th:text="${punishment.reconsiderationUnit}"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="lawsuitAcceptUnit_isNull">
 							        	<h2>提起诉讼单位</h2>
 							        	<p th:text="${punishment.lawsuitAcceptUnit}"></p>
 							        </div>
 							    </div>
 							    <div class="spaceline10"></div>
 							    <div class="mui-row ">
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="punishUnitName_isNull">
 							        	<h2>主办单位</h2>
 							        	<p th:text="${punishment.punishUnitName}"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="urgeNote_isNull">
 							        	<h2>催告书</h2>
 							        	<p th:text="${punishment.urgeNote}"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="forceExecute_isNull">
 							        	<h2>行政强制执行</h2>
 							        	<p th:text="${punishment.forceExecute}"></p>
 							        </div>
@@ -218,8 +218,121 @@
 			}
 			return str;
 		}
-		function init(){
+		//获取字段名
+		function getKey(){
 			console.log([[${punishment}]]);
+			//以下是页面一行一条数据
+			displayNone('punishmentUnitAddr',[[${punishment.punishmentUnitAddr}]]);//违法单位地址
+			displayNone('punishmentDocNumber',[[${punishment.punishmentDocNumber}]]);//行政处罚书文号
+			displayNone('punishmentReason',[[${punishment.punishmentReason}]]);//现场情况
+			displayNone('punishmentEvidence',[[${punishment.punishmentEvidence}]]);//处罚依据
+			displayNone('punishmentBasis',[[${punishment.punishmentBasis}]]);//行政处罚依据
+			displayNone('dutyPersonId',[[${punishment.dutyPersonId}]]);//责任人身份证号
+			displayNone('sealUpDocNumber',[[${punishment.sealUpDocNumber}]]);//查封决定书文号
+			displayNone('sealUpPosition',[[${punishment.sealUpPosition}]]);//查封部位
+			displayNone('sealUpBasis',[[${punishment.sealUpBasis}]]);//查封依据
+			displayNone('unsealDocNumber',[[${punishment.unsealDocNumber}]]);//解除查封决定书文号
+			displayNone('unsealBasis',[[${punishment.unsealBasis}]]);//解除依据
+			displayNone('tempEntranceDocNumber',[[${punishment.tempEntranceDocNumber}]]);//临时进入决定书文号
+			displayNone('tempEntranceBasis',[[${punishment.tempEntranceBasis}]]);//临时进入依据
+			displayNone('punishmentDescription',[[${punishment.punishmentDescription}]]);//处罚说明
+			displayNone('executorName',[[${punishment.executorName}]]);//执法人名称
+			displayNone('reconsiderationUnit',[[${punishment.reconsiderationUnit}]]);//复议单位
+			displayNone('lawsuitAcceptUnit',[[${punishment.lawsuitAcceptUnit}]]);//提起诉讼单位
+			displayNone('punishUnitName',[[${punishment.punishUnitName}]]);//主办单位
+			displayNone('urgeNote',[[${punishment.urgeNote}]]);//催告书
+			displayNone('forceExecute',[[${punishment.forceExecute}]]);//行政强制执行
+			if([[${punishment.punishMethod}]] == 4){//执法时间
+				displayNone('occurTimes',[[${punishment.sealUpTimeBegin}]]);
+			}else{
+				displayNone('occurTimes',[[${punishment.executeTime}]]);
+			}
+			displayNone('punishPublicTime',[[${punishment.punishmentPublishTime}]]);
+			displayNone('sealUpBegin',[[${punishment.sealUpTimeBegin}]]);
+			displayNone('sealUpEnd',[[${punishment.sealUpTimeEnd}]]);
+			displayNone('unSealTime',[[${punishment.unsealTime}]]);
+			displayNone('tempBegin',[[${punishment.tempEntranceTimeBegin}]]);
+			displayNone('tempEnd',[[${punishment.tempEntranceTimeEnd}]]);
+			//以下是页面一行2条数据
+			twoNone('streetName','blockName',[[${punishment.streetName}]],[[${punishment.blockName}]]);//街道和社区
+			twoNone('punishMethod','buildingName',[[${punishment.punishMethod}]],[[${punishment.buildingName}]]);//处罚方式和建筑名称
+			twoNone('fineAmount','dutyPersonName',[[${punishment.fineAmount}]],[[${punishment.dutyPersonName}]]);//处罚金额和责任人 
+			//隐藏spaceline10
+			spaceNone();
+		}
+		//隐藏没有数据的div(单行一条数据)
+		function displayNone(key,value){
+			if(value == null || value == ''){
+				$('#' + key + '_isNull').css('display','none');
+			}
+		}
+		//隐藏没有数据的div(单行2条数据)
+		function twoNone(firKey,secKey,firValue,secValue){
+			if((firValue == null || firValue == '')&&(secValue == null || secValue == '')){
+				$('#' + firKey + secKey + '_isNull').css('display','none');
+			}
+		}
+		//判断隐藏spaceline10(一共有6个)
+		function spaceNone(){
+			if([[${punishment.punishUnitName}]]==null||[[${punishment.punishUnitName}]]==''){
+				if([[${punishment.urgeNote}]]==null||[[${punishment.urgeNote}]]==''){
+					if([[${punishment.forceExecute}]]==null||[[${punishment.forceExecute}]]==''){
+						$('.spaceline10').eq(5).css('display','none');
+					}
+				}
+			}
+			if([[${punishment.lawsuitAcceptUnit}]]==null||[[${punishment.lawsuitAcceptUnit}]]==''){
+				if([[${punishment.reconsiderationUnit}]]==null||[[${punishment.reconsiderationUnit}]]==''){
+					if([[${punishment.executorName}]]==null||[[${punishment.executorName}]]==''){
+						if([[${punishment.punishmentDescription}]]==null||[[${punishment.punishmentDescription}]]==''){
+							$('.spaceline10').eq(4).css('display','none');
+						}
+					}
+				}
+			}
+			if([[${punishment.tempEntranceDocNumber}]]==null||[[${punishment.tempEntranceDocNumber}]]==''){
+				if([[${punishment.tempEntranceBasis}]]==null||[[${punishment.tempEntranceBasis}]]==''){
+					if([[${punishment.tempEntranceTimeBegin}]]==null||[[${punishment.tempEntranceTimeBegin}]]==''){
+						if([[${punishment.tempEntranceTimeEnd}]]==null||[[${punishment.tempEntranceTimeEnd}]]==''){
+							$('.spaceline10').eq(3).css('display','none');
+						}
+					}
+				}
+			}
+			if([[${punishment.unsealDocNumber}]]==null||[[${punishment.unsealDocNumber}]]==''){
+				if([[${punishment.unsealBasis}]]==null||[[${punishment.unsealBasis}]]==''){
+					if([[${punishment.unsealTime}]]==null||[[${punishment.unsealTime}]]==''){
+						$('.spaceline10').eq(2).css('display','none');
+					}
+				}
+			}
+			if([[${punishment.sealUpDocNumber}]]==null||[[${punishment.sealUpDocNumber}]]==''){
+				if([[${punishment.sealUpPosition}]]==null||[[${punishment.sealUpPosition}]]==''){
+					if([[${punishment.sealUpBasis}]]==null||[[${punishment.sealUpBasis}]]==''){
+						if([[${punishment.sealUpTimeBegin}]]==null||[[${punishment.sealUpTimeBegin}]]==''){
+							if([[${punishment.sealUpTimeEnd}]]==null||[[${punishment.sealUpTimeEnd}]]==''){
+								$('.spaceline10').eq(1).css('display','none');
+							}
+						}
+					}
+				}
+			}
+			if([[${punishment.punishmentEvidence}]]==null||[[${punishment.punishmentEvidence}]]==''){
+				if([[${punishment.punishmentBasis}]]==null||[[${punishment.punishmentBasis}]]==''){
+					if([[${punishment.punishmentPublishTime}]]==null||[[${punishment.punishmentPublishTime}]]==''){
+						if([[${punishment.fineAmount}]]==null||[[${punishment.fineAmount}]]==''){
+							if([[${punishment.dutyPersonName}]]==null||[[${punishment.dutyPersonName}]]==''){
+								if([[${punishment.dutyPersonId}]]==null||[[${punishment.dutyPersonId}]]==''){
+									$('.spaceline10').eq(0).css('display','none');
+								}	
+							}
+						}
+					}
+				}
+			}
+		}
+		//初始化修改返回数据
+		function init(){
 			//时间渲染 occ:执法时间  pub:发布决定书时间 sealBegin:查封开始时间 sealEnd:查封结束时间 unSeal:解除时间 tempBegin:临时进入时间开始 tempEnd:临时进入时间结束
 			var occ;
 			if([[${punishment.punishMethod}]] == 4){
@@ -242,9 +355,7 @@
 			$('#tempEnd').text(reTime(tempEnd,0));
 			//返回按钮地址
 			var streetId = [[${punishment.streetId}]];
-			/* $('#pageBack').bind('tap',function(){
-                window.history.go(-1);
-  			}); */
+			getKey();
 		}
 		init();
 	</script>

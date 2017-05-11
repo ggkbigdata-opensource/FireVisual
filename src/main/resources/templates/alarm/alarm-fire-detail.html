@@ -26,13 +26,13 @@
 						<div class="mui-content-padded" id="contentBox">
 							<!-- 内容区域 -->
 							<div class="profileBox">
-								<h1 class="profileTit" th:text="${event.blockName}"></h1>
+								<h1 class="profileTit" th:text="${event.blockName}" id="blockName_isNull"></h1>
 								<div class="mui-row ">
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="occurTimes_isNull">
 							        	<h2>发生时间</h2>
 							        	<p id="occurTimes"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items mui-row">
+							        <div class="mui-col-xs-12 profile-items mui-row" id="streetNameblockName_isNull">
 							        	<div class="mui-col-xs-6">
 								        	<h2>街道</h2>
 								        	<p th:text="${event.streetName}"></p>
@@ -40,30 +40,29 @@
 							        	<div class="mui-col-xs-6">
 								        	<h2>社区</h2>
 								        	<p th:text="${event.blockName}"></p>
-
 								        </div>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="address_isNull">
 							        	<h2>地址</h2>
 							        	<p th:text="${event.address}"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="caseNumber_isNull">
 							        	<h2>火情案号</h2>
 							        	<p th:text="${event.caseNumber}"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="buildingName_isNull">
 							        	<h2>建筑名称</h2>
 							        	<p th:text="${event.buildingName}">-</p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="placeName_isNull">
 							        	<h2>场所名称</h2>
 							        	<p th:text="${event.placeName}">-</p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="placePositionType_isNull">
 							        	<h2>地理位置</h2>
 							        	<p th:text="${event.placePositionType}"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items mui-row">
+							        <div class="mui-col-xs-12 profile-items mui-row" id="placeUseTypeconstructionType_isNull">
 							        	<div class="mui-col-xs-6">
 								        	<h2>使用性质</h2>
 								        	<p th:text="${event.placeUseType}"></p>
@@ -71,10 +70,9 @@
 							        	<div class="mui-col-xs-6">
 								        	<h2>工程性质</h2>
 								        	<p th:text="${event.constructionType}"></p>
-
 								        </div>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items mui-row">
+							        <div class="mui-col-xs-12 profile-items mui-row" id="fireTypedutyPart_isNull">
 							        	<div class="mui-col-xs-6">
 							        		<h2>火灾类型</h2>
 							        		<p th:text="${event.fireType} == 1? '原始':(${event.fireType}==2?'冒烟':(${event.fireType}==3?'确认':(${event.fireType}==4?'损失':(${event.fireType}==5?'受伤':'死亡'))))"></p>
@@ -82,22 +80,21 @@
 							        	<div class="mui-col-xs-6">
 								        	<h2>值班组</h2>
 								        	<p th:text="${event.dutyPart}"></p>
-
 								        </div>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="description_isNull">
 							        	<h2>警情描述</h2>
 							        	<p th:text="${event.description}"></p>
 							        </div>
 							        
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="sceneDesc_isNull">
 							        	<h2>现场警情</h2>
 							        	<p th:text="${event.sceneDesc}"></p>
 							        </div>
 							    </div>
 							    <div class="spaceline10"></div>
 							    <div class="mui-row ">
-							        <div class="mui-col-xs-12 profile-items mui-row">
+							        <div class="mui-col-xs-12 profile-items mui-row" id="firePositionfireObject_isNull">
 							        	<div class="mui-col-xs-6">
 							        		<h2>起火位置</h2>
 							        		<p th:text="${event.firePosition}"></p>
@@ -105,10 +102,9 @@
 							        	<div class="mui-col-xs-6">
 								        	<h2>起火物</h2>
 								        	<p th:text="${event.fireObject}"></p>
-								        	
 								        </div>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items mui-row">
+							        <div class="mui-col-xs-12 profile-items mui-row" id="fireReasonTypefireReason_isNull">
 							        	<div class="mui-col-xs-6">
 							        		<h2>起火原因分类</h2>
 							        		<p th:text="${event.fireReasonType}"></p>
@@ -116,13 +112,12 @@
 							        	<div class="mui-col-xs-6">
 								        	<h2>起火原因</h2>
 								        	<p th:text="${event.fireReason}"></p>
-
 								        </div>
 							        </div>
 							    </div>
 							    <div class="spaceline10"></div>
 							    <div class="mui-row ">
-							        <div class="mui-col-xs-12 profile-items mui-row">
+							        <div class="mui-col-xs-12 profile-items mui-row" id="enterpriseNatureloss_isNull">
 							        	<div class="mui-col-xs-6">
 							        		<h2>企业性质</h2>
 								        	<p th:text="${event.enterpriseNature}"></p>
@@ -130,10 +125,9 @@
 							        	<div class="mui-col-xs-6">
 								        	<h2>经济损失（元）</h2>
 							        		<p th:text="${event.loss}"></p>
-
 								        </div>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items mui-row">
+							        <div class="mui-col-xs-12 profile-items mui-row" id="hurtNumdeadNum_isNull">
 							        	<div class="mui-col-xs-6">
 							        		<h2>受伤人数</h2>
 							        		<p th:text="${event.hurtNum}"></p>
@@ -141,10 +135,9 @@
 							        	<div class="mui-col-xs-6">
 								        	<h2>死亡人数</h2>
 								        	<p th:text="${event.deadNum}"></p>
-
 								        </div>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items mui-row">
+							        <div class="mui-col-xs-12 profile-items mui-row" id="hasProcedurerecycleBin_isNull">
 							        	<div class="mui-col-xs-6">
 							        		<h2>是否有消防手续</h2>
 								        	<p th:text="${event.hasProcedure}"></p>
@@ -154,7 +147,7 @@
 								        	<p th:text="${event.recycleBin}"></p>
 								        </div>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items mui-row">
+							        <div class="mui-col-xs-12 profile-items mui-row" id="rescueEquipmentisArrive_isNull">
 							        	<div class="mui-col-xs-6">
 							        		<h2>消防救援器材</h2>
 								        	<p th:text="${event.rescueEquipment}"></p>
@@ -164,7 +157,7 @@
 								        	<p th:text="${event.isArrive}"></p>
 								        </div>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items mui-row">
+							        <div class="mui-col-xs-12 profile-items mui-row" id="isDisposehalfwayBack_isNull">
 							        	<div class="mui-col-xs-6">
 							        		<h2>到场未处置</h2>
 								        	<p th:text="${event.isDispose}"></p>
@@ -174,7 +167,7 @@
 								        	<p th:text="${event.halfwayBack}"></p>
 								        </div>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items mui-row">
+							        <div class="mui-col-xs-12 profile-items mui-row" id="selfSaverescueType_isNull">
 							        	<div class="mui-col-xs-6">
 								        	<h2>是否自救</h2>
 								        	<p th:text="${event.selfSave}"></p>
@@ -184,7 +177,7 @@
 								        	<p th:text="${event.rescueType}"></p>
 								        </div>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items mui-row">
+							        <div class="mui-col-xs-12 profile-items mui-row" id="isArriveProspectisPunish_isNull">
 							        	<div class="mui-col-xs-6">
 								        	<h2>有无到场勘察</h2>
 								        	<p th:text="${event.isArriveProspect}"></p>
@@ -197,11 +190,11 @@
 							    </div>
 							    <div class="spaceline10"></div>
 							    <div class="mui-row ">
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="punishCaseNumber_isNull">
 							        	<h2>消防执法案号</h2>
-							        	<p th:text="${event.punishCaseNumber}">-</p>
+							        	<p th:text="${event.punishCaseNumber}"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items mui-row">
+							        <div class="mui-col-xs-12 profile-items mui-row" id="fireStationhandleDepart_isNull">
 							        	<div class="mui-col-xs-6">
 							        		<h2>微型消防站参与</h2>
 								        	<p th:text="${event.fireStation}"></p>
@@ -211,11 +204,11 @@
 							        		<p th:text="${event.handleDepart}"></p>
 								        </div>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="createDates_isNull">
 							        	<h2>数据创建时间</h2>
 							        	<p id="createDates"></p>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items" id="modDates_isNull">
 							        	<h2>修改时间</h2>
 							        	<p id="modDates"></p>
 							        </div>
@@ -235,6 +228,7 @@
 	<script th:src="@{/js/normal.js}"></script>
 	<script th:inline="javascript">
 		mui.init();
+		var spaceLine = [true,true,true];//此页面有3条灰色间隙
 		//将数据时间转换格式ifDate:0表示年月日时分，1表示年月日
 		function reTime(times,ifDate){
 			if(times.getFullYear() == 1970){//表示时间为空
@@ -254,6 +248,77 @@
 			}
 			return str;
 		}
+		//获取字段名
+		function getKey(){
+			//以下是判断1行1条数据
+			displayNone('blockName',[[${event.blockName}]]);//社区名字
+			displayNone('occurTimes',[[${event.occurTime}]]);//发生时间
+			displayNone('address',[[${event.address}]]);//地址
+			displayNone('caseNumber',[[${event.caseNumber}]]);//火情案号
+			displayNone('buildingName',[[${event.buildingName}]]);//建筑名称
+			displayNone('placeName',[[${event.placeName}]]);//场所名称
+			displayNone('placePositionType',[[${event.placePositionType}]]);//地理位置
+			displayNone('description',[[${event.description}]]);//警情描述
+			displayNone('sceneDesc',[[${event.sceneDesc}]]);//现场警情
+			displayNone('punishCaseNumber',[[${event.punishCaseNumber}]]);//消防执法案号
+			displayNone('createDates',[[${event.createDate}]]);//数据创建时间
+			displayNone('modDates',[[${event.modDate}]]);//修改时间
+			//以下是判断1行2条数据
+			twoNone('streetName','blockName',[[${event.streetName}]],[[${event.blockName}]]);//街道和社区
+			twoNone('placeUseType','constructionType',[[${event.placeUseType}]],[[${event.constructionType}]]);//使用性质和工程性质
+			twoNone('fireType','dutyPart',[[${event.fireType}]],[[${event.dutyPart}]]);//火灾类型和值班组
+			twoNone('firePosition','fireObject',[[${event.firePosition}]],[[${event.fireObject}]],0);//起火位置和起火物
+			twoNone('fireReasonType','fireReason',[[${event.fireReasonType}]],[[${event.fireReason}]],0);//起火原因分类和起火原因
+			twoNone('enterpriseNature','loss',[[${event.enterpriseNature}]],[[${event.loss}]],1);//企业性质和经济损失
+			twoNone('hurtNum','deadNum',[[${event.hurtNum}]],[[${event.deadNum}]],1);//受伤人数和死亡人数
+			twoNone('hasProcedure','recycleBin',[[${event.hasProcedure}]],[[${event.recycleBin}]],1);//是否有消防手续和其它回收站
+			twoNone('rescueEquipment','isArrive',[[${event.rescueEquipment}]],[[${event.isArrive}]],1);//消防救援器材和消防车到场
+			twoNone('isDispose','halfwayBack',[[${event.isDispose}]],[[${event.halfwayBack}]],1);//到场未处置和中途返回
+			twoNone('selfSave','rescueType',[[${event.selfSave}]],[[${event.rescueType}]],1);//是否自救和救援类型
+			twoNone('isArriveProspect','isPunish',[[${event.isArriveProspect}]],[[${event.isPunish}]],1);//有无到场勘察和有无处罚
+			twoNone('fireStation','handleDepart',[[${event.fireStation}]],[[${event.handleDepart}]],2);//微型消防站参与和移交部门 
+			//判断间隙
+			spaceNone();
+		}
+		//隐藏没有数据的div(单行一条数据)
+		function displayNone(key,value){
+			if(value == null || value == ''){
+				$('#' + key + '_isNull').css('display','none');
+			}
+		}
+		//隐藏没有数据的div(单行2条数据)
+		function twoNone(firKey,secKey,firValue,secValue,index){
+			if((firValue == null || firValue == '')&&(secValue == null || secValue == '')){
+				$('#' + firKey + secKey + '_isNull').css('display','none');
+			}else{
+				if(index != undefined){
+					spaceLine[index] = false;
+				}
+			}
+		}
+		//隐藏灰色间隙
+		function spaceNone(){
+			if(spaceLine[2] === true){//最后一条间隙判断
+				if([[${event.punishCaseNumber}]]==null||[[${event.punishCaseNumber}]]==''){
+					if([[${event.createDate}]]==null||[[${event.createDate}]]==''){
+						if([[${event.modDate}]]==null||[[${event.modDate}]]==''){
+							spaceLine[2] = true;
+						}else{
+							spaceLine[2] = false;
+						}
+					}else{
+						spaceLine[2] = false;
+					}
+				}else{
+					spaceLine[2] = false;
+				}
+			}
+			for(var i=0;i<spaceLine.length;i++){
+				if(spaceLine[i] === true){
+					$('.spaceline10').eq(i).css('display','none');
+				}
+			}
+		}
 		function init(){
 			console.log([[${event}]]);
 			//时间渲染 occ发生时间 createDate数据创建时间 modDate修改时间
@@ -265,9 +330,7 @@
 			$('#modDates').text(reTime(modDate,0));
 			//返回按钮地址
 			var streetId = [[${event.streetId}]];
-/* 			$('#pageBack').bind('tap',function(){
-                  window.history.go(-1);
-    		}); */
+			getKey();
 		}
 		init();
 	</script>
