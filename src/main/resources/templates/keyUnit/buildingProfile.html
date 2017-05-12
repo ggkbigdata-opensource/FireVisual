@@ -35,7 +35,7 @@
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>建筑所在地地址</h2>
-							        	<p ><a class="address mui-navigate-right" th:href="@{'/app/keyUnit/map?id=' + ${info.id}}" id="hrefHidden"><i class="mui-icon mui-icon-location mr5 fl"></i><span th:text="${info.buildingAddress}"></span></a></p>
+							        	<p ><a class="address mui-navigate-right" id="hrefHidden"><i class="mui-icon mui-icon-location mr5 fl"></i><span th:text="${info.buildingAddress}"></span></a></p>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>设计单位</h2>
@@ -49,13 +49,15 @@
 							        	<h2>消防安全责任人</h2>
 							        	<p th:text="${info.securityPersonLiable}"></p>
 							        </div>
-							        <div class="mui-col-xs-6 profile-items">
-							        	<h2>联系人姓名</h2>
-							        	<p th:text="${info.linkmanName}"></p>
-							        </div>
-							        <div class="mui-col-xs-6 profile-items">
-							        	<h2>联系人电话</h2>
-							        	<p><a class="phone" href="tel:18151236498"><i class="mui-icon mui-icon-phone fl"></i><span th:text="${info.linkmanTel}"></span></a></p>
+							        <div class="mui-col-xs-12 profile-items mui-row">
+							        	<div class="mui-col-xs-6">
+								        	<h2>联系人姓名</h2>
+							        		<p th:text="${info.linkmanName}"></p>
+								        </div>
+							        	<div class="mui-col-xs-6">
+								        	<h2>联系人电话</h2>
+							        		<p><a class="phone" href="tel:18151236498"><i class="mui-icon mui-icon-phone fl"></i><span th:text="${info.linkmanTel}"></span></a></p>
+								        </div>
 							        </div>
 							        <div class="mui-col-xs-12 profile-items">
 							        	<h2>上级主管单位名称</h2>
@@ -76,54 +78,62 @@
 							    </div>
 							    <div class="spaceline10" name="isNull"></div>
 							    <div class="mui-row" name="isNull">
-							        <div class="mui-col-xs-6 profile-items">
-							        	<h2>建筑高度（m）</h2>
-							        	<p th:text="${info.constructionHeight}"></p>
+							    	<div class="mui-col-xs-12 profile-items mui-row">
+							        	<div class="mui-col-xs-6">
+								        	<h2>建筑高度（m）</h2>
+							        		<p th:text="${info.constructionHeight}"></p>
+								        </div>
+							        	<div class="mui-col-xs-6">
+								        	<h2>占地面积（m2）</h2>
+							        		<p th:text="${info.occupyArea}"></p>
+								        </div>
 							        </div>
-							        <div class="mui-col-xs-6 profile-items">
-							        	<h2>占地面积（m2）</h2>
-							        	<p th:text="${info.occupyArea}"></p>
-							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items typeBox">
 							        	<h2 class="sm-tit">建筑面积（m2）</h2>
 							        	<div class="mui-row">
-								        	<div class="mui-col-xs-12">
+								        	<div class="mui-col-xs-12 profile-items">
 									        	<h2>总面积</h2>
 									        	<p th:text="${info.constructionAreaAll}"></p>
 									        </div>
-									        <div class="mui-col-xs-6">
-									        	<h2>地上</h2>
-									        	<p th:text="${info.constructionAreaOverground}"></p>
-									        </div>
-									        <div class="mui-col-xs-6">
-									        	<h2>地下</h2>
-									        	<p th:text="${info.constructionAreaUnderground}"></p>
+									        <div class="mui-col-xs-12 mui-row profile-items">
+									        	<div class="mui-col-xs-6">
+										        	<h2>地上</h2>
+									        		<p th:text="${info.constructionAreaOverground}"></p>
+										        </div>
+									        	<div class="mui-col-xs-6">
+										        	<h2>地下</h2>
+									        		<p th:text="${info.constructionAreaUnderground}"></p>
+										        </div>
 									        </div>
 								        </div>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items typeBox">
 							        	<h2 class="sm-tit">建筑所在地经纬度</h2>
 							        	<div class="mui-row">
-									        <div class="mui-col-xs-6">
-									        	<h2>经度</h2>
-									        	<p th:text="${info.constructionLongitude}"></p>
-									        </div>
-									        <div class="mui-col-xs-6">
-									        	<h2>纬度</h2>
-									        	<p th:text="${info.constructionLatitude}"></p>
+							        		<div class="mui-col-xs-12 mui-row profile-items">
+									        	<div class="mui-col-xs-6">
+										        	<h2>经度</h2>
+									        		<p th:text="${info.constructionLongitude}"></p>
+										        </div>
+									        	<div class="mui-col-xs-6">
+										        	<h2>纬度</h2>
+									        		<p th:text="${info.constructionLatitude}"></p>
+										        </div>
 									        </div>
 								        </div>
 							        </div>
-							        <div class="mui-col-xs-12 profile-items">
+							        <div class="mui-col-xs-12 profile-items typeBox">
 							        	<h2 class="sm-tit">建筑层数（层）</h2>
 							        	<div class="mui-row">
-									        <div class="mui-col-xs-6">
-									        	<h2>地上</h2>
-									        	<p th:text="${info.pliesNumberOverground}"></p>
-									        </div>
-									        <div class="mui-col-xs-6">
-									        	<h2>地下</h2>
-									        	<p th:text="${info.pliesNumberUnderground}"></p>
+							        		<div class="mui-col-xs-12 mui-row profile-items">
+									        	<div class="mui-col-xs-6">
+										        	<h2>地上</h2>
+										        	<p th:text="${info.pliesNumberOverground}"></p>
+										        </div>
+										        <div class="mui-col-xs-6">
+										        	<h2>地下</h2>
+										        	<p th:text="${info.pliesNumberUnderground}"></p>
+										        </div>
 									        </div>
 								        </div>
 							        </div>
@@ -206,6 +216,7 @@
 			var hidden = getParam('hidden');
 			if(streetId == ''){
 				$('#mainTitle').text('重点单位信息');
+				$('#hrefHidden').attr('href',[[@{/app/keyUnit/map?reportNum=}]] + reportNum + '&id=' + [[${info.id}]]);
 				$('#pageBack').attr('href',[[@{/app/keyUnit}]]);
 			}else{
 				if(hidden == 1){

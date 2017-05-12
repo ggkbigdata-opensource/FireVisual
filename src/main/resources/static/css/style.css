@@ -838,15 +838,18 @@ body,
 	background-color: #f4f3f3;
 	margin: 0 -10px;
 }
+.profileBox .mui-row {overflow: hidden;}
 .profileBox .profile-items {
 	position: relative;
 	padding-top: 8px;
 	padding-bottom: 8px;
 	border-top: 1px solid #ddd;
+	margin-top: -1px;
 }
-.profileBox .profile-items:first-child {
-	border-top: 0;
+.profileBox .profile-items.typeBox {
+	padding-bottom: 0;
 }
+
 .profileBox .profile-items.mui-col-xs-6:first-child+.mui-col-xs-6 {
 	padding-top: 2px;
 	border-top: 0;

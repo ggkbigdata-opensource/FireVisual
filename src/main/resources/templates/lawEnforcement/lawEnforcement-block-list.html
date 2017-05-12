@@ -19,7 +19,7 @@
                 <div class="mui-scroll">
                     <div class="filterBox">
                     	<h1><span id="streetName"></span></h1>
-                        <a th:href="@{/app/punishment/toBasePage}" class="fl btn-filter" >
+                        <a href="#" id="pageBack" class="fl btn-filter" >
 							<i class="mui-icon mui-icon-arrowleft"></i>
 							返回
 						</a>
@@ -202,6 +202,11 @@
         var endRange = getParam('endRange');
         var currentTime = beginRange.substr(0,4) + '年' + beginRange.substr(beginRange.length-2,2) + '月-' + endRange.substr(endRange.length-2,2) + '月';
         $('div[name="currentTime"] span').text(currentTime);
+        $('#pageBack').bind('tap',function(){//返回
+			mui.openWindow({
+				url: [[@{/app/punishment/toBasePage?beginRange=}]] + beginRange + '&endRange=' + endRange
+			});
+		});
     	mui.post([[@{/app/punishment/getBlockData}]],{
     		streetId: streetId,
     		beginTime: beginRange,

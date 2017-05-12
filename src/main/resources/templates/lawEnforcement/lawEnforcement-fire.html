@@ -190,13 +190,42 @@
     <script th:inline="javascript">
     	/*<![CDATA[*/
         mui.init();
+      //获取返回的参数
+    	//获取参数
+		function getParam(paramName) {
+		    paramValue = "";
+		    isFound = false;
+		    if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+		        arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&");
+		        i = 0;
+		        while (i < arrSource.length && !isFound) {
+		            if (arrSource[i].indexOf("=") > 0) {
+		                if (arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase()) {
+		                    paramValue = arrSource[i].split("=")[1];
+		                    isFound = true;
+		                }
+		            }
+		            i++;
+		        }
+		    }
+		    return paramValue;
+		}
     	//初始化并获取当年数据
         var now = new Date();
     	var beginMon=13;
     	var endMon=13;
-        var beginRange = now.getFullYear() + '-01';
-        var endRange = now.getFullYear() + '-' + ('0'+(now.getMonth()+1)).slice(-2);
-        var currentTime = now.getFullYear() + '年01月-' + ('0' + (now.getMonth()+1)).slice(-2) + '月';
+    	var beginRange;
+    	var endRange;
+    	var currentTime;
+    	if(getParam('beginRange') == '' && getParam('endRange') == ''){
+            beginRange = now.getFullYear() + '-01';
+            endRange = now.getFullYear() + '-' + ('0'+(now.getMonth()+1)).slice(-2);
+            currentTime = now.getFullYear() + '年01月-' + ('0' + (now.getMonth()+1)).slice(-2) + '月';
+    	}else{
+    		beginRange = getParam('beginRange');
+    		endRange = getParam('endRange');
+    		currentTime = currentTime = beginRange.substr(0,4) + '年' + beginRange.substr(beginRange.length-2,2) + '月-' + endRange.substr(endRange.length-2,2) + '月';
+    	}
         $('div[name="currentTime"] span').text(currentTime);
     	mui.post([[@{/app/punishment/getBaseDate}]],{
     		beginTime: beginRange,
@@ -359,6 +388,8 @@
 				mui.toast('请选择结束月份');
 				return;
 			}
+			beginRange = year + '-' + beginMon;
+			endRange = year + '-' + endMon;
 			currentTime = year + '年' + beginMon + '月-' + endMon + '月'; 
 			$('div[name="currentTime"] span').text(currentTime);
 			mui.post([[@{/app/punishment/getBaseDate}]],{

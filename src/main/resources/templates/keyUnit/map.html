@@ -72,7 +72,7 @@
 				$('#mainTitle').text('重点单位信息');
 				$('#pageBack').bind('tap',function(){
 					mui.openWindow({
-						url: [[@{/app/keyUnit/unit?id=}]] + id + '&streetId=' + streetId
+						url: [[@{/app/keyUnit/unit?reportNum=}]] + reportNum
 					});
 				});
 			}else{
