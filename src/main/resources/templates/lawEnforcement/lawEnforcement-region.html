@@ -114,7 +114,6 @@
         
         //选取街道获取数据
         function choose (id,name) {
-        	console.log(id + name);
         	$('#selectedBlock').html(name + '<i class="mui-icon mui-icon-arrowdown"></i>');
 			$('.regionCurrent:eq(0)').html('当前：<span>' + name + '</span>');
 			$('#blocks li').removeClass('selected');
@@ -123,7 +122,6 @@
         		streetId: id
         	},function(data){
         		if(data && data.length>0){
-        			console.log(data);
         			var legend = [];
     				var item = [];
     				var datas = [];
@@ -186,7 +184,6 @@
 					$('#' + data[i].data[j].month + '_' + (i+1)).bind('tap',function(){
 	    				var type = this.id.substr(this.id.indexOf('_')+1,this.id.length);
 	    				var time = this.id.substr(0,this.id.indexOf('_'));
-	    				console.log(type,time);
 		    	    	mui.openWindow({
 		    	    		url: [[@{/app/punishment/toLawEnforcementListPage?streetId=}]] + id + '&type=' + type + '&time=' + time
 		                });

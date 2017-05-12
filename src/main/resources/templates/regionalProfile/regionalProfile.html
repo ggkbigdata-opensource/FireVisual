@@ -4113,7 +4113,6 @@
     		var sortsNum = [1];
     		var intNum = 1;
     		regionData.sort(compare(sort));
-    		console.log(regionData);
 	    	for(var j=0;j<regionData.length;j++){
 	    		var tr1 = '';
 	    		var str1 = '';
@@ -4151,7 +4150,6 @@
 	    			});
 	    		});
 				$('#' + regionData[k].streetId + '_3').bind('tap',function(){//单位跳转
-					console.log(this.id);
 					var streetId = this.id.substring(0,this.id.indexOf('_'));
 	    			mui.openWindow({
 	    				url:[[@{/app/situation/check?streetId=}]] + streetId

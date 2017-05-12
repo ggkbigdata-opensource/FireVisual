@@ -79,7 +79,6 @@
 		//获取历史浏览记录
 		function getHistory(){
 			mui.get([[@{/app/keyUnit/recent}]],'',function(data){
-				console.log(data);
 				if(data.length == 0){//首次进入没有浏览记录
 					$('#getNone').css('display','block');
 				}else{//展现浏览记录
@@ -111,7 +110,6 @@
 			mui.post([[@{/app/keyUnit/search}]],{
 				name: $('#keyUnit').val()
 			},function(data){
-				console.log(data);
 				if(data.length == 0){//无搜索记录
 					$('#getNone').css('display','block');
 				}else{//搜索数据

@@ -95,7 +95,6 @@
 			mui.post([[@{/app/situation/streetEvent}]],{
 				streetId: streetId
 			},function(data){
-				console.log(data);
 				var notThData = data.list;
 				$('#placeName').text(data.street);
 				if(data.list.length ==0 ){		//没有数据

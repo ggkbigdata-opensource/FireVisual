@@ -213,7 +213,6 @@
     		endTime: endRange
     	},function(data){
     		if(data){
-    			console.log(data);
     			showData(data);
     		}
     	});
@@ -436,7 +435,6 @@
 	    var totalNum = [];
 	    var totalStr = [];
 	    function showData(block){
-	    	console.log(block);
 	    	var data = block.list;
 	    	for(var z=0;z<data.length;z++){
 	    		data[z].blockName = data[z].blockName.substring(0,data[z].blockName.length-2);	

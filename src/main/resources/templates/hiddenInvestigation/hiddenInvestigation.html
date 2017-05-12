@@ -81,7 +81,6 @@
 		function getHidGrade(){
 			mui.get([[@{/app/hiddInvest/hidGrade}]],'',function(data){
 	    		if(data){
-	    			console.log(data);
 	    			$('#hiddenGrade').text('');
 	    			for(var i=0;i<data.length;i++){
 	    				var str = '';
@@ -103,7 +102,6 @@
 		function getInvestigate(){
 			mui.get([[@{/app/hiddInvest/investigate}]],'',function(data){
 	    		if(data){
-	    			console.log(data);
 	    			$('#itemHidden').text('');
 	    			for(var i=0;i<data.length;i++){
 	    				var str = '';

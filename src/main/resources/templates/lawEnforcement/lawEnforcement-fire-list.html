@@ -87,7 +87,6 @@
 		$('#pageback').attr('href',[[@{/app/punishment/toBlockDataPage?streetId=}]] + streetId + '&type=' + type + '&beginRange=' + beginRange + '&endRange=' + endRange);
 		
 		function init(){
-			console.log([[${result}]]);
 			if([[${result.list}]].length <= 0){
 				$('#norecord').css('display','block');
 			}

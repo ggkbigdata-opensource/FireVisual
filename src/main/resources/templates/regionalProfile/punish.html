@@ -72,7 +72,6 @@
 			mui.post([[@{/app/situation/streetPunish}]],{
 				streetId: streetId
 			},function(data){
-				console.log(data);
 				var dataList = data.list;
 				$('#placeName').text(data.street);
 				if(dataList.length ==0 ){		//没有数据
