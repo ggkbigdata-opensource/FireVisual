@@ -75,7 +75,7 @@
 			if(streetId == ''){
 				$('#pageback').attr('href',[[@{/app/fireEvent/}]]);
 			}else{
-				$('#pageback').attr('href',[[@{/app/fireEvent/toAreaPage}]]);
+				$('#pageback').attr('href',[[@{/app/fireEvent/toAreaPage?streetId=}]] + streetId);
 			}
 			mui.post([[@{/app/fireEvent/getRegionList}]],{
 				streetId: streetId,

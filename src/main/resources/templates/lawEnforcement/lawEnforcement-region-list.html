@@ -75,7 +75,7 @@
 			if(streetId == ''){
 				$('#pageback').attr('href',[[@{/app/punishment/}]]);
 			}else{
-				$('#pageback').attr('href',[[@{/app/punishment/toAreaPage}]]);
+				$('#pageback').attr('href',[[@{/app/punishment/toAreaPage?streetId=}]] + streetId);
 			}
 			mui.post([[@{/app/punishment/getLawEnforcementList}]],{
 				streetId: streetId,

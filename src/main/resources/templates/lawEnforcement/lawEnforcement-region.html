@@ -52,7 +52,27 @@
     <script th:inline="javascript">
     	/*<![CDATA[*/
         mui.init();
+      //获取参数
+		function getParam(paramName) {
+		    paramValue = "";
+		    isFound = false;
+		    if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+		        arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&");
+		        i = 0;
+		        while (i < arrSource.length && !isFound) {
+		            if (arrSource[i].indexOf("=") > 0) {
+		                if (arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase()) {
+		                    paramValue = arrSource[i].split("=")[1];
+		                    isFound = true;
+		                }
+		            }
+		            i++;
+		        }
+		    }
+		    return paramValue;
+		}
     	var selected='';
+    	var streetId;
     	var lists = [
 		     	{name:'行政罚款',type:1},
 		     	{name:'行政拘留',type:2},
@@ -107,7 +127,15 @@
         				$('#blocks').append('<li id="selected' + data[i].id + '"><button onclick="choose(' + data[i].id + ',\'' + data[i].name + '\')">' + data[i].name + '</button></li>');
         			}
         			$('#blocks li').first().addClass('selected');
-        			choose(data[0].id,data[0].name);
+        			if(streetId == ''){
+        				choose(data[0].id,data[0].name);
+        			}else{
+        				for(var j=0;j<data.length;j++){
+        					if(data[j].id == streetId){
+        						choose(data[j].id,data[j].name);
+        					}
+        				}
+        			}
         		}
         	},'json');
         }
@@ -193,6 +221,7 @@
 		}
       
         function init () {
+        	streetId = getParam('streetId');
         	getRegion();
         }
         init();
