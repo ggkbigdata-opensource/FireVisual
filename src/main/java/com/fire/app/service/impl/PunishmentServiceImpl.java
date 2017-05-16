@@ -486,7 +486,7 @@ public class PunishmentServiceImpl implements PunishmentService {
 
     @Override
     public JSONObject findByBlockIdAndType(Long blockId, Integer type,String beginTime,String endTime) {
-        // type 1--行罚 2--行拘 3--刑拘 4--临封 5--三停（停工，停产，停业）
+        // type 1--行罚 2--行拘 3--刑拘 4--临封 5--三停（//停产停业、停止使用、停止施工）
 
         Block block = blockRepository.findOne(blockId);
 
@@ -513,9 +513,9 @@ public class PunishmentServiceImpl implements PunishmentService {
             punishments = punishmentRepository.findSealUpByCondition(blockId, punishMehtod,bTime,eTime);
         } else {
             List<String> methods = new ArrayList<String>();
-            methods.add("停业");
-            methods.add("停工");
-            methods.add("停产");
+            methods.add("停产停业");//停产停业、停止使用、停止施工
+            methods.add("停止使用");
+            methods.add("停止施工");
             punishments = punishmentRepository.findStopDataByCondition(blockId, methods,bTime,eTime);
         }
 
@@ -569,7 +569,7 @@ public class PunishmentServiceImpl implements PunishmentService {
     @Override
     public List<JSONObject> getLawEnforcementList(Long streetId, String time, Integer type) {
 
-        // type 1--行罚 2--行拘 3--刑拘 4--临封 5--三停（停工，停产，停业）
+        // type 1--行罚 2--行拘 3--刑拘 4--临封 5--三停（//停产停业、停止使用、停止施工）
         // type 1--行政罚款  2--行政拘留  3--刑事拘留  4--临时查封  5--三停
         String year = time.substring(0, 4);
         String mounth = time.substring(4, 6);
@@ -590,9 +590,9 @@ public class PunishmentServiceImpl implements PunishmentService {
             punishments = punishmentRepository.findSealUpystreetId(streetId, year,mounth, punishMehtod);
         } else {
             List<String> methods = new ArrayList<String>();
-            methods.add("停业");
-            methods.add("停工");
-            methods.add("停产");
+            methods.add("停产停业");//停产停业、停止使用、停止施工
+            methods.add("停止使用");
+            methods.add("停止施工");
             punishments = punishmentRepository.findBystreetId(streetId, year,mounth,methods);
         }
 
@@ -640,7 +640,7 @@ public class PunishmentServiceImpl implements PunishmentService {
 
     @Override
     public List<JSONObject> getLawEnforcementList(String time, Integer type) {
-     // type 1--行罚 2--行拘 3--刑拘 4--临封 5--三停（停工，停产，停业）
+     // type 1--行罚 2--行拘 3--刑拘 4--临封 5--三停（//停产停业、停止使用、停止施工）
         // type 1--行政罚款  2--行政拘留  3--刑事拘留  4--临时查封  5--三停
         String year = time.substring(0, 4);
         String mounth = time.substring(4, 6);
@@ -661,9 +661,9 @@ public class PunishmentServiceImpl implements PunishmentService {
             punishments = punishmentRepository.findSealUpByPunishMehtod(year,mounth, punishMehtod);
         } else {
             List<String> methods = new ArrayList<String>();
-            methods.add("停业");
-            methods.add("停工");
-            methods.add("停产");
+            methods.add("停产停业");////停产停业、停止使用、停止施工
+            methods.add("停止使用");
+            methods.add("停止施工");
             punishments = punishmentRepository.findByPunishMehtod( year,mounth,methods);
         }
 

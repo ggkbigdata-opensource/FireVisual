@@ -232,7 +232,6 @@ public class PunishmentController {
             result = punishmentService.getLawEnforcementList(time,type);
         }
         
-        
         obj.put("list", result);
 
         return obj;
