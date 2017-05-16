@@ -107,7 +107,7 @@ public class KeyUnitServiceImpl implements KeyUnitService {
                 obj.put("streetName", street.getName());
                 obj.put("streetId", street.getId());
                 obj.put("riskLevel", info.getRiskLevel());
-                BsBuildingInfo buildingInfo = buildingInfoRepository.findByItemNumber(info.getReportNum().replace("天消", ""));
+                BsBuildingInfo buildingInfo = buildingInfoRepository.findByItemNumber(info.getReportNum());
                 if (buildingInfo==null) {
                     obj.put("constructionClass", "");
                     obj.put("constructionCategory", "");
