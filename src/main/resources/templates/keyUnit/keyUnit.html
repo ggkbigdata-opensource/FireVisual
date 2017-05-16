@@ -115,7 +115,12 @@
 				}else{//搜索数据
 					$('#getNone').css('display','none');
 					for(var i=0;i<data.length;i++){
-						var level = data[i].riskLevel.substring(data[i].riskLevel.length-1);
+						var level;
+						if(data[i].riskLevel != null){
+							level = data[i].riskLevel.substring(data[i].riskLevel.length-1);
+						}else{
+							level = '';
+						}
 						var reportNum = data[i].reportNum.substring(2,data[i].reportNum.length);
 						var liStr = '<li><h1>' + data[i].unitName + '<a class="btn-detail pa" href="#" id="' + reportNum + '">查看详情<i class="mui-icon mui-icon-arrowright"></i></a></h1>';
 						liStr += '<div class="mui-row"><div class="mui-col-xs-6"><div class="tit fl">街道：</div><div class="oh">' + data[i].streetName + '</div></div>';
