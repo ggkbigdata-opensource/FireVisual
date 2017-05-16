@@ -289,12 +289,21 @@
 	    	}
 	    	var strMonths = '';
 	    	var divMonths = '';
-	    	for(var m=1;m<13;m++){
-	    		var months = m + '月';
-	    		strMonths += '<button onclick="checkRange(' + (now.getFullYear()-j-1) + ',\'4\',\'\',\'\',' + m + ')">' + months + '</button>';
+	    	if(j == 0){
+	    		var today = new Date();
+	    		var thisMonth = today.getMonth() + 1;
+    			for(var q=1;q<thisMonth;q++){
+    				var months = q + '月';
+		    		strMonths += '<button onclick="checkRange(' + (now.getFullYear()-j) + ',\'4\',\'\',\'\',' + q + ')">' + months + '</button>';
+    			}
+	    	}else{
+	    		for(var m=1;m<13;m++){
+		    		var months = m + '月';
+		    		strMonths += '<button onclick="checkRange(' + (now.getFullYear()-j) + ',\'4\',\'\',\'\',' + m + ')">' + months + '</button>';
+		    	}
 	    	}
 	    	divMonths = '<div class="oh">' + strMonths + '</div>';
-	    	$('#selectMonth').append('<div class="tit">' + (now.getFullYear()-j-1) + '年' + '</div>' + divMonths);
+	    	$('#selectMonth').append('<div class="tit">' + (now.getFullYear()-j) + '年' + '</div>' + divMonths);
 	    }
 	    //##################选择时间段结束###############################
 	    //点击确认提交时间获取数据
