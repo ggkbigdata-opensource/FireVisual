@@ -1,7 +1,10 @@
 package com.fire.app.controller;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +24,8 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
+    static final Logger LOG = Logger.getLogger(LoginController.class);
+    
     @RequestMapping("/")
     public String login() {
 
@@ -49,9 +54,10 @@ public class LoginController {
         
         if (flag) {
             
+            LOG.info("帐号"+name+"登录成功");
             return CommonResult.success("success");
         }
-        
+        LOG.info("帐号"+name+"登录失败");
         return CommonResult.fail("帐号或密码错误");
         
     }
