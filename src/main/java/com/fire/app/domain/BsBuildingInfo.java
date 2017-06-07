@@ -3,17 +3,20 @@ package com.fire.app.domain;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+/**
+ * @createDate 2017年3月21日下午5:53:16
+ * @author wangzhiwang
+ * @description
+ */
 @Entity
-public class BsBuildingInfo {
-
+public class BsBuildingInfo  {
     @Id
-    @GeneratedValue
     private Long id;
     private String itemNumber;
     private Long streetId;
+    private Long blockId;
     private String propertyCompanyName;
     private String buildingAddress;
     private String designCompany;
@@ -22,7 +25,7 @@ public class BsBuildingInfo {
     private String linkmanName;
     private String linkmanTel;
     private String superiorCompanyName;
-    private String supervisionDepartment;
+    private String supervisionDepartment;//主管部门
     private String constructionCategory;
     private String streetAndCommittee;
     private String constructionHeight;
@@ -44,21 +47,22 @@ public class BsBuildingInfo {
     private String createTime;
     
     private Date importTime;
+    
+    private Double score;
 
-    public BsBuildingInfo(){
-        
-    }
+    private String heightType;//
+    private String buildingTypeBig;
+    private String buildingTypeSmall;
+    
 
     
-    public Long getStreetId() {
-        return streetId;
+    public Long getBlockId() {
+        return blockId;
     }
 
-    public void setStreetId(Long streetId) {
-        this.streetId = streetId;
+    public void setBlockId(Long blockId) {
+        this.blockId = blockId;
     }
-
-
 
     public Long getId() {
         return id;
@@ -66,6 +70,14 @@ public class BsBuildingInfo {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getStreetId() {
+        return streetId;
+    }
+
+    public void setStreetId(Long streetId) {
+        this.streetId = streetId;
     }
 
     public String getItemNumber() {
@@ -136,16 +148,16 @@ public class BsBuildingInfo {
         return superiorCompanyName;
     }
 
-    public void setSuperiorCompanyName(String superiorCompanyName) {
-        this.superiorCompanyName = superiorCompanyName;
+    public void setSupervisionDepartment(String supervisionDepartment) {
+        this.supervisionDepartment = supervisionDepartment;
     }
 
     public String getSupervisionDepartment() {
         return supervisionDepartment;
     }
 
-    public void setSupervisionDepartment(String supervisionDepartment) {
-        this.supervisionDepartment = supervisionDepartment;
+    public void setSuperiorCompanyName(String superiorCompanyName) {
+        this.superiorCompanyName = superiorCompanyName;
     }
 
     public String getConstructionCategory() {
@@ -291,11 +303,45 @@ public class BsBuildingInfo {
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
+
     public Date getImportTime() {
         return importTime;
     }
+
     public void setImportTime(Date importTime) {
         this.importTime = importTime;
+    }
+
+    public Double getScore() {
+        return score;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
+    }
+
+    public String getHeightType() {
+        return heightType;
+    }
+
+    public void setHeightType(String heightType) {
+        this.heightType = heightType;
+    }
+
+    public String getBuildingTypeBig() {
+        return buildingTypeBig;
+    }
+
+    public void setBuildingTypeBig(String buildingTypeBig) {
+        this.buildingTypeBig = buildingTypeBig;
+    }
+
+    public String getBuildingTypeSmall() {
+        return buildingTypeSmall;
+    }
+
+    public void setBuildingTypeSmall(String buildingTypeSmall) {
+        this.buildingTypeSmall = buildingTypeSmall;
     }
     
 }

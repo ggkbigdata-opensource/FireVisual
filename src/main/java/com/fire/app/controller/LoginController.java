@@ -1,7 +1,5 @@
 package com.fire.app.controller;
 
-import java.util.Date;
-
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -51,6 +49,11 @@ public class LoginController {
 
         verifCode = AppHelper.encryptPassword(verifCode);
         Boolean flag = this.userService.selectByUsernameAndPassword(name,phone,verifCode);
+        
+        
+        
+        //-------------------------------------------
+       // userService.updateDate();
         
         if (flag) {
             

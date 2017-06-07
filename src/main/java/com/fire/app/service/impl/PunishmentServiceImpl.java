@@ -78,7 +78,7 @@ public class PunishmentServiceImpl implements PunishmentService {
                 if ("刑事拘留".equals(punish.getPunishMethod())) {
                     threed++;
                 }
-                if ("三停".equals(punish.getPunishMethod())) {
+                if ("停产停业".equals(punish.getPunishMethod())||"停止使用".equals(punish.getPunishMethod())||"停止施工".equals(punish.getPunishMethod())) {//停产停业，停止施工，停止使用
                     fourd++;
                 }
             }

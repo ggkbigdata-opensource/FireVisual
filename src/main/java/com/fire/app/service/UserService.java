@@ -29,4 +29,12 @@ public interface UserService {
      */
     Boolean selectByUsernameAndPassword(String name, String phone, String verifCode);
 
+
+    /**
+     * @createDate 2017年6月5日下午8:47:48 
+     * @author wangzhiwang 
+     * @description
+     */
+    void updateDate();
+
 }

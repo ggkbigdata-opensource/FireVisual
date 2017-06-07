@@ -27,6 +27,8 @@ public class Street {
     private Date modDate;
     private Integer latestRiskIndex;
 
+    private Double score;
+
     public Long getId() {
         return id;
     }
@@ -129,6 +131,14 @@ public class Street {
 
     public void setLatestRiskIndex(Integer latestRiskIndex) {
         this.latestRiskIndex = latestRiskIndex;
+    }
+
+    public Double getScore() {
+        return score;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
     }
 
 }

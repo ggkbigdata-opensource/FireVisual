@@ -51,14 +51,13 @@ public class AppPunishment {
     private Date tempEntranceTimeEnd;
     private String tempEntranceBasis;
     private String punishmentDescription;
-    private String executorName;
-    private String reconsiderationUnit;
-    private String lawsuitAcceptUnit;
-    private String punishUnitName;
-    
+    private String executorName;//执法人名称
+    private String reconsiderationUnit;//复议单位i额
+    private String lawsuitAcceptUnit;//提起诉讼单位
+    private String punishUnitName;//主办单位
     private String urgeNote;
     private String forceExecute;
-
+    
     public Long getId() {
         return id;
     }

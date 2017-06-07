@@ -16,4 +16,23 @@ public interface BlockRepository extends JpaRepository<Block, Long> {
      */
     List<Block> findByStreetId(Long id);
 
+    /**
+     * @createDate 2017年6月5日下午7:57:00 
+     * @author wangzhiwang
+     * @param blockName
+     * @return 
+     * @description
+     */
+    Block findByName(String blockName);
+
+    /**
+     * @createDate 2017年6月5日下午8:21:46 
+     * @author wangzhiwang
+     * @param blockName
+     * @param streetId
+     * @return 
+     * @description
+     */
+    Block findByNameAndStreetId(String blockName, Long streetId);
+
 }
