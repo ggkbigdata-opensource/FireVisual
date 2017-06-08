@@ -52,11 +52,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean selectByUsernameAndPassword(String name, String phone, String verifCode) {
-        User user = userRepository.findByUsernameAndPassword(name, verifCode);
+        //User user = userRepository.findByUsernameAndPassword(name, verifCode);
+        
+        User user = userRepository.findByPhoneAndPassword(phone, verifCode);
         if (user != null) {
 
-            String mobile = user.getMobile();
-            if (phone.equals(mobile)) {
+            //String mobile = user.getMobile();
+           // if (phone.equals(mobile)) {
 
                 String token = EncryptUtils.encryptByMD5(new Date().toString());
 
@@ -68,8 +70,8 @@ public class UserServiceImpl implements UserService {
                 session.setAttribute(App.USER_SESSION_KEY, user);
 
                 return true;
-            }
-            return false;
+            //}
+            //return false;
         }
         return false;
     }
