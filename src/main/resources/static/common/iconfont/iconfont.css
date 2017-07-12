@@ -1,10 +1,10 @@
 
 @font-face {font-family: "iconfont";
-  src: url('iconfont.eot?t=1491560051256'); /* IE9*/
-  src: url('iconfont.eot?t=1491560051256#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('iconfont.woff?t=1491560051256') format('woff'), /* chrome, firefox */
-  url('iconfont.ttf?t=1491560051256') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('iconfont.svg?t=1491560051256#iconfont') format('svg'); /* iOS 4.1- */
+  src: url('iconfont.eot?t=1499823967965'); /* IE9*/
+  src: url('iconfont.eot?t=1499823967965#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1499823967965') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1499823967965') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1499823967965#iconfont') format('svg'); /* iOS 4.1- */
 }
 
 .iconfont {
@@ -38,4 +38,6 @@
 .icon-triangle:before { content: "\e601"; }
 
 .icon-menu:before { content: "\e600"; }
+
+.icon-evaluation:before { content: "\e778"; }
 
