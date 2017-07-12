@@ -41,14 +41,15 @@ public class LoginController {
   
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult loginToPhone(@RequestParam(value = "name", required = true) String name,
+    public CommonResult loginToPhone(
+            //@RequestParam(value = "name", required = true) String name,
             @RequestParam(value = "phone", required = true) String phone,
             @RequestParam(value = "verifCode", required = true) String verifCode, HttpSession session) {
 
         session.removeAttribute(App.USER_SESSION_KEY);
 
         verifCode = AppHelper.encryptPassword(verifCode);
-        Boolean flag = this.userService.selectByUsernameAndPassword(name,phone,verifCode);
+        Boolean flag = this.userService.selectByUsernameAndPassword(null,phone,verifCode);
         
         
         
@@ -57,10 +58,10 @@ public class LoginController {
         
         if (flag) {
             
-            LOG.info("帐号"+name+"登录成功");
+            LOG.info("电话："+phone+"登录成功");
             return CommonResult.success("success");
         }
-        LOG.info("帐号"+name+"登录失败");
+        LOG.info("电话"+phone+"登录失败");
         return CommonResult.fail("帐号或密码错误");
         
     }
