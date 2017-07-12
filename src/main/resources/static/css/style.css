@@ -127,7 +127,7 @@ body,
 }
 /*menu*/
 .menu {
-	padding-top: 50px;
+	padding-top: 30px;
 	margin: 0 10px;
 }
 .menu > li + li {
@@ -962,4 +962,31 @@ body,
 	.fireDataTable > thead > tr > th {
 		font-size: 15px;
 	}
+}
+/*评估结果*/
+.evaluation.mui-table-view:before {
+	display: none;
+}
+.evaluation .mui-table-view-cell > a:not(.mui-btn){
+	white-space: inherit;
+	padding-right: 25px;
+}
+.mui-navigate-pulldown:after, 
+.mui-push-pulldown:after {
+    right: 10px;
+    content: '\e588';
+}
+.mui-navigate-pulldown:after,
+.mui-push-pulldown:after {
+    font-family: Muiicons;
+    font-size: 18px;
+    line-height: 1;
+    position: absolute;
+    top: 50%;
+    display: inline-block;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    text-decoration: none;
+    color: #bbb;
+    -webkit-font-smoothing: antialiased;
 }
