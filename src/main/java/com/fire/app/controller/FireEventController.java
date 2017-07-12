@@ -1,6 +1,5 @@
 package com.fire.app.controller;
 
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class FireEventController {
     @Autowired
     private StreetService streetService;
 
-    @RequestMapping("/")
+    @RequestMapping()
     private String toFireEvent() {
 
         if (!ContextHolderUtils.isLogin()) {

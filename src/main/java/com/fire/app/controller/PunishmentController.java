@@ -32,7 +32,7 @@ public class PunishmentController {
     @Autowired
     private StreetService streetService;
 
-    @RequestMapping("/")
+    @RequestMapping()
     private String toFireEvent() {
 
         if (!ContextHolderUtils.isLogin()) {
